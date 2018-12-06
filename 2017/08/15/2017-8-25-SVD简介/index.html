@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>SVD简介 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引言奇异值分解可以将一个比较复杂的矩阵用更小更简单的几个子矩阵的相乘来表示，这些小矩阵描述的是矩阵的重要的特性。就像是描述一个人一样，给别人描述说这个人长得浓眉大眼，方脸，络腮胡，而且带个黑框的眼镜，这样寥寥的几个特征，就让别人脑海里面就有一个较为清楚的认识，实际上，人脸上的特征是有着无数种的，之所以能这么描述，是因为人天生就有着非常好的抽取重要特征的能力，让机器学会抽取重要的特征，SVD是一个重">
+<meta name="keywords" content="SVD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVD简介">
+<meta property="og:url" content="https://kingsea0-0.github.io/2017/08/15/2017-8-25-SVD简介/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="引言奇异值分解可以将一个比较复杂的矩阵用更小更简单的几个子矩阵的相乘来表示，这些小矩阵描述的是矩阵的重要的特性。就像是描述一个人一样，给别人描述说这个人长得浓眉大眼，方脸，络腮胡，而且带个黑框的眼镜，这样寥寥的几个特征，就让别人脑海里面就有一个较为清楚的认识，实际上，人脸上的特征是有着无数种的，之所以能这么描述，是因为人天生就有着非常好的抽取重要特征的能力，让机器学会抽取重要的特征，SVD是一个重">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ubjhawjy11nxyw61poqn38gl/image_1boe8fm8dsj94gi1jpl1khb13v89.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/fg4zviipod2o3imryttv24hc/image_1boe8fumi9cbunk1ncqtfu1ak8m.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/xm7ek5agxta477h9b6eda8nf/image_1boe8iub61lhmlp0qlf1i9a2b513.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nqc29oaz8s9ut3165vvj6raa/image_1boe9lbaj9oa169b1ot4689tju1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/b7j65zklmweydsgeio30ghga/image_1boe9rc6h1j1rpv06jg65k1n4t1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/b4aqq9amo05cbz0vltlj5cyv/image_1boeci0l63c01p6218c018vf1tov2a.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/be65kso5i57wv95guls8317t/image_1boecnfb4mmsskv6dvqcq1ide2n.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/pizno259n1xhxs6zj3z48zpy/image_1boecomco1gmr53o1k9b1rk8bj934.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/41b0syigm9c4554c8untkka2/image_1boed8rsrbtu13fp910r6ep723u.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/g4jtftpu31nqieag5hrptyg9/image_1boed9ql4vlu1lvr1m961rdu17ee4b.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1jmau5ty4xxhesrvpkz4o5dl/image_1boelhnlg11g2r2f13pt17jf1ms74o.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/pmbcpp7m2uqyjesjr4cqikcm/image_1boelimb312ldmdin53u5mgu55.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVD简介">
+<meta name="twitter:description" content="引言奇异值分解可以将一个比较复杂的矩阵用更小更简单的几个子矩阵的相乘来表示，这些小矩阵描述的是矩阵的重要的特性。就像是描述一个人一样，给别人描述说这个人长得浓眉大眼，方脸，络腮胡，而且带个黑框的眼镜，这样寥寥的几个特征，就让别人脑海里面就有一个较为清楚的认识，实际上，人脸上的特征是有着无数种的，之所以能这么描述，是因为人天生就有着非常好的抽取重要特征的能力，让机器学会抽取重要的特征，SVD是一个重">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/ubjhawjy11nxyw61poqn38gl/image_1boe8fm8dsj94gi1jpl1khb13v89.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-8-25-SVD简介" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/15/2017-8-25-SVD简介/" class="article-date">
+  <time datetime="2017-08-15T01:00:00.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SVD简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>奇异值分解可以将一个比较复杂的矩阵用更小更简单的几个子矩阵的相乘来表示，这些小矩阵描述的是矩阵的重要的特性。就像是描述一个人一样，给别人描述说这个人长得浓眉大眼，方脸，络腮胡，而且带个黑框的眼镜，这样寥寥的几个特征，就让别人脑海里面就有一个较为清楚的认识，实际上，人脸上的特征是有着无数种的，之所以能这么描述，是因为人天生就有着非常好的抽取重要特征的能力，让机器学会抽取重要的特征，SVD是一个重要的方法。在机器学习领域，有相当多的应用与奇异值都可以扯上关系，比如做feature reduction的PCA，做数据压缩（以图像压缩为代表）的算法，还有做搜索引擎语义层次检索的LSI（Latent Semantic Indexing）</p>
+<p>奇异值的作用和特征值有些类似，但是特征值只能应用于方阵，而奇异值分解可以对所有矩阵使用</p>
+<h1 id="奇异值的几何意义"><a href="#奇异值的几何意义" class="headerlink" title="奇异值的几何意义"></a>奇异值的几何意义</h1><p>要理解奇异值分解的集合意义，首先要对线性代数中的向量、矩阵所表示的几何意义有所了解，这里就不详细写了。具体可见：<a href="https://www.bilibili.com/video/av6731067/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6731067/</a></p>
+<p>我们以2*2的矩阵来举例</p>
+<p>2<em>2矩阵奇异值分解的几何实质是：对于任意2</em>2矩阵，总能找到某个正交网格到另一个正交网格的转换与矩阵变换相对应。</p>
+<p>用向量解释这个现象：选择适当的正交的单位向量v1和v2，向量Mv1和Mv2也是正交的。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ubjhawjy11nxyw61poqn38gl/image_1boe8fm8dsj94gi1jpl1khb13v89.png" alt="image_1boe8fm8dsj94gi1jpl1khb13v89.png-18.6kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/fg4zviipod2o3imryttv24hc/image_1boe8fumi9cbunk1ncqtfu1ak8m.png" alt="image_1boe8fumi9cbunk1ncqtfu1ak8m.png-17.2kB"></p>
+<p>用u1和u2来表示Mv1和Mv2方向上的单位向量。Mv1和Mv2的长度用σ1 和 σ2来表示——量化了网格在特定方向上被拉伸的效果。σ1 和 σ2被称为M的奇异值。即</p>
+<p>$Mv_1 = σ_1u_1$</p>
+<p>$Mv_2 = σ_2u_2$<br><img src="http://static.zybuluo.com/yhsdba/xm7ek5agxta477h9b6eda8nf/image_1boe8iub61lhmlp0qlf1i9a2b513.png" alt="image_1boe8iub61lhmlp0qlf1i9a2b513.png-16.9kB"></p>
+<p>现在给出矩阵M作用于向量x的简单描述。因为向量v1和v2是正交的单位向量，我们有<br>$x = (v_1 · x) v_1 + (v_2 · x) v_2$</p>
+<p>那么</p>
+<p>$Mx = (v_1 · x) Mv_1 + (v_2 · x) Mv_2$<br>$Mx = (v_1 · x) σ_1u_1 + (v_2 · x) σ_2u_2$</p>
+<p>将点积转换为转置后相乘</p>
+<p>$Mx = u_1σ_1v_1^Tx + u_2σ_2v_2^Tx$</p>
+<p>$M = u_1σ_1v_1^T + u_2σ_2v_2^T$</p>
+<p>通常表述成</p>
+<p>$M = UΣV^T$</p>
+<p>这里U是列向量u1和u2组成的矩阵，Σ是非零项为σ1 和 σ2的对角矩阵，V是列向量v1和v2组成的矩阵。</p>
+<h1 id="代数角度的奇异值"><a href="#代数角度的奇异值" class="headerlink" title="代数角度的奇异值"></a>代数角度的奇异值</h1><p> 假设A是一个M <em> N的矩阵，那么得到的U是一个M </em> M的方阵（里面的向量是正交的，U里面的向量称为左奇异向量），Σ是一个M <em> N的矩阵（除了对角线的元素都是0，对角线上的元素称为奇异值）,$V^T$是一个N </em> N的矩阵，里面的向量也是正交的，V里面的向量称为右奇异向量），从图片来反映几个相乘的矩阵的大小可得下面的图片</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nqc29oaz8s9ut3165vvj6raa/image_1boe9lbaj9oa169b1ot4689tju1g.png" alt="image_1boe9lbaj9oa169b1ot4689tju1g.png-24.1kB"></p>
+<p> 那么奇异值和特征值是怎么对应起来的呢？首先，我们将一个矩阵A的转置 * A，将会得到一个方阵，我们用这个方阵求特征值可以得到：</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/b7j65zklmweydsgeio30ghga/image_1boe9rc6h1j1rpv06jg65k1n4t1t.png" alt="image_1boe9rc6h1j1rpv06jg65k1n4t1t.png-4.2kB"></p>
+<p>这里得到的v，就是我们上面的右奇异向量。此外我们还可以得到：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/b4aqq9amo05cbz0vltlj5cyv/image_1boeci0l63c01p6218c018vf1tov2a.png" alt="image_1boeci0l63c01p6218c018vf1tov2a.png-4.6kB"></p>
+<p>  这里的σ就是上面说的奇异值，u就是上面说的左奇异向量。奇异值σ跟特征 值类似，在矩阵Σ中也是从大到小排列，而且σ的减少特别的快，在很多情况下，前10%甚至1%的奇异值的和就占了全部的奇异值之和的99%以上了。也就是说，我们也可以用前r大的奇异值来近似描述矩阵，这里定义一下部分奇异值分解：</p>
+<p>  <img src="http://static.zybuluo.com/yhsdba/be65kso5i57wv95guls8317t/image_1boecnfb4mmsskv6dvqcq1ide2n.png" alt="image_1boecnfb4mmsskv6dvqcq1ide2n.png-5.8kB"></p>
+<p>r是一个远小于m、n的数，这样矩阵的乘法看起来像是下面的样子：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/pizno259n1xhxs6zj3z48zpy/image_1boecomco1gmr53o1k9b1rk8bj934.png" alt="image_1boecomco1gmr53o1k9b1rk8bj934.png-12kB"></p>
+<p>右边的三个矩阵相乘的结果将会是一个接近于A的矩阵，在这儿，r越接近于n，则相乘的结果越接近于A。而这三个矩阵的面积之和（在存储观点来说，矩阵面积越小，存储量就越小）要远远小于原始的矩阵A，我们如果想要压缩空间来表示原矩阵A，我们存下这里的三个矩阵：U、Σ、V就好了。</p>
+<h1 id="SVD应用"><a href="#SVD应用" class="headerlink" title="SVD应用"></a>SVD应用</h1><h2 id="SVD与PCA"><a href="#SVD与PCA" class="headerlink" title="SVD与PCA"></a>SVD与PCA</h2><p>PCA的全部工作简单点说，就是对原始的空间中顺序地找一组相互正交的坐标轴，第一个轴是使得方差最大的，第二个轴是在与第一个轴正交的平面中使得方差最大的，第三个轴是在与第1、2个轴正交的平面中方差最大的，这样假设在N维空间中，我们可以找到N个这样的坐标轴，我们取前r个去近似这个空间，这样就从一个N维的空间压缩到r维的空间了，但是我们选择的r个坐标轴能够使得空间的压缩使得数据的损失最小。</p>
+<p>SVD得出的奇异向量是从奇异值由大到小排列的，按PCA的观点来看，就是方差最大的坐标轴就是第一个奇异向量，方差次大的坐标轴就是第二个奇异向量…</p>
+<p><img src="http://static.zybuluo.com/yhsdba/41b0syigm9c4554c8untkka2/image_1boed8rsrbtu13fp910r6ep723u.png" alt="image_1boed8rsrbtu13fp910r6ep723u.png-6.6kB"></p>
+<p>在矩阵的两边同时乘上一个矩阵V，由于V是一个正交的矩阵，所以V转置乘以V得到单位阵I，所以可以化成后面的式子</p>
+<p><img src="http://static.zybuluo.com/yhsdba/g4jtftpu31nqieag5hrptyg9/image_1boed9ql4vlu1lvr1m961rdu17ee4b.png" alt="image_1boed9ql4vlu1lvr1m961rdu17ee4b.png-15.1kB"></p>
+<p>右乘一个矩阵，相当于对向量进行空间的变换（见第一部分视频）。上面的式子相当于将一个m<em>n的矩阵压缩为了m</em>r的矩阵，即对列进行了压缩。</p>
+<p>如何对行进行压缩？</p>
+<p>在PCA的观点下，对行进行压缩可以理解为，将一些相似的sample合并在一起，或者将一些没有太大价值的sample去掉。下面写出一个通用的行压缩例子：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/1jmau5ty4xxhesrvpkz4o5dl/image_1boelhnlg11g2r2f13pt17jf1ms74o.png" alt="image_1boelhnlg11g2r2f13pt17jf1ms74o.png-4.5kB"></p>
+<p>这样就从一个m行压缩到r行了。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/pmbcpp7m2uqyjesjr4cqikcm/image_1boelimb312ldmdin53u5mgu55.png" alt="image_1boelimb312ldmdin53u5mgu55.png-6.9kB"></p>
+<p>这样我们就得到了对行进行压缩的式子。可以看出，其实PCA几乎可以说是对SVD的一个包装，如果我们实现了SVD，那也就实现了PCA了，而且更好的地方是，有了SVD，我们就可以得到两个方向的PCA，如果我们对A’A进行特征值的分解，只能得到一个方向的PCA。</p>
+<h2 id="奇异值与潜在语义索引LSI的关系-之后再补充"><a href="#奇异值与潜在语义索引LSI的关系-之后再补充" class="headerlink" title="奇异值与潜在语义索引LSI的关系(之后再补充)"></a>奇异值与潜在语义索引LSI的关系(之后再补充)</h2><p>参考：</p>
+<p><a href="http://www.ams.org/samplings/feature-column/fcarc-svd" target="_blank" rel="noopener">http://www.ams.org/samplings/feature-column/fcarc-svd</a></p>
+<p><a href="http://www.flickering.cn/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/2015/01/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88we-recommend-a-singular-value-decomposition%EF%BC%89/" target="_blank" rel="noopener">http://www.flickering.cn/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/2015/01/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88we-recommend-a-singular-value-decomposition%EF%BC%89/</a></p>
+<p><a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html" target="_blank" rel="noopener">http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/15/2017-8-25-SVD简介/" data-id="cjpcnx2i2000plsv6wf4y4kpi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVD/">SVD</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Stanford CS224d 深度学习与自然语言处理笔记(一) word2vec
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

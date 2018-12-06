@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>【ng公开课笔记02】线性回归 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、主要步骤(各算法通用) 构建模型 构建代价函数 参数优化  监督学习的工作方式：                              二、单变量线性回归eg：房价估计1.构建模型 假设函数: $ h_\theta(x)=\theta_0+\theta_1x $ 2.代价函数$ J(\theta_0,\theta_1)=1/2m*\sum^n_1(h_\theta(x^i-y^i))^2">
+<meta name="keywords" content="线性回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记02】线性回归">
+<meta property="og:url" content="https://kingsea0-0.github.io/2017/05/27/2017-5-2-【ng公开课笔记02】线性回归/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、主要步骤(各算法通用) 构建模型 构建代价函数 参数优化  监督学习的工作方式：                              二、单变量线性回归eg：房价估计1.构建模型 假设函数: $ h_\theta(x)=\theta_0+\theta_1x $ 2.代价函数$ J(\theta_0,\theta_1)=1/2m*\sum^n_1(h_\theta(x^i-y^i))^2">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/8vvje0ah0sbyea5xi9bs00fc/image_1bh51fai51gi31us419km90j9jd13.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/9ajfijc732r92o1na8zi0fk7/image_1bh50ubm31vefda2d1g16q6c6tm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/meohz27xm3i8i748vzuavkdt/image_1bh52dkl91r4ku7t1chp14hl10ee9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/6xhfv374dzobu0u5x5k2264r/image_1bh52euue1b1d1dch80q68v154lm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/7m2uokpdtvooxhjkc88ofqzv/image_1bh52helr1us51q841gqofvb1rln13.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/xkuyeai4fn8sh42oa83bcf3y/image_1bh53avt6194ghvblhv18q9doo2a.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ec2c0pup5uu5mqmq5gunxnno/image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/c76vk48ijzkdymesx5d2xdve/image_1bh53tnepat82p93d11p1v15pv2n.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ng公开课笔记02】线性回归">
+<meta name="twitter:description" content="一、主要步骤(各算法通用) 构建模型 构建代价函数 参数优化  监督学习的工作方式：                              二、单变量线性回归eg：房价估计1.构建模型 假设函数: $ h_\theta(x)=\theta_0+\theta_1x $ 2.代价函数$ J(\theta_0,\theta_1)=1/2m*\sum^n_1(h_\theta(x^i-y^i))^2">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/8vvje0ah0sbyea5xi9bs00fc/image_1bh51fai51gi31us419km90j9jd13.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-5-2-【ng公开课笔记02】线性回归" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/27/2017-5-2-【ng公开课笔记02】线性回归/" class="article-date">
+  <time datetime="2017-05-27T12:50:54.000Z" itemprop="datePublished">2017-05-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【ng公开课笔记02】线性回归
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、主要步骤-各算法通用"><a href="#一、主要步骤-各算法通用" class="headerlink" title="一、主要步骤(各算法通用)"></a><strong>一、主要步骤(各算法通用)</strong></h2><ul>
+<li>构建模型</li>
+<li>构建代价函数</li>
+<li>参数优化</li>
+</ul>
+<p>监督学习的工作方式：                            </p>
+<p><img src="http://static.zybuluo.com/yhsdba/8vvje0ah0sbyea5xi9bs00fc/image_1bh51fai51gi31us419km90j9jd13.png" alt="image_1bh51fai51gi31us419km90j9jd13.png-28.8kB"></p>
+<h2 id="二、单变量线性回归"><a href="#二、单变量线性回归" class="headerlink" title="二、单变量线性回归"></a><strong>二、单变量线性回归</strong></h2><h3 id="eg：房价估计"><a href="#eg：房价估计" class="headerlink" title="eg：房价估计"></a>eg：房价估计</h3><p>1.构建模型<br><img src="http://static.zybuluo.com/yhsdba/9ajfijc732r92o1na8zi0fk7/image_1bh50ubm31vefda2d1g16q6c6tm.png" alt="house_price"></p>
+<p><strong>假设函数: $ h_\theta(x)=\theta_0+\theta_1x $</strong></p>
+<p>2.<strong>代价函数</strong><br>$ J(\theta_0,\theta_1)=1/2m*\sum^n_1(h_\theta(x^i-y^i))^2 $<br>对代价函数的直观理解：<br><img src="http://static.zybuluo.com/yhsdba/meohz27xm3i8i748vzuavkdt/image_1bh52dkl91r4ku7t1chp14hl10ee9.png" alt="image_1bh52dkl91r4ku7t1chp14hl10ee9.png-293kB">                       </p>
+<p><img src="http://static.zybuluo.com/yhsdba/6xhfv374dzobu0u5x5k2264r/image_1bh52euue1b1d1dch80q68v154lm.png" alt="image_1bh52euue1b1d1dch80q68v154lm.png-75.3kB"></p>
+<p>3.<strong>梯度下降</strong></p>
+<p>直观理解：从高点逐步到达局部最小值（选择的初始参数组合不同，可能最后的结果也不同）<br><img src="http://static.zybuluo.com/yhsdba/7m2uokpdtvooxhjkc88ofqzv/image_1bh52helr1us51q841gqofvb1rln13.png" alt="image_1bh52helr1us51q841gqofvb1rln13.png-84.2kB"></p>
+<p>算法：<br>repeat:<br>    $\theta_j=\theta_j-\alpha\partial/\partial\theta_jJ(\theta_0,\theta_1)\  \ \  (for\ j=0\ and\ j=1)$  </p>
+<p>$\alpha$:学习率<br><strong>注意</strong>梯度下降时，要同时更新$\theta_0$和$\theta_1$，即：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/xkuyeai4fn8sh42oa83bcf3y/image_1bh53avt6194ghvblhv18q9doo2a.png" alt="image_1bh53avt6194ghvblhv18q9doo2a.png-36.1kB"></p>
+<p>将代价函数带入上式求导   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ec2c0pup5uu5mqmq5gunxnno/image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png" alt="image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png-15.7kB"></p>
+<h2 id="三、多变量线性回归"><a href="#三、多变量线性回归" class="headerlink" title="三、多变量线性回归"></a><strong>三、多变量线性回归</strong></h2><p>步骤与上述类似，只是需要将X和Y向量化<br>即代价函数变为：<br>$J(\theta_0\theta_1…\theta_n)=1/2m\sum_1^n(h_\theta(x^i)-y^i)^2$<br>梯度下降算法变为(求导带入后)：<br>Repeat{<br>$\theta_j=\theta_j-\alpha/m\sum^m_1(h_\theta(x^i)-y^i)x^i_j$<br>}</p>
+<h2 id="四、一些数据处理方法"><a href="#四、一些数据处理方法" class="headerlink" title="四、一些数据处理方法"></a><strong>四、一些数据处理方法</strong></h2><p>1.特征缩放：面对多特征问题时，要保证这些特征都具有相近的尺度，这样可以使收敛速度加快。最简单的是将所有特征取值范围都缩放到[-1,1]</p>
+<p>即$x_n=(x_n-u_n)/s_n$</p>
+<p>其中$u_n$是平均值$s_n$是标准差</p>
+<p>收敛速度对比：<br><img src="http://static.zybuluo.com/yhsdba/c76vk48ijzkdymesx5d2xdve/image_1bh53tnepat82p93d11p1v15pv2n.png" alt="image_1bh53tnepat82p93d11p1v15pv2n.png-51.1kB"></p>
+<p>2.常用学习率：0.01,0.03,0.1,0.3,1,3,10.（过高可能越过最值，过低迭代次数过高）</p>
+<p>3.非线性多项式：有时需要用曲线来适应数据，如<br>$h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x^2+\theta_3x^3$<br>通常需要先观察数据再决定尝试怎样的模型<br>还可以令：$x_2=x_2^2$     $x_3=x_3^3$将模型转换为线性回归</p>
+<h2 id="五、正规方程"><a href="#五、正规方程" class="headerlink" title="五、正规方程"></a><strong>五、正规方程</strong></h2><h3 id="另一种参数优化方法"><a href="#另一种参数优化方法" class="headerlink" title="另一种参数优化方法"></a>另一种参数优化方法</h3><p>如$J(\theta)=a\theta^2+b\theta+c$<br>X为训练集特征矩阵，y为结果向量<br>正规方程解$\theta=(X^TX)^{-1}X^Ty$</p>
+<ul>
+<li>对上述式子的理解：  </li>
+</ul>
+<p>设误差为$\Sigma_{i=1}^m(y_i-x_i^Tw)^2$     </p>
+<p>还可以用矩阵写为$(y-x_i^T\theta)^T(y-x_i^T\theta)$，对$w$求导，得到$X^T(Y-X\theta)$，令其等于0，得到  </p>
+<blockquote>
+<p>$\theta=(X^TX)^{-1}X^Ty$  </p>
+</blockquote>
+<p>即得到了使误差函数最小的参数</p>
+<h3 id="梯度下降和正规方程的比较："><a href="#梯度下降和正规方程的比较：" class="headerlink" title="梯度下降和正规方程的比较："></a>梯度下降和正规方程的比较：</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">梯度下降</th>
+<th style="text-align:center">正规方程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">需要选择学习率</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">需要多次迭代</td>
+<td style="text-align:center">一次运算得出</td>
+</tr>
+<tr>
+<td style="text-align:center">当特征数量n大时也能较好适用</td>
+<td style="text-align:center">特征数量n较大则运算代价大</td>
+</tr>
+<tr>
+<td style="text-align:center">适用于各种类型的模型</td>
+<td style="text-align:center">只适用于线性模型，不适合逻辑回归等其他模型</td>
+</tr>
+</tbody>
+</table>
+<p>当特征变量数量小于一万，通常使用标准方程法</p>
+<p><strong>正规方程是不可逆时可删除几个特征</strong></p>
+<h2 id="六、python实现"><a href="#六、python实现" class="headerlink" title="六、python实现"></a><strong>六、python实现</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def standRegress(xArr,yArr):</span><br><span class="line">    xMat=np.mat(xArr);yMat=np.mat(yArr).T</span><br><span class="line">    xTx=xMat.T*xMat</span><br><span class="line">    if np.linalg.det(xTx)==0:</span><br><span class="line">        print &apos;the matrix is singular,can not reverse&apos;</span><br><span class="line">        return</span><br><span class="line">    ws=xTx.I*(xMat.T*yMat)</span><br><span class="line">    return ws</span><br><span class="line"></span><br><span class="line">def lwlr(testPoint,xArr,yArr,k=1.0):</span><br><span class="line">    xMat=np.mat(xArr);yMat=np.mat(yArr).T</span><br><span class="line">    m=np.shape(xMat)[0]</span><br><span class="line">    weights=np.mat(np.eye(m))</span><br><span class="line">    for j in range(m):</span><br><span class="line">        diffMat=testPoint-xMat[j,:]</span><br><span class="line">        weights[j,j]=np.exp(diffMat*diffMat.T/(-2.0*k**2))</span><br><span class="line">    xTx=xMat.T*(weights*xMat)</span><br><span class="line">    if np.linalg.det(xTx)==0.0:</span><br><span class="line">        print &quot;This matrix is singular,cannot do inverse&quot;</span><br><span class="line">        return</span><br><span class="line">    ws=xTx.I*(xMat.T*(weights*yMat))</span><br><span class="line">    return testPoint*ws</span><br><span class="line"></span><br><span class="line">def lwlrTest(testArr,xArr,yArr,k=1.0):</span><br><span class="line">    m=np.shape(testArr)[0]</span><br><span class="line">    yHat=np.zeros(m)</span><br><span class="line">    for i in range(m):</span><br><span class="line">        yHat[i]=lwlr(testArr[i],xArr,yArr,k)</span><br><span class="line">    return yHat</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/05/27/2017-5-2-【ng公开课笔记02】线性回归/" data-id="cjpcnx2gh0001lsv690jp825b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线性回归/">线性回归</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/27/2017-5-27-mathjax常用语法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mathjax常用语法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/27/2017-5-27-【ng公开课笔记01】概述/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【ng公开课笔记01】概述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

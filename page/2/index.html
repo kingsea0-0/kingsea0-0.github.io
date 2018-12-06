@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://kingsea0-0.github.io/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2017-8-4-LDA" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/04/2017-8-4-LDA/" class="article-date">
+  <time datetime="2017-08-04T07:00:00.000Z" itemprop="datePublished">2017-08-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/04/2017-8-4-LDA/">LDA简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h1><p>LDA的全称是Linear Discriminant Analysis（线性判别分析），是一种supervised learning。LDA的原理是，将带标签的数据（点），通过投影的方法，投影到维度更低的空间中，使得投影后的点，会形成按类别区分，相同类别的点，将会在投影后的空间中更接近。要说明白LDA，首先得弄明白线性分类器(Linear Classifier)：因为LDA是一种线性分类器。对于K-分类的一个分类问题，会有K个线性函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/2xb0t13uos4ajiz0mji92u2c/image_1bmm1qol8t62138j1s28n1darh9.png" alt="image_1bmm1qol8t62138j1s28n1darh9.png-4kB"></p>
+<p>当满足条件：对于所有的j，都有Yk &gt; Yj,的时候，我们就说x属于类别k。对于每一个分类，都有一个公式去算一个分值，在所有的公式得到的分值中，找一个最大的，就是所属的分类了。</p>
+<p>上式实际上就是一种投影，是将一个高维的点投影到一条高维的直线上，LDA最求的目标是，给出一个标注了类别的数据集，投影到了一条直线之后，能够使得点尽量的按类别区分开，当k=2即二分类问题的时候，如下图所示：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8hykbc5fosz03o7mouw3376v/image_1bmm1snljalr125it1t1heghe8m.png" alt="image_1bmm1snljalr125it1t1heghe8m.png-10kB"><br>下面推到一下二分类LDA问题的公式：</p>
+<p>假设用来区分二分类的直线（投影函数)为：<br><img src="http://static.zybuluo.com/yhsdba/l9jt3fyh8axc05rgmfkzue2h/image_1bmm1v7clj34b09tn11r9o199i1j.png" alt="image_1bmm1v7clj34b09tn11r9o199i1j.png-1.9kB"></p>
+<p>LDA分类的一个目标是使得不同类别之间的距离越远越好，同一类别之中的距离越近越好（即需要找一个最佳的w的值），所以我们需要定义几个关键的值。</p>
+<p>类别i的原始中心点为：（Di表示属于类别i的点)</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/o91frcuvci3q1yybw3th631d/image_1bmm1vuunkht1k31d7a1eim1hlo20.png" alt="image_1bmm1vuunkht1k31d7a1eim1hlo20.png-3.5kB"></p>
+<p>类别i投影后的中心点为：</p>
+<p>  <img src="http://static.zybuluo.com/yhsdba/30qj4b9cfry4phgrw19efmkt/image_1bmm20a7j618lkv1e7m6vlukn2d.png" alt="image_1bmm20a7j618lkv1e7m6vlukn2d.png-3kB"></p>
+<p>衡量类别i投影后，类别点之间的分散程度（方差）为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/i93zr9tjm58znrkhhpq0ojkt/image_1bmm21d15d0c1ofslo7139dldk2q.png" alt="image_1bmm21d15d0c1ofslo7139dldk2q.png-5.4kB"></p>
+<p>最终我们可以得到一个下面的公式，表示LDA投影到w后的损失函数：</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/1lar6cb8x29mzwp6d5rkirc4/image_1bmm21pht1m7j1mb8n6daf61vir37.png" alt="image_1bmm21pht1m7j1mb8n6daf61vir37.png-6.4kB"></p>
+<p>  我们分类的目标是，使得类别内的点距离越近越好（集中），类别间的点越远越好。分母表示每一个类别内的方差之和，方差越大表示一个类别内的点越分散，分子为两个类别各自的中心点的距离的平方，我们最大化J(w)就可以求出最优的w了。想要求出最优的w，可以使用拉格朗日乘子法，但是现在我们得到的J(w)里面，w是不能被单独提出来的，我们就得想办法将w单独提出来。</p>
+<p>我们定义一个投影前的各类别分散程度的矩阵，矩阵的含义是，如果某一个分类的输入点集Di里面的点距离这个分类的中心店mi越近，则Si里面元素的值就越小，如果分类的点都紧紧地围绕着mi，则Si里面的元素值越更接近0.</p>
+<p><img src="http://static.zybuluo.com/yhsdba/lh6waa2axf0xxq6qitn02wt9/image_1bmm2sifg106s1dogsm0hqagub3k.png" alt="image_1bmm2sifg106s1dogsm0hqagub3k.png-6kB"></p>
+<p>Si称作散列矩阵(scatter matrix)</p>
+<p>同时定义$S_w=S_1+S_2$,Sw叫做within-class scatter matrix</p>
+<p>带入Si，将J(w)分母化为：（图片中应为si的平方）</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8al9xnvysnh6eg0v9kxau4so/image_1bmm2t0hb1f402duls016te146l41.png" alt="image_1bmm2t0hb1f402duls016te146l41.png-19.7kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/844ujymlbw4kxbmmy39eenjs/image_1bmm2t9ubs3hj3n110huimvtm4e.png" alt="image_1bmm2t9ubs3hj3n110huimvtm4e.png-8.5kB"></p>
+<p>同样的将J(w)分子化为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/29th473moxpndsvuaq2aiz92/image_1bmm2ukpr1b8d1vleu6df1718vt4r.png" alt="image_1bmm2ukpr1b8d1vleu6df1718vt4r.png-10kB"></p>
+<p>$S_B$成为Between-class-scatter,是一个秩为1的矩阵</p>
+<p>这样损失函数可以化成下面的形式：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/g5w7ygqa4yx6k68krl49zcl1/image_1bmm34d9m14e712h9h71f651ups58.png" alt="image_1bmm34d9m14e712h9h71f651ups58.png-5.6kB"></p>
+<p>然后就可以求导来求J(w)的最大值从而得到最佳的w。在我们求导之前，需要对分母进行归一化，因为不做归一的话，w扩大任何倍，都成立，我们就无法确定w。因此我们打算令$|w^TS_ww|=1$</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/xyhmtkifwqcpxcninb4uu1rb/image_1bmm35ngg1ojf5ov19sug1vict5l.png" alt="image_1bmm35ngg1ojf5ov19sug1vict5l.png-17.5kB">   </p>
+<p>其中用到了矩阵微积分，求导时可以简单的把$w^TS_ww$看作$S_ww^2$</p>
+<p>如果$S_w$可逆，两边同乘$S_w^{-1}$得到$S_w^{-1}S_Bw=\lambda w$</p>
+<p>w就是矩阵$S_w^{-1}S_B$的特征向量</p>
+<p>这个公式称为Fisher linear discrimination。</p>
+<p>将前面已知的$S_B$公式带入得到$S_w^{-1}S_Bw=S_w^{-1}(u_1-u_2)*\lambda_w=\lambda w$</p>
+<p>由于对w扩大缩小任何倍不影响结果，因此可以约去两边的未知常数$\lambda$和$\lambda_w$，得到</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8ix3oqvt7cwcuhsaqm6m4336/image_1bmm8p66f1lvh1vtr11hg3nrdm57f.png" alt="image_1bmm8p66f1lvh1vtr11hg3nrdm57f.png-1.2kB"></p>
+<p>至此，我们只需要求出原始样本的均值和方差就可以求出最佳的方向w</p>
+<p> 对于N(N&gt;2)分类的问题，结论：</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/ah7kqp49zxsgv5d9ln8sjdvr/image_1bmm60u3911kd135lnpno661kq572.png" alt="image_1bmm60u3911kd135lnpno661kq572.png-13.9kB"></p>
+<p> 参考：<br> <a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html" target="_blank" rel="noopener">http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html</a></p>
+<p> <a href="http://blog.csdn.net/ffeng271/article/details/7353834" target="_blank" rel="noopener">http://blog.csdn.net/ffeng271/article/details/7353834</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/04/2017-8-4-LDA/" data-id="cjpcnx2if000ylsv6qlve9ca1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-7-23-【ng公开课笔记10】降维" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/27/2017-7-23-【ng公开课笔记10】降维/" class="article-date">
+  <time datetime="2017-07-27T09:00:00.000Z" itemprop="datePublished">2017-07-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/27/2017-7-23-【ng公开课笔记10】降维/">【ng公开课笔记10】降维</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-数据压缩"><a href="#1-数据压缩" class="headerlink" title="1.数据压缩"></a>1.数据压缩</h1><p>如果几个特征高度相关，我们可以用1个特征进行表示，这就是降维<br>降维可以对数据进行压缩，节约存储空间，并提高训练速度</p>
+<p><img src="http://static.zybuluo.com/yhsdba/wpb5p3vt4trxuslkx0mtaxl2/image_1bm1mijn4u4r13a3r3617lh1cuv9.png" alt="image_1bm1mijn4u4r13a3r3617lh1cuv9.png-102.1kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/ejil7svkrni5q9k5iksgy74i/image_1bm1mjnd217arfn13bd14qv1eh7m.png" alt="image_1bm1mjnd217arfn13bd14qv1eh7m.png-549.9kB"></p>
+<h1 id="2-数据可视化"><a href="#2-数据可视化" class="headerlink" title="2.数据可视化"></a>2.数据可视化</h1><p>可以通过降维将数据进行可视化</p>
+<h1 id="3-主成成分分析（Principal-Component-Analysis-Problem-Formulation）"><a href="#3-主成成分分析（Principal-Component-Analysis-Problem-Formulation）" class="headerlink" title="3.主成成分分析（Principal Component Analysis Problem Formulation）"></a>3.主成成分分析（Principal Component Analysis Problem Formulation）</h1><p>PCA是最常见的降维算法 </p>
+<p>在 PCA 中，我们要做的是找到一个方向向量（Vector direction），当我们把所有的数据<br>都  投射到该向量上时，我们希望投射平均均方误差能尽可能地小。方向向量是一个经过原<br>点的向量，而投射误差是从特征向量向该方向向量作垂线的长度。 </p>
+<p><img src="http://static.zybuluo.com/yhsdba/p23zvkxnb0tvwu9n9n8qjhvc/image_1bm1mssmel4j15nme7ot0o10fs13.png" alt="image_1bm1mssmel4j15nme7ot0o10fs13.png-94.9kB">  </p>
+<p>下面给出主成分分析问题的描述：<br>问题是要将 n 维数据降至 k 维，目标是找到向量 u (1) ,u (2) ,…,u (k)使得总的投射误差最小。<br>主成分分析与线性回顾的比较：<br>主成分分析与线性回归是两种不同的算法。主成分分析最小化的是投射误差（Projected<br>Error），而线性回归尝试的是最小化预测误差。线性回归的目的是预测结果，而主成分分析<br>不作任何预测。  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/1woezzphbenpprs7we5ynkj1/image_1bm1pg9bsauo1s5n1iousb1fss1g.png" alt="image_1bm1pg9bsauo1s5n1iousb1fss1g.png-51.9kB"></p>
+<p>上图中，左边的是线性回归的误差（垂直于横轴投影），右边则是主要成分分析的误差（垂直于红线投影）</p>
+<h1 id="4-主成分分析算法"><a href="#4-主成分分析算法" class="headerlink" title="4.主成分分析算法"></a>4.主成分分析算法</h1><p>PCA减少n维到k维：<br>第一步是均值归一化。我们需要计算出所有特征的均值，然后令$x_j=x_j-u_j$。如果特征是在不同的数量级上，我们还需要将其除以标准差$\sigma^2$。<br>第二步是计算协方差矩阵（covariance matrix）Σ：<br>$$\Sigma=1/m(x^i)(x^i)^T$$</p>
+<p>第三步是计算协方差矩阵 Σ 的特征向量（eigenvectors）:<br>利用Ocatave里的奇异值分解来求解。[U,S,V]=svd(sigma)。</p>
+<pre><code>$$U=\begin{bmatrix}
+{\vdots}&amp;{\vdots}&amp;{\cdots}&amp;{\vdots}\\
+u^1&amp;u^2&amp;{\cdots}&amp;u^n\\
+{\vdots}&amp;{\vdots}&amp;{\cdots}&amp;{\vdots}\\
+\end{bmatrix}$$
+</code></pre><p>对于一个  n×n  维度的矩阵，上式中的U是一个具有与数据之间最小投射误差的方向向量构成的矩阵。如果我们希望将数据从 n 维降至 k 维，我们只需要从 U 中选取前 K 个向量，获得一个 n×k 维度的矩阵，我们用$U_reduce$ 表示，然后通过如下计算获得要求的新特征向量z (i)： </p>
+<p>$$z^i=U_{reduce}^Tx^i$$</p>
+<p>其中 x 是 n×1 维的，因此结果为 k×1 维度。注，我们不对方差特征进行处理。</p>
+<h1 id="5-选择主成分的数量"><a href="#5-选择主成分的数量" class="headerlink" title="5.选择主成分的数量"></a>5.选择主成分的数量</h1><p>主要成分分析是减少投射的平均均方误差：$1/m\Sigma_{i=1}^m\mid x^i-x_{approx}^i\mid^2$</p>
+<p>训练集的方差为：$1/m\Sigma_{i=1}^m\mid x^i\mid^2$</p>
+<p>我们希望在平均均方误差与训练集方差的比例尽可能小的情况下选择尽可能小的 K 值。 </p>
+<p>我们可以先令 K=1，然后进行主要成分分析，获得 U reduce 和 z，然后计算比例是否小于 1%。如果不是的话再令K=2，如此类推，直到找到可以使得比例小于 1%的最小 K 值（原因是各个特征之间通常情况存在某种相关性）。  </p>
+<p>还有一些更好的方式来选择 K，当我们在Octave中调用“svd”函数的时候，我们获得三个参数：[U, S, V] = svd(sigma)。 </p>
+<p>其中的 S 是一个 n×n 的矩阵，只有对角线上有值，而其它单元都是 0，我们可以使用这<br>个矩阵来计算平均均方误差与训练集方差的比例： </p>
+<p><img src="http://static.zybuluo.com/yhsdba/55771649x4vlct14uegj7cz1/image_1bm1utk3db2hk251bi41ldqa2b1t.png" alt="image_1bm1utk3db2hk251bi41ldqa2b1t.png-76.3kB"></p>
+<h1 id="6-压缩重建"><a href="#6-压缩重建" class="headerlink" title="6.压缩重建"></a>6.压缩重建</h1><p>$z=U_{reduce}^Tx$<br>$x_{appox}=U_{reduce}z$</p>
+<h1 id="7-应用建议："><a href="#7-应用建议：" class="headerlink" title="7.应用建议："></a>7.应用建议：</h1><p>只在训练集使用主成分析<br>最好不要用作避免过拟合的手段</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/07/27/2017-7-23-【ng公开课笔记10】降维/" data-id="cjpcnx2ic000tlsv6q6x4wz1r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据预处理/">数据预处理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-7-27-【ng公开课笔记09】K-means" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/27/2017-7-27-【ng公开课笔记09】K-means/" class="article-date">
+  <time datetime="2017-07-27T06:47:00.000Z" itemprop="datePublished">2017-07-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/27/2017-7-27-【ng公开课笔记09】K-means/">【ng公开课笔记09】聚类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-k-均值算法"><a href="#1-k-均值算法" class="headerlink" title="1.k-均值算法"></a>1.k-均值算法</h1><p>k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：</p>
+<ul>
+<li>选择k个随机的点，称为<strong>聚类中心</strong></li>
+<li>对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。</li>
+<li>计算每一个组的平均值，将该组所关联的中心点移到平均值的位置</li>
+<li>重复上述步骤直到中心点不再变化<br>示例：  </li>
+</ul>
+<p>开始随机选两个聚类中心  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png" alt="image_1bm1e6upq1hunbf919op1bqu10m99.png-113.4kB">    </p>
+<p>将数据与聚类中心关联起来，分成了两类</p>
+<p><img src="http://static.zybuluo.com/yhsdba/devmv809j8ljztup508gupjf/image_1bm1e8qk81l9ca011c8k16cp1jlm.png" alt="image_1bm1e8qk81l9ca011c8k16cp1jlm.png-83.6kB"> </p>
+<p>第一次迭代，移动聚类中心</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nuz257lv4n7x1b6poyavfrni/image_1bm1ecgmcpp21oo41k5qcr1h3413.png" alt="image_1bm1ecgmcpp21oo41k5qcr1h3413.png-76.8kB">  </p>
+<p>继续迭代，直到聚类中心不再变化</p>
+<p><img src="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png" alt="image_1bm1edeek8tq4486caks6e1g.png-80kB"></p>
+<p>用 $u^1,u^2,……,u^k$ 来表示聚类中心，用 $c^1,c^2,……,c^m$ 来储存与第i个实例数据最近的聚类中心的索引，算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Repeat &#123; </span><br><span class="line">for i = 1 to m </span><br><span class="line">c (i)  := index (form 1 to K) of cluster centroid closest to x (i)  //cluster assignment step</span><br><span class="line"> </span><br><span class="line">for k = 1 to K </span><br><span class="line">μ k  := average (mean) of points assigned to cluster k //move centroid</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-优化目标"><a href="#2-优化目标" class="headerlink" title="2.优化目标"></a>2.优化目标</h1><p>K-均值最小化问题，是要最小化所有的数据点与其所关联的聚类中心点之间的距离之和，<br>因此  K-均值的代价函数（又称畸变函数  Distortion function）为： $J(c^1,…,c^m,u_1,…,u_k)=1/m\Sigma_{i=1}^m|x^i-u_{c^i}|^2$</p>
+<p> 我们的的优化目标便是找出使得代价函数最小<br>的  c (1) ,c (2) ,…,c (m)和 μ 1 ,μ 2 ,…,μ k：</p>
+<p>上一节的算法，第一个循环是用于减小 c (i)引起的代价，<br>而第二个循环则是用于减小 μ i  引起的代价。  </p>
+<h1 id="3-随机初始化"><a href="#3-随机初始化" class="headerlink" title="3.随机初始化"></a>3.随机初始化</h1><p>在运行 K-均值算法的之前，我们首先要随机初始化所有的聚类中心点：</p>
+<ol>
+<li><p>我们应该选择 K&lt;m，即聚类中心点的个数要小于所有训练集实例的数量  </p>
+</li>
+<li><p>随机选择 K 个训练实例，然后令 K 个聚类中心分别与这 K 个训练实例相等<br>K-均值的一个问题在于，它有可能会停留在一个局部最小值处，而这取决于初始化的情<br>况。  </p>
+</li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/2zmip2hwr5j9pnczsfhrpcsu/image_1bm1f3pesle187u1e5s1keqg7b1t.png" alt="image_1bm1f3pesle187u1e5s1keqg7b1t.png-359.5kB"> </p>
+<p>为了解决这个问题，我们通常需要多次运行 K-均值算法，每一次都重新进行随机初始<br>化，最后再比较多次运行 K-均值的结果，选择代价函数最小的结果。这种方法在 K 较小的时候（2–10）还是可行的，但是如果K较大，这么做也可能不会有明显地改善。 </p>
+<h1 id="4-选择聚类数"><a href="#4-选择聚类数" class="headerlink" title="4.选择聚类数"></a>4.选择聚类数</h1><p>通常根据具体问题人工手动选择。</p>
+<p>肘部法则：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/nhgy9szvwowwo5twvi6gw1ac/image_1bm1f9giqtsfr68mq1rca7ag2a.png" alt="image_1bm1f9giqtsfr68mq1rca7ag2a.png-139.3kB"> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/07/27/2017-7-27-【ng公开课笔记09】K-means/" data-id="cjpcnx2ie000wlsv6d59x2mje" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/聚类/">聚类</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-7-23-【ng公开课笔记08】SVM" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/24/2017-7-23-【ng公开课笔记08】SVM/" class="article-date">
+  <time datetime="2017-07-24T02:00:00.000Z" itemprop="datePublished">2017-07-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/24/2017-7-23-【ng公开课笔记08】SVM/">【ng公开课笔记08】SVM</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-优化目标"><a href="#1-优化目标" class="headerlink" title="1.优化目标"></a>1.优化目标</h1><p>首先先来复习一下逻辑回归：<br>下面是逻辑回归的假设函数   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/js245wqiq4okcoz930sj1mb6/image_1blk0li1a5pb1u87duf1mblvcv9.png" alt="image_1blk0li1a5pb1u87duf1mblvcv9.png-160.5kB"></p>
+<p>  如果有一个y=1的样本，如果能够让它能够被正确分类，即希望 $h_\theta(x)=1$,就需要 $\theta^Tx&gt;&gt;0$ 。y=0时同理   </p>
+<p>  下面是逻辑回归一个样本的代价函数计算公式，总代价函数即是每个样本的代价求和再取均值<br>  <img src="http://static.zybuluo.com/yhsdba/krv45leod1i18vm2inzh2p5s/image_1blk0v4sc2i9v1h1hf21ta61fk3m.png" alt="image_1blk0v4sc2i9v1h1hf21ta61fk3m.png-90.5kB">       </p>
+<p>  <img src="http://static.zybuluo.com/yhsdba/ouhwxnv0xldp7hyhsozd87ov/image_1blk115gp12t9122u1e9t1ch71c1613.png" alt="image_1blk115gp12t9122u1e9t1ch71c1613.png-58.1kB"></p>
+<p>  通过函数图像可以看到，当$z=\theta^Tx&gt;&gt;0$时，cost-&gt;0,与上述结论相似。 </p>
+<p>  在svm中我们在上述代价函数基础上进行简化：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/repbwvedv8rye06wrw4ia8wt/image_1blk15q3r1husdg91p6p491ruj1t.png" alt="image_1blk15q3r1husdg91p6p491ruj1t.png-143.2kB">  </p>
+<p>得到SVM的代价函数：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/wos3zs3baf2xoybxzlk1m90u/image_1blk17dlvp8i13gfg1vgkkqtj2a.png" alt="image_1blk17dlvp8i13gfg1vgkkqtj2a.png-389.6kB">  </p>
+<p>与逻辑回归区别，除了代价函数的变化，系数也进行了一些调整。  </p>
+<h1 id="2-大边界的直观理解"><a href="#2-大边界的直观理解" class="headerlink" title="2.大边界的直观理解"></a>2.大边界的直观理解</h1><p><img src="http://static.zybuluo.com/yhsdba/7ud0bmeg0jola2spy26dgstd/image_1blk1euln1stm1hqf1hrbrps1c8i2n.png" alt="image_1blk1euln1stm1hqf1hrbrps1c8i2n.png-232.3kB">  </p>
+<p>这是上一部分我们得出的svm代价函数模型。在逻辑回归中，我们只需要z&gt;0就可以将样本分类为1，z&lt;0将样本分类为0。但在SVM中，只有z&gt;1或者z&lt;-1时才能将样本确定为类型1或0。相当于在SVM中加入了一个安全（距离）因子。  </p>
+<p>那这个因子导致了什么结果？从一个特特例来看，将C设为一个很大的数如100000，观察支持向量机  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/vpenjwwir7vrnkgk2cbqbey9/image_1blk3hioemch18jq12ru146mb6234.png" alt="image_1blk3hioemch18jq12ru146mb6234.png-95.4kB">   </p>
+<p>如果C很大，我们想要最小化代价函数，就希望得到一个第一项为0的最优解。当我们最优化$\theta$函数后，会得到一个决策边界  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/t5g9vlb2225qb0qprlmwidrj/image_1blk3qad616341tk4t8hvcd1ppo3u.png" alt="image_1blk3qad616341tk4t8hvcd1ppo3u.png-60.6kB">   </p>
+<p>支持向量机会选择黑色的边界。但其他的边界也可以分开样本（但看起来不自然），那为什么会选择黑色的？  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/yrswq248db2biuv8xsjb19hs/image_1blk414qj1futdn8f3p88p7r14b.png" alt="image_1blk414qj1futdn8f3p88p7r14b.png-82.5kB"></p>
+<p>如果我们在样本边界做分界线的平行线，我们可以看到黑色分界线和样本间有更大的最短距离，所以支持向量机也被称为大间距分类器。    </p>
+<p>我们来看一下C这个系数的作用：</p>
+<p>像下面的样本，我们可以得到一条垂直于x轴的分界线</p>
+<p><img src="http://static.zybuluo.com/yhsdba/6vjeowsjcu9uif3cit7vd1si/image_1blk44qa095etfk1dqtm381pcf55.png" alt="image_1blk44qa095etfk1dqtm381pcf55.png-40.5kB">  </p>
+<p>但如果加入了一个异常点</p>
+<p><img src="http://static.zybuluo.com/yhsdba/oy8bn3yuocps9pgnajmmeosz/image_1blk44f111kl3ntr1h5q1h5f1mdv4o.png" alt="image_1blk44f111kl3ntr1h5q1h5f1mdv4o.png-55.1kB">  </p>
+<p>当C很大时，我们将会得到粉色的分界线，而C较小时，依然得到黑色的分界线。<br>（我们可以将C看作$1/\lambda$,当C很大，即正则化系数很小，容易过拟合）</p>
+<h1 id="3-大边界分类器的数学原理"><a href="#3-大边界分类器的数学原理" class="headerlink" title="3. 大边界分类器的数学原理"></a>3. 大边界分类器的数学原理</h1><p>svm的目标函数（第一项优化为0）：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/7mattcop5fgb8yco9gth66yz/image_1blk4qf8ndc71rln1se870a2mh5i.png" alt="image_1blk4qf8ndc71rln1se870a2mh5i.png-17.6kB"></p>
+<p>为了方便，我们将$\theta_0=0$，将特征数n=2</p>
+<p>目标函数可以写为<br>$$1/2(\theta_1^2+\theta_2^2)=1/2(\sqrt{\theta_1^2+\theta_2^2}=1/2||\theta||^2)$$<br>将x也画在图像上</p>
+<p><img src="http://static.zybuluo.com/yhsdba/48ewu5i8qusihy2be9uy76a9/image_1blk4soi1fui80l164klmp1k9n5v.png" alt="image_1blk4soi1fui80l164klmp1k9n5v.png-205.5kB">  </p>
+<p>$$\theta^T<em>x=p</em>\mid\theta\mid$$ </p>
+<p><img src="http://static.zybuluo.com/yhsdba/a461lksh9gybhpif1p5gtx34/image_1blk6g7mo5r1akaifd1g601ba36c.png" alt="image_1blk6g7mo5r1akaifd1g601ba36c.png-131.3kB">    </p>
+<p>$\theta$ 是和决策边界正交的，我们可以看到，如果是正样本，p&gt;0,负样本则p&lt;0如果选择如图的边界p会非常小.而我们优化目标函数的时候，我们需要$p\midθ\mid&gt;=1$,但在这里p很小，就需要θ很大。但我们的优化目标是找到一个较小的theta。所以我们需要选择一个边界使得p最大。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/sb8p3bdry35qkz6mtlu3l8j7/image_1blk6ldleker4degq91p1qhes6p.png" alt="image_1blk6ldleker4degq91p1qhes6p.png-328.9kB">  </p>
+<h1 id="4-核函数"><a href="#4-核函数" class="headerlink" title="4.核函数"></a>4.核函数</h1><p>对于之前讨论过的非线性分类问题，我们之前通过多项式的形式解决。但通常代价较大，所以我们换一种方式来解决。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/5ubi16a3esvvkcfjgixsmdx1/image_1blk76i1d1sukbm01mcli71m7o76.png" alt="image_1blk76i1d1sukbm01mcli71m7o76.png-120.4kB">  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/j0yaeif6ou2snen01kvjhjal/image_1blk77e9898b3nhmtu1ahd1j807j.png" alt="image_1blk77e9898b3nhmtu1ahd1j807j.png-107.1kB"></p>
+<p>通过核函数得到f用作新的特征。</p>
+<p>给定一个训练实例x，利用x的各个特征与预先选定的地标(landmarks)l的近似程度来选取新的特征f1,f2,f3  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/x7cfof2pbf5n07j2y6lcwhlk/image_1blkbmp3g10rl1t75gnu1043op580.png" alt="image_1blkbmp3g10rl1t75gnu1043op580.png-19kB">               </p>
+<p>$f1=similarity(x,l^{(1)})=e(-\midx-l^{(1)}\mid^2/(2\sigma^2))$             </p>
+<p>其中 $\midx-l^{(1)}\mid^2=\Sigma_{j=1}^n(x_j-l_j^{(1)})^2$  </p>
+<p>similarity(x,l)就是核函数，上述是一个高斯核函数</p>
+<p>注：与正态分布没什么关系，只是看起来像  </p>
+<p>如果一个训练实例x与地标l的距离近似于0，则f=1,如果距离较远，f=0</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ckkq7f9pnij7wtddak33yh96/image_1blkc9h2qbn51t259nqnl0srp8d.png" alt="image_1blkc9h2qbn51t259nqnl0srp8d.png-403.6kB">  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/pljyln4y08yg8bmpjdxgaw6j/image_1blkcbcd31iqcpcvn20frlmt78q.png" alt="image_1blkcbcd31iqcpcvn20frlmt78q.png-309.3kB"></p>
+<h2 id="如何选择地标"><a href="#如何选择地标" class="headerlink" title="如何选择地标"></a>如何选择地标</h2><p>通常根据训练集的数量选择地标的数量，如果训练集中有m个实例，则我们选取m个地标，并且令 $l^1=x^1,l^2=x^2,l^m=x^m$ ，这样的好处在于，新特征是建立在原有特征与训练集中所有其他特征之间的距离的基础上  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/tpa7po7cj5j9aqgeyxijpwtz/image_1blkcth651fjv41cbqhvq1107i97.png" alt="image_1blkcth651fjv41cbqhvq1107i97.png-363.6kB">  </p>
+<p>将核函数运用的支持向量机中：</p>
+<ul>
+<li>给定x，计算新特征f，当 $\theta^Tx&gt;=0$ 时，预测y=1，否则y=0。修改代价函数为：</li>
+</ul>
+<p><img src="http://static.zybuluo.com/yhsdba/kb3bcb70n41v99qmmnqzqzot/image_1blkdfo7q7cs13dq43v1tsf1h389k.png" alt="image_1blkdfo7q7cs13dq43v1tsf1h389k.png-34.1kB">  </p>
+<p>具体实施时，还需对归一化进行调整，在计算 $\Sigma_{j=1}^{n=m}\theta^2=\theta^T\theta$ 时，用 $\theta^TM\theta$ 代替 $\theta^T\theta$ ，M是根据核函数选择的一个矩阵，帮助简化计算  </p>
+<p>当SVM不使用核函数时，也可称为线性核函数。当训练集特征很多而实例很少时，可以采用线性核函数向量机。  </p>
+<p>下面是SVM的两个参数C和$\sigma$的影响：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/l3m8weskz5zqjcsx4xd9evgs/image_1blkdnt7g1o081j2ht6t8sq122ja1.png" alt="image_1blkdnt7g1o081j2ht6t8sq122ja1.png-36kB"> </p>
+<h1 id="5-使用SVM"><a href="#5-使用SVM" class="headerlink" title="5.使用SVM"></a>5.使用SVM</h1><p>其他的核函数：</p>
+<ul>
+<li>多项式核函数</li>
+<li>字符串核函数</li>
+<li>卡方核函数</li>
+<li>直方图核函数</li>
+<li>……</li>
+</ul>
+<p>使用时的一些准则：<br>n为特征数,m为训练样本数</p>
+<ol>
+<li>相较于m而言，n要大很多，即训练数据量不够我们训练一个复杂的非线性模型，我们选用逻辑回归模型或者不带核函数的支持向量机</li>
+<li>如果n较小，m大小中等，如n在1-1000之间，m在10-10000之间，使用高斯核函数</li>
+<li>如果n较小，m较大，如n在1-1000之间，m大于50000，在使用是svm会非常慢，解决方案是创造更多特征，然后使用逻辑回归或者线性核函数</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/07/24/2017-7-23-【ng公开课笔记08】SVM/" data-id="cjpcnx2jf001qlsv6rr1fsmt3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVM/">SVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-5-27-【ng公开课笔记07】系统构建中的问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/09/2017-5-27-【ng公开课笔记07】系统构建中的问题/" class="article-date">
+  <time datetime="2017-06-09T15:00:00.000Z" itemprop="datePublished">2017-06-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/09/2017-5-27-【ng公开课笔记07】系统构建中的问题/">【ng公开课笔记07】系统构建的几个问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><ul>
+<li>开始时先构建一个简单的（特征量少）系统，快速得到一个结果，并进行交叉验证 </li>
+<li>画出学习曲线，找出算法存在的问题逐步改进，决定增加数据、添加特征或其他方法  </li>
+<li>当不容易画出学习曲线时我们可以采用误差分析的方法，即人工检查交叉检验集中在算法中产生误差的实例，看看这些实例是否有某种趋势  </li>
+</ul>
+<p>通过量化的数值(如误差率)而不是凭感觉改进算法。同时注意是在交叉验证集上做误差分析，而不是测试集。  </p>
+<h1 id="类偏斜"><a href="#类偏斜" class="headerlink" title="类偏斜"></a>类偏斜</h1><p>假如我们要用算法来预测恶性癌症，训练集中只有0.5%的实例是恶性肿瘤。假设我们的算法有1%的误差。所以“假设所有肿瘤都是良性的”的误差比通过算法来预测的误差还要小。   </p>
+<p>像上述例子这样，训练集中有非常多的同一种类实例，只有很少或没有其他类实例的情况，叫做类偏斜。<br>对于类偏斜情况，用误差大小评判算法就不是一个很好的依据了，因此我们通过<strong>查准率(precision)</strong>和<strong>查全率(recall)</strong>来作为算法的评价标准。  </p>
+<p>预测结果可以分为以下四类</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">实际\预测</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">正确否定(True Negativ，TN)</td>
+<td style="text-align:center">错误否定(False Negative，FN)</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">错误肯定(False Positive，FP)</td>
+<td style="text-align:center">正确肯定(True Positive，TP)</td>
+<td>　　</td>
+</tr>
+</tbody>
+</table>
+<p>precision=TP/(TP+FP)      </p>
+<p>所有预测患有恶性肿瘤的病人中，实际患有恶性肿瘤的病人百分比。  </p>
+<p>recall=TP/(TP+FN)    </p>
+<p>实际患有恶性肿瘤的病人中，成功预测的百分比。</p>
+<p>precision和recall越高越好  </p>
+<h1 id="查全率和查准率之间的权衡"><a href="#查全率和查准率之间的权衡" class="headerlink" title="查全率和查准率之间的权衡"></a>查全率和查准率之间的权衡</h1><p><img src="http://static.zybuluo.com/yhsdba/mm06vbn9yyc8loma8gc9dbcd/image_1bi6l7l95tt0nv7101a1rmr1re99.png" alt="image_1bi6l7l95tt0nv7101a1rmr1re99.png-42.7kB">  </p>
+<p>如果我们只希望在非常确信的情况下预测为真,可以将0.5调整为0.7，0.9。可减少错误预测的情况，但会增加未能成功预测的情况。  </p>
+<p>如果我们想尽可能将所有患恶性肿瘤的病人都预测到，可以将0.5调整为0.3等  </p>
+<p>将不同阈值下查全率和查准率的关系绘成图表：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ghobmsw7gpj2f5m0y4c88e51/image_1bi6lhipf16nqrdh1u8u18ruform.png" alt="image_1bi6lhipf16nqrdh1u8u18ruform.png-23.9kB">   </p>
+<p>可以通过计算$F_1$值来帮助我们选择阈值   </p>
+<p>$F_1=2PR/(P+R)$   </p>
+<p>选择使得F1最大的阈值</p>
+<h1 id="机器学习的依据"><a href="#机器学习的依据" class="headerlink" title="机器学习的依据"></a>机器学习的依据</h1><p>有时（如低偏差的情况）低性能的算法在大数据量的情况下比高性能算法但是数据量少表现要好<br>对于大量训练数据作用的两种理解方式：</p>
+<ul>
+<li>即使特征参数数量非常多，只要训练集足够大（比参数数量还多），依然可以很好的拟合，还能避免过拟合，使训练误差很低，同时训练误差接近测试误差</li>
+<li>为了获得一个高性能算法，我们不希望高偏差和方差。可以通过一个具有很多参数的算法来达到低偏差，同时用非常大的训练集来保证没有方差问题。所以一个有很多参数同时有大量数据训练出的算法是得到高性能算法的一个很好的方式  </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/06/09/2017-5-27-【ng公开课笔记07】系统构建中的问题/" data-id="cjpcnx2gn0005lsv61nga2ks2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调参方法/">调参方法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-6-7-【ng公开课笔记06】算法应用建议" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/07/2017-6-7-【ng公开课笔记06】算法应用建议/" class="article-date">
+  <time datetime="2017-06-07T08:00:00.000Z" itemprop="datePublished">2017-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/07/2017-6-7-【ng公开课笔记06】算法应用建议/">【ng公开课笔记06】算法应用建议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="性能改进方法"><a href="#性能改进方法" class="headerlink" title="性能改进方法"></a>性能改进方法</h1><p>先放结论，后面再详细写一下原因  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">适用范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">获得更多的训练实例</td>
+<td style="text-align:center">高方差</td>
+</tr>
+<tr>
+<td style="text-align:center">减小特征数量</td>
+<td style="text-align:center">高方差</td>
+</tr>
+<tr>
+<td style="text-align:center">获得更多特征</td>
+<td style="text-align:center">高偏差</td>
+</tr>
+<tr>
+<td style="text-align:center">增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等)</td>
+<td style="text-align:center">高偏差</td>
+</tr>
+<tr>
+<td style="text-align:center">减小归一化程度$\lambda$</td>
+<td style="text-align:center">高偏差</td>
+</tr>
+<tr>
+<td style="text-align:center">增加归一化程度$\lambda$</td>
+<td style="text-align:center">高方差</td>
+</tr>
+</tbody>
+</table>
+<h1 id="评估一个假设"><a href="#评估一个假设" class="headerlink" title="评估一个假设"></a>评估一个假设</h1><p>前面我们确定假设函数时所用的方法是不断优化假设函数的参数使其误差最小。但这并不意味着我们求得了一个好的假设函数，因为有可能出现过拟合问题。最简单的确定过拟合的方法就是画图，但当特征数量较多时，画图就比较困难了，所以需要采取别的方法来评判一个假设函数的好坏。   </p>
+<p>为了检验算法是否过拟合，我们将数据分为训练集和测试集，比例约为7:3。注意数据要随机分配。通过训练集计算出参数后，对测试集运用该模型计算代价函数J。  </p>
+<p>对于逻辑回归（分类问题），除了采用代价函数计算误差外，还可以用误分类率(misclassfication error)计算。</p>
+<p>$$<br>err(h_\theta(x),y)={^{1\ \ \ ifh(x)&gt;0.5\ and \ y=0,or\ if \ h(x)&lt;0.5\ and\ y=1}_{0  \ \ \ ohterwise}<br>$$    </p>
+<p>最后对计算结果求平均  </p>
+<h1 id="模型选择和交叉验证"><a href="#模型选择和交叉验证" class="headerlink" title="模型选择和交叉验证"></a>模型选择和交叉验证</h1><p>前面提到了，当多项式的次数越高时越能适应训练集，但不一定能代表普遍情况（即不能很好的预测）。所以我们通过交叉验证来帮助选择模型。    </p>
+<blockquote>
+<p>交叉验证：使用60%的数据用作训练集，20%的数据作为交叉验证集，20%的数据作为测试集  </p>
+</blockquote>
+<p>模型选择方法：</p>
+<ul>
+<li>使用训练集训练出10个模型</li>
+<li>用10个模型分别对交叉验证集计算得出交叉验证误差（代价函数的值）</li>
+<li>选取代价函数值最小的模型</li>
+<li>用步骤3选出的模型对测试机计算得出推广误差   </li>
+</ul>
+<p><img src="http://static.zybuluo.com/yhsdba/fkpmj31forfx0bujg3fvggaj/image_1bi0qv10k170d1qd287nemn6rk9.png" alt="image_1bi0qv10k170d1qd287nemn6rk9.png-60kB"></p>
+<h1 id="诊断偏差和方差"><a href="#诊断偏差和方差" class="headerlink" title="诊断偏差和方差"></a>诊断偏差和方差</h1><p><strong>这节讨论的是误差与多项式次数的关系</strong></p>
+<p>模型效果不理想一般分为两种情况：  </p>
+<ul>
+<li>偏差较大：表现为欠拟合</li>
+<li>方差较大：表现为过拟合  </li>
+</ul>
+<p><img src="http://static.zybuluo.com/yhsdba/fei86o7a4ypkczc0536kh24y/image_1bi0r5a13shb3i11an6aed7sm.png" alt="image_1bi0r5a13shb3i11an6aed7sm.png-34.3kB">  </p>
+<p>对于训练集，d较小时，拟合程度低，误差大，随着d增大拟合度变好，误差减小  </p>
+<p>对于交叉验证集，d较小时欠拟合，误差较大，d较大时过拟合，误差也较大，所以呈现出先减小后增大的趋势  </p>
+<p>所以当训练集误差和交叉验证集误差近似时：偏差/欠拟合  </p>
+<p>交叉验证误差远大于训练集误差时：方差/过拟合  </p>
+<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p><strong>这里讨论的是误差与$\lambda$的关系</strong></p>
+<p>前面提到我们通过归一化的方式来防止过拟合，但是$\lambda$的值过高会导致欠拟合，过小依然过拟合。   </p>
+<p>所以我们需要测试一系列$\lambda$的值，通常是0-10之间的呈现2倍关系的值(0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10)。同样把数据分为训练集交叉验证集和测试集  </p>
+<p>选择$\lambda$的方法：</p>
+<ol>
+<li>使用训练集训练出12个不同程度的归一化模型</li>
+<li>分别用每个模型对交叉验证集计算交叉验证误差</li>
+<li>选择交叉验证误差最小的模型</li>
+<li>对选出的模型通过测试集得出误差的推广，也可以同时将训练集和交叉验证集的代价函数误差与$\lambda$的值会在一张图表上：   </li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/juuvgz155l5wya8vpdburnf1/image_1bi168gcb455ru51q9pcdamd413.png" alt="image_1bi168gcb455ru51q9pcdamd413.png-140.2kB">   </p>
+<ul>
+<li>$\lambda$较小时，训练误差较小而交叉验证误差较大(过拟合)</li>
+<li>$\lambda$增加，训练集误差不断增加(欠拟合),而交叉验证集误差先减小后增大</li>
+</ul>
+<h1 id="学习曲线"><a href="#学习曲线" class="headerlink" title="学习曲线"></a>学习曲线</h1><p>学习曲线是对算法的一个合理检验，表示了<strong>训练集实例数量与误差的关系</strong>  </p>
+<p>当实例很少的时候，模型可以完美拟合训练数据，但训练出的模型不能很好的适应交叉训练集。当训练数据增多，训练集的误差会有所增大，但交叉验证集的误差却减小了。   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/083lvwrlimahkod3z5ijm7pz/image_1bi172kt1pb4fh41rea1g2ik561g.png" alt="image_1bi172kt1pb4fh41rea1g2ik561g.png-33.9kB">    </p>
+<p>对于高偏差、欠拟合的模型，增加数据量几乎没有效果：<br><img src="http://static.zybuluo.com/yhsdba/c5u57yciclhsnq4rihy4orvd/image_1bi175tts14unv6418qi1ese1niv2a.png" alt="image_1bi175tts14unv6418qi1ese1niv2a.png-20.8kB"><br><img src="http://static.zybuluo.com/yhsdba/t3g7ix850dy4t8bl0h5s6tnx/image_1bi176m171t1l1mji14kp3un1g5m2n.png" alt="image_1bi176m171t1l1mji14kp3un1g5m2n.png-21.1kB">   </p>
+<p>而对于高方差/过拟合的情况，增加训练集数据可以提高准确度：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/6snengrbjx4vhoxgnyp86vij/image_1bi17897n15c9g1d2jp1rgj1hro34.png" alt="image_1bi17897n15c9g1d2jp1rgj1hro34.png-103.1kB">     </p>
+<h1 id="神经网络和偏差与方差"><a href="#神经网络和偏差与方差" class="headerlink" title="神经网络和偏差与方差"></a>神经网络和偏差与方差</h1><ul>
+<li>使用较小的神经网络，类似于参数较少的情况，容易造成高偏差和欠拟合。</li>
+<li>当计算大家较小时使用较大的神经网络类似高方差和过拟合，可以通过归一化来调整   </li>
+<li>所以一般选择较大神经网络并归一化比采用较小的神经网络效果要好  </li>
+<li>对于隐藏层数的选择，通常从一层开始逐渐增加并进行交叉检验。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/06/07/2017-6-7-【ng公开课笔记06】算法应用建议/" data-id="cjpcnx2hw000mlsv6d21cpn3j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-6-6-【机器学习实战】knn算法" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/06/2017-6-6-【机器学习实战】knn算法/" class="article-date">
+  <time datetime="2017-06-05T16:00:00.000Z" itemprop="datePublished">2017-06-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/06/2017-6-6-【机器学习实战】knn算法/">kNN算法的python实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。<br>工作原理如下：<br>首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。  </p>
+<p><em>通常k&lt;=20</em>    </p>
+<p>如我们要下图绿色图形的分类<br><img src="http://static.zybuluo.com/yhsdba/4m9o83v8nbcgopx653aywd67/image_1bhu8q6441tqi7lg14taffa1cq9.png" alt="image_1bhu8q6441tqi7lg14taffa1cq9.png-70.6kB"><br>如果k=3 则被分类为三角形  </p>
+<p>如果k=5 则被分类为正方形  </p>
+<p>所以knn算法的结果很大程度上取决于k的选择  </p>
+<h3 id="knn算法的描述："><a href="#knn算法的描述：" class="headerlink" title="knn算法的描述："></a>knn算法的描述：</h3><ul>
+<li>列表项</li>
+<li>计算测试数据与各个训练集之间的距离</li>
+<li>按照距离的递增关系进行排序</li>
+<li>选取距离最小的k个点</li>
+<li>确定前k个点所在类别的频率</li>
+<li>返回前k个点出现频率最高的类别作为测试数据的分类  </li>
+</ul>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><p>优点：精度高、对异常值不敏感、无数据输入假定<br>缺点：计算复杂度高、空间复杂度高<br>适用范围：数值型和标称型  </p>
+<h2 id="二、python实现"><a href="#二、python实现" class="headerlink" title="二、python实现"></a>二、python实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from numpy import *</span><br><span class="line">import operator</span><br><span class="line"></span><br><span class="line">def creatDataset():</span><br><span class="line">    group=array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])</span><br><span class="line">    labels=[&apos;A&apos;,&apos;A&apos;,&apos;B&apos;,&apos;B&apos;]</span><br><span class="line">    return group,labels</span><br><span class="line"></span><br><span class="line">#inX:分类向量</span><br><span class="line">#dataSet:测试数据集</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line">    dataSetSize=dataSet.shape[0]#shape返回行列数,shape[0]返回行数</span><br><span class="line">    diffmat=tile(inX,(dataSetSize,1))-dataSet</span><br><span class="line">    seqdiffmat=diffmat**2</span><br><span class="line">    seqdistance=sum(seqdiffmat,axis=1)##axis=1按行相加 anxis=0按列相加</span><br><span class="line">    distances=seqdistance**0.5</span><br><span class="line">    sortedDistindex=argsort(distances)#从大到小排序，返回下标</span><br><span class="line"></span><br><span class="line">    classCount=&#123;&#125;</span><br><span class="line"></span><br><span class="line">    for i in range(k):</span><br><span class="line">        votelabel=labels[sortedDistindex[i]]</span><br><span class="line">        classCount[votelabel]=classCount.get(votelabel,0)+1##相当于classcount+=1 但该没有数据时用get可返回0</span><br><span class="line">    maxCount=0</span><br><span class="line">    for key,value in classCount.items():</span><br><span class="line">        if value&gt;maxCount:</span><br><span class="line">            maxCount=value</span><br><span class="line">            classes=key</span><br><span class="line">        return classes</span><br><span class="line"></span><br><span class="line">dataSet,labels=creatDataset()</span><br><span class="line">inX=array([1.1,0.3])</span><br><span class="line">K=3</span><br><span class="line">output=classify0(inX,dataSet,labels,K)</span><br><span class="line">print(&apos;测试数据为：&apos;,inX,&apos;分类结果为：&apos;,output)</span><br></pre></td></tr></table></figure>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>这是《机器学习实战》书中的第一个算法，实现起来比较简单。书中有几个实战的内容就不详细写了，代码都已放在github上。<br>这个算法中用到了Numpy和Matplotlib库，对这些库的使用还需要继续学习（会新开一篇写一下常用的用法）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/06/06/2017-6-6-【机器学习实战】knn算法/" data-id="cjpcnx2h3000flsv690f988iy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-5-30-【转】mongodb极简入门" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/30/2017-5-30-【转】mongodb极简入门/" class="article-date">
+  <time datetime="2017-05-30T03:06:00.000Z" itemprop="datePublished">2017-05-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/30/2017-5-30-【转】mongodb极简入门/">【转】mongodb极简入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4>1. 为什么用MongoDB？</h4><br>假如我们要位每篇文章添加评论功能，会发现每篇文章可能要多篇评论，而且这个数目是动态变化的，而且每篇评论还包括好几项内容：评论的人、评论的时间、以及评论内容。这时候要将这些内容都塞进上述的那个表，就显得很困难。通常的做法是为评论(comment)单独建一个表：<br><br>| ID | Author  | Time   | Content  | Article |<br>|—-|:—–: |:—————–:|:——:|:——:|<br>| C_1  | Anna | 2014-12-26 08:23 | Really good articles! | A_1 |<br>| C_2  | David | 2014-12-25 09:30     | I like it! |  A_1 |<br><br>类似地，每篇文章可能会有若干标签(tags)。标签本身又是一个表单：<br><br>| ID | Category  | Tags   | Content  | Article |<br>|—-|:—–: |:—————–:|:——:|:——:|<br>| T_1  | Anna | 2014-12-26 08:23 | Really good articles!|  A_1 |<br>| T_2  | David | 2014-12-25 09:30     | I like it!| A_2 |<br><br>而博客的表格则要通过foreign key跟这些相关联的表格联系起来(可能还包括作者、出版社等其它表格)。这样一来，当我们做查询的时候，比如说，“找出评论数不少于3的标签为‘政治评论’的作者为Sam的文章”，就会涉及到复杂的跨表查询，需要大量使用<code>join</code>语句。这种跨表查询不仅降低了查询速度，而且这些语句写起来也不简单。<br><br>那么，如果用MongoDB数据库来实现，可以如何设计数据模型呢？很简单，像下面这样<a href="http://www.tutorialspoint.com/mongodb/mongodb_data_modeling.htm" target="_blank" rel="noopener">[1]</a>：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">_id: POST_ID</span><br><span class="line">  title: TITLE_OF_POST, </span><br><span class="line">  description: POST_DESCRIPTION,</span><br><span class="line">  author: POST_BY,</span><br><span class="line">  tags: [TAG1, TAG2, TAG3],</span><br><span class="line">  likes: TOTAL_LIKES, </span><br><span class="line">  comments: [	</span><br><span class="line">     &#123;</span><br><span class="line">        user:&apos;COMMENT_BY&apos;,</span><br><span class="line">        message: TEXT,</span><br><span class="line">        dateCreated: DATE_TIME,</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">        user:&apos;COMMENT_BY&apos;,</span><br><span class="line">        message: TEXT,</span><br><span class="line">        dateCreated: DATE_TIME,</span><br><span class="line">     &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure><br><br>在MongoDB里，每篇博客文章以一个文档(document)的形式保存起来，而文档内部包含了很多项目，比如<code>title tags</code>等，每一个项目都是<code>key-value</code>的形式，即有一个项目的名字，比如<code>title</code>，以及它的值<code>TITLE_OF_POST</code>。而重要的是，一个<code>key</code>可以有多个<code>values</code>，他们用<code>[]</code>括起来。<br><br>这种“宽松”的数据存储形式非常灵活，MongoDB不限制每个<code>key</code>对应的<code>values</code>的数目。比如有的文章没有评论，则它的值就是一个空集，完全没有问题；有的文章评论很多，也可以无限制地插入。更灵活的是，MongoDB不要求同一个集合(collection，相当于SQL的table)里面的不同document有相同的key，比如除了上述这种文档组织，有的文档所代表的文章可能没有likes这个项目，再比如有的文章可能有更多的项目，比如可能还有dislikes等等。这些不同的文档都可以灵活地存储在同一个集合下，而且查询起来也异常简单，因为都在一个文档里，不用进行各种跨文档查询。而这种MongoDB式的存储也方便了数据的维护，对于一篇博客文章来说，所有的相关数据都在这个document里面，不用去考虑一个数据操作需要involve多少个表格。<br><br>当然，除了上述的优点，MongoDB还有不少别的优势，比如MongoDB的数据是用JSON(Javascript Object Notation)存储的(就是上面的这种key-value的形式)，而几乎所有的web应用都是基于Javascript的。因此，存储的数据和应用的数据的格式是高度一致的，不需经过转换。更多的优点可以查看：<a href="http://www.tutorialspoint.com/mongodb/mongodb_advantages.htm" target="_blank" rel="noopener">[2]</a>。<br><br><h4>2. 关于这篇文章</h4>
+
+<p>这个极简教程，或者说笔记，并不是一个覆盖MongoDB方方面面的教程。所谓极简的意思，就是只选取那些最重要、最常用的内容进行基于实例的介绍，从而让读者能够在最短的时间内快速上手，并且能顺利地进行后续的纵深的学习。</p>
+<p>具体地说，这个教程的特点是：</p>
+<ul><br><li>不求全面，只求实用。只覆盖最核心的部分；</li><br><li>以大量例子为导向；</li><br><li>一边阅读一边动手操作的话，大约只需要2小时的时间；</li><br></ul>
+
+<p>阅读这篇文章不需要有特别的基础，但最好知道数据库的基本概念，如果本身熟悉SQL那就更好啦。</p>
+<h4>3. 安装与环境</h4>
+
+<p>MongoDB可以在Windows、Linux、Mac OS X等主流平台运行，而且下载和安装非常简单，非常友好。这篇文档的例子采用MongoDB 2.6版本，均在OS X测试过，有充足的理由相信，在其它平台也能顺利运行。</p>
+<p>Windows的安装和设置可以参考：<a href="http://www.w3cschool.cc/mongodb/mongodb-window-install.html；" target="_blank" rel="noopener">http://www.w3cschool.cc/mongodb/mongodb-window-install.html；</a></p>
+<p>Linux的安装和设置可以参考：<a href="http://www.w3cschool.cc/mongodb/mongodb-linux-install.html；" target="_blank" rel="noopener">http://www.w3cschool.cc/mongodb/mongodb-linux-install.html；</a></p>
+<p>Mac OS X下的安装和设置：</p>
+<ul><br><li>1. 在<a href="https://www.mongodb.org/" target="_blank" rel="noopener">https://www.mongodb.org/</a> 下载适合你的Mac的MongoDb;</li><br><li>2. 下载得到的文件是一个zip文件，解压，然后放到你想到的文件夹，比如/Users/Steven/MongoDB;</li><br><li>3. 创建一个你喜欢的文件夹来存储你的数据，比如/User/Steven/myData;</li><br><li>4. 打开Terminal，cd到2里面那个文件夹/Users/Steven/MongoDB，再cd bin;</li><br><li>5. 输入./mongod –dbpath /User/Steven/myData,等到出现类似“waiting for connections on port 27017”，说明MongoDB服务器已架设好，而数据将储存在myData里面；</li><br><li>6. 新打开一个Terminal, cd /Users/Steven/MongoDB/bin,然后运行./mongo;顺利的话它将出现一个interactive shell让你进行各种操作，而你的数据将储存在myData里</li><br></ul>
+
+<p>如果以上的各个步骤都运行顺利，就可以跳到下一节啦。</p>
+<h4>4. 创建集合和删除集合</h4><br>在上一节执行完步骤6后，你会看到命令行里显示：<code>connecting to: test</code>，这里的<code>test</code>是默认的数据库。这里我们可以新建一个数据库。在命令行里打入：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use tutorial</span><br></pre></td></tr></table></figure><br><br>这样就新建了一个叫做<code>tutorial</code>的数据库。你可以执行<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases</span><br></pre></td></tr></table></figure><br><br>来显示当前的数据库。不过这时候由于我们的新数据库是空的，所以会显示类似这样的：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin  (empty)</span><br><span class="line">local  0.078GB</span><br></pre></td></tr></table></figure><br><br>我们试着往我们的数据库里添加一个集合(collection)，MongoDB里的集合和SQL里面的表格是类似的：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&apos;author&apos;)</span><br></pre></td></tr></table></figure><br><br>顺利的话会显示：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;ok&quot; : 1 &#125;</span><br></pre></td></tr></table></figure><br><br>表示创建成功。<br><br>你可以再回头执行：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases</span><br></pre></td></tr></table></figure><br><br>这时候我们的tutorial集合已经位列其中。你可以再执行<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure><br><br>可以看到创建的集合author也在其中。<br><br>我们暂时不需要author这个集合，所以我们可以通过执行：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.author.drop()</span><br></pre></td></tr></table></figure><br><br>来将其删除。这时候你再执行<code>show collections</code>，就再也看不到我们的author了。<br><br>这一节要记住的点主要只有一个：集合(collection)类似于SQL的表格(table)，类似于Excel的一个个表格。<br><br><h4>5. 插入</h4>
+
+<p>想象一个精简版的“豆瓣电影”。我们需要创建一个数据库，来存储每部电影的信息，电影的信息包括：</p>
+<ul><br><li>电影名字</li><br><li>导演</li><br><li>主演(可能多个)</li><br><li>类型标签(可能多个)</li><br><li>上映日期</li><br><li>喜欢人数</li><br><li>不喜欢人数</li><br><li>用户评论(可能多个)</li><br></ul>
+
+<p>显然我们需要先创建一个叫电影的集合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&apos;movie&apos;)</span><br></pre></td></tr></table></figure>
+<p>然后，我们就可以插入数据了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">db.movie.insert(</span><br><span class="line"> &#123;</span><br><span class="line">   title: &apos;Forrest Gump&apos;, </span><br><span class="line">   directed_by: &apos;Robert Zemeckis&apos;,</span><br><span class="line">   stars: [&apos;Tom Hanks&apos;, &apos;Robin Wright&apos;, &apos;Gary Sinise&apos;],</span><br><span class="line">   tags: [&apos;drama&apos;, &apos;romance&apos;],</span><br><span class="line">   debut: new Date(1994,7,6,0,0),</span><br><span class="line">   likes: 864367,</span><br><span class="line">   dislikes: 30127,</span><br><span class="line">   comments: [	</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user1&apos;,</span><br><span class="line">         message: &apos;My first comment&apos;,</span><br><span class="line">         dateCreated: new Date(2013,11,10,2,35),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user2&apos;,</span><br><span class="line">         message: &apos;My first comment too!&apos;,</span><br><span class="line">         dateCreated: new Date(2013,11,11,6,20),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>请注意，这里插入数据之前，我们并不需要先声明movie这个集合里面有哪些项目。我们直接插入就可以了~这一点和SQL不一样，SQL必须先声明一个table里面有哪些列，而MongoDB不需要。</p>
+<p>把上面的例子复制进命令行应该可以顺利运行，但我强烈建议你手动打一下，或者输入一部你自己喜欢的电影。<code>insert</code>操作有几点需要注意：</p>
+<ul><br><li>1. 不同key-value需要用逗号隔开，而key:value中间是用冒号；</li><br><li>2. 如果一个key有多个value，value要用[]。哪怕当前只有一个value，也加上[]以备后续的添加；</li><br><li>3. 整个“数据块”要用{}括起来；</li><br></ul>
+
+<p>如果你在<code>insert</code>之后看到<code>WriteResult({ &quot;nInserted&quot; : 1 })</code>，说明写入成功。</p>
+<p>这个时候你可以用查询的方式来返回数据库中的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find().pretty()</span><br></pre></td></tr></table></figure></p>
+<p>这里<code>find()</code>里面是空的，说明我们不做限制和筛选，类似于SQL没有<code>WHERE</code>语句一样。而<code>pretty()</code>输出的是经格式美化后的数据，你可以自己试试没有<code>pretty()</code>会怎么样。</p>
+<p>仔细观察<code>find()</code>的结果，你会发现多了一个叫<code>&#39;_id&#39;</code>的东西，这是数据库自动创建的一个ID号，在同一个数据库里，每个文档的ID号都是不同的。</p>
+<p>我们也可以同时输入多个数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">db.movie.insert([</span><br><span class="line"> &#123;</span><br><span class="line">   title: &apos;Fight Club&apos;, </span><br><span class="line">   directed_by: &apos;David Fincher&apos;,</span><br><span class="line">   stars: [&apos;Brad Pitt&apos;, &apos;Edward Norton&apos;, &apos;Helena Bonham Carter&apos;],</span><br><span class="line">   tags: &apos;drama&apos;,</span><br><span class="line">   debut: new Date(1999,10,15,0,0),</span><br><span class="line">   likes: 224360,</span><br><span class="line">   dislikes: 40127,</span><br><span class="line">   comments: [	</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user3&apos;,</span><br><span class="line">         message: &apos;My first comment&apos;,</span><br><span class="line">         dateCreated: new Date(2008,09,13,2,35),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user2&apos;,</span><br><span class="line">         message: &apos;My first comment too!&apos;,</span><br><span class="line">         dateCreated: new Date(2003,10,11,6,20),</span><br><span class="line">         like: 14 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user7&apos;,</span><br><span class="line">         message: &apos;Good Movie!&apos;,</span><br><span class="line">         dateCreated: new Date(2009,10,11,6,20),</span><br><span class="line">         like: 2</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">   title: &apos;Seven&apos;, </span><br><span class="line">   directed_by: &apos;David Fincher&apos;,</span><br><span class="line">   stars: [&apos;Morgan Freeman&apos;, &apos;Brad Pitt&apos;,  &apos;Kevin Spacey&apos;],</span><br><span class="line">   tags: [&apos;drama&apos;,&apos;mystery&apos;,&apos;thiller&apos;],</span><br><span class="line">   debut: new Date(1995,9,22,0,0),</span><br><span class="line">   likes: 134370,</span><br><span class="line">   dislikes: 1037,</span><br><span class="line">   comments: [	</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user3&apos;,</span><br><span class="line">         message: &apos;Love Kevin Spacey&apos;,</span><br><span class="line">         dateCreated: new Date(2002,09,13,2,35),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user2&apos;,</span><br><span class="line">         message: &apos;Good works!&apos;,</span><br><span class="line">         dateCreated: new Date(2013,10,21,6,20),</span><br><span class="line">         like: 14 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&apos;user7&apos;,</span><br><span class="line">         message: &apos;Good Movie!&apos;,</span><br><span class="line">         dateCreated: new Date(2009,10,11,6,20),</span><br><span class="line">         like: 2</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure></p>
+<p>顺利的话会显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BulkWriteResult(&#123;</span><br><span class="line">	&quot;writeErrors&quot; : [ ],</span><br><span class="line">	&quot;writeConcernErrors&quot; : [ ],</span><br><span class="line">	&quot;nInserted&quot; : 2,</span><br><span class="line">	&quot;nUpserted&quot; : 0,</span><br><span class="line">	&quot;nMatched&quot; : 0,</span><br><span class="line">	&quot;nModified&quot; : 0,</span><br><span class="line">	&quot;nRemoved&quot; : 0,</span><br><span class="line">	&quot;upserted&quot; : [ ]</span><br></pre></td></tr></table></figure></p>
+<p>表面我们成功地插入了两个数据。注意批量插入的格式是这样的：<code>db.movie.insert([{ITEM1},{ITEM2}])</code>。几部电影的外面需要用[]括起来。</p>
+<p>请注意，虽然collection的插入不需要先声明，但表达相同意思的key，名字要一样，比如，如果我们在一个文档里用<code>directed_by</code>来表示导演，则在其它文档也要保持同样的名字(而不是<code>director</code>之类的)。不同的名字不是不可以，技术上完全可行，但会给查询和更新带来困难。</p>
+<p>好了，到这里，我们就有了一个叫tutorial的数据库，里面有一个叫movie的集合，而movie里面有三个记录。接下来我们就可以对其进行查询了。</p>
+<h4>6. 查询</h4>
+
+<p>在上一节我们已经接触到最简单的查询<code>db.movie.find().pretty()</code>。MongoDB支持各种各样的深度查询功能。先来一个最简单的例子，找出大卫芬奇(David Fincher)导演的所有电影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&apos;directed_by&apos;:&apos;David Fincher&apos;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>将返回《搏击俱乐部》和《七宗罪》两部电影。这种搜索和SQL的<code>WHERE</code>语句是很相似的。</p>
+<p>也可以设置多个条件。比如找出大卫芬奇导演的, 摩根弗里曼主演的电影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&apos;directed_by&apos;:&apos;David Fincher&apos;, &apos;stars&apos;:&apos;Morgan Freeman&apos;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>这里两个条件之间，是AND的关系，只有同时满足两个条件的电影才会被输出。同理，可以设置多个的条件，不赘述。</p>
+<p>条件之间也可以是或的关系，比如找出罗宾怀特或摩根弗里曼主演的电影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(</span><br><span class="line">&#123;</span><br><span class="line">  $or: </span><br><span class="line">     [  &#123;&apos;stars&apos;:&apos;Robin Wright&apos;&#125;, </span><br><span class="line">        &#123;&apos;stars&apos;:&apos;Morgan Freeman&apos;&#125;</span><br><span class="line">     ]</span><br><span class="line">&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>注意这里面稍显复杂的各种括号。</p>
+<p>还可以设置一个范围的搜索，比如找出50万人以上赞的电影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&apos;likes&apos;:&#123;$gt:500000&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>同样要注意略复杂的括号。注意，在这些查询里，key的单引号都是可选的，也就是说，上述语句也可以写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;likes:&#123;$gt:500000&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure></p>
+<p>类似地，少于二十万人赞的电影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;likes:&#123;$lt:200000&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>类似的运算符还有：<code>$let</code>:小于或等于；<code>$get</code>:大于或等于；<code>$ne</code>:不等于。</p>
+<p>注意，对于包含多个值的key，同样可以用find来查询。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&apos;tags&apos;:&apos;romance&apos;&#125;)</span><br></pre></td></tr></table></figure>
+<p>将返回《阿甘正传》，虽然其标签既有romance，又有drama，但只要符合一个就可以了。</p>
+<p>如果你确切地知道返回的结果只有一个，也可以用<code>findOne</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.findOne(&#123;&apos;title&apos;:&apos;Forrest Gump&apos;&#125;)</span><br></pre></td></tr></table></figure>
+<p>如果有多个结果，则会按磁盘存储顺序返回第一个。请注意，<code>findOne()</code>自带pretty模式，所以不能再加<code>pretty()</code>，将报错。</p>
+<p>如果结果很多而你只想显示其中一部分，可以用<code>limit()</code>和<code>skip()</code>，前者指明输出的个数，后者指明从第二个结果开始数。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find().limit(2).skip(1).pretty()</span><br></pre></td></tr></table></figure>
+<p>则跳过第一部，从第二部开始选取两部电影。</p>
+<h4>7. 局部查询</h4>
+
+<p>第五节的时候我们讲了<code>find</code>的用法，但对于符合条件的条目，我们都是返回整个JSON文件的。这类似于SQL里面的<code>SELECT *</code>。有的时候，我们需要的，仅仅是部分数据，这个时候，<code>find</code>的局部查询的功能就派上用场了。先来看一个例子，返回tags为drama的电影的名字和首映日期。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&apos;tags&apos;:&apos;drama&apos;&#125;,&#123;&apos;debut&apos;:1,&apos;title&apos;:1&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>数据库将返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;_id&quot; : ObjectId(&quot;549cfb42f685c085f1dd47d4&quot;),</span><br><span class="line">	&quot;title&quot; : &quot;Forrest Gump&quot;,</span><br><span class="line">	&quot;debut&quot; : ISODate(&quot;1994-08-05T16:00:00Z&quot;)</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;_id&quot; : ObjectId(&quot;549cff96f685c085f1dd47d6&quot;),</span><br><span class="line">	&quot;title&quot; : &quot;Fight Club&quot;,</span><br><span class="line">	&quot;debut&quot; : ISODate(&quot;1999-11-14T16:00:00Z&quot;)</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">	&quot;_id&quot; : ObjectId(&quot;549cff96f685c085f1dd47d7&quot;),</span><br><span class="line">	&quot;title&quot; : &quot;Seven&quot;,</span><br><span class="line">	&quot;debut&quot; : ISODate(&quot;1995-10-21T16:00:00Z&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里find的第二个参数是用来控制输出的，1表示要返回，而0则表示不返回。默认值是0，但<code>_id</code>是例外，因此如果你不想输出<code>_id</code>，需要显式地声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&apos;tags&apos;:&apos;drama&apos;&#125;,&#123;&apos;debut&apos;:1,&apos;title&apos;:1,&apos;_id&apos;:0&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<h4>8. 更新</h4><br>很多情况下你需要更新你的数据库，比如有人对某部电影点了个赞，那么你需要更新相应的数据库。比如有人对《七宗罪》点了个赞，而它本来的赞的个数是134370，那么你需要更新到134371。可以这样操作：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;title:&apos;Seven&apos;&#125;, &#123;$set:&#123;likes:134371&#125;&#125;)</span><br></pre></td></tr></table></figure><br><br>第一个大括号里表明要选取的对象，第二个表明要改动的数据。请注意上述的操作相当不现实，因为你首先要知道之前的数字是多少，然后加一，但通常你不读取数据库的话，是不会知道这个数(134370)的。MongoDB提供了一种简便的方法，可以对现有条目进行增量操作。假设又有人对《七宗罪》点了两个赞，则可以：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;title:&apos;Seven&apos;&#125;, &#123;$inc:&#123;likes:2&#125;&#125;)</span><br></pre></td></tr></table></figure><br><br>如果你查询的话，会发现点赞数变为134373了，这里用的是<code>$inc</code>。除了增量更新，MongoDB还提供了很多灵活的更新选项，具体可以看：<a href="http://docs.mongodb.org/manual/reference/operator/update-field/" target="_blank" rel="noopener">http://docs.mongodb.org/manual/reference/operator/update-field/</a> 。<br><br>注意如果有多部符合要求的电影。则默认只会更新第一个。如果要多个同时更新，要设置<code>{multi:true}</code>，像下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;&#125;, &#123;$inc:&#123;likes:10&#125;&#125;,&#123;multi:true&#125;)</span><br></pre></td></tr></table></figure><br><br>所有电影的赞数都多了10.<br><br>注意，以上的更新操作会替换掉原来的值，所以如果你是想在原有的值得基础上增加一个值的话，则应该用<code>$push</code>，比如，为《七宗罪》添加一个popular的tags。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;&apos;title&apos;:&apos;Seven&apos;&#125;, &#123;$push:&#123;&apos;tags&apos;:&apos;popular&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure><br><br>你会发现《七宗罪》现在有四个标签：<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;tags&quot; : [</span><br><span class="line">	&quot;drama&quot;,</span><br><span class="line">	&quot;mystery&quot;,</span><br><span class="line">	&quot;thiller&quot;,</span><br><span class="line">	&quot;popular&quot;</span><br><span class="line">],</span><br></pre></td></tr></table></figure><br><br><h4>9. 删除</h4>
+
+<p>删除的句法和find很相似，比如，要删除标签为romance的电影，则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.remove(&#123;&apos;tags&apos;:&apos;romance&apos;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>考虑到我们数据库条目异常稀少，就不建议你执行这条命令了~</p>
+<p>注意，上面的例子会删除所有标签包含romance的电影。如果你只想删除第一个，则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.remove(&#123;&apos;tags&apos;:&apos;romance&apos;&#125;,1)</span><br></pre></td></tr></table></figure></p>
+<p>如果不加任何限制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.remove()</span><br></pre></td></tr></table></figure>
+<p>会删除movie这个集合下的所有文档。</p>
+<h4>10. 索引和排序</h4>
+
+<p>为文档中的一些key加上索引(index)可以加快搜索速度。这一点不难理解，假如没有没有索引，我们要查找名字为Seven的电影，就必须在所有文档里逐个搜索。而如果对名字这个key加上索引值，则电影名这个字符串和数字建立了映射，这样在搜索的时候就会快很多。排序的时候也是如此，不赘述。MongoDB里面为某个key加上索引的方式很简单，比如我们要对导演这个key加索引，则可以：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.ensureIndex(&#123;directed_by:1&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这里的1是升序索引，如果要降序索引，用-1。</p>
+<p>MongoDB支持对输出进行排序，比如按名字排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find().sort(&#123;&apos;title&apos;:1&#125;).pretty()</span><br></pre></td></tr></table></figure></p>
+<p>同样地，1是升序，-1是降序。默认是1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.getIndexes()</span><br></pre></td></tr></table></figure>
+<p>将返回所有索引，包括其名字。</p>
+<p>而</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.dropIndex(&apos;index_name&apos;)</span><br></pre></td></tr></table></figure>
+<p>将删除对应的索引。</p>
+<h4>11. 聚合</h4>
+
+<p>MongoDB支持类似于SQL里面的<code>GROUP BY</code>操作。比如当有一张学生成绩的明细表时，我们可以找出每个分数段的学生各有多少。为了实现这个操作，我们需要稍加改动我们的数据库。执行以下三条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;title:&apos;Seven&apos;&#125;,&#123;$set:&#123;grade:1&#125;&#125;)</span><br><span class="line">db.movie.update(&#123;title:&apos;Forrest Gump&apos;&#125;,&#123;$set:&#123;grade:1&#125;&#125;)</span><br><span class="line">db.movie.update(&#123;title:&apos;Fight Club&apos;&#125;,&#123;$set:&#123;grade:2&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<p>这几条是给每部电影加一个虚拟的分级，前两部是归类是一级，后一部是二级。</p>
+<p>这里你也可以看到MongoDB的强大之处：可以动态地后续添加各种新项目。</p>
+<p>我们先通过聚合来找出总共有几种级别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&apos;$grade&apos;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : 2 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : 1 &#125;</span><br></pre></td></tr></table></figure>
+<p>注意这里的2和1是指级别，而不是每个级别的电影数。这个例子看得清楚些：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&apos;$directed_by&apos;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p>这里按照导演名字进行聚合。输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : &quot;David Fincher&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : &quot;Robert Zemeckis&quot; &#125;</span><br></pre></td></tr></table></figure>
+<p>接着我们要找出，每个导演的电影数分别有多少：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&apos;$directed_by&apos;,num_movie:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p>将会输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : &quot;David Fincher&quot;, &quot;num_movie&quot; : 2 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : &quot;Robert Zemeckis&quot;, &quot;num_movie&quot; : 1 &#125;</span><br></pre></td></tr></table></figure>
+<p>注意$sum后面的1表示只是把电影数加起来，但我们也可以统计别的数据，比如两位导演谁的赞比较多：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&apos;$directed_by&apos;,num_likes:&#123;$sum:&apos;$likes&apos;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : &quot;David Fincher&quot;, &quot;num_likes&quot; : 358753 &#125;</span><br><span class="line">&#123; &quot;_id&quot; : &quot;Robert Zemeckis&quot;, &quot;num_likes&quot; : 864377 &#125;</span><br></pre></td></tr></table></figure>
+<p>注意这些数据都纯属虚构啊！</p>
+<p>除了<code>$sum</code>，还有其它一些操作。比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&apos;$directed_by&apos;,num_movie:&#123;$avg:&apos;$likes&apos;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></p>
+<p>统计平均的赞。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&apos;$directed_by&apos;,num_movie:&#123;$first:&apos;$likes&apos;&#125;&#125;&#125;]</span><br></pre></td></tr></table></figure>
+<p>返回每个导演的电影中的第一部的赞数。</p>
+<p>其它各种操作可以参考：<a href="http://docs.mongodb.org/manual/reference/operator/aggregation/group/" target="_blank" rel="noopener">http://docs.mongodb.org/manual/reference/operator/aggregation/group/</a> 。</p>
+<h4>12. All or Nothing?</h4>
+
+<p>MongoDB支持单个文档内的原子化操作(atomic operation)，这是说，可以将多条关于同一个文档的指令放到一起，他们要么一起执行，要么都不执行。而不会执行到一半。有些场合需要确保多条执行一起顺次执行。比如一个场景：一个电商网站，用户查询某种商品的剩余数量，以及用户购买该种商品，这两个操作，必须放在一起执行。不然的话，假定我们先执行剩余数量的查询，这是假定为1，用户接着购买，但假如这两个操作之间还加入了其它操作，比如另一个用户抢先购买了，那么原先购买用户的购买的行为就会造成数据库的错误，因为实际上这种商品以及没有存货了。但因为查询剩余数量和购买不是在一个“原子化操作”之内，因此会发生这样的错误<a href="http://www.tutorialspoint.com/mongodb/mongodb_atomic_operations.htm" target="_blank" rel="noopener">[2]</a>。</p>
+<p>MongoDB提供了<code>findAndModify</code>的方法来确保atomic operation。比如这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.movie.findAndModify(</span><br><span class="line">			&#123;</span><br><span class="line">			query:&#123;&apos;title&apos;:&apos;Forrest Gump&apos;&#125;,</span><br><span class="line">			update:&#123;$inc:&#123;likes:10&#125;&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		      )</span><br></pre></td></tr></table></figure></p>
+<p>query是查找出匹配的文档，和find是一样的，而update则是更新likes这个项目。注意由于MongoDB只支持单个文档的atomic operation，因此如果query出多于一个文档，则只会对第一个文档进行操作。</p>
+<p><code>findAndModify</code>还支持更多的操作，具体见：<a href="http://docs.mongodb.org/manual/reference/command/findAndModify/。" target="_blank" rel="noopener">http://docs.mongodb.org/manual/reference/command/findAndModify/。</a></p>
+<h4>13. 文本搜索</h4>
+
+<p>除了前面介绍的各种深度查询功能，MongoDB还支持文本搜索。对文本搜索之前，我们需要先对要搜索的key建立一个text索引。假定我们要对标题进行文本搜索，我们可以先这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.ensureIndex(&#123;title:&apos;text&apos;&#125;)</span><br></pre></td></tr></table></figure>
+<p>接着我们就可以对标题进行文本搜索了，比如，查找带有”Gump”的标题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;$text:&#123;$search:&quot;Gump&quot;&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>注意text和search前面的$符号。</p>
+<p>这个例子里，文本搜索作用不是非常明显。但假设我们要搜索的key是一个长长的文档，这种text search的方便性就显现出来了。MongoDB目前支持15种语言的文本搜索。</p>
+<h4>14. 正则表达式</h4>
+
+<p>MongoDB还支持基于正则表达式的查询。如果不知道正则表达式是什么，可以参考<a href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="noopener">Wikipedia</a>。这里简单举几个例子。比如，查找标题以<code>b</code>结尾的电影信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;title:&#123;$regex:&apos;.*b$&apos;&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>也可以写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;title:/.*b$/&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>查找含有’Fight’标题的电影：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;title:/Fight/&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p>注意以上匹配都是区分大小写的，如果你要让其不区分大小写，则可以：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;title:&#123;$regex:&apos;fight.*b&apos;,$options:&apos;$i&apos;&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<p><code>$i</code>是insensitive的意思。这样的话，即使是小写的fight，也能搜到了。</p>
+<h4>15. 后记</h4>
+
+<p>至此，MongoDB的最基本的内容就介绍得差不多了。如果有什么遗漏的以后我会补上來。如果你一路看到底完全了这个入门教程，恭喜你，你一定是一个有毅力的人。</p>
+<p>把这个文档过一遍，不会让你变成一个MongoDB的专家(如果会那就太奇怪了)。但如果它能或多或少减少你上手的时间，或者让你意识到“咦，MongoDB其实没那么复杂”，那么这个教程的目的也就达到啦。</p>
+<p>这个文档是匆忙写就的，出错简直是一定的。如果您发现了任何错误或者有关于本文的任何建议，麻烦发邮件给我（stevenslxie at gmail.com）或者在GitHub上直接交流，不胜感激。</p>
+<p></p><h4>转载声明</h4><br>如果你喜欢这篇文章，可以随意转载。但请<p></p>
+<ul><br><li>标明原作者StevenSLXie;</li><br><li>标明原链接(<a href="https://github.com/StevenSLXie/Tutorials-for-Web-Developers/blob/master/MongoDB%20%E6%9E%81%E7%AE%80%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8.md)" target="_blank" rel="noopener">https://github.com/StevenSLXie/Tutorials-for-Web-Developers/blob/master/MongoDB%20%E6%9E%81%E7%AE%80%E5%AE%9E%E8%B7%B5%E5%85%A5%E9%97%A8.md)</a>;</li><br><li>在可能的情况下请保持文本显示的美观。比如，请不要直接一键复制到博客之类，因为代码的显示效果可能非常糟糕;</li><br><li>请将这个转载声明包含进来；</li><br></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/05/30/2017-5-30-【转】mongodb极简入门/" data-id="cjpcnx2le002jlsv6v4or1ltr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-5-28-【ng公开课笔记05】神经网络" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/28/2017-5-28-【ng公开课笔记05】神经网络/" class="article-date">
+  <time datetime="2017-05-28T07:34:00.000Z" itemprop="datePublished">2017-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/28/2017-5-28-【ng公开课笔记05】神经网络/">【ng公开课笔记05】神经网络</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、非线性假设"><a href="#一、非线性假设" class="headerlink" title="一、非线性假设"></a>一、非线性假设</h2><p>当特征数量太多时，如果再用多项式进行预测，项数会非常多($n^2/2$)<br>所以普通的线性回归和逻辑回归将不能很好的解决这类复杂的问题，因此模拟人的大脑，构建了神经网络  </p>
+<h2 id="二、模型表示"><a href="#二、模型表示" class="headerlink" title="二、模型表示"></a>二、模型表示</h2><p>神经元模型:  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-f5d71d77a4c34d4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="神经元模型">  </p>
+<p>hθ(x)=g(θTx)=11+e−θTx，我们称这是一个以S型函数作为激励函数的人工神经元<br>每个神经元都是一个学习模型，它采纳一些特征作为输入，并产生一个输出，θ在神经网络中也叫做权重   </p>
+<p>神经网络：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/yo5jsdfa4rm9nx0fgsyu4j2x/image_1bh6jtd9t50b1mov1ra2108h18o19.png" alt="image_1bh6jtd9t50b1mov1ra2108h18o19.png-100.5kB">  </p>
+<p>参数：</p>
+<blockquote>
+<p>$a_i^{(j)}$:第j层的第i个单元  </p>
+</blockquote>
+<blockquote>
+<p>$\theta^(j)$第j层映射到第j+1层时的权重矩阵  </p>
+</blockquote>
+<p>对于θ矩阵，行数=下一层的单元数，列数=上一行的单元数+1（bias unit）<br>如$\theta^1$的尺寸为3*4 </p>
+<p><strong>前向传播算法：</strong>  </p>
+<p>激活单元和输出单元的表达式  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/v2f5hkj2urt2kpm0rse7eosa/image_1bh6kirs166n1cvt12saa9t1ko7m.png" alt="image_1bh6kirs166n1cvt12saa9t1ko7m.png-25.7kB">  </p>
+<p>$\theta_{32}^{(1)}$即表示将第一层的第二个单元传导到下一层的第三个单元(即下标的前一个数是下一层的单元位置)。<br>如果用矩阵表示：<br>$$<br>X=\begin{bmatrix}<br>x_0\x_1\x_2\x_3<br>\end{bmatrix}<br>$$<br>$$<br>\theta=\begin{bmatrix}<br>\theta_{10}&amp;\cdots\\vdots&amp;\ddots\\cdots&amp;\cdots&amp;\theta_{33}<br>\end{bmatrix}<br>$$ </p>
+<p>$$a=\begin{bmatrix}<br>a_1\a_2\a_3<br>\end{bmatrix}$$</p>
+<p>我们可以得到$\theta*X=a$  </p>
+<p><strong>模型的向量化表示</strong>  </p>
+<p>令$z^{(2)}=\Theta^{(1)}x$,$h_\theta(x)=a^{(3)}=g(z^{(3)})$<br>这是针对一个训练实例进行的计算，如果对整个训练集进行计算，则需要将训练集特征矩阵进行转置，使同一个实例都在一列上。即：<br>$z^{(2)}=\Theta^{(1)}*X^T$<br>$a^{(2)}=g(z^{(2)})$<br>神经网络就像是logistic regression，只不过把输入向量[x1-x3]变成了中间层的单元。  </p>
+<h2 id="三、神经网络的优势"><a href="#三、神经网络的优势" class="headerlink" title="三、神经网络的优势"></a>三、神经网络的优势</h2><p>我们可以把$a_i$看作是更高级的特征值，他们是由x决定的，因为是梯度下降的，所以a是变化的，并且越来越厉害，这些更高级的特征值比仅仅将x进行幂运算效果要好，能更好的预测数据</p>
+<h2 id="四、对特征的直观理解"><a href="#四、对特征的直观理解" class="headerlink" title="四、对特征的直观理解"></a>四、对特征的直观理解</h2><p>1.and or not  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-88ac0f2a36ea6234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>2.xor:先将and和not进行组合<br>即(notx1)and(notx2)构成第二层，再进行一次or得到第三层  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-57e1cf093c2858ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>3.多类分类：<br>识别行人、汽车、卡车、摩托车  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-dd89312e20fb18e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="五、反向传播算法"><a href="#五、反向传播算法" class="headerlink" title="五、反向传播算法"></a>五、反向传播算法</h2><p>1.几个标记方法：   </p>
+<p>m组训练数据<br>$x^{(1)}, x^{(2)}……x^{(m)}$<br>神经网络总的层数L；<br>第l层的单元数$s_l$（不包括偏差单元）；<br>输出层的单元数K。<br>①对于两类分类问题<br>y=0或1，只有一个输出单元，hΘ(x)∈R，故$s_L$<br>=1,即K=1 .</p>
+<p>②对于多类分类问题<br>y是一个向量，y∈$R_K$，hΘ(x)∈$R_K$，SL=K(K&gt;=3)。    </p>
+<p>2.逻辑回归的代价函数  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-057fbc656b1799a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>3.神经网络的代价函数（多类分类问题）  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-91b5c3c2f022aae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>该式子的含义（个人现阶段理解），共有k个分类，所以对于每一行数据，h(x(i))是一个k维的向量（有个输出结果），Σk 即将每一个结果的代价求和，再将m行数据的代价求和，得出总的代价。正则化的式子：每一层有l个单元，对应每层的theta是一个S(l+1)*S(L)的矩阵  </p>
+<p>4.反向传播算法<br>先通过一个例子来看：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-844a59eea558cd17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>即前向传播是通过ai求得zi+1,反向传播是通过δi+1求得δi，系数都是Θij，其中j是前一层对应的单元，i是后一层对应的单元<br>代价函数：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-fd85bab91732fbfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png">  </p>
+<p>误差计算方法：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-c24fa92373b3dd66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-632f4670ccd417dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>而代价函数的偏导数为  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-1e1f1ca312b18b0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>算法：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-cfdb2c8f0235ca2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="六、梯度检验"><a href="#六、梯度检验" class="headerlink" title="六、梯度检验"></a>六、梯度检验</h2><p>当我们对一个复杂模型进行梯度下降算法的时候，可能存在一些不易察觉的错误，导致最终的结果可能不是最优解。<br>为了避免这样的问题，采用一种叫做梯度的数值检验方法。通过估计梯度值来检验我们计算的导数是否符合要求。   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/j6t01jtg13e9cysmu7lx8aj9/image_1bh6ufmnid8u1rg1o5sga13e213.png" alt="image_1bh6ufmnid8u1rg1o5sga13e213.png-23.9kB"><br>方法是在代价函数上沿着切线方向选择两个非常近的点然后计算两个点的平均值以估计梯度。即对某个特定的$\theta$，我们计算出$\theta-\epsilon$和$\theta+\epsilon$的代价值，然后求两个代价的平均，用以估计在θ出的代价值。<br>当θ是一个向量时，我们需要对偏导数进行检验    </p>
+<p><img src="http://static.zybuluo.com/yhsdba/nnskhtgvtw2fay9j90oc8xje/image_1bh6unph8vrt44fmk5htk81v1g.png" alt="image_1bh6unph8vrt44fmk5htk81v1g.png-8.6kB">  </p>
+<p>将计算出的偏导数存储在矩阵$D_{ij}^l$中。检验时将矩阵展开为向量，同时也将θ展开为向量，我们针对每一个θ都算一个近似的梯度值，将这些值存储在另一个矩阵中，并与D进行比较    </p>
+<p><img src="http://static.zybuluo.com/yhsdba/syumrd3cndbp6ia1zi82qcuz/image_1bh6usvb2fhm116cbpjnjj5361t.png" alt="image_1bh6usvb2fhm116cbpjnjj5361t.png-94.1kB">   </p>
+<h2 id="七、随机初始化"><a href="#七、随机初始化" class="headerlink" title="七、随机初始化"></a>七、随机初始化</h2><p>之前通常将参数初始化为0，但对于神经网络不可行，这会导致第二层所有的激活单元都为相同的值，同理，如果所有参数的值都相同，结果也是一样的。<br>所以参数的初值要随机产生。</p>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>使用神经网络的步骤：</p>
+<blockquote>
+<ul>
+<li>网络结构：决定层数和单元数  </li>
+</ul>
+</blockquote>
+<p> 第一层的单元数即训练集的特征数量  </p>
+<p> 最后一层的单元数是结果的种类数量  </p>
+<p> 如果隐藏层数大于1，确保每个隐藏层的单元个数相同  </p>
+<p> 真正需要决定的就是隐藏层的层数和每个中间层的单元数  </p>
+<blockquote>
+<ul>
+<li>训练神经网络：  </li>
+</ul>
+</blockquote>
+<p> 1.参数的随机初始化 </p>
+<p> 2.利用正向传播算法计算所有的$h_\theta(x)$ </p>
+<p> 3.编写计算代价函数J的代码  </p>
+<p> 4.利用反向传播方法计算所有的偏导数  </p>
+<p> 5.利用数值检验方法检验这些偏导数  </p>
+<p> 6.使用优化算法来最小化代价函数  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/05/28/2017-5-28-【ng公开课笔记05】神经网络/" data-id="cjpcnx2h0000blsv6aap2lwuh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经网络/">神经网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-5-28-【ng公开课笔记04】正则化" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/28/2017-5-28-【ng公开课笔记04】正则化/" class="article-date">
+  <time datetime="2017-05-28T03:00:00.000Z" itemprop="datePublished">2017-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/28/2017-5-28-【ng公开课笔记04】正则化/">【ng公开课笔记04】正则化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、过（欠）拟合问题"><a href="#一、过（欠）拟合问题" class="headerlink" title="一、过（欠）拟合问题"></a>一、过（欠）拟合问题</h2><p>回归问题中的过（欠）拟合  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/qwazrrwzi7m2yt38gqsp1c97/image_1bh6icscm1rdti9f1l07nshdoh9.png" alt="image_1bh6icscm1rdti9f1l07nshdoh9.png-87.4kB">   </p>
+<p>分类问题中的过（欠）拟合  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ovsh5bmpfxscwi92rq4an4yf/image_1bh6if2a919ln1si5qvg12hk1vjnm.png" alt="image_1bh6if2a919ln1si5qvg12hk1vjnm.png-195.1kB">  </p>
+<p>很容易看出，x的次数越高，拟合程度越好，但也有可能造成预测能力变差  </p>
+<p>解决方法：<br>1.丢弃一些特征<br>2.正则化：保留所有的特征，但是减少参数的大小  </p>
+<h2 id="二、代价函数"><a href="#二、代价函数" class="headerlink" title="二、代价函数"></a>二、代价函数</h2><p>假设回归问题中模型为： $h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2^2+\theta_3x^3+\theta_4x_4^4$<br>如果能让高次项系数接近于0，就能很好的拟合了<br>正则化要做的就是在一定程度上减小θ的值。如要减小$\theta_3$和$\theta_4$的值，可以通过修改代价函数，在$\theta_3$和$\theta_4$做一些惩罚<br>修改后的代价函数<br>$min1/2m\sum_1^m((h_\theta(x^{(i)})-y^{(i)})^2+1000\theta_3^2+10000\theta_4^2)$   </p>
+<p><strong>正则化线性回归的代价函数</strong><br>$J(\theta)=1/2m[\sum_{i=1}^m(h_\theta(x^{i})-y^{(i)})^2+\lambda\sum_{j=1}^n\theta_j^2]$</p>
+<p><em>不对 $\theta_0$进行惩罚</em><br>所以梯度下降算法要分成两种情况   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/649jlda89jvmon86acn943xn/image_1bh6j80mgsq7ocfqsn17tol8m13.png" alt="image_1bh6j80mgsq7ocfqsn17tol8m13.png-45.9kB">   </p>
+<p>如果利用正规方程来求解线性回归：    </p>
+<p><img src="http://static.zybuluo.com/yhsdba/binmm50m4qg6kkcvpkzgcd0p/image_1bh6j9q0ol2h1oqj1fa91k2lf871g.png" alt="image_1bh6j9q0ol2h1oqj1fa91k2lf871g.png-13.1kB">   </p>
+<h2 id="三、正则化的逻辑回归"><a href="#三、正则化的逻辑回归" class="headerlink" title="三、正则化的逻辑回归"></a>三、正则化的逻辑回归</h2><p><img src="http://static.zybuluo.com/yhsdba/maiq579bzn9u1d1r15esr6nz/image_1bh6jc2rh16va5693q31pk1170d1t.png" alt="image_1bh6jc2rh16va5693q31pk1170d1t.png-80.4kB">  </p>
+<p>正则化后的代价函数：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/0isi0qa9uy7racixaobre33o/image_1bh6jdr6vmf1qsk1u6a1ag81iif2a.png" alt="image_1bh6jdr6vmf1qsk1u6a1ag81iif2a.png-47.8kB">  </p>
+<p><em>看起来与线性回归相同，但要注意$h_\theta(x)=g(\theta^TX)$，所以与线性回归不同</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/05/28/2017-5-28-【ng公开课笔记04】正则化/" data-id="cjpcnx2gy000alsv6iksrebtk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/过拟合/">过拟合</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

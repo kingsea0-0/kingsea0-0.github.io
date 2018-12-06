@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^">
+<meta name="keywords" content="神经网络 word2vec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络">
+<meta property="og:url" content="https://kingsea0-0.github.io/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/xwe0ziycheoqgmk32p1ceu60/image_1bpt4ncp3onos8h177l1l6edh09.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/7jq4ipnmfgs77opcggu1s2i8/image_1bpt4pp541bikit0rllqo119ag13.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/p60bz512q1xvywy4e8vdsct8/image_1bpt4vstbdfaj5c25t112dbvb30.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/grxl59vmauqqhcidk8n89awh/image_1bpt53crf1dhu15sf1cg2u7s5a13t.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/3mbz3w79bsfi10qra9m6tcz2/image_1bpt8ao93ffp1n2b10djbvjc0p4a.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/65n4qjwt960ipakbt2ff2ec7/image_1bpt8edme8s21tvm7v61n8bivd4n.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/msy3vbvlddcrh3ypmpfiv75o/image_1bpt99b8j1s9e1fhb1emksr810438o.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/srefkec65u8ingr09ynibwaa/image_1bpt95oqhqga14eu1h7tga57uo6b.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/e1gwia9laljmxg0rgoqq68v8/image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/c8zoc40vxms457ycfdzst6li/image_1bpt9mjrfu28v6k1f1f1m481d52av.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/144gger5c98e36pcn8ia9i8j/image_1bpt9mut31grhm86su9at10sebc.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/4xux9u3pnm61tiidjbmayrz1/image_1bpt9p9vs8niosf1qoedel181gbp.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ohj8qpx1z7mndo7jbt64phi6/image_1bpt9pvb7bro12s91fiq1krsggkc6.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/b7itm0gafn1bb4owt6xqywec/image_1bpta8i3e1f6qikd1ika7hs17c0cj.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1j23u8l9s5jrcx40hl375vkd/image_1bpta8nrk11921i1konn13d31jthd0.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/c1odz8i7ars1f8d8byx71svj/image_1bpta8sv312n61nqh11ri173b1otadd.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/gojyls8bkjdxypktedbuopdo/image_1bpta93v9aj81j1u25so7o1gr4dq.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/jvuoux4d09x332bpj79ermiq/image_1bptaa4ph754fq718j21qfh1nl7e7.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/5tte77pk0n1p41qtvfedsuuz/image_1bptb27ad1q1174b1j04400610f1.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/p6o0ak00f3x92ly6c6r7hu36/image_1bptb1te62n9u1b1bf8ilv11vaek.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/v24frsw8asn1g8269i4z115a/image_1bptbjcp9m241fn018nlvhmsjnfe.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/16fx20l4cvn8ijhayy3mpht8/image_1bptbmnl21588ufsuq71ijv1njrg8.png">
+<meta property="og:image" content="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_3_Lecture3_toy_nn.jpg?imageView/2/w/300/q/100">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/o5iyt8zpzszjbl8f35urbj6q/cs224d_3_Lecture3_example.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/btzt5ltm46wszi7t8bdf2os6/%E5%9B%BE%E5%83%8F%201.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ww5x186ub03m3hs7xc1zovpe/%E5%9B%BE%E5%83%8F%202.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ps1e6qg9snj7f1p258akw95z/IMG_20170914_164959.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/o4ec44mk07efi3i7d8sj8slp/IMG_20170914_165413.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/mydxmhea2eg2ey33xvgz6gpl/image_1bpvs2069qd61nvi1ibqb07kmu9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1buj0nrwo555s5j93g2cnwgn/image_1bpvs451p1u1rfrdkp01jt0l0c1r.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络">
+<meta name="twitter:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/xwe0ziycheoqgmk32p1ceu60/image_1bpt4ncp3onos8h177l1l6edh09.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/" class="article-date">
+  <time datetime="2017-08-14T16:00:00.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nlp/">nlp</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。</p>
+<p>我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^i$是一个d维向量，$y^i$是一个C维one-hot向量（常用来作为预测结果的标签），N是总数。在一般的机器学习任务中，我们通常固定输入数据和目标标签，通过优化（SGD等）训练权重。在自然语言处理中，我们引入了重训练的思想，针对具体任务时，我们重新训练输入的词向量。下面讨论何时需要进行这样的操作以及原因。</p>
+<h2 id="重训练词向量"><a href="#重训练词向量" class="headerlink" title="重训练词向量"></a>重训练词向量</h2><p>注：只有在训练集比较大时，才需要进行词向量重训练，否则适得其反</p>
+<p>我们一般先用一个简单的内部任务评价来初始化用于外部任务评价的词向量。在很多情况下，这些预训练的词向量的在外部任务中的表现已经非常好了。 然而，一些情况下，这些词向量在外部任务中的表现仍然有提升空间。不过，重训练词向量是由风险的。</p>
+<p>比如有一个给单词做情感分析的小任务，在预训练的词向量中，这三个表示电视的单词都是在一起的：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/xwe0ziycheoqgmk32p1ceu60/image_1bpt4ncp3onos8h177l1l6edh09.png" alt="image_1bpt4ncp3onos8h177l1l6edh09.png-19.3kB"></p>
+<p>但由于情感分析语料中，训练集只含有TV和telly，导致re-training之后两者跑到别处去了：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7jq4ipnmfgs77opcggu1s2i8/image_1bpt4pp541bikit0rllqo119ag13.png" alt="image_1bpt4pp541bikit0rllqo119ag13.png-60.1kB"></p>
+<p>于是在测试集上导致television被误分类。</p>
+<p>这个例子说明，如果任务的语料非常小，则不必在任务语料上重新训练词向量，否则会导致词向量过拟合。</p>
+<h2 id="softmax与正则化"><a href="#softmax与正则化" class="headerlink" title="softmax与正则化"></a>softmax与正则化</h2><p>softmax分类函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/p60bz512q1xvywy4e8vdsct8/image_1bpt4vstbdfaj5c25t112dbvb30.png" alt="image_1bpt4vstbdfaj5c25t112dbvb30.png-9.1kB"></p>
+<p>计算方法分为两个步骤：取权值矩阵的某一行乘上输入向量，归一化得到概率。</p>
+<p>上面我们计算了词向量x属于类别j的概率。训练的时候，可以直接最小化正确类别的概率的负对数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/grxl59vmauqqhcidk8n89awh/image_1bpt53crf1dhu15sf1cg2u7s5a13t.png" alt="image_1bpt53crf1dhu15sf1cg2u7s5a13t.png-9.5kB"></p>
+<p>其实这个损失函数等效于交叉熵：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/3mbz3w79bsfi10qra9m6tcz2/image_1bpt8ao93ffp1n2b10djbvjc0p4a.png" alt="image_1bpt8ao93ffp1n2b10djbvjc0p4a.png-28.7kB"></p>
+<p>这是因为类别是one-hot向量。只有正确的分类y=1,其余y=0</p>
+<p>对N个数据点来讲有：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/65n4qjwt960ipakbt2ff2ec7/image_1bpt8edme8s21tvm7v61n8bivd4n.png" alt="image_1bpt8edme8s21tvm7v61n8bivd4n.png-12.6kB"></p>
+<p>这个公式有一点点不同，注意到其实这里的k(i)现在是个函数，返回每个x(i)所对应的正确的类。</p>
+<p>如果我们同时要训练模型中的权重参数(W)和词向量(x)， 需要训练多少个参数呢? 一个以d-维词向量为输入，输出一个其在C个类上的分布的简单的线性模型需要C·d个参数。如果我们训练时更新词库中每个单词的词向量，则需要更新|V|个词向量，而每一个都是d维。综合一下，我们知道，一个简单的线性分类模型需要更新C⋅d+∣V∣⋅d个参数。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/msy3vbvlddcrh3ypmpfiv75o/image_1bpt99b8j1s9e1fhb1emksr810438o.png" alt="image_1bpt99b8j1s9e1fhb1emksr810438o.png-42.9kB"></p>
+<p>对于一个简单的线性模型来说，这个参数量就显得非常大了，带来的问题是模型很容易在数据集上过拟合。为了缓解过拟合，我们需要引入一个正则项，用贝耶斯的角度来讲，这个正则项其实就是一个给模型的参数加上了一个先验分布，从而希望他们的值更接近0。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/srefkec65u8ingr09ynibwaa/image_1bpt95oqhqga14eu1h7tga57uo6b.png" alt="image_1bpt95oqhqga14eu1h7tga57uo6b.png-18.5kB"></p>
+<p>如果咱们找到合适的正则项权重λ，那最小化上面的损失函数得到的模型，不会出现某些权重特别大的情况，同时模型的泛化能力也很不错。</p>
+<h2 id="词窗分类"><a href="#词窗分类" class="headerlink" title="词窗分类"></a>词窗分类</h2><p><a href="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_2_Figure8.jpg?imageView/2/w/450/q/100![image_1bpt9bapt1ph1g0ki8014mnf7595.png-26kB][9]" target="_blank" rel="noopener">http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_2_Figure8.jpg?imageView/2/w/450/q/100![image_1bpt9bapt1ph1g0ki8014mnf7595.png-26kB][9]</a></p>
+<p>我们这里看到的是一个中心词，和长度为2的左右窗口内的词。这种上下文可以帮助我们分辨Paris是一个地点，还是一个人名 </p>
+<p><img src="http://static.zybuluo.com/yhsdba/e1gwia9laljmxg0rgoqq68v8/image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png" alt="image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png-7.1kB"></p>
+<p>我们前面提到的外部任务都是以单个单词为输入的。实际上，由于自然语言的特性，这种情况很少会出现。在自然语言中，有很多一词多义的情况，这时候我们一般会参考上下文来判断。所以在大多数的情况下，我们给模型输入的是一个词序列。这个词序列由一个中心词向量和它上下文的词向量组成。上下文中词的数量又叫词窗大小，任务不同这个参数的取值也不同。一般来讲，小窗口在句法上的精度较高，大窗口在语义上的表现较好。</p>
+<h2 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h2><p>我们继续使用softmax进行分类。只需要将之前的$x$换成$x_{window}$即可</p>
+<p><img src="http://static.zybuluo.com/yhsdba/c8zoc40vxms457ycfdzst6li/image_1bpt9mjrfu28v6k1f1f1m481d52av.png" alt="image_1bpt9mjrfu28v6k1f1f1m481d52av.png-10.7kB"></p>
+<p>那相应的，我们计算损失函数梯度的时候，得到的就是如下形式的向量了：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/144gger5c98e36pcn8ia9i8j/image_1bpt9mut31grhm86su9at10sebc.png" alt="image_1bpt9mut31grhm86su9at10sebc.png-10.5kB"></p>
+<p>对于较小的数据集，能勉强提供一个线性分类决策边界</p>
+<p><img src="http://static.zybuluo.com/yhsdba/4xux9u3pnm61tiidjbmayrz1/image_1bpt9p9vs8niosf1qoedel181gbp.png" alt="image_1bpt9p9vs8niosf1qoedel181gbp.png-159.5kB"></p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><p>神经网络可以提供非线性的决策边界：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ohj8qpx1z7mndo7jbt64phi6/image_1bpt9pvb7bro12s91fiq1krsggkc6.png" alt="image_1bpt9pvb7bro12s91fiq1krsggkc6.png-61kB"></p>
+<h1 id="神经网络-1"><a href="#神经网络-1" class="headerlink" title="神经网络"></a>神经网络</h1><p>之前已经写过几个神经网络的笔记，这里就简单写一写。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p><img src="http://static.zybuluo.com/yhsdba/b7itm0gafn1bb4owt6xqywec/image_1bpta8i3e1f6qikd1ika7hs17c0cj.png" alt="image_1bpta8i3e1f6qikd1ika7hs17c0cj.png-144.4kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/1j23u8l9s5jrcx40hl375vkd/image_1bpta8nrk11921i1konn13d31jthd0.png" alt="image_1bpta8nrk11921i1konn13d31jthd0.png-208.8kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/c1odz8i7ars1f8d8byx71svj/image_1bpta8sv312n61nqh11ri173b1otadd.png" alt="image_1bpta8sv312n61nqh11ri173b1otadd.png-88kB"></p>
+<p>我们把预测结果喂给下一级逻辑回归单元，由损失函数自动决定它们预测什么：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/gojyls8bkjdxypktedbuopdo/image_1bpta93v9aj81j1u25so7o1gr4dq.png" alt="image_1bpta93v9aj81j1u25so7o1gr4dq.png-131.6kB"></p>
+<p>多层网络：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/jvuoux4d09x332bpj79ermiq/image_1bptaa4ph754fq718j21qfh1nl7e7.png" alt="image_1bptaa4ph754fq718j21qfh1nl7e7.png-179.1kB"></p>
+<h2 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h2><p>我们以一个实际例子来观察前向和后向传播在nlp中的作用。</p>
+<p>一个命名识体识别的例子：</p>
+<p>“Museums in Paris are amazing”</p>
+<p>我们要来判断这里的中心词”Paris”是不是个命名实体。在这种情况下， 我们不止要知道这个词窗内哪些词向量出现过，可能也需要知道他们之间的相互作用。 比如说，可能只有在”Museums”出现在第1个位置，”in”出现在第二个位置的时候，Paris才是命名实体。如果你直接把词向量丢给Softmax函数， 这种非线性的决策是很难做到的。</p>
+<p>所以我们需要用1.2中讨论的方法对输入的变量进行非线性的处理加工(神经元产出非线性激励输出)，再把这些中间层的产物输入到Softmax函数中去。 这样我们可以用另一个矩阵<br>U∈$R^{m+1}$,与激励输出结果运算生成得分（当然，这里是未归一化的），从而进一步用于分类任务：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/5tte77pk0n1p41qtvfedsuuz/image_1bptb27ad1q1174b1j04400610f1.png" alt="image_1bptb27ad1q1174b1j04400610f1.png-430.2kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/p6o0ak00f3x92ly6c6r7hu36/image_1bptb1te62n9u1b1bf8ilv11vaek.png" alt="image_1bptb1te62n9u1b1bf8ilv11vaek.png-96.5kB"></p>
+<h2 id="最大化目标间隔函数"><a href="#最大化目标间隔函数" class="headerlink" title="最大化目标间隔函数"></a>最大化目标间隔函数</h2><p>跟大多数机器学习模型一样，神经网络也需要一个优化目标，一个用来衡量模型好坏的度量。优化算法在做的事情呢，通常说来就是找到一组权重，来最优化目标或者最小化误差。这里我们讨论一个比较流行的度量，叫做最大化间隔目标函数。直观的理解就是我们要保证被正确分类的样本分数要高于错误分类的样本得分。</p>
+<p>继续用之前的例子，如果我们把一个正确标记的词窗 “Museums in Paris are amazing”(这里Paris是命名实体)的得分记做$s$,而错误标记的词窗“Not all Museums in Paris”(这里Paris不是命名实体)的得分记作$s_c$ (c表示这个词窗”corrupt”了)</p>
+<p>于是，我们的目标函数就是要最大化$(s-s_c)$ 或者最小化 $(s_c-s)$。然而$当s&gt;s_c$时，这表明标记正确，我们可以跳过这个样不进行训练。我们只需要将$s_c-s&gt;0$的样本训练到差最小就可以了。所以目标函数改进为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/v24frsw8asn1g8269i4z115a/image_1bptbjcp9m241fn018nlvhmsjnfe.png" alt="image_1bptbjcp9m241fn018nlvhmsjnfe.png-6.1kB"></p>
+<p>但是这个优化函数还不稳妥，因为它缺乏一个用来保证安全划分的间隔。我们希望那些被正确标记的词窗得分不仅要比错误标记的词窗得分高，还希望至少高出一个取值为正的间隔Δ。通常将$\Delta$取1。因此，我们修改优化目标为 ︰ </p>
+<p><img src="http://static.zybuluo.com/yhsdba/16fx20l4cvn8ijhayy3mpht8/image_1bptbmnl21588ufsuq71ijv1njrg8.png" alt="image_1bptbmnl21588ufsuq71ijv1njrg8.png-6.8kB"></p>
+<p>这实际上是将函数间隔转换为几何间隔。可以参考SVM优化函数的几何意义。</p>
+<p>通常通过负采样算法得到负例。</p>
+<p>这个目标函数的好处是，随着训练的进行，可以忽略越来越多的实例，而只专注于那些难分类的实例。</p>
+<h2 id="反向传播训练"><a href="#反向传播训练" class="headerlink" title="反向传播训练"></a>反向传播训练</h2><p>通过反向传播来训练模型中的各个参数。方法就是梯度下降：</p>
+<p>$\theta^{(t+1)=\theta^{(t)}-\alpha\Delta_{\theta^{(t)}}J}$</p>
+<p>通过下面一个简单的网络我们自己推导一遍：</p>
+<p><img src="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_3_Lecture3_toy_nn.jpg?imageView/2/w/300/q/100" alt="此处输入图片的描述"></p>
+<p>假设目标函数$J=(1+s_c-s)$取正值，我们希望更新权重参数$W_{14}$我们注意到$W_{14}$只在计算$z_1^{2}$和$a_1^{2}$的时候出现。这一点对于理解反向传播很重要-参数的反向传播梯度只被那些在正向计算中用到过这个参数的值所影响。$a_1^2$在之后的正向计算中和$W_1^2$相乘进而参与到分类得分的计算中。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/o5iyt8zpzszjbl8f35urbj6q/cs224d_3_Lecture3_example.jpg" alt="cs224d_3_Lecture3_example.jpg-4.9kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/btzt5ltm46wszi7t8bdf2os6/%E5%9B%BE%E5%83%8F%201.jpg" alt="图像 1.jpg-9.4kB"> </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ww5x186ub03m3hs7xc1zovpe/%E5%9B%BE%E5%83%8F%202.jpg" alt="图像 2.jpg-143.1kB"></p>
+<p>这里所谓的反向传播误差$\delta_i^k$其实就是最终的目标函数对于第k层上第i个激励输出值$z_i^k$的导数</p>
+<p>如我们要更新$W_{14}$</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ps1e6qg9snj7f1p258akw95z/IMG_20170914_164959.jpg" alt="IMG_20170914_164959.jpg-1732.9kB"></p>
+<h3 id="偏移量的更新"><a href="#偏移量的更新" class="headerlink" title="偏移量的更新"></a>偏移量的更新</h3><p><img src="http://static.zybuluo.com/yhsdba/o4ec44mk07efi3i7d8sj8slp/IMG_20170914_165413.jpg" alt="IMG_20170914_165413.jpg-1763kB"></p>
+<h2 id="反向传播的向量化"><a href="#反向传播的向量化" class="headerlink" title="反向传播的向量化"></a>反向传播的向量化</h2><p><img src="http://static.zybuluo.com/yhsdba/mydxmhea2eg2ey33xvgz6gpl/image_1bpvs2069qd61nvi1ibqb07kmu9.png" alt="image_1bpvs2069qd61nvi1ibqb07kmu9.png-17.7kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/1buj0nrwo555s5j93g2cnwgn/image_1bpvs451p1u1rfrdkp01jt0l0c1r.png" alt="image_1bpvs451p1u1rfrdkp01jt0l0c1r.png-19.7kB"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/" data-id="cjpcnx2jx001ylsv6759as7qo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/15/2017-8-25-SVD简介/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SVD简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/04/2017-8-4-LDA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LDA简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

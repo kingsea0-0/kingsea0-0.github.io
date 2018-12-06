@@ -5,15 +5,27 @@
   
 
   
-  <title>Archives: 2018/12 | Hexo</title>
+  <title>【ng公开课笔记04】正则化 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://kingsea0-0.github.io/archives/2018/12/index.html">
+  <meta name="description" content="一、过（欠）拟合问题回归问题中的过（欠）拟合       分类问题中的过（欠）拟合      很容易看出，x的次数越高，拟合程度越好，但也有可能造成预测能力变差   解决方法：1.丢弃一些特征2.正则化：保留所有的特征，但是减少参数的大小   二、代价函数假设回归问题中模型为： $h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2^2+\theta_3x^3+">
+<meta name="keywords" content="过拟合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记04】正则化">
+<meta property="og:url" content="https://kingsea0-0.github.io/2017/05/28/2017-5-28-【ng公开课笔记04】正则化/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、过（欠）拟合问题回归问题中的过（欠）拟合       分类问题中的过（欠）拟合      很容易看出，x的次数越高，拟合程度越好，但也有可能造成预测能力变差   解决方法：1.丢弃一些特征2.正则化：保留所有的特征，但是减少参数的大小   二、代价函数假设回归问题中模型为： $h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2^2+\theta_3x^3+">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/qwazrrwzi7m2yt38gqsp1c97/image_1bh6icscm1rdti9f1l07nshdoh9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ovsh5bmpfxscwi92rq4an4yf/image_1bh6if2a919ln1si5qvg12hk1vjnm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/649jlda89jvmon86acn943xn/image_1bh6j80mgsq7ocfqsn17tol8m13.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/binmm50m4qg6kkcvpkzgcd0p/image_1bh6j9q0ol2h1oqj1fa91k2lf871g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/maiq579bzn9u1d1r15esr6nz/image_1bh6jc2rh16va5693q31pk1170d1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/0isi0qa9uy7racixaobre33o/image_1bh6jdr6vmf1qsk1u6a1ag81iif2a.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="【ng公开课笔记04】正则化">
+<meta name="twitter:description" content="一、过（欠）拟合问题回归问题中的过（欠）拟合       分类问题中的过（欠）拟合      很容易看出，x的次数越高，拟合程度越好，但也有可能造成预测能力变差   解决方法：1.丢弃一些特征2.正则化：保留所有的特征，但是减少参数的大小   二、代价函数假设回归问题中模型为： $h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2^2+\theta_3x^3+">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/qwazrrwzi7m2yt38gqsp1c97/image_1bh6icscm1rdti9f1l07nshdoh9.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,129 +72,82 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/12/06/2018-12-01-dialogue_paper/" class="archive-article-date">
-  <time datetime="2018-12-06T13:52:28.928Z" itemprop="datePublished">Dec 6</time>
+        <section id="main"><article id="post-2017-5-28-【ng公开课笔记04】正则化" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/28/2017-5-28-【ng公开课笔记04】正则化/" class="article-date">
+  <time datetime="2017-05-28T03:00:00.000Z" itemprop="datePublished">2017-05-28</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+    <h1 class="article-title" itemprop="name">
+      【ng公开课笔记04】正则化
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/12/06/2018-11-28-dialogue_system_overview/" class="archive-article-date">
-  <time datetime="2018-12-06T13:52:28.911Z" itemprop="datePublished">Dec 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
-    </h1>
-  
+        <h2 id="一、过（欠）拟合问题"><a href="#一、过（欠）拟合问题" class="headerlink" title="一、过（欠）拟合问题"></a>一、过（欠）拟合问题</h2><p>回归问题中的过（欠）拟合  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/qwazrrwzi7m2yt38gqsp1c97/image_1bh6icscm1rdti9f1l07nshdoh9.png" alt="image_1bh6icscm1rdti9f1l07nshdoh9.png-87.4kB">   </p>
+<p>分类问题中的过（欠）拟合  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ovsh5bmpfxscwi92rq4an4yf/image_1bh6if2a919ln1si5qvg12hk1vjnm.png" alt="image_1bh6if2a919ln1si5qvg12hk1vjnm.png-195.1kB">  </p>
+<p>很容易看出，x的次数越高，拟合程度越好，但也有可能造成预测能力变差  </p>
+<p>解决方法：<br>1.丢弃一些特征<br>2.正则化：保留所有的特征，但是减少参数的大小  </p>
+<h2 id="二、代价函数"><a href="#二、代价函数" class="headerlink" title="二、代价函数"></a>二、代价函数</h2><p>假设回归问题中模型为： $h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2^2+\theta_3x^3+\theta_4x_4^4$<br>如果能让高次项系数接近于0，就能很好的拟合了<br>正则化要做的就是在一定程度上减小θ的值。如要减小$\theta_3$和$\theta_4$的值，可以通过修改代价函数，在$\theta_3$和$\theta_4$做一些惩罚<br>修改后的代价函数<br>$min1/2m\sum_1^m((h_\theta(x^{(i)})-y^{(i)})^2+1000\theta_3^2+10000\theta_4^2)$   </p>
+<p><strong>正则化线性回归的代价函数</strong><br>$J(\theta)=1/2m[\sum_{i=1}^m(h_\theta(x^{i})-y^{(i)})^2+\lambda\sum_{j=1}^n\theta_j^2]$</p>
+<p><em>不对 $\theta_0$进行惩罚</em><br>所以梯度下降算法要分成两种情况   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/649jlda89jvmon86acn943xn/image_1bh6j80mgsq7ocfqsn17tol8m13.png" alt="image_1bh6j80mgsq7ocfqsn17tol8m13.png-45.9kB">   </p>
+<p>如果利用正规方程来求解线性回归：    </p>
+<p><img src="http://static.zybuluo.com/yhsdba/binmm50m4qg6kkcvpkzgcd0p/image_1bh6j9q0ol2h1oqj1fa91k2lf871g.png" alt="image_1bh6j9q0ol2h1oqj1fa91k2lf871g.png-13.1kB">   </p>
+<h2 id="三、正则化的逻辑回归"><a href="#三、正则化的逻辑回归" class="headerlink" title="三、正则化的逻辑回归"></a>三、正则化的逻辑回归</h2><p><img src="http://static.zybuluo.com/yhsdba/maiq579bzn9u1d1r15esr6nz/image_1bh6jc2rh16va5693q31pk1170d1t.png" alt="image_1bh6jc2rh16va5693q31pk1170d1t.png-80.4kB">  </p>
+<p>正则化后的代价函数：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/0isi0qa9uy7racixaobre33o/image_1bh6jdr6vmf1qsk1u6a1ag81iif2a.png" alt="image_1bh6jdr6vmf1qsk1u6a1ag81iif2a.png-47.8kB">  </p>
+<p><em>看起来与线性回归相同，但要注意$h_\theta(x)=g(\theta^TX)$，所以与线性回归不同</em></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/" class="archive-article-date">
-  <time datetime="2018-12-06T13:52:28.895Z" itemprop="datePublished">Dec 6</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/12/06/2017-8-25-PCA简介/" class="archive-article-date">
-  <time datetime="2018-12-06T13:52:28.843Z" itemprop="datePublished">Dec 6</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/05/28/2017-5-28-【ng公开课笔记04】正则化/" data-id="cjpcnx2gy000alsv6iksrebtk" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/12/06/2017-6-3-python的多线程和多进程/" class="archive-article-date">
-  <time datetime="2018-12-06T13:52:28.711Z" itemprop="datePublished">Dec 6</time>
-</a>
       
-    </header>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/过拟合/">过拟合</a></li></ul>
+
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/12/06/2017-5-29-正则表达式/" class="archive-article-date">
-  <time datetime="2018-12-06T13:52:28.658Z" itemprop="datePublished">Dec 6</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/06/2017-5-29-正则表达式/">正则表达式</a>
-    </h1>
+    <a href="/2017/05/28/2017-5-28-【ng公开课笔记05】神经网络/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【ng公开课笔记05】神经网络
+        
+      </div>
+    </a>
   
+  
+    <a href="/2017/05/27/2017-5-27-mathjax常用语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mathjax常用语法</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         

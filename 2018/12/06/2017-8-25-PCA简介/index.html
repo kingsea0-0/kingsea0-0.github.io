@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>PCA简介 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PCA与LDA与许多相似之处，都是一种将高维数据降维的方法，区别是LDA是带标签的，而PCA是不带标签的，所以是一种unsupervised learning。上一篇写过了LDA的数学原理，所以接着上一篇总结一下PCA的数学原理。同时感到上一篇还有一些地方没有写明白，在参考了几篇文章后，在这篇博文中重新总结一下。 向量表示、基变换、矩阵乘法的几何意义这里推荐一个视频：https://www.bil">
+<meta name="keywords" content="PCA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PCA简介">
+<meta property="og:url" content="https://kingsea0-0.github.io/2018/12/06/2017-8-25-PCA简介/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="PCA与LDA与许多相似之处，都是一种将高维数据降维的方法，区别是LDA是带标签的，而PCA是不带标签的，所以是一种unsupervised learning。上一篇写过了LDA的数学原理，所以接着上一篇总结一下PCA的数学原理。同时感到上一篇还有一些地方没有写明白，在参考了几篇文章后，在这篇博文中重新总结一下。 向量表示、基变换、矩阵乘法的几何意义这里推荐一个视频：https://www.bil">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.055Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PCA简介">
+<meta name="twitter:description" content="PCA与LDA与许多相似之处，都是一种将高维数据降维的方法，区别是LDA是带标签的，而PCA是不带标签的，所以是一种unsupervised learning。上一篇写过了LDA的数学原理，所以接着上一篇总结一下PCA的数学原理。同时感到上一篇还有一些地方没有写明白，在参考了几篇文章后，在这篇博文中重新总结一下。 向量表示、基变换、矩阵乘法的几何意义这里推荐一个视频：https://www.bil">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-8-25-PCA简介" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2017-8-25-PCA简介/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.843Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PCA简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PCA与LDA与许多相似之处，都是一种将高维数据降维的方法，区别是LDA是带标签的，而PCA是不带标签的，所以是一种unsupervised learning。上一篇写过了LDA的数学原理，所以接着上一篇总结一下PCA的数学原理。同时感到上一篇还有一些地方没有写明白，在参考了几篇文章后，在这篇博文中重新总结一下。</p>
+<h1 id="向量表示、基变换、矩阵乘法的几何意义"><a href="#向量表示、基变换、矩阵乘法的几何意义" class="headerlink" title="向量表示、基变换、矩阵乘法的几何意义"></a>向量表示、基变换、矩阵乘法的几何意义</h1><p>这里推荐一个视频：<a href="https://www.bilibili.com/video/av6731067/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6731067/</a></p>
+<p>简单的说，向量可以看作是基进行伸缩变换形成的，也可以看作是在该基下的坐标。矩阵是基变换的一种表示形式，矩阵的列向量即新的基的坐标。而矩阵乘法的含义，即是将一组向量由在原来基下的坐标，转换到新的基下表示的坐标。</p>
+<h1 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h1><p>为了避免过于抽象的讨论，我们以一个具体的例子展开。假设我们的数据由五条记录组成，将它们表示成矩阵形式</p>
+<p>![image_1boc247chg3e1pgrkqj1fnn1tbr9.png-5kB][1]</p>
+<p>其中每一列为一条数据记录，而一行为一个字段。为了后续处理方便，我们首先将每个字段内所有值都减去字段均值，其结果是将每个字段都变为均值为0（简化之后方差的计算）。</p>
+<p>我们看上面的数据，第一个字段均值为2，第二个字段均值为3，所以变换后：</p>
+<p>![image_1boc24t08o2ceag1oab19jci32m.png-5.3kB][2]</p>
+<p>我们可以看下五条数据在平面直角坐标系内的样子：</p>
+<p>![image_1boc25jst1si1ogikj2j8n104b13.png-28.1kB][3]</p>
+<p>之后的问题是要在二维平面中选择一个方向，将所有数据都投影到这个方向所在直线上，用投影值表示原始记录。这是一个实际的二维降到一维的问题。</p>
+<p>以上图为例，可以看出如果向x轴投影，那么最左边的两个点会重叠在一起，中间的两个点也会重叠在一起，于是本身四个各不相同的二维点投影后只剩下两个不同的值了，这是一种严重的信息丢失，同理，如果向y轴投影最上面的两个点和分布在x轴上的两个点也会重叠。所以看来x和y轴都不是最好的投影选择。我们直观目测，如果向通过第一象限和第三象限的斜线投影，则五个点在投影后还是可以区分的。</p>
+<p>那么如何选择这个方向（或者说基）才能尽量保留最多的原始信息呢？一种直观的看法是：希望投影后的投影值尽可能分散。</p>
+<p>一个字段的方差可以看做是每个元素与字段均值的差的平方和的均值，即：</p>
+<p>![image_1boc29l64361mta1okdhhr13de1g.png-5.8kB][4]</p>
+<p>因为均值之前已化为0，则：</p>
+<p>![image_1boc2aen912oi1i381cnhhou1t0u1t.png-5.2kB][5]</p>
+<h1 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h1><p>对于上面二维降成一维的问题来说，找到那个使得方差最大的方向就可以了。不过对于更高维，还有一个问题需要解决。考虑三维降到二维问题。与之前相同，首先我们希望找到一个方向使得投影后方差最大，这样就完成了第一个方向的选择，继而我们选择第二个投影方向。</p>
+<p>如果我们还是单纯只选择方差最大的方向，很明显，这个方向与第一个方向应该是“几乎重合在一起”，显然这样的维度是没有用的，因此，应该有其他约束条件。从直观上说，让两个字段尽可能表示更多的原始信息，我们是不希望它们之间存在（线性）相关性的，因为相关性意味着两个字段不是完全独立，必然存在重复表示的信息。</p>
+<p>数学上可以用两个字段的协方差表示其相关性，由于已经让每个字段均值为0，则：</p>
+<p>![image_1boc2droi1g4mavmn5g1vtnikf2a.png-5.7kB][6]</p>
+<p>可以看到，在字段均值为0的情况下，两个字段的协方差简洁的表示为其内积除以元素数m。</p>
+<p>当协方差为0时，表示两个字段完全独立。为了让协方差为0，我们选择第二个基时只能在与第一个基正交的方向上选择。因此最终选择的两个方向一定是正交的。</p>
+<p>至此，我们得到了降维问题的优化目标：<strong>将一组N维向量降为K维（K大于0，小于N），其目标是选择K个单位（模为1）正交基，使得原始数据变换到这组基上后，各字段两两间协方差为0，而字段的方差则尽可能大（在正交的约束下，取最大的K个方差）。</strong></p>
+<h1 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h1><p>上面我们导出了优化目标，但是这个目标似乎不能直接作为操作指南（或者说算法），因为它只说要什么，但根本没有说怎么做。所以我们要继续在数学上研究计算方案。</p>
+<p>我们看到，最终要达到的目的与字段内方差及字段间协方差有密切关系。因此我们希望能将两者统一表示，仔细观察发现，两者均可以表示为内积的形式，而内积又与矩阵相乘密切相关。</p>
+<p>假设我们只有a和b两个字段，那么我们将它们按行组成矩阵X：</p>
+<p>![image_1boc2uha2ofj18tn1h011sf52m02n.png-5.6kB][7]</p>
+<p>然后我们用X乘以X的转置，并乘上系数1/m：</p>
+<p>![image_1boc2vmhfj70rvndm17o11nqj34.png-12.6kB][8]</p>
+<p>这个矩阵对角线上的两个元素分别是两个字段的方差，而其它元素是a和b的协方差。两者被统一到了一个矩阵的。</p>
+<p>根据矩阵相乘的运算法则，这个结论很容易被推广到一般情况：</p>
+<p><strong>设我们有m个n维数据记录，将其按列排成n乘m的矩阵X，设$C=1/mXX^T$，则C是一个对称矩阵，其对角线分别个各个字段的方差，而第i行j列和j行i列元素相同，表示i和j两个字段的协方差。</strong></p>
+<h1 id="协方差矩阵对角化"><a href="#协方差矩阵对角化" class="headerlink" title="协方差矩阵对角化"></a>协方差矩阵对角化</h1><p>根据上述推导，要达到方差最大，协方差最小，等价于将协方差矩阵对角化：即除对角线外的其它元素化为0，并且在对角线上将元素按大小从上到下排列，这样我们就达到了优化目的。</p>
+<p>设原始数据矩阵X对应的协方差矩阵为C，而P是一组基按行组成的矩阵，设Y=PX，则Y为X对P做基变换后的数据。设Y的协方差矩阵为D，我们推导一下D与C的关系：</p>
+<p>![image_1boc35jh11cph1a3v162bpo2fpg3h.png-11.5kB][9]</p>
+<p>优化目标变成了寻找一个矩阵P，满足PCPTPCPT是一个对角矩阵，并且对角元素按从大到小依次排列，那么P的前K行就是要寻找的基，用P的前K行组成的矩阵乘以X就使得X从N维降到了K维并满足上述优化条件。</p>
+<p>之后可运用线性代数中的实对称矩阵对角化即可。</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>总结一下PCA的算法步骤：</p>
+<p>设有m条n维数据。</p>
+<p>1）将原始数据按列组成n行m列矩阵X<br>2）将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值<br>3）求出协方差矩阵$C=1/mXX^T$<br>4）求出协方差矩阵的特征值及对应的特征向量<br>5）将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P<br>6）Y=PX即为降维到k维后的数据</p>
+<p>参考：<a href="https://www.bilibili.com/video/av6731067/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6731067/</a></p>
+<p><a href="http://blog.codinglabs.org/articles/pca-tutorial.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/pca-tutorial.html</a><br>  [1]: <a href="http://static.zybuluo.com/yhsdba/coor440qpu05md68km3i3975/image_1boc247chg3e1pgrkqj1fnn1tbr9.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/coor440qpu05md68km3i3975/image_1boc247chg3e1pgrkqj1fnn1tbr9.png</a><br>  [2]: <a href="http://static.zybuluo.com/yhsdba/1osqkb1zltc8lkkwahupauye/image_1boc24t08o2ceag1oab19jci32m.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/1osqkb1zltc8lkkwahupauye/image_1boc24t08o2ceag1oab19jci32m.png</a><br>  [3]: <a href="http://static.zybuluo.com/yhsdba/vrb0ssrm5qh3tiwzrlidp6m1/image_1boc25jst1si1ogikj2j8n104b13.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/vrb0ssrm5qh3tiwzrlidp6m1/image_1boc25jst1si1ogikj2j8n104b13.png</a><br>  [4]: <a href="http://static.zybuluo.com/yhsdba/p5kj9w59nfqkuvhg0lzv1shs/image_1boc29l64361mta1okdhhr13de1g.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/p5kj9w59nfqkuvhg0lzv1shs/image_1boc29l64361mta1okdhhr13de1g.png</a><br>  [5]: <a href="http://static.zybuluo.com/yhsdba/01vr5lb9gm148olhyb6g300p/image_1boc2aen912oi1i381cnhhou1t0u1t.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/01vr5lb9gm148olhyb6g300p/image_1boc2aen912oi1i381cnhhou1t0u1t.png</a><br>  [6]: <a href="http://static.zybuluo.com/yhsdba/93ekrfegtqhpz2mibe4bc7nm/image_1boc2droi1g4mavmn5g1vtnikf2a.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/93ekrfegtqhpz2mibe4bc7nm/image_1boc2droi1g4mavmn5g1vtnikf2a.png</a><br>  [7]: <a href="http://static.zybuluo.com/yhsdba/atn0wc7g7fjoa458vukqv2wq/image_1boc2uha2ofj18tn1h011sf52m02n.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/atn0wc7g7fjoa458vukqv2wq/image_1boc2uha2ofj18tn1h011sf52m02n.png</a><br>  [8]: <a href="http://static.zybuluo.com/yhsdba/qkte74qcrsmw35dcde7pddgg/image_1boc2vmhfj70rvndm17o11nqj34.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/qkte74qcrsmw35dcde7pddgg/image_1boc2vmhfj70rvndm17o11nqj34.png</a><br>  [9]: <a href="http://static.zybuluo.com/yhsdba/so05lkofpkc7lhswrq80dopx/image_1boc35jh11cph1a3v162bpo2fpg3h.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/so05lkofpkc7lhswrq80dopx/image_1boc35jh11cph1a3v162bpo2fpg3h.png</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2017-8-25-PCA简介/" data-id="cjpcnx2jr001slsv6n8ycudi9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PCA/">PCA</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          “周志华《机器学习》笔记01 模型评估”
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/06/2017-6-3-python的多线程和多进程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

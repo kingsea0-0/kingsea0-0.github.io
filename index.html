@@ -62,12 +62,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-2018-12-01-dialogue_paper" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/12/05/hello-world/" class="article-date">
-  <time datetime="2018-12-05T14:35:17.947Z" itemprop="datePublished">2018-12-05</time>
+    <a href="/2018/12/06/2018-12-01-dialogue_paper/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.928Z" itemprop="datePublished">2018-12-06</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/NLP/">NLP</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -76,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/05/hello-world/">Hello World</a>
+      <a class="article-title" href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
     </h1>
   
 
@@ -84,20 +88,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="语料库相关"><a href="#语料库相关" class="headerlink" title="语料库相关"></a>语料库相关</h1><h2 id="2018EMNLP：MultiWOZ-A-Large-Scale-Multi-Domain-Wizard-of-Oz-Dataset-for-Task-Oriented-Dialogue-Modelling"><a href="#2018EMNLP：MultiWOZ-A-Large-Scale-Multi-Domain-Wizard-of-Oz-Dataset-for-Task-Oriented-Dialogue-Modelling" class="headerlink" title="2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling"></a>2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling</h2><p>这篇是2018EMNLP最佳论文之一。</p>
+<p>这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。</p>
+<p>特点：</p>
+<ul>
+<li>数据内容是有关旅游业服务的，包含7个领域包括：医疗、警察、宾馆、餐厅、出租车、火车、吸引力等</li>
+<li>数据量大。共有10438个对话，70%的对话超过10轮。比目前的数据集大一个数量级。与现有数据集相比，句子的长度更长，回复更多样。</li>
+<li>3406个单一领域的对话，7032个涉及多领域的对话（2-5个领域）</li>
+<li>数据结构包括：目标、多个用户和系统的语句、信念状态、每轮带有slot的一系列对话</li>
+</ul>
+<p>用途：作为一种新的benchmark：</p>
+<ul>
+<li>dialogue state tracking</li>
+<li>dialogue management and response generation</li>
+<li>Natural Language Generation from a structured meaning representation</li>
+</ul>
+<h1 id="端到端的对话"><a href="#端到端的对话" class="headerlink" title="端到端的对话"></a>端到端的对话</h1><h2 id="2018EMNLP：Learning-End-to-End-Goal-Oriented-Dialog-with-Multiple-Answers"><a href="#2018EMNLP：Learning-End-to-End-Goal-Oriented-Dialog-with-Multiple-Answers" class="headerlink" title="2018EMNLP：Learning End-to-End Goal-Oriented Dialog with Multiple Answers"></a>2018EMNLP：Learning End-to-End Goal-Oriented Dialog with Multiple Answers</h2><h1 id="引入外部知识相关"><a href="#引入外部知识相关" class="headerlink" title="引入外部知识相关"></a>引入外部知识相关</h1><h2 id="2018-AAAI：Augmenting-End-to-End-Dialogue-Systems-with-Commonsense-Knowledge"><a href="#2018-AAAI：Augmenting-End-to-End-Dialogue-Systems-with-Commonsense-Knowledge" class="headerlink" title="2018 AAAI：Augmenting End-to-End Dialogue Systems with Commonsense Knowledge"></a>2018 AAAI：Augmenting End-to-End Dialogue Systems with Commonsense Knowledge</h2><p>这篇文章的观点是，由于外部知识数量巨大，所以更适合使用外部存储模块，而不是传统的在模型中通过参数进行编码。<br>它用来进行实验的问题限定在非任务导向领域，检索式方法的对话系统。</p>
+<h3 id="关于常识的检索："><a href="#关于常识的检索：" class="headerlink" title="关于常识的检索："></a>关于常识的检索：</h3><p>我们假设常识库是由一系列关于概念C的断言A构成。每一条断言$a\in A$ 可以表示为 $&lt;c_1,r,c_2&gt;,r \in R$表示c1和c2之间的关系。同时建立一个关于A的字典H。每一个概念c作为key，与c有关的a作为value。目的是可以检索到一条信息中涉及概念的全部常识。$A_x$为与c相关的全部断言的集合。</p>
+<p><img src="assets/markdown-img-paste-20181202164123679.png" alt=""></p>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>将常识融入进对话模型的方法是用另一个额外的LSTM对论断a进行编码</p>
+<p><img src="assets/markdown-img-paste-20181202164413498.png" alt=""></p>
+<p>上半部分是常识论断的编码网络，下半部分是一个Dual-LSTM网络，用于回复的编码。原来a的形式是 $&lt;c_1,r,c_2&gt;$，由于c可能是一个多词组的概念，所以a就被转化为了token序列 $[c_{11},c_{12},c_{13},…,r,c_{21},c_{22},c_{23}…]$</p>
+<p>对于R我们将其加入词汇表V中，将r看待为一个常规的单词来编码。同时我们决定不把每一个c都作为编码单元，因为数量太多。使用LSTM将a编码为embedding层的表示 $\vec a$ 。这个方法对于自然表达中良好的结构化断言都适用。</p>
+<p>将断言a与回复y的匹配得分定义为：$m(a,y)=\vec a^TW_a\vec y$</p>
+<p>$W_a \in R^{D*D}$ 在训练中被学习。</p>
+<p>对于断言集$A_x$<br>$m(A_x,y)=max_{a\in A_x}m(a,y)$，大部分$A_x与y相关性不大，只考虑得分最高的m对应的a。将得分最高的m(A_x,y)融入Dual-LSTM编码器。$</p>
+<p>总的Tri-LSTM编码模型可以被定义为 $f(x,y)=\theta(\vec x^TW\vec y+m(A_x,y))$</p>
+<p>$这个式子表明了最终的回复y不仅与x有关，还与x相关的知识m(A_x,y)有关$</p>
+<h2 id="2018-ACL-Knowledge-Diffusion-for-Neural-Dialogue-Generation"><a href="#2018-ACL-Knowledge-Diffusion-for-Neural-Dialogue-Generation" class="headerlink" title="2018 ACL Knowledge Diffusion for Neural Dialogue Generation"></a>2018 ACL Knowledge Diffusion for Neural Dialogue Generation</h2><p>该论文提出了一种 neural knowl-edge diffusion (NKD)网络来将知识引入对话生成，不仅可以进行对输入的表述进行事实匹配，还能将事实进行扩展，融合到相似的实体中。</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>文中提到了知识库的应用之一是问答，常见的事实表示形式是一种三元关系（主题，关系，客体）。这在对话中同样重要，但是还不够，对话中常出现一种实体转移现象，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: Is there anything like the [Titanic]?</span><br><span class="line">B: I think the love story in ﬁlm [Waterloo Bridge] is beautiful, too.</span><br></pre></td></tr></table></figure></p>
+<p>涉及到的实体从《泰坦尼克号》扩展到了《魂断蓝桥》。NKD模型就可以表示这种实体的转移和扩展。</p>
+<h3 id="NKD模型"><a href="#NKD模型" class="headerlink" title="NKD模型"></a>NKD模型</h3><p><img src="assets/markdown-img-paste-20181202220328894.png" alt="NKD"></p>
+<p>输入：$X=(x_1,x_2,…,x_{NX})$</p>
+<p>输出: $Y=(y_1,y_2,…,y_{NY})$</p>
+<p>知识库K中的事实是以三元关系（主体、关系、客体）保存的。</p>
+<p>由上图可以看到，模型主要有以下几个部分组成：</p>
+<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>将离散的tokens转化为向量表示。特别之处在于，为了捕捉不同方面的信息，利用两个独立的RNN产生两种隐状态序列：$H^C=(h_1^C,h_2^C,…,h_{NX}^C)和H^K=(h_1^K,…,h_{NX}^K)$。我们利用最终的隐状态，$h_{NX}^C$输入上下文RNN来追踪对话状态。另一个$h_{NX}^K$用于知识检索，并用来为输入表述中的知识实体和关系进行编码。</p>
+<h5 id="Knowledge-Retriever"><a href="#Knowledge-Retriever" class="headerlink" title="Knowledge Retriever"></a>Knowledge Retriever</h5><p>知识检索通过从知识库中提取一系列事实并明确它们的重要性，可以让以知识为基础的对话系统既具有收敛性，同时在思考能力上又具有扩展性。对于思考能力的扩展主要依靠：事实匹配和实体扩展，如下图：<br><img src="assets/markdown-img-paste-20181203085211172.png" alt=""></p>
+<ul>
+<li><strong>事实匹配</strong></li>
+</ul>
+<p>首先输入表述X和提取的隐状态$h_{NX}^K$，从知识库和历史对话中提取相关的事实。预先定义的事实数量的事实 $F={f_1,f_2,..f_{Nf}}$通过字符串匹配、实体连接、命名实体识别来获得。如上图所示，第一句话“Titanic”被认为是一个实体，所有相关的三元知识结构都被提取出来。接着通过entity embedding和relation embedding将实体和这些知识被转化为事实表示 $h_f={h_{f1},…,h_{fN_f}}$。事实和输入之间的关系系数$r^f$范围是[0,1],通过非线性函数或者子神经网络计算。比如可以用一个多层感知机MLP：</p>
+<p>$r_k^f=MLP([h_{NX}^K,h_{fk}])$</p>
+<p>对于多轮对话，之前表述中的实体也会被继承和保留，就像上图中的点连线所示。通过对$h_f$的加权平均，一系列事实总结为相关事实表示$C^f$</p>
+<p>  $C^f=\frac{\sum^{N_f}_{k=1}r_k^fh_{fk}}{\sum_{k=1}^{N_f}r_k^f}$</p>
+<ul>
+<li><strong>实体扩展</strong></li>
+</ul>
+<p>通过多层感知器计算知识库中实体(除了在前面出现的内容)与相关事实表示之间的相似性，得到相似系数re</p>
+<p>$r_k^e=MLP([h_{NX}^K,C^f,e_k])$</p>
+<p>$e_k$是entity embedding。选出top $N_e$个实体作为相似实体$E={e_1,e_2,…,e_{Ne}}$。相似实体的表示$C_s$定义为：</p>
+<p>  $C^s=\frac{\sum^{N_e}_{k=1}r_k^ee_k}{\sum_{k=1}^{N_e}r_k^e}$</p>
+<p>如上图，第一轮对话通过事实匹配得到最相关的事实是(Titanic,direct_by,JamesCameron)。当事实匹配完成，如果相关性很高，直觉上就不需要再进行实体扩展。而且进行实体扩展后发现相似度也不高。</p>
+<p>但在第二轮对话，没有对应输入的知识，但是之前继承过来的实体“Titanic”得分较高，我们就对”Titanic”进行实体扩展，得到相似的实体”Waterloo Bridge”和“Posedion”。同时可以看到这两个实体的相似度得分在第二轮比第一轮要高。说明比第一轮的对话更合适。</p>
+<h4 id="Context-RNN"><a href="#Context-RNN" class="headerlink" title="Context RNN"></a>Context RNN</h4><p>记录了话语（utterance）层面的对话状态。它包括utterance representation和knowledge representation.隐状态在这一层被更新为:</p>
+<p>$h_t^T=RNN(h_t^C,[c^f,C^s],h_{t-1}^T)$</p>
+<p>$h_t^T$被转移到解码器来引导回答生成</p>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="assets/markdown-img-paste-20181203111914535.png" alt=""></p>
+<p>主要介绍了Vanilla decoder和Probabilistic gated decoder</p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>作者爬取了百度知道和豆瓣电影的数据和讨论作为数据集。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://kingsea0-0.github.io/2018/12/05/hello-world/" data-id="cjpc8wgcz0000tcv6c6v1s28v" class="article-share-link">Share</a>
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/" data-id="cjpcnx2jc001plsv656t2wdmg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -107,25 +161,1356 @@
 
 
   
+    <article id="post-2018-11-28-dialogue_system_overview" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2018-11-28-dialogue_system_overview/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.911Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/NLP/">NLP</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-概要"><a href="#1-概要" class="headerlink" title="1. 概要"></a>1. 概要</h2><p>本文是阅读京东数据团队的论文《A Survey on Dialogue Systems:<br>Recent Advances and New Frontiers》以及微软亚洲研究院周明院长的演讲《自然语言对话引擎》的一些摘要。希望通过该论文首先对dialogue system的常用方法有一个了解。</p>
+<p>对话系统大致分为两类：</p>
+<p><strong>（1）任务导向型（task-oriented)：完成特定工作（如找商品、订酒店等）</strong></p>
+<p>通常将dialogue response视为pipeline。</p>
+<p><img src="assets/markdown-img-paste-20181128195917650.png" alt="pipeline"></p>
+<p><strong>（2）非任务导向型（non-task-oriented）</strong><br>主要有两种方法：</p>
+<ul>
+<li>生成式方法：如seq2seq</li>
+<li>检索式方法：从数据库中选择对话的回复</li>
+</ul>
+<h2 id="2-Task-oriented-System"><a href="#2-Task-oriented-System" class="headerlink" title="2. Task-oriented System"></a>2. Task-oriented System</h2><h3 id="2-1-Pipeline-method"><a href="#2-1-Pipeline-method" class="headerlink" title="2.1 Pipeline method"></a>2.1 Pipeline method</h3><p>如图示，pipeline由四部分构成</p>
+<p>具体解析四个部分：</p>
+<h4 id="NLU"><a href="#NLU" class="headerlink" title="NLU"></a>NLU</h4><p>功能：将用户的表达解析为预定义的语义槽（semantic slots）</p>
+<p>举例：<br><img src="assets/markdown-img-paste-20181128212329795.png" alt=""></p>
+<p>如上表就是一个语义槽，New York是槽值，槽中还确定了领域（domain）和意图（intent）。</p>
+<p>表示方法分为两种：</p>
+<ul>
+<li>句子级别的分类：如表示用户意图和句子种类</li>
+<li>词级别的信息抽取：如命名实体识别和槽填充</li>
+</ul>
+<p><strong>意图检测</strong></p>
+<p>将一句话分类为预先设定的意图之一。文中主要提及了CNN方法。（个人理解CNN在分类问题上效果较好，用于意图检测也十分合理，毕竟也属于分类问题）</p>
+<p><strong>槽填充</strong></p>
+<p>槽填充通常被定义为序列标注问题（sequence labelling problems）。句子里的词语被标注上语义标签。该问题的输入是一系列单词组成的句子，输出是一个槽/概念索引（slot/concept IDS）的序列。文中主要提及了DBN（深度信念网络）的方法，比CRF(条件随机场)方法效果要好。当然序列问题肯定还有RNN的方法。</p>
+<h4 id="Dialogue-State-Tracking"><a href="#Dialogue-State-Tracking" class="headerlink" title="Dialogue State Tracking"></a>Dialogue State Tracking</h4><p>功能：管理每一轮对话的输入与回复历史，输出当前的对话状态。具体来说，它会在每一次对话中估计用户的目标，对话状态$H_t$表示到时间t为止的对话历史的表示。这种经典的状态结构通常被称为槽填充或者语义框架。</p>
+<p>除了传统的人工特征，最近也提出了信念跟踪深度学习。它使用一个滑动窗口，输出任意数量的可能值的概率分布。它虽然是在某一特定领域训练的，但也很容易转移到新的领域。运用的比较多的模型有：</p>
+<ul>
+<li>multi-domain RNN dialog state tracking models:首先训练一个泛化模型，再针对特定领域进行专门化</li>
+<li>Neural Belief Tracker(NBT):用来检测槽值对。</li>
+</ul>
+<h4 id="Dialogue-Policy-Learning"><a href="#Dialogue-Policy-Learning" class="headerlink" title="Dialogue Policy Learning"></a>Dialogue Policy Learning</h4><p>以上一部分产生的状态作为条件，该部分产生下一个可用的系统动作。监督学习和强化学习都可以用来优化策略学习。强化学习的引入可以对对话策略进行一步的训练。效果超过了基于规则和监督的方法。</p>
+<h4 id="NLG"><a href="#NLG" class="headerlink" title="NLG"></a>NLG</h4><p>传统方法采用句子规划，将输入的语义符号映射为中间形式的表示，利用树状或模板结构，将中间结构通过表层实现转化为最终的回复。</p>
+<p>几种深度学习的方法：</p>
+<ul>
+<li>基于LSTM的结构。将对话行为类型和slot-value转化为one-hot控制向量，作为附加输入，确保生成的句子能够表达确定的意图。</li>
+<li>使用一个正向RNN生成器，一个CNN重拍器和一个后向RNN重拍器。</li>
+<li>利用对话行为类型来选择LSTM的输入向量</li>
+<li>基于LSTM的encoder-decoder形式，将问题信息、语义槽值、对话行为类型结合起来生成正确答案。同时使用了注意力机制来处理解码器当前解码状态的关键信息。</li>
+<li>基于seq2seq的自然语言生成器，可以被训练用于利用对话行为输入来产生自然语言和深度语法树。</li>
+</ul>
+<h3 id="2-2-端到端的方法"><a href="#2-2-端到端的方法" class="headerlink" title="2.2 端到端的方法"></a>2.2 端到端的方法</h3><p>传统的流水线式方法存在两个问题：一是最终用户的反馈很难传递到上游模块。二是各部分之间相互依赖，使得难以优化。</p>
+<p>端到端方法使用一个模块，并且与外部结构化数据进行交互。文中提到的方法有：</p>
+<ul>
+<li>利用神经网络构建一个系统作为从对话历史到系统回复的映射，利用encoder-decoder训练整个系统。缺点是通过监督学习训练，需要大量数据，并且缺乏好的保持健壮性的策略。</li>
+<li>一个端到端的强化学习系统，在对话管理中共同学习对话状态跟踪和对话策略学习。这种方法在用户脑海中想着名人的面向任务的提问有良好效果。</li>
+</ul>
+<p>文中还提到了查询外部数据库的问题。传统的符号化查询存在两个问题：</p>
+<ul>
+<li>检索不包含语义</li>
+<li>检索不可导。因此分析器和对话策略需要分别训练。</li>
+</ul>
+<p>文中针对这两个缺点提出了一些方法：</p>
+<ul>
+<li>通过一个在知识库条目上可导的基于注意力的key-value检索机制来增强现有循环神经网络的结构。</li>
+<li>将符号化询问替换为在知识库上的概率，该概率为表达哪些条目用户比较感兴趣的“软”后验概率。</li>
+<li>将RNN与特定领域知识与系统回复模板相接合<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">J. D. Williams, K. Asadi, and G. Zweig. Hybrid code networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1:Long Papers), pages 665–677, Vancouver, Canada,July 2017. Association for Computational Linguistics.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-Non-Task-oriented-Dialogue-Systems"><a href="#3-Non-Task-oriented-Dialogue-Systems" class="headerlink" title="3. Non-Task-oriented Dialogue Systems"></a>3. Non-Task-oriented Dialogue Systems</h2><ul>
+<li>检索式：从语料库中为当前问题检索一个适当回复，具有更富有信息与流畅度的优势</li>
+<li>生成式：可以产生于语料库中未出现过的回复</li>
+</ul>
+<h3 id="3-1-生成模型"><a href="#3-1-生成模型" class="headerlink" title="3.1 生成模型"></a>3.1 生成模型</h3><p>文中主要介绍了seq2seq模型，并讨论了热门的研究课题，包括结合对话上下文、提高回复多样性、建模主题、利用外部数据库、交互式学习等。</p>
+<h4 id="3-1-1-seq2seq模型"><a href="#3-1-1-seq2seq模型" class="headerlink" title="3.1.1 seq2seq模型"></a>3.1.1 seq2seq模型</h4><p>给定一个包含T个词的原序列（消息）：<br>$X=(x_1,x_2,…x_T)$</p>
+<p>一个包含T’个词的目标序列（回复）$Y=(y_1,y_2,…y_T’)$</p>
+<p>模型需要最大化条件概率：$P(y_1,…,y_T’|x_1…x_T)$</p>
+<p>特别地，seq2seq模型是一种encoder-decoder结构。如下图</p>
+<p><img src="assets/markdown-img-paste-20181129174110923.png" alt="figure2"></p>
+<p>编码器依次读入X个词，利用RNN将其表示为一个上下文向量c,解码器利用c作为输入估计生成Y的概率。RNN编码器计算上下文c可以写作：$h_t=f(x_t,h_{t-1})$。</p>
+<p>其中$h_t$是t时刻的隐藏状态，f是一个非线性方程，如LSTM或GRU。c就是最后一个词的隐藏状态$h_T$。解码器是一个标准的RNN语言模型，加上额外的条件上下文向量c，t时刻候选词的概率分布$P_t$可计算为：</p>
+<p>$s_t=f(y_{t-1},s_{t-1},c)$</p>
+<p>$P_t=softmax(s_t,y_{t-1})$</p>
+<p>其中$s_t$是RNN解码器t时刻的隐状态，$y_{t-1}$ 是t-1时刻回复的词。</p>
+<p>seq2seq的目标函数被定义为：</p>
+<p>$p((y_1,…,y_{T’}|x_1,…x_T)=p(y_1|c)\prod_{t=2}^{T’}p(y_t|c,y_1,…y_{t-1})$</p>
+<h4 id="3-1-2-对话上下文-Dialogue-Context"><a href="#3-1-2-对话上下文-Dialogue-Context" class="headerlink" title="3.1.2 对话上下文(Dialogue Context)"></a>3.1.2 对话上下文(Dialogue Context)</h4><p>考虑对话的上下文信息的是构建对话系统的关键所在，它可以使对话保持连贯和增进用户体验。使用层次化的RNN模型，捕捉个体语句的意义，然后将其整合为完整的对话。同时，分别用字级别和句子级别的注意力方法扩展层次化的结构。试验证明：(1)层次化 RNNs的表现通常优于非层次化的RNNs；(2)在考虑上下文相关的信息后，神经网络趋向于产生更长的、更有意义和多样性的回复。</p>
+<p>在下图中，作者通过代表整个对话历史(包括当前的信息)，用连续的表示或嵌入单词和短语来解决上下文敏感回复生成的这一难题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A neural network approach to context-sensitive generation of conversational responses. In Proceedings of the 2015 Conference of the North American Chapter of the Association for Computational Linguistics:Human Language Technologies, pages 196–205, Denver, Colorado,May–June 2015. Association for Computational Linguistics.</span><br></pre></td></tr></table></figure>
+<p><img src="assets/markdown-img-paste-20181129204537238.png" alt="Context1"></p>
+<p>在下图的结构中作者引入两个层次的Attention机制，让模型能够自动的学到词语与句子级别的重要度信息，从而更好的生成新一轮的对话。作者在句子级别的信息中，是反向学习的，即认为下一句的信息中更能够包含上一句的信息，所以从总体上来看，其对于对话的学习是逆向使用每一轮对话的内容的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C. Xing, W. Wu, Y. Wu, M. Zhou, Y. Huang,and W. Y. Ma. Hierarchical recurrent attention network for response generation. arXiv preprint arXiv:1701.07149, 2017.</span><br></pre></td></tr></table></figure>
+<p><img src="assets/markdown-img-paste-20181129204556654.png" alt="context2"></p>
+<h4 id="3-1-3-回复多样性"><a href="#3-1-3-回复多样性" class="headerlink" title="3.1.3 回复多样性"></a>3.1.3 回复多样性</h4><p>在当前的序列对话系统中，一个具有挑战性的问题是，它们倾向于产生意义不大的普通或不重要的、普适的回答，而这些回答往往涉及到“我不知道”或者“我很好”这样的高频率短语。这种行为可以归因于泛型回答往往有相对较高的频率，例如会话数据集中“我不知道”，而相反，有更多信息的回答相对稀疏。</p>
+<p>目前提出的解决此类问题的办法：</p>
+<ul>
+<li>寻找更好的目标函数</li>
+<li>引入随机隐变量来产生更多不同的输出</li>
+<li>消息本身可能也缺乏重放的足够信息，提出使用逐点互信息（PMI）来预测名词作为关键词，反映答复的主要依据，然后生成一个包含给定关键字的答复。</li>
+<li>解码过程是冗余候选回复的另一个来源。通过引入了一个随机的beam-search程序或增加了一个用于beam-search评分的术语来惩罚搜索中同一父节点的同胞扩展。</li>
+</ul>
+<h4 id="3-1-4-主题和个性"><a href="#3-1-4-主题和个性" class="headerlink" title="3.1.4 主题和个性"></a>3.1.4 主题和个性</h4><p>显式地学习对话的内在属性是改善对话多样性和保持一致性的另一种方法。在不同的属性中，主题和个性被广泛探索。</p>
+<p>人们经常把他们的对话与主题相关的概念联系起来，并根据这些概念创建他们的回复。使用Twitter的LDA模型来获得输入的主题，将主题信息和输入表示形式加入联合注意模块中，并产生与主题相关的回复，取得了不错的效果。</p>
+<p>将情绪嵌入生成模型，并在困惑度中取得了良好的表现。</p>
+<h4 id="3-1-5-外部知识库"><a href="#3-1-5-外部知识库" class="headerlink" title="3.1.5 外部知识库"></a>3.1.5 外部知识库</h4><p>记忆网络是处理利用知识库完成问答任务的经典方法。</p>
+<p>相关工作：</p>
+<p>[1]在此之上做了尝试，并在开放域对话中取得了不错的成绩。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1]  M. Ghazvininejad, C. Brockett, M.-W. Chang,B. Dolan, J. Gao, W.-t. Yih, and M. Galley. A knowledge-grounded neural conversation model. arXiv preprint arXiv:1702.01932, 2017.</span><br></pre></td></tr></table></figure></p>
+<p>[2]也通过在多模态空间中进行CNN嵌入和RNN嵌入，在有背景知识下展开开放域对话，并在困惑度上取得了进步。根据外部知识产生一个问题的答案是一个类似的任务。与一般方法中在知识库中检索元组不同，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2]P. Vougiouklis, J. Hare, and E. Simperl. A neural net-work approach for knowledge-driven response gener-ation. In Proceedings of COLING 2016, the 26th In-ternational Conference on Computational Linguistics:Technical Papers, pages 3370–3380, Osaka, Japan, De-cember 2016. The COLING 2016 Organizing Committee.</span><br></pre></td></tr></table></figure></p>
+<p>[3]将知识库中的词与生成过程中常见的词相结合。实证研究表明，所提出的模型能够通过参考知识库中的事实来产生自然而正确的答案。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[3]J. Yin, X. Jiang, Z. Lu, L. Shang, H. Li, and X. Li.Neural generative question answering. In Proceedings of the Twenty-Fifth International Joint Conference on Artiﬁcial Intelligence, IJCAI’16, pages 2972–2978.AAAI Press, 2016.</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-1-6-交互式对话学习"><a href="#3-1-6-交互式对话学习" class="headerlink" title="3.1.6 交互式对话学习"></a>3.1.6 交互式对话学习</h4><h4 id="3-1-7-评价"><a href="#3-1-7-评价" class="headerlink" title="3.1.7 评价"></a>3.1.7 评价</h4><p>评价生成回复的质量是对话系统的一个重要方面。任务导向型的对话系统可以基于人工生成的监督信号进行评估，例如任务完成测试或用户满意度评分等，然而，由于高回复的多样性，自动评估非任务导向的对话系统所产生的响应的质量仍然是一个悬而未决的问题。目前的方法有以下几种：</p>
+<ul>
+<li>计算BLEU值，就是直接计算 word overlap、ground truth和你生成的回复。由于一句话可能存在多种回复，因此从某些方面来看，BLEU 可能不太适用于对话评测。</li>
+<li>计算 embedding的距离，这类方法分三种情况：直接相加求平均、先取绝对值再求平均和贪婪匹配。</li>
+<li>衡量多样性，主要取决于 distinct-ngram 的数量和 entropy 值的大小。</li>
+<li>进行图灵测试，用 retrieval 的 discriminator 来评价回复生成。</li>
+</ul>
+<h3 id="3-2-检索模型"><a href="#3-2-检索模型" class="headerlink" title="3.2 检索模型"></a>3.2 检索模型</h3><h4 id="3-2-1-单轮回复匹配"><a href="#3-2-1-单轮回复匹配" class="headerlink" title="3.2.1 单轮回复匹配"></a>3.2.1 单轮回复匹配</h4><p>目前比较新的方法如下图，利用深度卷积神经网络体系结构改进模型，学习消息和响应的表示，或直接学习两个句子的相互作用表示，然后用多层感知器来计算匹配的分数。</p>
+<p><img src="assets/markdown-img-paste-20181129214952750.png" alt="单论匹配"></p>
+<h4 id="3-2-2-多轮回复匹配"><a href="#3-2-2-多轮回复匹配" class="headerlink" title="3.2.2 多轮回复匹配"></a>3.2.2 多轮回复匹配</h4><p>在多轮回复的选择中，当前消息和之前的对话将被作为输入。模型会选择与整个文本最相关且自然的回复。这样，在之前的对话里识别重要信息、对对话的关系建立合适模型来保证对话一致性就变得十分重要。</p>
+<p>多轮对话的难点在于不仅要考虑当前的问题，也要考虑前几轮的对话情景。多轮对话的难点主要有两点：1.如何明确上下文的关键信息（关键词，关键短语或关键句）；2.在上下文中如何模拟多轮对话间的关系。</p>
+<p>目前提出的方法有：</p>
+<ul>
+<li>通过RNN/LSTM的结构，编码了整个上下文（把之前所有的对话和当前用户的话拼接起来）和候选回复，作为上下文向量和回复向量，然后基于这两个向量计算匹配分数。</li>
+<li>利用不同策略在之前出现的对话中选出一些话语，结合当前消息生成一个重组的上下文。</li>
+<li>不仅仅在词级别上下文向量中进行上下文-回复匹配，而且还在句子级别的上下文向量中进行。</li>
+<li>通过卷积神经网络，得到多种不同粒度的文本，然后在时序上利用循环神经网络进行累加，来建模句子之间的相关性。</li>
+</ul>
+<h4 id="3-2-3-关于检索方式引入外部知识的问题"><a href="#3-2-3-关于检索方式引入外部知识的问题" class="headerlink" title="3.2.3 关于检索方式引入外部知识的问题"></a>3.2.3 关于检索方式引入外部知识的问题</h4><p>这一点论文中没有提及，我在周明院长的讲话中看到了一些相关内容，整理进来。</p>
+<p>短字符串匹配的时候太依赖于自己的信息了。而我们日常说话时往往是有背景、有常识的，我们说的每句话都有一个主题词表。怎么体现呢？首先找出输入语句的N个主题词，然后再找出可以回复的那些句子的主题词，用主题词来增强匹配的过程。这也是通过神经网络来算两个词串，再加上主题词增义的相似度。</p>
+<p>具体算法实际上是通过Attention model（注意力模型）计算每个主题词跟当前这句话的匹配强度，所有主题词根据强度不同进行加权以体现当前背景主题词的强度，然后再和原句匹配在一起，来算相似度。</p>
+<p>另外，我们也可以把主题词当成所谓的Knowledge base（知识图谱），通过主题词限定当前的输入应该有哪些信息可以输出，哪些信息不要输出，哪些信息应该补足，哪些信息可以直接使用等等。实际上在具体实现时可以看到一个句子有三种表示方法，两个句子之间每个句子都有三种表示方法，用两两表示方法计算距离最后就会得到一个矢量，再通过多层感知得到一个数值，来表征这两个输入串的距离。所以，这两个输入串不是赤裸裸地直接去匹配，而是用周围知识所代表的主题词来增强。</p>
+<h3 id="3-3-3-混合方法"><a href="#3-3-3-混合方法" class="headerlink" title="3.3.3 混合方法"></a>3.3.3 混合方法</h3><p>结合生成方法和基于检索的方法可以显著提高性能。[4]和[5]尝试结合这两种方法。基于检索的系统通常可以给出一个精准但是不流利的方法，而基于生成的系统则倾向于给出一个流利但是没有什么意义的回复。在集成模型中，通过检索得到的候选回复，与原始消息一起送入基于RNN的回复生成器，再将最终的回复重排。这种方法结合了基于检索和生成的模型，得到了更加优秀的性能。[6]综合了自然语言生成，检索模型，包括基于模板的模型、词袋模型、seq2seq神经网络和隐变量神经网络，应用强化学习学习众包数据和真实世界用户的交互从而从集成模型中选择一个合适的回复。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[4] Y. Song, R. Yan, X. Li, D. Zhao, and M. Zhang.Two are better than one: An ensemble of retrieval-and generation-based dialog systems. arXiv preprintarXiv:1610.07149, 2016.</span><br><span class="line">[5] M. Qiu, F.-L. Li, S. Wang, X. Gao, Y. Chen, W. Zhao,H. Chen, J. Huang, and W. Chu. Alime chat: A sequence to sequence and rerank based chatbot engine.In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 2:Short Papers), volume 2, pages 498–503, 2017.</span><br><span class="line">[6]I. V. Serban, C. Sankar, M. Germain, S. Zhang, Z. Lin,S. Subramanian, T. Kim, M. Pieper, S. Chandar,N. R. Ke, et al. A deep reinforcement learning chatbot.arXiv preprint arXiv:1709.02349, 2017.</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2018-11-28-dialogue_system_overview/" data-id="cjpcnx2la002ilsv678ylv66x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2018-02-17-周志华《机器学习》笔记01 模型评估" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.895Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>终于放假了，也有时间写博客了。最近在看西瓜书，记一下自己的理解和笔记。比较基础的内容已经在Coursera的机器学习课程笔记中写过了，为了节约时间就不再赘述了，只记一些之前课程里没有深入到的概念。<br>绪论就不写了，直接从第二章模型评估开始写吧。</p>
+<h2 id="2-1-经验误差与过拟合"><a href="#2-1-经验误差与过拟合" class="headerlink" title="2.1 经验误差与过拟合"></a>2.1 经验误差与过拟合</h2><p>【错误率】：分类错误的样本数占样本总数的比例。<br>【精度】：分类正确的样本数占样本总数的比例。即：精度=1-错误率。<br>【训练误差】：学习器在训练集上的误差，也叫【经验误差】<br>【泛化误差】：学习器在新样本上的误差</p>
+<h2 id="2-2评估方法"><a href="#2-2评估方法" class="headerlink" title="2.2评估方法"></a>2.2评估方法</h2><p>需要一些评估方法的原因：泛化误差无法直接获得，训练误差过拟合不适合作为评估标准。</p>
+<p>方法：将数据集$D={(x_1,y_1),(x_2,y_2),…(x_m,y_m)}$分为训练集$S$和测试集$T$，用【测试误差】作为泛化误差的近似。</p>
+<p>几种划测试集的方法：</p>
+<h3 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h3><p>直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集S，另一个作为测试集T，即D=S∪T，S∩T=∅。<br>要求：</p>
+<ul>
+<li>集合互斥</li>
+<li>保持数据分布的一致性，即分层采样</li>
+<li>单次使用留出法得到的结果往往不稳定可靠，一般采用若干次随机划分，重复进行实验评估后取平均值作为留出法的评估结果。</li>
+</ul>
+<h3 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h3><p>先将数据集D分为k个大小相似的互斥子集，即$D=D_1∪D_2∪…∪D_k；D_i∩D_j=∅（i≠j），$。每个子集Di都尽可能保持数据分布的一致性，即每个子集仍然要进行分层采样。每次用k-1个子集作为训练集，余下的那个子集做测试集。这样可以获得k组“训练/测试集”，最终返回的是k个结果的均值。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nbzrviex931qun9pokpa784m/image_1c5vofr6v1jp61qu0ivb8em8mn9.png" alt="image_1c5vofr6v1jp61qu0ivb8em8mn9.png-18.4kB"></p>
+<p>D分为k份，即每一份既可以做训练集也可以做测试集。即可进行k次验证，最后结果取均值。因此又叫【k-折交叉验证法】。</p>
+<p>而真正应用时交叉验证法得到的结果是均值的均值，即p个“k个结果的均值”的均值，因此交叉验证法又可以叫做p次k折交叉验证。</p>
+<blockquote>
+<p>k最常取10</p>
+</blockquote>
+<p>优点：准确；缺点：开销大</p>
+<h3 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h3><p>对有m个样本的数据集D，按如下方式采样产生数据集D’：每次随机取一个样本拷贝进D’，取m次（有放回取m次）。</p>
+<p>按此方法，保证了D’和D的规模一致。但D’虽然也有m个样本，可其中中会出现重复的样本，而D中会存在D’采样没有采到的样本，这些样本就留作测试集。</p>
+<p>某样本在m次采样中均不会被采到的概率是：$(1-1/m)^m$，取极限可得</p>
+<p><img src="http://static.zybuluo.com/yhsdba/w1gxn0087i2xq1aqju5yjz8q/image_1c5vqsf2u3qen23ai9g7h5cm.png" alt="image_1c5vqsf2u3qen23ai9g7h5cm.png-12.6kB"></p>
+<p>由此可知，理论上有36.8%的样本没有出现在在D’之中。</p>
+<p>优点：训练集与数据集规模一致；数据集小、难以有效划分训练集和测试集时效果显著；能产生多个不同的训练集；</p>
+<p>缺点：改变了训练集的样本分布，引入估计偏差。</p>
+<h2 id="性能度量（难点）"><a href="#性能度量（难点）" class="headerlink" title="性能度量（难点）"></a>性能度量（难点）</h2><p><img src="http://static.zybuluo.com/yhsdba/6q0kxf3qulg9i4pa9z33yo41/image_1c5vqv82j1tjppbij9p1o361as013.png" alt="image_1c5vqv82j1tjppbij9p1o361as013.png-43.6kB"></p>
+<h3 id="回归任务——均方误差"><a href="#回归任务——均方误差" class="headerlink" title="回归任务——均方误差"></a>回归任务——均方误差</h3><p><img src="http://static.zybuluo.com/yhsdba/79ufkki6a2z2gdzlz3207kf5/image_1c6186m871dsv1n70189ib201buo9.png" alt="image_1c6186m871dsv1n70189ib201buo9.png-14.1kB"></p>
+<p>但对于数据分布Ɗ和概率密度p(·)，均方误差的计算公式如下：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/laonja3hhllik70teuqmsdsm/image_1c618ailo114qs4g1oirh0h8skm.png" alt="image_1c618ailo114qs4g1oirh0h8skm.png-16.5kB"></p>
+<p>式1可看作离散样本，式2可看作连续样本</p>
+<p>均方误差当然是越小越好</p>
+<h3 id="分类任务"><a href="#分类任务" class="headerlink" title="分类任务"></a>分类任务</h3><ol>
+<li>错误率与精度</li>
+</ol>
+<p>错误率与精度反应的是分类任务模型判断正确与否的能力。</p>
+<p> 错误率：<img src="http://static.zybuluo.com/yhsdba/fbwwoek95eq5xbl1mwxndhlh/image_1c61bshb3a6a1plo1h5l12dc1b3j13.png" alt="image_1c61bshb3a6a1plo1h5l12dc1b3j13.png-41.4kB"></p>
+<p> 精度：<img src="http://static.zybuluo.com/yhsdba/q3bq8azz9gto9m4u6jmbfb3q/image_1c61btkvk17g1o2k18v1bj51ejr1g.png" alt="image_1c61btkvk17g1o2k18v1bj51ejr1g.png-51.6kB"></p>
+<p> 对于一般的数据分布：<br> <img src="http://static.zybuluo.com/yhsdba/7yx26c4cnb5raf6wg1zk3yif/image_1c61c0mgoscovbn14j21l4vh853d.png" alt="image_1c61c0mgoscovbn14j21l4vh853d.png-55kB"></p>
+<p> <img src="http://static.zybuluo.com/yhsdba/s8gylouanqkofvo7992ami5w/image_1c61c0tu31c1m12931bs31a3h1fa43q.png" alt="image_1c61c0tu31c1m12931bs31a3h1fa43q.png-77.2kB"></p>
+<ol start="2">
+<li>查准率、查全率、F1</li>
+</ol>
+<p>如果想知道相关比例信息，如推荐的信息中有多少比例是用户真正感兴趣的，或者用户感兴趣的信息中有多少被检索了出来，则需要查准率(precision)与查全率(recall)来进行度量。</p>
+<p>在二分类问题中，可将样本分为四类：真正例（TP）、假正例（FP）、假反例（FN）、真反例（TN）。<br><img src="http://static.zybuluo.com/yhsdba/n4cts0arig0fstx8teoelrjs/image_1c61c4shr1218t1re6f8nc168947.png" alt="image_1c61c4shr1218t1re6f8nc168947.png-90.9kB"></p>
+<p>查准率即检测出的正例占所有正例的比例。即假正例是没有被预测出来的正例。<br>查准率是检测出的’真正正例’占所有’预测为正例’的样本的比例。</p>
+<p>当我们追求准确率时，即希望查准率高，当我们希望把所有正例都选择出来时，希望查全率高。</p>
+<p>一般来说，查准率高时，查全率偏低；查全率高时，查准率偏低。通常只在一些简单任务中，查准率和查全率都偏高。</p>
+<h4 id="P-R图：判断查准率和查全率的性能"><a href="#P-R图：判断查准率和查全率的性能" class="headerlink" title="P-R图：判断查准率和查全率的性能"></a>P-R图：判断查准率和查全率的性能</h4><p>P-R图，即以查全率做横轴，查准率做纵轴的平面示意图，通过P-R曲线，来综合判断模型的性能。</p>
+<p>同一个模型，在同一个正例判断标准下，得到的查准率和查全率只有一个，也就是说，在图中，只有一个点，而不是一条曲线。</p>
+<p>那么要得到一条曲线，就需要不同的正例判断标准</p>
+<p>具体的方式是，先对结果进行排序，前面的是最可能的，后面的是最不可能的正例样本。逐个把每一个样本加入正例，计算当前状况下的查准率和查全率</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ls8tewpy1h95y4gmn5w57idh/image_1c61di0ia1avoer89g0p2ne2464.png" alt="image_1c61di0ia1avoer89g0p2ne2464.png-199kB"></p>
+<p>当曲线没有交叉的时候：外侧曲线的学习器性能优于内侧；</p>
+<p>当曲线有交叉的时候：</p>
+<p>第一种方法是比较曲线下面积，但值不太容易估算；</p>
+<p>第二种方法是比较两条曲线的平衡点，平衡点是“查准率=查全率”时的取值，在图中表示为曲线和对角线的交点。平衡点在外侧的曲线的学习器性能优于内侧。</p>
+<p>第三种方法是F1度量和Fβ度量。F1是基于查准率与查全率的调和平均定义的，Fβ则是加权调和平均。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/cehtjru0x3nxl98upux8dcqq/image_1c61djujn1cf8coma35jf2jhp6h.png" alt="image_1c61djujn1cf8coma35jf2jhp6h.png-37.5kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/2f9saplvzg4ey9rg6wmv15i3/image_1c61dk7cri23u2m14q31ef419n96u.png" alt="image_1c61dk7cri23u2m14q31ef419n96u.png-41.1kB"></p>
+<p>但在不同的应用中，对查准率和查全率的重视程度不同，需要根据其重要性，进行加权处理，故而有了Fβ度量。β是查全率对查准率的相对重要性。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/tsjjwufmdtmi5ly4yl0v6mfc/image_1c61dl5dg1bgg128v1mt25u31h1m7b.png" alt="image_1c61dl5dg1bgg128v1mt25u31h1m7b.png-46kB"></p>
+<ol start="3">
+<li>ROC与AUC<br>通过设定不同的阈值划分正反例，如可能性为50%以上就认为是正例，或60%，70%….进而得到某个特定阈值下的真正例率和假正例率。</li>
+</ol>
+<p>ROC与PR图有相似之处，即都是将样本排序进行划分后计算，不同的是计算的度量值不同，同时PR是逐个划分，ROC是对阈值进行变化。</p>
+<p>真正例率（TPR）：所有正例中被预测出来的正例占得比例（等于查全率）</p>
+<p>假正例率（FPR）：没有被预测出的反例（即预测错误的正例）占全部反例的比例</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ii9kt9v3hrhzb8cocdnldkdz/image_1c61ebkagdgj177i1sa957pmr07o.png" alt="image_1c61ebkagdgj177i1sa957pmr07o.png-60.2kB"></p>
+<p><em>注意上图和之前那张图的横竖轴是相反的</em></p>
+<p><img src="http://static.zybuluo.com/yhsdba/jf7sywejbj4i5g0sjwe5bzvs/image_1c61elfu11uhc1mec18jq1bm48qp85.png" alt="roc曲线"></p>
+<p>理想模型是真正例率为100%，假正例率为0%的一点。随机猜测模型则是真正例率与假正例率持平的直线。</p>
+<p>两个学习器进行比较时，一个被另一个包住则后者性能好，如果发生了交叉，通常比较面积，即AUC</p>
+<p>$AUC=1/2*\Sigma_{i=1}^{m-1}(x_{i+1}-x_i)·(y_i+y_{i+1})$</p>
+<p>可以认为是将图b分解为好多个小矩形。计算矩形面积和。当$x_{i+1}=x_{i}$时AUC为0，当$x_{i+1}!=x_{i}$时，$y_i=y_{i+1}$，乘0.5还是$y_i$的值，即矩形的高。产生这种巧合的原因，是ROC的绘制过程决定的。</p>
+<p>有限个点的ROC绘制：<br>先将分类阈值设为最大，即把所有样例设为反例，此时真正例率和假正例率都为0(TP=0,FP=0)。在（0，0）处标一个点。然后分类阈值一次设为每个样例的预测值，即依次将每个样例划分为正例(这就与PR曲线类似了，只是横纵坐标不同)，设前一个点坐标为（x,y），若为真正例，对应标记点为$(x,y+1/m^+)$(TP上升，TPR上升，y增加，FP 不变,FPR不变，x不变)，若为反例则坐标为$(x+1/m^-,y)$。<br>所以ROC上坐标都是平行或者垂直的，故可以推出面积公式。</p>
+<p>AUC考虑的是样本预测的排序质量。给定$m^+$个正例和$m^-$个反例，$D^+$和$D^-$分别表示正、反例集合，则排序损失为</p>
+<p><img src="http://static.zybuluo.com/yhsdba/1ycgj3bkfen0m80tcueefuvl/image_1c61f527k11l2aga1salgk41ros8i.png" alt="image_1c61f527k11l2aga1salgk41ros8i.png-18.4kB"></p>
+<p>可理解为，若正例的预测值小雨反例，记一个罚分，若相等，记0.5分。</p>
+<p>$AUC=1-l_{rank}$</p>
+<ol start="4">
+<li>代价敏感错误率与代价曲线<br>非均等代价：通常不同的错误造成的严重后果不同，所以要给不同的代价一定权重</li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/8re9war8uwc34s5ftm0epmnw/image_1c6201vj3sphr1n1aaj14be1i79c.png" alt="image_1c6201vj3sphr1n1aaj14be1i79c.png-84.2kB"></p>
+<p>非均等代价的错误率：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7kbrtw4oy5nu17fbzcy8wvhj/image_1c6204ojdrp81ps81io314ra12r69p.png" alt="image_1c6204ojdrp81ps81io314ra12r69p.png-49.7kB"></p>
+<p>在这样的非均等代价下，ROC曲线不能直接反映出学习器的期望总体代价，而“代价曲线”则可以达到目的。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/lmyzlgcfg0rs2ku8zm1wlzdr/image_1c61nebm91e57h2o184t123knq8v.png" alt="image_1c61nebm91e57h2o184t123knq8v.png-72.7kB"></p>
+<p>代价曲线的横轴是正例概率代价$P(+)cost$，纵轴是归一化代价 $cost_{norm}$ 。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ewxcnrjioeg6adt2o0d4n5b1/image_1c6209hg41nuqcup8a2p501f6a6.png" alt="image_1c6209hg41nuqcup8a2p501f6a6.png-61.2kB"></p>
+<p>p是样例为正例的概率；FNR是假反例率；FPR是假正例率。</p>
+<p>绘制方法：</p>
+<p>ROC曲线上取一个点(FPR,TPR)；</p>
+<p>取相应的(0,FPR)和(1,FNR)，连成线段；</p>
+<p>取遍ROC曲线上所有点并重复前步骤；</p>
+<p>所有线段的下界就是学习器期望总体代价。</p>
+<p>实际上就是通过将样例为正例的概率p设为0和1，来作出曲线的所有切线，最后连成曲线。</p>
+<h1 id="泛化误差分解"><a href="#泛化误差分解" class="headerlink" title="泛化误差分解"></a>泛化误差分解</h1><p>泛化误差=偏差+方差+噪声</p>
+<p>预测的期望（所有预测的均值）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/" data-id="cjpcnx2k30022lsv6lkl47990" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-8-25-PCA简介" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2017-8-25-PCA简介/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.843Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PCA与LDA与许多相似之处，都是一种将高维数据降维的方法，区别是LDA是带标签的，而PCA是不带标签的，所以是一种unsupervised learning。上一篇写过了LDA的数学原理，所以接着上一篇总结一下PCA的数学原理。同时感到上一篇还有一些地方没有写明白，在参考了几篇文章后，在这篇博文中重新总结一下。</p>
+<h1 id="向量表示、基变换、矩阵乘法的几何意义"><a href="#向量表示、基变换、矩阵乘法的几何意义" class="headerlink" title="向量表示、基变换、矩阵乘法的几何意义"></a>向量表示、基变换、矩阵乘法的几何意义</h1><p>这里推荐一个视频：<a href="https://www.bilibili.com/video/av6731067/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6731067/</a></p>
+<p>简单的说，向量可以看作是基进行伸缩变换形成的，也可以看作是在该基下的坐标。矩阵是基变换的一种表示形式，矩阵的列向量即新的基的坐标。而矩阵乘法的含义，即是将一组向量由在原来基下的坐标，转换到新的基下表示的坐标。</p>
+<h1 id="降维"><a href="#降维" class="headerlink" title="降维"></a>降维</h1><p>为了避免过于抽象的讨论，我们以一个具体的例子展开。假设我们的数据由五条记录组成，将它们表示成矩阵形式</p>
+<p>![image_1boc247chg3e1pgrkqj1fnn1tbr9.png-5kB][1]</p>
+<p>其中每一列为一条数据记录，而一行为一个字段。为了后续处理方便，我们首先将每个字段内所有值都减去字段均值，其结果是将每个字段都变为均值为0（简化之后方差的计算）。</p>
+<p>我们看上面的数据，第一个字段均值为2，第二个字段均值为3，所以变换后：</p>
+<p>![image_1boc24t08o2ceag1oab19jci32m.png-5.3kB][2]</p>
+<p>我们可以看下五条数据在平面直角坐标系内的样子：</p>
+<p>![image_1boc25jst1si1ogikj2j8n104b13.png-28.1kB][3]</p>
+<p>之后的问题是要在二维平面中选择一个方向，将所有数据都投影到这个方向所在直线上，用投影值表示原始记录。这是一个实际的二维降到一维的问题。</p>
+<p>以上图为例，可以看出如果向x轴投影，那么最左边的两个点会重叠在一起，中间的两个点也会重叠在一起，于是本身四个各不相同的二维点投影后只剩下两个不同的值了，这是一种严重的信息丢失，同理，如果向y轴投影最上面的两个点和分布在x轴上的两个点也会重叠。所以看来x和y轴都不是最好的投影选择。我们直观目测，如果向通过第一象限和第三象限的斜线投影，则五个点在投影后还是可以区分的。</p>
+<p>那么如何选择这个方向（或者说基）才能尽量保留最多的原始信息呢？一种直观的看法是：希望投影后的投影值尽可能分散。</p>
+<p>一个字段的方差可以看做是每个元素与字段均值的差的平方和的均值，即：</p>
+<p>![image_1boc29l64361mta1okdhhr13de1g.png-5.8kB][4]</p>
+<p>因为均值之前已化为0，则：</p>
+<p>![image_1boc2aen912oi1i381cnhhou1t0u1t.png-5.2kB][5]</p>
+<h1 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h1><p>对于上面二维降成一维的问题来说，找到那个使得方差最大的方向就可以了。不过对于更高维，还有一个问题需要解决。考虑三维降到二维问题。与之前相同，首先我们希望找到一个方向使得投影后方差最大，这样就完成了第一个方向的选择，继而我们选择第二个投影方向。</p>
+<p>如果我们还是单纯只选择方差最大的方向，很明显，这个方向与第一个方向应该是“几乎重合在一起”，显然这样的维度是没有用的，因此，应该有其他约束条件。从直观上说，让两个字段尽可能表示更多的原始信息，我们是不希望它们之间存在（线性）相关性的，因为相关性意味着两个字段不是完全独立，必然存在重复表示的信息。</p>
+<p>数学上可以用两个字段的协方差表示其相关性，由于已经让每个字段均值为0，则：</p>
+<p>![image_1boc2droi1g4mavmn5g1vtnikf2a.png-5.7kB][6]</p>
+<p>可以看到，在字段均值为0的情况下，两个字段的协方差简洁的表示为其内积除以元素数m。</p>
+<p>当协方差为0时，表示两个字段完全独立。为了让协方差为0，我们选择第二个基时只能在与第一个基正交的方向上选择。因此最终选择的两个方向一定是正交的。</p>
+<p>至此，我们得到了降维问题的优化目标：<strong>将一组N维向量降为K维（K大于0，小于N），其目标是选择K个单位（模为1）正交基，使得原始数据变换到这组基上后，各字段两两间协方差为0，而字段的方差则尽可能大（在正交的约束下，取最大的K个方差）。</strong></p>
+<h1 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h1><p>上面我们导出了优化目标，但是这个目标似乎不能直接作为操作指南（或者说算法），因为它只说要什么，但根本没有说怎么做。所以我们要继续在数学上研究计算方案。</p>
+<p>我们看到，最终要达到的目的与字段内方差及字段间协方差有密切关系。因此我们希望能将两者统一表示，仔细观察发现，两者均可以表示为内积的形式，而内积又与矩阵相乘密切相关。</p>
+<p>假设我们只有a和b两个字段，那么我们将它们按行组成矩阵X：</p>
+<p>![image_1boc2uha2ofj18tn1h011sf52m02n.png-5.6kB][7]</p>
+<p>然后我们用X乘以X的转置，并乘上系数1/m：</p>
+<p>![image_1boc2vmhfj70rvndm17o11nqj34.png-12.6kB][8]</p>
+<p>这个矩阵对角线上的两个元素分别是两个字段的方差，而其它元素是a和b的协方差。两者被统一到了一个矩阵的。</p>
+<p>根据矩阵相乘的运算法则，这个结论很容易被推广到一般情况：</p>
+<p><strong>设我们有m个n维数据记录，将其按列排成n乘m的矩阵X，设$C=1/mXX^T$，则C是一个对称矩阵，其对角线分别个各个字段的方差，而第i行j列和j行i列元素相同，表示i和j两个字段的协方差。</strong></p>
+<h1 id="协方差矩阵对角化"><a href="#协方差矩阵对角化" class="headerlink" title="协方差矩阵对角化"></a>协方差矩阵对角化</h1><p>根据上述推导，要达到方差最大，协方差最小，等价于将协方差矩阵对角化：即除对角线外的其它元素化为0，并且在对角线上将元素按大小从上到下排列，这样我们就达到了优化目的。</p>
+<p>设原始数据矩阵X对应的协方差矩阵为C，而P是一组基按行组成的矩阵，设Y=PX，则Y为X对P做基变换后的数据。设Y的协方差矩阵为D，我们推导一下D与C的关系：</p>
+<p>![image_1boc35jh11cph1a3v162bpo2fpg3h.png-11.5kB][9]</p>
+<p>优化目标变成了寻找一个矩阵P，满足PCPTPCPT是一个对角矩阵，并且对角元素按从大到小依次排列，那么P的前K行就是要寻找的基，用P的前K行组成的矩阵乘以X就使得X从N维降到了K维并满足上述优化条件。</p>
+<p>之后可运用线性代数中的实对称矩阵对角化即可。</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>总结一下PCA的算法步骤：</p>
+<p>设有m条n维数据。</p>
+<p>1）将原始数据按列组成n行m列矩阵X<br>2）将X的每一行（代表一个属性字段）进行零均值化，即减去这一行的均值<br>3）求出协方差矩阵$C=1/mXX^T$<br>4）求出协方差矩阵的特征值及对应的特征向量<br>5）将特征向量按对应特征值大小从上到下按行排列成矩阵，取前k行组成矩阵P<br>6）Y=PX即为降维到k维后的数据</p>
+<p>参考：<a href="https://www.bilibili.com/video/av6731067/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6731067/</a></p>
+<p><a href="http://blog.codinglabs.org/articles/pca-tutorial.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/pca-tutorial.html</a><br>  [1]: <a href="http://static.zybuluo.com/yhsdba/coor440qpu05md68km3i3975/image_1boc247chg3e1pgrkqj1fnn1tbr9.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/coor440qpu05md68km3i3975/image_1boc247chg3e1pgrkqj1fnn1tbr9.png</a><br>  [2]: <a href="http://static.zybuluo.com/yhsdba/1osqkb1zltc8lkkwahupauye/image_1boc24t08o2ceag1oab19jci32m.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/1osqkb1zltc8lkkwahupauye/image_1boc24t08o2ceag1oab19jci32m.png</a><br>  [3]: <a href="http://static.zybuluo.com/yhsdba/vrb0ssrm5qh3tiwzrlidp6m1/image_1boc25jst1si1ogikj2j8n104b13.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/vrb0ssrm5qh3tiwzrlidp6m1/image_1boc25jst1si1ogikj2j8n104b13.png</a><br>  [4]: <a href="http://static.zybuluo.com/yhsdba/p5kj9w59nfqkuvhg0lzv1shs/image_1boc29l64361mta1okdhhr13de1g.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/p5kj9w59nfqkuvhg0lzv1shs/image_1boc29l64361mta1okdhhr13de1g.png</a><br>  [5]: <a href="http://static.zybuluo.com/yhsdba/01vr5lb9gm148olhyb6g300p/image_1boc2aen912oi1i381cnhhou1t0u1t.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/01vr5lb9gm148olhyb6g300p/image_1boc2aen912oi1i381cnhhou1t0u1t.png</a><br>  [6]: <a href="http://static.zybuluo.com/yhsdba/93ekrfegtqhpz2mibe4bc7nm/image_1boc2droi1g4mavmn5g1vtnikf2a.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/93ekrfegtqhpz2mibe4bc7nm/image_1boc2droi1g4mavmn5g1vtnikf2a.png</a><br>  [7]: <a href="http://static.zybuluo.com/yhsdba/atn0wc7g7fjoa458vukqv2wq/image_1boc2uha2ofj18tn1h011sf52m02n.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/atn0wc7g7fjoa458vukqv2wq/image_1boc2uha2ofj18tn1h011sf52m02n.png</a><br>  [8]: <a href="http://static.zybuluo.com/yhsdba/qkte74qcrsmw35dcde7pddgg/image_1boc2vmhfj70rvndm17o11nqj34.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/qkte74qcrsmw35dcde7pddgg/image_1boc2vmhfj70rvndm17o11nqj34.png</a><br>  [9]: <a href="http://static.zybuluo.com/yhsdba/so05lkofpkc7lhswrq80dopx/image_1boc35jh11cph1a3v162bpo2fpg3h.png" target="_blank" rel="noopener">http://static.zybuluo.com/yhsdba/so05lkofpkc7lhswrq80dopx/image_1boc35jh11cph1a3v162bpo2fpg3h.png</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2017-8-25-PCA简介/" data-id="cjpcnx2jr001slsv6n8ycudi9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PCA/">PCA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-6-3-python的多线程和多进程" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2017-6-3-python的多线程和多进程/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.711Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>layout: post<br>title: “python中多进程和多线程的使用”<br>date: 2017-06-02 19:42:00<br>categories: python</p>
+<h2 id="tags-python-多进程-多线程-爬虫"><a href="#tags-python-多进程-多线程-爬虫" class="headerlink" title="tags: python 多进程 多线程 爬虫"></a>tags: python 多进程 多线程 爬虫</h2><h1 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h1><h2 id="1-1-线程"><a href="#1-1-线程" class="headerlink" title="1.1 线程"></a>1.1 线程</h2><h3 id="1-1-1-什么是线程"><a href="#1-1-1-什么是线程" class="headerlink" title="1.1.1 什么是线程"></a>1.1.1 什么是线程</h3><p>线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。一个线程是一个execution context（执行上下文）。一个线程是一个cpu执行时所需要的一串指令。</p>
+<h3 id="1-1-2-线程的工作方式"><a href="#1-1-2-线程的工作方式" class="headerlink" title="1.1.2 线程的工作方式"></a>1.1.2 线程的工作方式</h3><p>假设你正在读一本书，没有读完，你想休息一下，但是你想在回来时恢复到当时读的具体进度。有一个方法就是记下页数、行数与字数这三个数值，这些数值就是execution context。如果你的室友在你休息的时候，使用相同的方法读这本书。你和她只需要这三个数字记下来就可以在交替的时间共同阅读这本书了。</p>
+<p>线程的工作方式与此类似。CPU会给你一个在同一时间能够做多个运算的幻觉，实际上它在每个运算上只花了极少的时间，本质上CPU同一时刻只干了一件事。它能这样做就是因为它有每个运算的execution context。就像你能够和你朋友共享同一本书一样，多任务也能共享同一块CPU。</p>
+<h2 id="1-2-进程"><a href="#1-2-进程" class="headerlink" title="1.2 进程"></a>1.2 进程</h2><p>一个程序的执行实例就是一个进程。每一个进程提供执行程序所需的所有资源。（进程本质上是资源的集合）</p>
+<p>一个进程有一个虚拟的地址空间、可执行的代码、操作系统的接口、安全的上下文（记录启动该进程的用户和权限等等）、唯一的进程ID、环境变量、优先级类、最小和最大的工作空间（内存空间），还要有至少一个线程。</p>
+<p>每一个进程启动时都会最先产生一个线程，即主线程。然后主线程会再创建其他的子线程。  </p>
+<p>与进程相关的资源包括:  </p>
+<ul>
+<li>内存页（同一个进程中的所有线程共享同一个内存空间）</li>
+<li>文件描述符(e.g. open sockets)</li>
+<li>安全凭证（e.g.启动该进程的用户ID）  </li>
+</ul>
+<h2 id="1-3-进程与线程区别"><a href="#1-3-进程与线程区别" class="headerlink" title="1.3 进程与线程区别"></a>1.3 进程与线程区别</h2><p>1.同一个进程中的线程共享同一内存空间，但是进程之间是独立的。<br>2.同一个进程中的所有线程的数据是共享的（进程通讯），进程之间的数据是独立的。<br>3.对主线程的修改可能会影响其他线程的行为，但是父进程的修改（除了删除以外）不会影响其他子进程。<br>4.线程是一个上下文的执行指令，而进程则是与运算相关的一簇资源。<br>5.同一个进程的线程之间可以直接通信，但是进程之间的交流需要借助中间代理来实现。<br>6.创建新的线程很容易，但是创建新的进程需要对父进程做一次复制。<br>7.一个线程可以操作同一进程的其他线程，但是进程只能操作其子进程。<br>8.线程启动速度快，进程启动速度慢（但是两者运行速度没有可比性）。  </p>
+<h1 id="2-多线程"><a href="#2-多线程" class="headerlink" title="2.多线程"></a>2.多线程</h1><h2 id="2-1-多线程常用方法"><a href="#2-1-多线程常用方法" class="headerlink" title="2.1 多线程常用方法"></a>2.1 多线程常用方法</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start()</td>
+<td style="text-align:center">线程准备就绪，等待CPU调度</td>
+</tr>
+<tr>
+<td style="text-align:center">setName()</td>
+<td style="text-align:center">为线程设置名称</td>
+</tr>
+<tr>
+<td style="text-align:center">getName()</td>
+<td style="text-align:center">获取线程名称</td>
+</tr>
+<tr>
+<td style="text-align:center">setDaemon(True)</td>
+<td style="text-align:center">设置为守护线程</td>
+</tr>
+<tr>
+<td style="text-align:center">join()</td>
+<td style="text-align:center">逐个执行每个线程，执行完毕后继续往下执行</td>
+</tr>
+<tr>
+<td style="text-align:center">run()</td>
+<td style="text-align:center">线程被cpu调度后自动执行线程对象的run方法，如果想自定义线程类，直接重写run方法就行了</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-1-thread类"><a href="#2-1-1-thread类" class="headerlink" title="2.1.1 thread类"></a>2.1.1 thread类</h3><ol>
+<li><p>普通创建方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    print(&quot;task&quot;, n)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;2s&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;1s&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;0s&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line"></span><br><span class="line">t1 = threading.Thread(target=run, args=(&quot;t1&quot;,))</span><br><span class="line">t2 = threading.Thread(target=run, args=(&quot;t2&quot;,))</span><br><span class="line">t1.start()</span><br><span class="line">t2.start()</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">task t1</span><br><span class="line">task t2</span><br><span class="line">2s</span><br><span class="line">2s</span><br><span class="line">1s</span><br><span class="line">1s</span><br><span class="line">0s</span><br><span class="line">0s</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继承threading.Thread来自定义线程类<br>本质是重构Thread类中的run方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class MyThread(threading.Thread):</span><br><span class="line">    def __init__(self, n):</span><br><span class="line">        super(MyThread, self).__init__()  # 重构run函数必须要写</span><br><span class="line">        self.n = n</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        print(&quot;task&quot;, self.n)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        print(&apos;2s&apos;)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        print(&apos;1s&apos;)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        print(&apos;0s&apos;)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    t1 = MyThread(&quot;t1&quot;)</span><br><span class="line">    t2 = MyThread(&quot;t2&quot;)</span><br><span class="line"></span><br><span class="line">    t1.start()</span><br><span class="line">    t2.start()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-1-2-计算子线程执行的时间"><a href="#2-1-2-计算子线程执行的时间" class="headerlink" title="2.1.2 计算子线程执行的时间"></a>2.1.2 计算子线程执行的时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">join()  #等此线程执行完后，再执行其他线程或主线程</span><br><span class="line">threading.current_thread()      #输出当前线程</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    print(&quot;task&quot;, n,threading.current_thread())    #输出当前的线程</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;3s&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;2s&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;1s&apos;)</span><br><span class="line"></span><br><span class="line">strat_time = time.time()</span><br><span class="line"></span><br><span class="line">t_obj = []   #定义列表用于存放子线程实例</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.start()</span><br><span class="line">    t_obj.append(t)</span><br><span class="line">    </span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">由主线程生成的三个子线程</span><br><span class="line">task t-0 &lt;Thread(Thread-1, started 44828)&gt;</span><br><span class="line">task t-1 &lt;Thread(Thread-2, started 42804)&gt;</span><br><span class="line">task t-2 &lt;Thread(Thread-3, started 41384)&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">for tmp in t_obj:</span><br><span class="line">    t.join()            #为每个子线程添加join之后，主线程就会等这些子线程执行完之后再执行。</span><br><span class="line"></span><br><span class="line">print(&quot;cost:&quot;, time.time() - strat_time) #主线程</span><br><span class="line"></span><br><span class="line">print(threading.current_thread())       #输出当前线程</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">&lt;_MainThread(MainThread, started 43740)&gt;</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-3-统计当前活跃的线程数"><a href="#2-1-3-统计当前活跃的线程数" class="headerlink" title="2.1.3 统计当前活跃的线程数"></a>2.1.3 统计当前活跃的线程数</h3><p>由于主线程比子线程快很多，当主线程执行active_count()时，其他子线程都还没执行完毕，因此利用主线程统计的活跃的线程数num = sub_num(子线程数量)+1(主线程本身)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    print(&quot;task&quot;, n)    </span><br><span class="line">    time.sleep(1)       #此时子线程停1s</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line">time.sleep(0.5)     #主线程停0.5秒</span><br><span class="line">print(threading.active_count()) #输出当前活跃的线程数</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">task t-0</span><br><span class="line">task t-1</span><br><span class="line">task t-2</span><br><span class="line">4</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>由于主线程比子线程慢很多，当主线程执行active_count()时，其他子线程都已经执行完毕，因此利用主线程统计的活跃的线程数num = 1(主线程本身)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    print(&quot;task&quot;, n)</span><br><span class="line">    time.sleep(0.5)       #此时子线程停0.5s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line">time.sleep(1)     #主线程停1秒</span><br><span class="line">print(threading.active_count()) #输出活跃的线程数</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">task t-0</span><br><span class="line">task t-1</span><br><span class="line">task t-2</span><br><span class="line">1</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>此外我们还能发现在python内部默认会等待最后一个进程执行完后再执行exit()，或者说python内部在此时有一个隐藏的join()。</p>
+<p>##2.2 守护进程<br>我们看下面这个例子，这里使用setDaemon(True)把所有的子线程都变成了主线程的守护线程，因此当主进程结束后，子线程也会随之结束。所以当主线程结束后，整个程序就退出了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    print(&quot;task&quot;, n)</span><br><span class="line">    time.sleep(1)       #此时子线程停1s</span><br><span class="line">    print(&apos;3&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;2&apos;)</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&apos;1&apos;)</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.setDaemon(True)   #把子进程设置为守护线程，必须在start()之前设置</span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line">time.sleep(0.5)     #主线程停0.5秒</span><br><span class="line">print(threading.active_count()) #输出活跃的线程数</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">task t-0</span><br><span class="line">task t-1</span><br><span class="line">task t-2</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-3-GIL"><a href="#2-3-GIL" class="headerlink" title="2.3 GIL"></a>2.3 GIL</h2><p>在非python环境中，单核情况下，同时只能有一个任务执行。多核时可以支持多个线程同时执行。但是在python中，无论有多少核，同时只能执行一个线程。究其原因，这就是由于GIL的存在导致的。</p>
+<p>GIL的全称是Global Interpreter Lock(全局解释器锁)，来源是python设计之初的考虑，为了数据安全所做的决定。某个线程想要执行，必须先拿到GIL，我们可以把GIL看作是“通行证”，并且在一个python进程中，GIL只有一个。拿不到通行证的线程，就不允许进入CPU执行。GIL只在cpython中才有，因为cpython调用的是c语言的原生线程，所以他不能直接操作cpu，只能利用GIL保证同一时间只能有一个线程拿到数据。而在pypy和jpython中是没有GIL的。</p>
+<p><strong>python多线程的工作过程：</strong><br>python在使用多线程的时候，调用的是C语言的原生线程</p>
+<ol>
+<li>拿到公共数据</li>
+<li>申请gil</li>
+<li>python解释器调用os原生线程</li>
+<li>os操作cpu执行运算</li>
+<li>当该线程执行时间到后，无论运算是否已经执行完，gil都要求被释放</li>
+<li>进而其他进程重复上述过程</li>
+<li>等其他进程执行完后，又会切换到之前的进程（从他记录的上下文继续执行），整个过程是每个线程执行自己的运算，当执行时间到就进行切换</li>
+</ol>
+<ul>
+<li>python针对不同类型的代码效率是不同的：<blockquote>
+<ul>
+<li>CPU密集型代码(各种循环处理、计算等等)，在这种情况下，由于计算工作多，ticks计数很快就会达到阈值，然后触发GIL的释放与再竞争（多个线程来回切换当然是需要消耗资源的），所以python下的多线程对CPU密集型代码并不友好。</li>
+</ul>
+</blockquote>
+</li>
+<li>IO密集型代码(文件处理、网络爬虫等涉及文件读写的操作)，多线程能够有效提升效率(单线程下有IO操作会进行IO等待，造成不必要的时间浪费，而开启多线程能在线程A等待时，自动切换到线程B，可以不浪费CPU的资源，从而能提升程序执行效率)。所以python的多线程对IO密集型代码比较友好.               </li>
+</ul>
+<blockquote>
+</blockquote>
+<ul>
+<li>使用建议：  </li>
+</ul>
+<blockquote>
+<p>python下想要充分利用多核CPU，就用多进程。因为每个进程有各自独立的GIL，互不干扰，这样就可以真正意义上的并行执行，在python中，多进程的执行效率优于多线程(仅仅针对多核CPU而言)。</p>
+</blockquote>
+<ul>
+<li>版本差异<blockquote>
+<ul>
+<li>在python2.x里，GIL的释放逻辑是当前线程遇见IO操作或者ticks计数达到100时进行释放。（ticks可以看作是python自身的一个计数器，专门做用于GIL，每次释放后归零，这个计数可以通过sys.setcheckinterval 来调整）。而每次释放GIL锁，线程进行锁竞争、切换线程，会消耗资源。并且由于GIL锁存在，python里一个进程永远只能同时执行一个线程(拿到GIL的线程才能执行)，这就是为什么在多核CPU上，python的多线程效率并不高。</li>
+</ul>
+</blockquote>
+</li>
+<li>在python3.x中，GIL不使用ticks计数，改为使用计时器（执行时间达到阈值后，当前线程释放GIL），这样对CPU密集型程序更加友好，但依然没有解决GIL导致的同一时间只能执行一个线程的问题，所以效率依然不尽如人意。</li>
+</ul>
+<h2 id="2-4-线程锁"><a href="#2-4-线程锁" class="headerlink" title="2.4 线程锁"></a>2.4 线程锁</h2><p>由于线程之间是进行随机调度，并且每个线程可能只执行n条执行之后，当多个线程同时修改同一条数据时可能会出现脏数据，所以，出现了线程锁，即同一时刻允许一个线程执行操作。线程锁用于锁定资源</p>
+<p>由于线程之间是进行随机调度，如果有多个线程同时操作一个对象，如果没有很好地保护该对象，会造成程序结果的不可预期，我们也称此为“线程不安全”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#实测：在python2.7、mac os下，运行以下代码可能会产生脏数据。但是在python3中就不一定会出现下面的问题。</span><br><span class="line"></span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    global num</span><br><span class="line">    num += 1</span><br><span class="line"></span><br><span class="line">num = 0</span><br><span class="line">t_obj = [] </span><br><span class="line"></span><br><span class="line">for i in range(20000):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.start()</span><br><span class="line">    t_obj.append(t)</span><br><span class="line"></span><br><span class="line">for t in t_obj:</span><br><span class="line">    t.join()</span><br><span class="line"></span><br><span class="line">print &quot;num:&quot;, num</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">产生脏数据后的运行结果：</span><br><span class="line">num: 19999</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="2-5-互斥锁（mutex）"><a href="#2-5-互斥锁（mutex）" class="headerlink" title="2.5 互斥锁（mutex）"></a>2.5 互斥锁（mutex）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    lock.acquire()  #获取锁</span><br><span class="line">    global num</span><br><span class="line">    num += 1</span><br><span class="line">    lock.release()  #释放锁</span><br><span class="line"></span><br><span class="line">lock = threading.Lock()     #实例化一个锁对象</span><br><span class="line"></span><br><span class="line">num = 0</span><br><span class="line">t_obj = []  </span><br><span class="line"></span><br><span class="line">for i in range(20000):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.start()</span><br><span class="line">    t_obj.append(t)</span><br><span class="line"></span><br><span class="line">for t in t_obj:</span><br><span class="line">    t.join()</span><br><span class="line"></span><br><span class="line">print &quot;num:&quot;, num</span><br></pre></td></tr></table></figure>
+<h2 id="2-6-递归锁"><a href="#2-6-递归锁" class="headerlink" title="2.6 递归锁"></a>2.6 递归锁</h2><p>RLcok类的用法和Lock类一模一样，但它支持嵌套，在多个锁没有释放的时候一般会使用使用RLcok类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line">   </span><br><span class="line">gl_num = 0</span><br><span class="line">   </span><br><span class="line">lock = threading.RLock()</span><br><span class="line">   </span><br><span class="line">def Func():</span><br><span class="line">    lock.acquire()</span><br><span class="line">    global gl_num</span><br><span class="line">    gl_num +=1</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print gl_num</span><br><span class="line">    lock.release()</span><br><span class="line">       </span><br><span class="line">for i in range(10):</span><br><span class="line">    t = threading.Thread(target=Func)</span><br><span class="line">    t.start()</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-7-信号量（BoundedSemaphore类）"><a href="#2-7-信号量（BoundedSemaphore类）" class="headerlink" title="2.7 信号量（BoundedSemaphore类）"></a>2.7 信号量（BoundedSemaphore类）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def run(n):</span><br><span class="line">    semaphore.acquire()   #加锁</span><br><span class="line">    time.sleep(1)</span><br><span class="line">    print(&quot;run the thread:%s\n&quot; % n)</span><br><span class="line">    semaphore.release()     #释放</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">num = 0</span><br><span class="line">semaphore = threading.BoundedSemaphore(5)  # 最多允许5个线程同时运行</span><br><span class="line"></span><br><span class="line">for i in range(22):</span><br><span class="line">    t = threading.Thread(target=run, args=(&quot;t-%s&quot; % i,))</span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line">while threading.active_count() != 1:</span><br><span class="line">    pass  # print threading.active_count()</span><br><span class="line">else:</span><br><span class="line">    print(&apos;-----all threads done-----&apos;)</span><br></pre></td></tr></table></figure>
+<h2 id="2-8-事件（Event类）"><a href="#2-8-事件（Event类）" class="headerlink" title="2.8 事件（Event类）"></a>2.8 事件（Event类）</h2><p>python线程的事件用于主线程控制其他线程的执行，事件是一个简单的线程同步对象，其主要提供以下几个方法：<br>|方法|    注释|<br>|:—:|:—-:|<br>|clear|将flag设置为“False”|<br>|set|    将flag设置为“True”|<br>|is_set|    判断是否设置了flag|<br>|wait|    会一直监听flag，如果没有检测到flag就一直处于阻塞状态|</p>
+<p>  事件处理的机制：全局定义了一个“Flag”，当flag值为“False”，那么event.wait()就会阻塞，当flag值为“True”，那么event.wait()便不再阻塞。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#利用Event类模拟红绿灯</span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">event = threading.Event()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def lighter():</span><br><span class="line">    count = 0</span><br><span class="line">    event.set()     #初始值为绿灯</span><br><span class="line">    while True:</span><br><span class="line">        if 5 &lt; count &lt;=10 :</span><br><span class="line">            event.clear()  # 红灯，清除标志位</span><br><span class="line">            print(&quot;\33[41;1mred light is on...\033[0m&quot;)</span><br><span class="line">        elif count &gt; 10:</span><br><span class="line">            event.set()  # 绿灯，设置标志位</span><br><span class="line">            count = 0</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;\33[42;1mgreen light is on...\033[0m&quot;)</span><br><span class="line"></span><br><span class="line">        time.sleep(1)</span><br><span class="line">        count += 1</span><br><span class="line"></span><br><span class="line">def car(name):</span><br><span class="line">    while True:</span><br><span class="line">        if event.is_set():      #判断是否设置了标志位</span><br><span class="line">            print(&quot;[%s] running...&quot;%name)</span><br><span class="line">            time.sleep(1)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;[%s] sees red light,waiting...&quot;%name)</span><br><span class="line">            event.wait()</span><br><span class="line">            print(&quot;[%s] green light is on,start going...&quot;%name)</span><br><span class="line"></span><br><span class="line">light = threading.Thread(target=lighter,)</span><br><span class="line">light.start()</span><br><span class="line"></span><br><span class="line">car = threading.Thread(target=car,args=(&quot;MINI&quot;,))</span><br><span class="line">car.start()</span><br></pre></td></tr></table></figure>
+<h2 id="2-9-条件（Condition类）"><a href="#2-9-条件（Condition类）" class="headerlink" title="2.9 条件（Condition类）"></a>2.9 条件（Condition类）</h2><p>使得线程等待，只有满足某条件时，才释放n个线程</p>
+<h2 id="2-10-定时器（Timer类）"><a href="#2-10-定时器（Timer类）" class="headerlink" title="2.10 定时器（Timer类）"></a>2.10 定时器（Timer类）</h2><p>定时器，指定n秒后执行某操作  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from threading import Timer</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def hello():</span><br><span class="line">    print(&quot;hello, world&quot;)</span><br><span class="line"> </span><br><span class="line">t = Timer(1, hello)</span><br><span class="line">t.start()  # after 1 seconds, &quot;hello, world&quot; will be printed</span><br></pre></td></tr></table></figure>
+<h1 id="3-多进程"><a href="#3-多进程" class="headerlink" title="3. 多进程"></a>3. 多进程</h1><p>Unix/Linux中用fork()调用来实现。fork()调用一次，返回两次，因为操作系统将当前进程（父进程）复制了一份（子进程），分别在父进程和子进程中返回<br>子进程永远返回0，父进程返回子进程id，因为一个父进程可以fork()出多个子进程   </p>
+<p>获得当前进程的id：getpid()   </p>
+<p>获得父进程的id：getppid()    </p>
+<p>windows中没有fork，通过multiprocessing模块中的Process类来实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Process</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"># 子进程要执行的代码</span><br><span class="line">def run_proc(name):</span><br><span class="line">    print(&apos;Run child process %s (%s)...&apos; % (name, os.getpid()))</span><br><span class="line"></span><br><span class="line">if __name__==&apos;__main__&apos;:</span><br><span class="line">    print(&apos;Parent process %s.&apos; % os.getpid())</span><br><span class="line">    p = Process(target=run_proc, args=(&apos;test&apos;,))</span><br><span class="line">    print(&apos;Child process will start.&apos;)</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line">    print(&apos;Child process end.&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Parent process 928.</span><br><span class="line">Process will start.</span><br><span class="line">Run child process test (929)...</span><br><span class="line">Process end.</span><br></pre></td></tr></table></figure></p>
+<p>join()方法可以等待子进程结束后继续往下运行，通常用于进程间的同步</p>
+<h2 id="3-1-进程间通信"><a href="#3-1-进程间通信" class="headerlink" title="3.1 进程间通信"></a>3.1 进程间通信</h2><p><strong>Queue:</strong><br>Python的multiprocessing模块包装了底层的机制，提供了Queue、Pipes等多种方式来交换数据。</p>
+<p>我们以Queue为例，在父进程中创建两个子进程，一个往Queue里写数据，一个从Queue里读数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Process, Queue</span><br><span class="line">import os, time, random</span><br><span class="line"></span><br><span class="line"># 写数据进程执行的代码:</span><br><span class="line">def write(q):</span><br><span class="line">    print(&apos;Process to write: %s&apos; % os.getpid())</span><br><span class="line">    for value in [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]:</span><br><span class="line">        print(&apos;Put %s to queue...&apos; % value)</span><br><span class="line">        q.put(value)</span><br><span class="line">        time.sleep(random.random())</span><br><span class="line"></span><br><span class="line"># 读数据进程执行的代码:</span><br><span class="line">def read(q):</span><br><span class="line">    print(&apos;Process to read: %s&apos; % os.getpid())</span><br><span class="line">    while True:</span><br><span class="line">        value = q.get(True)</span><br><span class="line">        print(&apos;Get %s from queue.&apos; % value)</span><br><span class="line"></span><br><span class="line">if __name__==&apos;__main__&apos;:</span><br><span class="line">    # 父进程创建Queue，并传给各个子进程：</span><br><span class="line">    q = Queue()</span><br><span class="line">    pw = Process(target=write, args=(q,))</span><br><span class="line">    pr = Process(target=read, args=(q,))</span><br><span class="line">    # 启动子进程pw，写入:</span><br><span class="line">    pw.start()</span><br><span class="line">    # 启动子进程pr，读取:</span><br><span class="line">    pr.start()</span><br><span class="line">    # 等待pw结束:</span><br><span class="line">    pw.join()</span><br><span class="line">    # pr进程里是死循环，无法等待其结束，只能强行终止:</span><br><span class="line">    pr.terminate()</span><br></pre></td></tr></table></figure>
+<p><strong>Pipe():</strong><br>Pipe的本质是进程之间的数据传递，而不是数据共享，这和socket有点像。pipe()返回两个连接对象分别表示管道的两端，每端都有send()和recv()方法。如果两个进程试图在同一时间的同一端进行读取和写入那么，这可能会损坏管道中的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Process, Pipe</span><br><span class="line"> </span><br><span class="line">def f(conn):</span><br><span class="line">    conn.send([42, None, &apos;hello&apos;])</span><br><span class="line">    conn.close()</span><br><span class="line"> </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    parent_conn, child_conn = Pipe() </span><br><span class="line">    p = Process(target=f, args=(child_conn,))</span><br><span class="line">    p.start()</span><br><span class="line">    print(parent_conn.recv())   # prints &quot;[42, None, &apos;hello&apos;]&quot;</span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-2-Manager"><a href="#3-2-Manager" class="headerlink" title="3.2 Manager"></a>3.2 Manager</h2><p>通过Manager可实现进程间数据的共享。Manager()返回的manager对象会通过一个服务进程，来使其他进程通过代理的方式操作python对象。manager对象支持 list, dict, Namespace, Lock, RLock, Semaphore, BoundedSemaphore, Condition, Event, Barrier, Queue, Value ,Array.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Process, Manager</span><br><span class="line"> </span><br><span class="line">def f(d, l):</span><br><span class="line">    d[1] = &apos;1&apos;</span><br><span class="line">    d[&apos;2&apos;] = 2</span><br><span class="line">    d[0.25] = None</span><br><span class="line">    l.append(1)</span><br><span class="line">    print(l)</span><br><span class="line"> </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    with Manager() as manager:</span><br><span class="line">        d = manager.dict()</span><br><span class="line"> </span><br><span class="line">        l = manager.list(range(5))</span><br><span class="line">        p_list = []</span><br><span class="line">        for i in range(10):</span><br><span class="line">            p = Process(target=f, args=(d, l))</span><br><span class="line">            p.start()</span><br><span class="line">            p_list.append(p)</span><br><span class="line">        for res in p_list:</span><br><span class="line">            res.join()</span><br><span class="line"> </span><br><span class="line">        print(d)</span><br><span class="line">        print(l)</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-3进程锁"><a href="#3-3进程锁" class="headerlink" title="3.3进程锁"></a>3.3进程锁</h2><p>数据输出的时候保证不同进程的输出内容在同一块屏幕正常显示，防止数据乱序的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Process, Lock</span><br><span class="line"> </span><br><span class="line">def f(l, i):</span><br><span class="line">    l.acquire()</span><br><span class="line">    try:</span><br><span class="line">        print(&apos;hello world&apos;, i)</span><br><span class="line">    finally:</span><br><span class="line">        l.release()</span><br><span class="line"> </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    lock = Lock()</span><br><span class="line"> </span><br><span class="line">    for num in range(10):</span><br><span class="line">        Process(target=f, args=(lock, num)).start()</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-4进程池"><a href="#3-4进程池" class="headerlink" title="3.4进程池"></a>3.4进程池</h2><p>由于进程启动的开销比较大，使用多进程的时候会导致大量内存空间被消耗。为了防止这种情况发生可以使用进程池，（由于启动线程的开销比较小，所以不需要线程池这种概念，多线程只会频繁得切换cpu导致系统变慢，并不会占用过多的内存空间）<br>进程池中常用方法：<br>apply() 同步执行（串行）<br>apply_async() 异步执行（并行）<br>terminate() 立刻关闭进程池<br>join() 主进程等待所有子进程执行完毕。必须在close或terminate()之后。<br>close() 等待所有进程结束后，才关闭进程池。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from  multiprocessing import Process,Pool</span><br><span class="line">import time</span><br><span class="line"> </span><br><span class="line">def Foo(i):</span><br><span class="line">    time.sleep(2)</span><br><span class="line">    return i+100</span><br><span class="line"> </span><br><span class="line">def Bar(arg):</span><br><span class="line">    print(&apos;--&gt;exec done:&apos;,arg)</span><br><span class="line"> </span><br><span class="line">pool = Pool(5)  #允许进程池同时放入5个进程</span><br><span class="line"> </span><br><span class="line">for i in range(10):</span><br><span class="line">    pool.apply_async(func=Foo, args=(i,),callback=Bar)  #func子进程执行完后，才会执行callback，否则callback不执行（而且callback是由父进程来执行了）</span><br><span class="line">    #pool.apply(func=Foo, args=(i,))</span><br><span class="line"> </span><br><span class="line">print(&apos;end&apos;)</span><br><span class="line">pool.close()</span><br><span class="line">pool.join() #主进程等待所有子进程执行完毕。必须在close()或terminate()之后。</span><br></pre></td></tr></table></figure></p>
+<p>进程池内部维护一个进程序列，当使用时，去进程池中获取一个进程，如果进程池序列中没有可供使用的进程，那么程序就会等待，直到进程池中有可用进程为止。在上面的程序中产生了10个进程，但是只能有5同时被放入进程池，剩下的都被暂时挂起，并不占用内存空间，等前面的五个进程执行完后，再执行剩下5个进程。</p>
+<p><em>参考：<a href="http://www.cnblogs.com/whatisfantasy/p/6440585.html#" target="_blank" rel="noopener">http://www.cnblogs.com/whatisfantasy/p/6440585.html#</a></em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2017-6-3-python的多线程和多进程/" data-id="cjpcnx2kt002hlsv6yf814f8z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-5-29-正则表达式" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2017-5-29-正则表达式/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.658Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/06/2017-5-29-正则表达式/">正则表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>组成：字符+操作符</strong>  </p>
+<p>常用操作符：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">表示任何单个字符</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">[]</td>
+<td style="text-align:center">字符集，对单个字符给出取值范围</td>
+<td style="text-align:center">[abc]表示a或b或c，[a-z]表示a到z任意单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[^]</td>
+<td style="text-align:center">非字符，给出排除范围</td>
+<td style="text-align:center">[^abc]表示非a或b或c的单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">前一个字符0次或无限次扩展</td>
+<td style="text-align:center">abc*表示ab,abc,abcc等</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">前一个字符1次或无限次扩展</td>
+<td style="text-align:center">abc+表示abc、abcc\abccc等</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">前一个字符0次或一次扩展</td>
+<td style="text-align:center">abc?表示ab、abc</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">左右表达式任取一个</td>
+<td>abc\</td>
+<td>def表示abc或def</td>
+</tr>
+<tr>
+<td style="text-align:center">{m}</td>
+<td style="text-align:center">扩展前一个字符m次</td>
+<td style="text-align:center">ab{2}c表示abbc</td>
+</tr>
+<tr>
+<td style="text-align:center">{m,n}</td>
+<td style="text-align:center">扩展前一个字符m至n次</td>
+<td style="text-align:center">ab{1,2}c表示abc、abbc</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">匹配字符串的开头</td>
+<td style="text-align:center">^abc表示abc且在一个字符的开头</td>
+</tr>
+<tr>
+<td style="text-align:center">\$</td>
+<td style="text-align:center">匹配字符串的结尾</td>
+<td style="text-align:center">abc$表示abc且在一个字符串的结尾</td>
+</tr>
+<tr>
+<td style="text-align:center">()</td>
+<td style="text-align:center">分组标记，内部只能使用\</td>
+<td style="text-align:center">操作符</td>
+<td>(abc)表示abc,(abc\</td>
+<td>def)表示abc或def</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">数字，等价于[0-9]</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">单词字符，等价于[A-Za-z0-9]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实例</strong>  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">正则表达式</th>
+<th style="text-align:center">对应字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">^[A-Za-z]+\$</td>
+<td style="text-align:center">由26个字母组成的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">^[A-Za-z0-9]+\$</td>
+<td style="text-align:center">由字母或数字组成的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">^-?\d+$</td>
+<td style="text-align:center">整数形式字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">^[0-9]*[1-9][0-9]*\$</td>
+<td style="text-align:center">正整数形式的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">[1-9]\d{5}</td>
+<td style="text-align:center">邮政编码，6位</td>
+</tr>
+<tr>
+<td style="text-align:center">\u4e00-\u9fa5</td>
+<td style="text-align:center">匹配中文字符</td>
+</tr>
+<tr>
+<td style="text-align:center">d{3}-\d{8}</td>
+<td style="text-align:center">电话号码</td>
+</tr>
+</tbody>
+</table>
+<p>匹配ip地址的正则表达式：  </p>
+<p>ip地址分4段，每段0-255  </p>
+<p>0-255可再分位4段：    </p>
+<p>0-99：[1-9]?\d    </p>
+<p>100-199:1\d{2}  </p>
+<p>200-249:2[0-4]\d  </p>
+<p>250-255:25[0-5]    </p>
+<p>(([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5]).){3}([1-9]?\d|1\d{2}|2[0-4]\d|25[0-5])</p>
+<p><strong>re库的使用</strong>  </p>
+<p>正则表达式的表示类型：   </p>
+<p>raw string（原生字符串）r’text’：不包含转义符的表达式  </p>
+<p>常用功能函数：  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">re.search()</td>
+<td style="text-align:center">在一个字符串中搜索正则表达式的第一个位置，返回match对象</td>
+</tr>
+<tr>
+<td style="text-align:center">re.match</td>
+<td style="text-align:center">从一个字符串的开始位置起</td>
+</tr>
+<tr>
+<td style="text-align:center">re.findall()</td>
+<td style="text-align:center">搜索字符串，以列表类型返回全部匹配的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">re.split()</td>
+<td style="text-align:center">将字符串按正则表达式匹配结果进行分割，返回list</td>
+</tr>
+<tr>
+<td style="text-align:center">re.sub()</td>
+<td style="text-align:center">在一个字符串中替换所有匹配正则表达式的子串，返回替换后的字符串</td>
+</tr>
+</tbody>
+</table>
+<p>re.search(pattern,string,flags=0)  </p>
+<p>pattern:正则表达式的字符串  </p>
+<p>string待匹配的字符串  </p>
+<p>flags:</p>
+<ul>
+<li>re.I:忽略大小写</li>
+<li>re.M:^可以将给定字符串的每行当作匹配开始</li>
+<li>re.S:’.’可以匹配所有字符，如果不加re.S不匹配换行符</li>
+</ul>
+<p>re.match(pattern,string,flags=0):<br>如果在开头没有匹配到则返回空</p>
+<p>re.findall():返回所有符合条件的结果组成一个list  </p>
+<p>re.split(pattern,string,maxsplit=0,flags=0)</p>
+<ul>
+<li>maxsplit:最大分割数，剩余部分作为最后一个元素输出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;re.split(r&apos;[1-9]\d&#123;5&#125;&apos;,&apos;BIT100081 TSU100084&apos;)</span><br><span class="line">[&apos;BIT&apos;,&apos;TSU&apos;,&apos;&apos;]</span><br><span class="line">&gt;&gt;&gt;re.split(r&apos;[1-9]\d&#123;5&#125;&apos;,&apos;BIT100081 TSU100084&apos;,maxsplit=1)</span><br><span class="line">[&apos;BIT&apos;,&apos;TSU10084&apos;]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">re.sub(pattern,repl,string,count=0,flags=0)</span><br><span class="line">在一个字符串中替换所有匹配正则表达式的字串，返回替换后的字符串</span><br><span class="line">* repl:替换匹配到字符串的字符串</span><br><span class="line">* count:最大替换次数</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>re.sub(r’[1-9]\d{5}’,’:zipcode’,’BIT100081 TSU100084’)<br>‘BIT:zipcode TSU:zipcode’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">等价用法:</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>##函数式用法：一次性操作</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>rst=re.search(r’[1-9]\d{5}’,’BIT100081 TSU100084’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>##面向对象用法：编译后多次操作</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>pat=re.compile(r’[1-9]\d{5})<br>rst=pat.search(‘BIT 100081’)<br><code>`</code></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>re.comple:可以将正则表达式表示编译为正则表达式对象（可以重复使用）</p>
+<p><strong>贪婪和最小匹配</strong>  </p>
+<p>默认贪婪匹配<br>如果希望进行最小匹配，需要对操作符进行扩展（加？）  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*？</td>
+<td style="text-align:center">前一个字符0次或无限次扩展，最小匹配</td>
+</tr>
+<tr>
+<td style="text-align:center">+？</td>
+<td style="text-align:center">前一个字符1次或无限次扩展，最小匹配</td>
+</tr>
+<tr>
+<td style="text-align:center">？？</td>
+<td style="text-align:center">前一个字符0次或1次扩展，最小匹配</td>
+</tr>
+<tr>
+<td style="text-align:center">{m,n}?</td>
+<td style="text-align:center">扩展前一个字符m至n次（含n），最小匹配</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2017-5-29-正则表达式/" data-id="cjpcnx2hl000ilsv668vk5fje" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-8-31-Stanford cs224d 深度学习与nlp（二）高级词向量" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/31/2017-8-31-Stanford cs224d 深度学习与nlp（二）高级词向量/" class="article-date">
+  <time datetime="2017-08-31T01:31:00.000Z" itemprop="datePublished">2017-08-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nlp/">nlp</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/31/2017-8-31-Stanford cs224d 深度学习与nlp（二）高级词向量/">Stanford cs224d 深度学习与nlp(二) 高级词向量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SGD与词向量"><a href="#SGD与词向量" class="headerlink" title="SGD与词向量"></a>SGD与词向量</h1><p>在每一个窗口中，我们最多只有2m+1个单词，所以$\nabla_\theta J_t(\theta)$会非常稀疏</p>
+<p><img src="http://static.zybuluo.com/yhsdba/yik2jtywz7gzp28sbv8bj8nr/image_1bor07qr3okhi7u1r21193g128u9.png" alt="image_1bor07qr3okhi7u1r21193g128u9.png-31.3kB"></p>
+<p>我们实际上只更新了出现在窗口中的那些词的列</p>
+<p>所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nqd3max13sdlweblzx40do9b/image_1bor0amj4h5f13sa1gkvgee5jtm.png" alt="image_1bor0amj4h5f13sa1gkvgee5jtm.png-20kB"></p>
+<h1 id="负采样"><a href="#负采样" class="headerlink" title="负采样"></a>负采样</h1><p>词向量矩阵的量级很大，所以下面式子的分母很难计算</p>
+<p><img src="http://static.zybuluo.com/yhsdba/io9id90dmear1r8ixr99aogc/image_1bor0ibi2dk3onrvq6ddt1q1p13.png" alt="image_1bor0ibi2dk3onrvq6ddt1q1p13.png-147.3kB"></p>
+<p>之前我们提到word2vec有两种高效的训练方法：</p>
+<ul>
+<li>Hierarchical softmax</li>
+<li>Negative sampling</li>
+</ul>
+<p>而我们第一节课采用了更简单的naive softmax</p>
+<p>而negative sampling简化计算的步骤是：具体做法是，对每个正例（中央词语及上下文中的一个词语）采样几个负例（中央词语和其他随机词语），训练binary logistic regression（也就是二分类器）。</p>
+<h1 id="negative-sampling和skip-gram"><a href="#negative-sampling和skip-gram" class="headerlink" title="negative sampling和skip-gram"></a>negative sampling和skip-gram</h1><p>目标函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/qpys3imcupcj0cptv9b150yf/image_1bor1ftnn1heq2rtl15i8f15co1t.png" alt="image_1bor1ftnn1heq2rtl15i8f15co1t.png-7.8kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/7o3vvjx3cwmtb1ky144fbwmw/image_1bor0ru13v5015fhtem15d11e061g.png" alt="image_1bor0ru13v5015fhtem15d11e061g.png-13.8kB"></p>
+<ul>
+<li><p>这里t是某个窗口，k是采样个数</p>
+</li>
+<li><p>$\sigma$是sigmoid函数</p>
+</li>
+</ul>
+<p>所以上式可以化为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/99gd9k5b810oa8bi1zjtv9av/image_1bor1hmr11jme11kuh681ab61pe2a.png" alt="image_1bor1hmr11jme11kuh681ab61pe2a.png-22.4kB"></p>
+<ul>
+<li>需要做的是最大化第一项（真实出现在中心词上下文的词），最小化第二项（随机选取的词）</li>
+<li>P(w)是一个unigram分布 $P(W)=U(w)^{3/4}/Z$</li>
+</ul>
+<p>word2vec通过把相似词语放到同一个地方来增大目标函数(内积大嘛)</p>
+<p><img src="http://static.zybuluo.com/yhsdba/9348jo8hlb1abrtyeqkmvgt5/image_1bor21b984en1f0v16l815vgmgq2n.png" alt="image_1bor21b984en1f0v16l815vgmgq2n.png-1025.2kB"></p>
+<h1 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h1><p>word2vec将窗口视作训练单位，每个窗口或者几个窗口都要进行一次参数更新。要知道，很多词串出现的频次是很高的。能不能遍历一遍语料，迅速得到结果呢？</p>
+<p>早在word2vec之前，就已经出现了很多得到词向量的方法，这些方法是基于统计共现矩阵的方法。如果在窗口级别上统计词性和语义共现，可以得到相似的词。如果在文档级别上统计，则会得到相似的文档（潜在语义分析LSA）。</p>
+<h2 id="基于窗口的共现矩阵X"><a href="#基于窗口的共现矩阵X" class="headerlink" title="基于窗口的共现矩阵X"></a>基于窗口的共现矩阵X</h2><p>我们先规定一个固定大小的窗口，然后统计每个词出现在窗口中次数，这个计数是针对整个语料集做的。可能说得有点含糊，咱们一起来看个例子，假定我们有如下的3个句子，同时我们的窗口大小设定为1（把原始的句子分拆成一个一个的词）： </p>
+<ol>
+<li>I enjoy flying. </li>
+<li>I like NLP. </li>
+<li>I like deep learning.<br>由此产生的计数矩阵如下： </li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/q1zg40048encmhvue8no4ni4/image_1bor5s4em1di9168utrnjtgvju9.png" alt="image_1bor5s4em1di9168utrnjtgvju9.png-326.3kB"></p>
+<p>根据这个矩阵，的确可以得到简单的共现向量。但是它存在非常多的局限性：</p>
+<ul>
+<li><p>当出现新词的时候，以前的旧向量连维度都得改变</p>
+</li>
+<li><p>高纬度（词表大小）</p>
+</li>
+<li><p>高稀疏性</p>
+</li>
+</ul>
+<p>通过降维减少计算量，用25到1000的低维稠密向量来储存重要信息。</p>
+<p>通过SVD进行降维</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7va4xmfpuvww8acudwvil7mv/image_1bor60qsi409185cn5ug261msnm.png" alt="image_1bor60qsi409185cn5ug261msnm.png-221.9kB"></p>
+<p>r维降到d维，取奇异值最大的两列作为二维坐标可视化：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/zrdke76k4708xhh7cdg93zri/image_1bor617prck71jfp1qqh1gf6tch13.png" alt="image_1bor617prck71jfp1qqh1gf6tch13.png-253.1kB"></p>
+<p>改进：</p>
+<ul>
+<li><p>限制高频词（a,the,he,has…）的频次(如最大为100，超过就不再计数)，或者干脆停用词</p>
+</li>
+<li><p>根据与中央词的距离衰减词频权重</p>
+</li>
+<li><p>用皮尔逊相关系数代替词频</p>
+</li>
+</ul>
+<p>效果还不错：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/fi5tt7sucb7xkecp6vl84utd/image_1bor65ntk1hlk1l6tfvrr51oi91g.png" alt="image_1bor65ntk1hlk1l6tfvrr51oi91g.png-251.4kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/eupr0e4kmpcof6ftsxrhcq8j/image_1bor66viu1qq3112h11vk13ddkts1t.png" alt="image_1bor66viu1qq3112h11vk13ddkts1t.png-42.6kB"></p>
+<h2 id="SVD的问题"><a href="#SVD的问题" class="headerlink" title="SVD的问题"></a>SVD的问题</h2><ul>
+<li>计算复杂度高，对m*n的矩阵 O($mn^2$)</li>
+<li>不方便处理新词和新文档</li>
+<li>与其他DL模型训练套路不同</li>
+</ul>
+<h2 id="基于统计的词向量模型vs基于预测的词向量模型（Count-based-vs-direct-prediction）"><a href="#基于统计的词向量模型vs基于预测的词向量模型（Count-based-vs-direct-prediction）" class="headerlink" title="基于统计的词向量模型vs基于预测的词向量模型（Count based vs direct prediction）"></a>基于统计的词向量模型vs基于预测的词向量模型（Count based vs direct prediction）</h2><p>前者以基于SVD分解技术的LSA模型为代表，通过构建一个共现矩阵得到隐层的语义向量<br>优点：充分利用了全局的统计信息。</p>
+<p>缺点：然而这类模型得到的语义向量往往很难把握词与词之间的线性关系（例如著名的King、Queen、Man、Woman等式）。</p>
+<p>后者则以基于神经网络的Skip-gram模型为代表，通过预测一个词出现在上下文里的概率得到embedding词向量。</p>
+<p>优点：其得到的词向量能够较好地把握词与词之间的线性关系，因此在很多任务上的表现都要略优于SVD模型。</p>
+<p>缺点：这类模型的缺陷在于其对统计信息的利用不充分，训练时间与语料大小息息相关。</p>
+<h1 id="综合两者优势：GloVe"><a href="#综合两者优势：GloVe" class="headerlink" title="综合两者优势：GloVe"></a>综合两者优势：GloVe</h1><p>这种模型的目标函数是：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ll2n7pf9xk0e0hhekiomm0lg/image_1bor6d1fdrd4evcpch189n1cg02a.png" alt="image_1bor6d1fdrd4evcpch189n1cg02a.png-10.7kB"></p>
+<p>这里的Pij是两个词共现的频次，f是一个max函数,用于降低高频词对模型的干扰：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/wdtgldceov8zr4huisswzkqa/image_1bor6kmni1ppv198tpk11ha81lsh2n.png" alt="image_1bor6kmni1ppv198tpk11ha81lsh2n.png-42.3kB"></p>
+<p>优点是训练快，可以拓展到大规模语料，也适用于小规模语料和小向量。</p>
+<p>这里面有两个向量u和v，它们都捕捉了共现信息<br>试验证明，最佳方案是简单地加起来：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/jhfz1u64l80gsjhniaxjngh2/image_1bor7g4i7n5ujlrm1me0rnt3h.png" alt="image_1bor7g4i7n5ujlrm1me0rnt3h.png-3.4kB"></p>
+<p>相对于word2vec只关注窗口内的共现，GloVe这个命名也说明这是全局的</p>
+<h2 id="模型的评估："><a href="#模型的评估：" class="headerlink" title="模型的评估："></a>模型的评估：</h2><p>通常有两种方式：Intrinsic和Extrinsic</p>
+<p>Intrinsic:</p>
+<ul>
+<li>关注模型在一个特定子任务上的表现</li>
+<li>快速便捷</li>
+<li>有助于更好地理解模型内在的性质</li>
+<li>可能实际应用时效果不好</li>
+</ul>
+<p>Extrinsic:</p>
+<ul>
+<li>关注在一个具体任务上的表现，如机器翻译或情感分析</li>
+<li>通常比较耗时</li>
+<li>比Intrinsic评估更具有参考意义</li>
+</ul>
+<h3 id="Intrinsic评估"><a href="#Intrinsic评估" class="headerlink" title="Intrinsic评估"></a>Intrinsic评估</h3><p>对于词向量模型，一个常用的Intrinsic评估是向量类比（word vector analogies）。它评估了一组词向量在语义和句法上表现出来的线性关系。具体来说，给定一组词(a, b, c, d)，我们要验证的是<img src="http://static.zybuluo.com/yhsdba/e7rbnp9xfz5qktdgqbqf955q/image_1bor7rega5c4sd31cj21luc1u984b.png" alt="image_1bor7rega5c4sd31cj21luc1u984b.png-5.7kB">，即d是与向量$(x_b-x_a+x_c)$的cosine距离最近的词。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/z9tjej1lqs771ep2x2t78sld/image_1bor849oc7fc14of168ql0eokh4o.png" alt="image_1bor849oc7fc14of168ql0eokh4o.png-98.2kB"></p>
+<p>Mikolov在他的word2vec开源工具包里也提供了用于word<br>analogy评估的数据集。例如国家与首都的类比数据，时态或是比较级的类比数据。</p>
+<p>借助于Intrinsic评估，我们也可以方便快捷地对模型的超参数（Hyperparameters）进行选择。例如向量的维度，context window的大小，甚至是模型的选择。</p>
+<p>一些有趣的类比：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/p0cw1e2dcglt4ld014ikt2ar/image_1bor85chpmguhvlgh178q17ds55.png" alt="image_1bor85chpmguhvlgh178q17ds55.png-616.1kB"></p>
+<h4 id="训练结果"><a href="#训练结果" class="headerlink" title="训练结果"></a>训练结果</h4><p><img src="http://static.zybuluo.com/yhsdba/1i61u0s2yqux395yc7elut67/image_1bor8ei594mt127r1ibn11pv13ju5i.png" alt="image_1bor8ei594mt127r1ibn11pv13ju5i.png-621.6kB"></p>
+<p>Glove效果是最好的。</p>
+<p>另外高维度数据效果不一定好，而数据量越多效果越好</p>
+<h4 id="调参"><a href="#调参" class="headerlink" title="调参"></a>调参</h4><p>主要是几个参数：窗口是否对称（还是只考虑前面的单词），向量维度，窗口大小</p>
+<p>300维，窗口大小为8的对称窗口效果较好。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/j26voyd81p6dzm3oess8uodc/image_1bor8j66p173n1qrh10g62e81tm5v.png" alt="image_1bor8j66p173n1qrh10g62e81tm5v.png-405.6kB"></p>
+<p>迭代次数越多，效果越稳定</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ypg3y2b1kx14svi4g5ieip2e/image_1bor8jgcgorq9r36f817461r5j6c.png" alt="image_1bor8jgcgorq9r36f817461r5j6c.png-338.7kB"></p>
+<p>维基百科语料比新闻语料效果好，主要是因为一些词在新闻中很少出现</p>
+<p><img src="http://static.zybuluo.com/yhsdba/o7c88cxdf1cecbpwjy3zsf29/image_1bor8l7a31lr912le1b3kfjd1k276p.png" alt="image_1bor8l7a31lr912le1b3kfjd1k276p.png-479.5kB"></p>
+<h3 id="Extrinsic评估"><a href="#Extrinsic评估" class="headerlink" title="Extrinsic评估"></a>Extrinsic评估</h3><p>值得注意的是，即使一些模型在人为设定的Intrinsic任务上表现较弱，并不能说明它们在具体的真实任务中毫无优势。Intrinsic评估的主要作用是对模型的超参数进行初步的调整和选择（这种模型选择在Extrinsic任务上往往极为耗时）。而评估模型的优劣还是要看它在Extrinsic任务上的表现。</p>
+<p>对于词向量模型，常见的Extrinsic任务是对词向量进行分类。例如命名实体识别（NER）和情感分析。理论上，如果我们习得的词向量足够精确，那么语义或句法上相近的词必然分布在同一片向量空间。这就使得基于词向量的分类更加准确。</p>
+<p>采用Extrinsic评估时我们用的还是softmax函数。具体上一篇已经写过了。</p>
+<h1 id="word2vec适用范围"><a href="#word2vec适用范围" class="headerlink" title="word2vec适用范围"></a>word2vec适用范围</h1><p>对单词分类比较适合，情感分析就不太适合，</p>
+<h1 id="歧义消解"><a href="#歧义消解" class="headerlink" title="歧义消解"></a>歧义消解</h1><p>中心思想：通过上下文聚类，对不同词义分门别类进行训练</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8omul7jo5o3ol4daf4zk200k/image_1bor8t9lle4u18vf85jb042ln76.png" alt="image_1bor8t9lle4u18vf85jb042ln76.png-627kB"></p>
+<p>相同颜色的是同一个单词的不同义项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/31/2017-8-31-Stanford cs224d 深度学习与nlp（二）高级词向量/" data-id="cjpcnx2ju001vlsv6ewpo210k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/word2vec/">word2vec</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/" class="article-date">
+  <time datetime="2017-08-29T08:00:00.000Z" itemprop="datePublished">2017-08-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nlp/">nlp</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/">Stanford CS224d 深度学习与自然语言处理笔记(一) word2vec</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p>一直对nlp比较感兴趣，最近开始学习Stanford大学cs224d课程，对深度学习在nlp上的应用进行一些了解。之后每节课上完都会根据课程内容和一些其他人的博客在博客理笔记。第一节课绪论的内容非常简单，就不写了。从第二节课word2vec开始写起。</p>
+<h1 id="计算机中如何表示一个词的意思"><a href="#计算机中如何表示一个词的意思" class="headerlink" title="计算机中如何表示一个词的意思"></a>计算机中如何表示一个词的意思</h1><hr>
+<p>word vector是一种在计算机中表达word meaning的方式。在Webster词典中，关于meaning有三种定义：</p>
+<ul>
+<li>the idea that is represented by a word, phrase, etc.</li>
+<li>the idea that a person wants to express by using words, signs, etc.</li>
+<li>the idea that is expressed in a word of writing, art, etc.</li>
+</ul>
+<p>计算语言学中常见的表示词义的方式是WordNet那样的词库。包含有上位词（is-a)关系和同义词集.比如NLTK中可以通过WordNet查询熊猫的hypernyms (is-a，上位词)，得到“食肉动物”“动物”之类的上位词。也可以查询“good”的同义词——“just品格好”“ripe熟了”。</p>
+<p>这种表示方式叫做<strong>discrete representation</strong></p>
+<h2 id="discrete-representation-amp-amp-one-hot-vector"><a href="#discrete-representation-amp-amp-one-hot-vector" class="headerlink" title="discrete representation &amp;&amp; one-hot vector"></a>discrete representation &amp;&amp; one-hot vector</h2><p>它有许多缺点：</p>
+<ul>
+<li>缺少新词</li>
+<li>主观化</li>
+<li>需要耗费大量人力去整理</li>
+<li><strong>无法准确计算词之间的相似度</strong></li>
+</ul>
+<p>传统的基于规则或基于统计的自然语义处理方法将单词看作一个原子符号：hotel, conference, walk。在向量空间的范畴里，这是一个1很多0的向量表示：[0,0,0,0,…,0,1,0,…,0,0,0]。<br>这种表示方法存在一个重要的问题就是“词汇鸿沟”现象：任意两个词之间都是孤立的。光从这两个向量中看不出两个词是否有关系。比如Dell notebook battery size和Dell laptop battery capacity。而one-hot向量是正交的，无法通过任何运算得到相似度。</p>
+<h2 id="Distributional-similarity-based-representations"><a href="#Distributional-similarity-based-representations" class="headerlink" title="Distributional similarity based representations"></a>Distributional similarity based representations</h2><p>现代nlp一个很成功的思想是：将单词放到上下文中去理解它的含义。</p>
+<blockquote>
+<p>You shall know a word by the company it keeps</p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/yhsdba/9kj8idjutrvww8ab3kd7gbwx/image_1bombg7df1nk5n7s6c03kl28a9.png" alt="image_1bombg7df1nk5n7s6c03kl28a9.png-280.7kB"></p>
+<h3 id="通过向量表示词语含义"><a href="#通过向量表示词语含义" class="headerlink" title="通过向量表示词语含义"></a>通过向量表示词语含义</h3><p>通过调整一个单词及其上下文单词的向量，使得根据两个向量可以推测两个词语的相似度；或根据向量可以预测词语的上下文。这种手法也是递归的，根据向量来调整向量，与词典中意项的定义相似。</p>
+<p>另外，distributed representations与symbolic representations（localist representation、one-hot representation）相对；discrete representation则与后者及denotation的意思相似。切不可搞混distributed和discrete这两个单词。</p>
+<h2 id="学习神经网络word-embedding的基本思路"><a href="#学习神经网络word-embedding的基本思路" class="headerlink" title="学习神经网络word embedding的基本思路"></a>学习神经网络word embedding的基本思路</h2><p>定义一个预测某个单词上下文的模型：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/yys085tfywnrncfeq3ls5ap6/image_1bomerc3b1nbh10bv16rupu4m7vm.png" alt="image_1bomerc3b1nbh10bv16rupu4m7vm.png-4.5kB"></p>
+<p>损失函数定义如下：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/tgv2t9vtmk135tf0bmcdebad/image_1bomerrtq15fme7p1ehv15pbc1513.png" alt="image_1bomerrtq15fme7p1ehv15pbc1513.png-3.5kB"></p>
+<p>这里的$w_{-t}$表示$w_t$的上下文（负号通常表示除了某某之外），如果完美预测，损失函数为零。</p>
+<p>然后在一个大型语料库中的不同位置得到训练实例，调整词向量，最小化损失函数。</p>
+<h2 id="word2vec细节"><a href="#word2vec细节" class="headerlink" title="word2vec细节"></a>word2vec细节</h2><p>根据最大似然估计，目标函数定义为所有位置的预测结果的乘积：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/968pmw305rj2by2hndmn2yff/image_1boml0ank1veb16318stf659t95r.png" alt="image_1boml0ank1veb16318stf659t95r.png-110.1kB"></p>
+<p>取对数便于优化，加负号将最小化变为最大化（习惯而已）<br><img src="http://static.zybuluo.com/yhsdba/81315otrozq35zxgvh0w9q17/image_1boml0lbo1d3jnlv8dn185j21g68.png" alt="image_1boml0lbo1d3jnlv8dn185j21g68.png-161.4kB"></p>
+<p>预测到的某个上下文条件概率$p(w_{t+j}|wt)$可由softmax得到：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/uz0bhcxuyz7c40s0o9l5faiq/image_1boml47i4183517va1nlb1of5cgm6l.png" alt="image_1boml47i4183517va1nlb1of5cgm6l.png-297.6kB"></p>
+<p>o是输出的上下文词语中的确切某一个，c是中间的词语。u是对应的上下文词向量，v是词向量。</p>
+<p>注：关于softmax函数的原理</p>
+<p><img src="http://static.zybuluo.com/yhsdba/47tgpb3x8rzyum6sjp4vlxrl/image_1boml9glatutjefafc186f1787f.png" alt="image_1boml9glatutjefafc186f1787f.png-553kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/dxfi9f00mc9lsmhzaaj1rdmi/image_1boml8d321dl62s510r6n7v1ktn72.png" alt="image_1boml8d321dl62s510r6n7v1ktn72.png-125.7kB"></p>
+<p>指数函数可以把实数映射成正数，然后归一化得到概率。<br>softmax之所叫softmax，是因为指数函数会导致较大的数变得更大，小数变得微不足道；这种选择作用类似于max函数。</p>
+<h2 id="Skipgram（预测上下文）"><a href="#Skipgram（预测上下文）" class="headerlink" title="Skipgram（预测上下文）"></a>Skipgram（预测上下文）</h2><p><img src="http://static.zybuluo.com/yhsdba/rio0ylh4nv751knqssaqdpkp/image_1bomlatg418m6r0b16s2uslme7s.png" alt="image_1bomlatg418m6r0b16s2uslme7s.png-489.6kB"></p>
+<p>图中各种符号的含义：</p>
+<ul>
+<li>$w_t$:one-hot向量，对应含义的那一项为1，其他为0.</li>
+<li>W：词向量。这就是我们要求的部分（我们的目的不就是要用一个新的向量来表示一个词嘛，而且这个向量可以反映词与词之间的关系。而W这个矩阵每一个列向量就是一个词的表示。）</li>
+<li>$V_c$:$W*w_t$得到的中心词的词向量<br>最后用中心词词向量乘以W的转置得到对每个词语的“相似度”，对相似度取softmax得到概率，与答案对比计算损失。</li>
+</ul>
+<p>如果不是很明白，可以自己写一个句子带到上面试一试，这里就不具体说明了。</p>
+<p>上面手写图的抽象版：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/vsajjaxirwhmjihhqbt9bc05/image_1bomlucja1uanmuo1ir8dj2ogh89.png" alt="image_1bomlucja1uanmuo1ir8dj2ogh89.png-121kB"></p>
+<h1 id="训练模型：计算参数向量的梯度"><a href="#训练模型：计算参数向量的梯度" class="headerlink" title="训练模型：计算参数向量的梯度"></a>训练模型：计算参数向量的梯度</h1><hr>
+<p>把所有参数写进向量θθ，对d维的词向量和大小V的词表来讲，有：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7kh0mfxyrs2ujks72drurvk6/image_1bomm0cfot451k2p1v2bqfo1p3696.png" alt="image_1bomm0cfot451k2p1v2bqfo1p3696.png-35.5kB"></p>
+<p>这里上标2是因为上文和下文各有V个备胎</p>
+<p>然后用梯度下降法求得参数。</p>
+<p>自己手写了一下，懒得打了</p>
+<p><img src="http://static.zybuluo.com/yhsdba/cg962k7xxxsop7fmz3rlbmc3/TIM%E5%9B%BE%E7%89%8720170829180518.jpg" alt="TIM图片20170829180518.jpg-1501.6kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/1yzn0bn6xnqt6rsz39b37hf3/TIM%E5%9B%BE%E7%89%8720170829180525.jpg" alt="TIM图片20170829180525.jpg-1378.7kB"></p>
+<h1 id="连续词袋模型CBOM-这里视频中没有讲，根据一些材料和博客补充一下"><a href="#连续词袋模型CBOM-这里视频中没有讲，根据一些材料和博客补充一下" class="headerlink" title="连续词袋模型CBOM(这里视频中没有讲，根据一些材料和博客补充一下)"></a>连续词袋模型CBOM(这里视频中没有讲，根据一些材料和博客补充一下)</h1><ul>
+<li>对于m个词长度的输入上下文，我们产生它们的one-hot向量$（x^{(c−m)},⋯,x^{(c−1)},x^{(c+1)},⋯,x^{(c+m)}）$。</li>
+<li><p>我们得到上下文的嵌入词向量     $（v_{c−m+1}=Wx_(c−m+1),⋯,v_{c$+m}=Vx^{(c+m)}）$</p>
+</li>
+<li><p>将这些向量取平均$\hat{v}=(v_{c−m}+v_{c−m+1}+⋯+v_{c+m})/2m$</p>
+</li>
+<li>产生一个得分向量$z=U\hat{v}$</li>
+<li>将得分向量转换成概率分布形式y^=softmax(z)</li>
+<li>我们希望我们产生的概率分布,与真实概率分布$\hat{y}$相匹配。而y刚好也就是我们期望的真实词语的one-hot向量。</li>
+</ul>
+<p>步骤与skip-gram基本一致，不同的是代价函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/faq57yk87g0spqb2n6rtx4e1/image_1bon1ouk92fhm8l1u2uet4s6ba.png" alt="image_1bon1ouk92fhm8l1u2uet4s6ba.png-34.8kB"></p>
+<p>我们可以用随机梯度下降法去更新未知参数的梯度。</p>
+<p>参考：<a href="http://www.hankcs.com/nlp/word-vector-representations-word2vec.html" target="_blank" rel="noopener">http://www.hankcs.com/nlp/word-vector-representations-word2vec.html</a></p>
+<p><a href="http://blog.csdn.net/longxinchen_ml/article/details/51567960" target="_blank" rel="noopener">http://blog.csdn.net/longxinchen_ml/article/details/51567960</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/" data-id="cjpcnx2jt001ulsv6g58nln6l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/word2vec/">word2vec</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-8-25-SVD简介" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/15/2017-8-25-SVD简介/" class="article-date">
+  <time datetime="2017-08-15T01:00:00.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/15/2017-8-25-SVD简介/">SVD简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>奇异值分解可以将一个比较复杂的矩阵用更小更简单的几个子矩阵的相乘来表示，这些小矩阵描述的是矩阵的重要的特性。就像是描述一个人一样，给别人描述说这个人长得浓眉大眼，方脸，络腮胡，而且带个黑框的眼镜，这样寥寥的几个特征，就让别人脑海里面就有一个较为清楚的认识，实际上，人脸上的特征是有着无数种的，之所以能这么描述，是因为人天生就有着非常好的抽取重要特征的能力，让机器学会抽取重要的特征，SVD是一个重要的方法。在机器学习领域，有相当多的应用与奇异值都可以扯上关系，比如做feature reduction的PCA，做数据压缩（以图像压缩为代表）的算法，还有做搜索引擎语义层次检索的LSI（Latent Semantic Indexing）</p>
+<p>奇异值的作用和特征值有些类似，但是特征值只能应用于方阵，而奇异值分解可以对所有矩阵使用</p>
+<h1 id="奇异值的几何意义"><a href="#奇异值的几何意义" class="headerlink" title="奇异值的几何意义"></a>奇异值的几何意义</h1><p>要理解奇异值分解的集合意义，首先要对线性代数中的向量、矩阵所表示的几何意义有所了解，这里就不详细写了。具体可见：<a href="https://www.bilibili.com/video/av6731067/" target="_blank" rel="noopener">https://www.bilibili.com/video/av6731067/</a></p>
+<p>我们以2*2的矩阵来举例</p>
+<p>2<em>2矩阵奇异值分解的几何实质是：对于任意2</em>2矩阵，总能找到某个正交网格到另一个正交网格的转换与矩阵变换相对应。</p>
+<p>用向量解释这个现象：选择适当的正交的单位向量v1和v2，向量Mv1和Mv2也是正交的。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ubjhawjy11nxyw61poqn38gl/image_1boe8fm8dsj94gi1jpl1khb13v89.png" alt="image_1boe8fm8dsj94gi1jpl1khb13v89.png-18.6kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/fg4zviipod2o3imryttv24hc/image_1boe8fumi9cbunk1ncqtfu1ak8m.png" alt="image_1boe8fumi9cbunk1ncqtfu1ak8m.png-17.2kB"></p>
+<p>用u1和u2来表示Mv1和Mv2方向上的单位向量。Mv1和Mv2的长度用σ1 和 σ2来表示——量化了网格在特定方向上被拉伸的效果。σ1 和 σ2被称为M的奇异值。即</p>
+<p>$Mv_1 = σ_1u_1$</p>
+<p>$Mv_2 = σ_2u_2$<br><img src="http://static.zybuluo.com/yhsdba/xm7ek5agxta477h9b6eda8nf/image_1boe8iub61lhmlp0qlf1i9a2b513.png" alt="image_1boe8iub61lhmlp0qlf1i9a2b513.png-16.9kB"></p>
+<p>现在给出矩阵M作用于向量x的简单描述。因为向量v1和v2是正交的单位向量，我们有<br>$x = (v_1 · x) v_1 + (v_2 · x) v_2$</p>
+<p>那么</p>
+<p>$Mx = (v_1 · x) Mv_1 + (v_2 · x) Mv_2$<br>$Mx = (v_1 · x) σ_1u_1 + (v_2 · x) σ_2u_2$</p>
+<p>将点积转换为转置后相乘</p>
+<p>$Mx = u_1σ_1v_1^Tx + u_2σ_2v_2^Tx$</p>
+<p>$M = u_1σ_1v_1^T + u_2σ_2v_2^T$</p>
+<p>通常表述成</p>
+<p>$M = UΣV^T$</p>
+<p>这里U是列向量u1和u2组成的矩阵，Σ是非零项为σ1 和 σ2的对角矩阵，V是列向量v1和v2组成的矩阵。</p>
+<h1 id="代数角度的奇异值"><a href="#代数角度的奇异值" class="headerlink" title="代数角度的奇异值"></a>代数角度的奇异值</h1><p> 假设A是一个M <em> N的矩阵，那么得到的U是一个M </em> M的方阵（里面的向量是正交的，U里面的向量称为左奇异向量），Σ是一个M <em> N的矩阵（除了对角线的元素都是0，对角线上的元素称为奇异值）,$V^T$是一个N </em> N的矩阵，里面的向量也是正交的，V里面的向量称为右奇异向量），从图片来反映几个相乘的矩阵的大小可得下面的图片</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nqc29oaz8s9ut3165vvj6raa/image_1boe9lbaj9oa169b1ot4689tju1g.png" alt="image_1boe9lbaj9oa169b1ot4689tju1g.png-24.1kB"></p>
+<p> 那么奇异值和特征值是怎么对应起来的呢？首先，我们将一个矩阵A的转置 * A，将会得到一个方阵，我们用这个方阵求特征值可以得到：</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/b7j65zklmweydsgeio30ghga/image_1boe9rc6h1j1rpv06jg65k1n4t1t.png" alt="image_1boe9rc6h1j1rpv06jg65k1n4t1t.png-4.2kB"></p>
+<p>这里得到的v，就是我们上面的右奇异向量。此外我们还可以得到：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/b4aqq9amo05cbz0vltlj5cyv/image_1boeci0l63c01p6218c018vf1tov2a.png" alt="image_1boeci0l63c01p6218c018vf1tov2a.png-4.6kB"></p>
+<p>  这里的σ就是上面说的奇异值，u就是上面说的左奇异向量。奇异值σ跟特征 值类似，在矩阵Σ中也是从大到小排列，而且σ的减少特别的快，在很多情况下，前10%甚至1%的奇异值的和就占了全部的奇异值之和的99%以上了。也就是说，我们也可以用前r大的奇异值来近似描述矩阵，这里定义一下部分奇异值分解：</p>
+<p>  <img src="http://static.zybuluo.com/yhsdba/be65kso5i57wv95guls8317t/image_1boecnfb4mmsskv6dvqcq1ide2n.png" alt="image_1boecnfb4mmsskv6dvqcq1ide2n.png-5.8kB"></p>
+<p>r是一个远小于m、n的数，这样矩阵的乘法看起来像是下面的样子：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/pizno259n1xhxs6zj3z48zpy/image_1boecomco1gmr53o1k9b1rk8bj934.png" alt="image_1boecomco1gmr53o1k9b1rk8bj934.png-12kB"></p>
+<p>右边的三个矩阵相乘的结果将会是一个接近于A的矩阵，在这儿，r越接近于n，则相乘的结果越接近于A。而这三个矩阵的面积之和（在存储观点来说，矩阵面积越小，存储量就越小）要远远小于原始的矩阵A，我们如果想要压缩空间来表示原矩阵A，我们存下这里的三个矩阵：U、Σ、V就好了。</p>
+<h1 id="SVD应用"><a href="#SVD应用" class="headerlink" title="SVD应用"></a>SVD应用</h1><h2 id="SVD与PCA"><a href="#SVD与PCA" class="headerlink" title="SVD与PCA"></a>SVD与PCA</h2><p>PCA的全部工作简单点说，就是对原始的空间中顺序地找一组相互正交的坐标轴，第一个轴是使得方差最大的，第二个轴是在与第一个轴正交的平面中使得方差最大的，第三个轴是在与第1、2个轴正交的平面中方差最大的，这样假设在N维空间中，我们可以找到N个这样的坐标轴，我们取前r个去近似这个空间，这样就从一个N维的空间压缩到r维的空间了，但是我们选择的r个坐标轴能够使得空间的压缩使得数据的损失最小。</p>
+<p>SVD得出的奇异向量是从奇异值由大到小排列的，按PCA的观点来看，就是方差最大的坐标轴就是第一个奇异向量，方差次大的坐标轴就是第二个奇异向量…</p>
+<p><img src="http://static.zybuluo.com/yhsdba/41b0syigm9c4554c8untkka2/image_1boed8rsrbtu13fp910r6ep723u.png" alt="image_1boed8rsrbtu13fp910r6ep723u.png-6.6kB"></p>
+<p>在矩阵的两边同时乘上一个矩阵V，由于V是一个正交的矩阵，所以V转置乘以V得到单位阵I，所以可以化成后面的式子</p>
+<p><img src="http://static.zybuluo.com/yhsdba/g4jtftpu31nqieag5hrptyg9/image_1boed9ql4vlu1lvr1m961rdu17ee4b.png" alt="image_1boed9ql4vlu1lvr1m961rdu17ee4b.png-15.1kB"></p>
+<p>右乘一个矩阵，相当于对向量进行空间的变换（见第一部分视频）。上面的式子相当于将一个m<em>n的矩阵压缩为了m</em>r的矩阵，即对列进行了压缩。</p>
+<p>如何对行进行压缩？</p>
+<p>在PCA的观点下，对行进行压缩可以理解为，将一些相似的sample合并在一起，或者将一些没有太大价值的sample去掉。下面写出一个通用的行压缩例子：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/1jmau5ty4xxhesrvpkz4o5dl/image_1boelhnlg11g2r2f13pt17jf1ms74o.png" alt="image_1boelhnlg11g2r2f13pt17jf1ms74o.png-4.5kB"></p>
+<p>这样就从一个m行压缩到r行了。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/pmbcpp7m2uqyjesjr4cqikcm/image_1boelimb312ldmdin53u5mgu55.png" alt="image_1boelimb312ldmdin53u5mgu55.png-6.9kB"></p>
+<p>这样我们就得到了对行进行压缩的式子。可以看出，其实PCA几乎可以说是对SVD的一个包装，如果我们实现了SVD，那也就实现了PCA了，而且更好的地方是，有了SVD，我们就可以得到两个方向的PCA，如果我们对A’A进行特征值的分解，只能得到一个方向的PCA。</p>
+<h2 id="奇异值与潜在语义索引LSI的关系-之后再补充"><a href="#奇异值与潜在语义索引LSI的关系-之后再补充" class="headerlink" title="奇异值与潜在语义索引LSI的关系(之后再补充)"></a>奇异值与潜在语义索引LSI的关系(之后再补充)</h2><p>参考：</p>
+<p><a href="http://www.ams.org/samplings/feature-column/fcarc-svd" target="_blank" rel="noopener">http://www.ams.org/samplings/feature-column/fcarc-svd</a></p>
+<p><a href="http://www.flickering.cn/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/2015/01/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88we-recommend-a-singular-value-decomposition%EF%BC%89/" target="_blank" rel="noopener">http://www.flickering.cn/%E6%95%B0%E5%AD%A6%E4%B9%8B%E7%BE%8E/2015/01/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%EF%BC%88we-recommend-a-singular-value-decomposition%EF%BC%89/</a></p>
+<p><a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html" target="_blank" rel="noopener">http://www.cnblogs.com/LeftNotEasy/archive/2011/01/19/svd-and-applications.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/15/2017-8-25-SVD简介/" data-id="cjpcnx2i2000plsv6wf4y4kpi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVD/">SVD</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/" class="article-date">
+  <time datetime="2017-08-14T16:00:00.000Z" itemprop="datePublished">2017-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nlp/">nlp</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/">Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。</p>
+<p>我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^i$是一个d维向量，$y^i$是一个C维one-hot向量（常用来作为预测结果的标签），N是总数。在一般的机器学习任务中，我们通常固定输入数据和目标标签，通过优化（SGD等）训练权重。在自然语言处理中，我们引入了重训练的思想，针对具体任务时，我们重新训练输入的词向量。下面讨论何时需要进行这样的操作以及原因。</p>
+<h2 id="重训练词向量"><a href="#重训练词向量" class="headerlink" title="重训练词向量"></a>重训练词向量</h2><p>注：只有在训练集比较大时，才需要进行词向量重训练，否则适得其反</p>
+<p>我们一般先用一个简单的内部任务评价来初始化用于外部任务评价的词向量。在很多情况下，这些预训练的词向量的在外部任务中的表现已经非常好了。 然而，一些情况下，这些词向量在外部任务中的表现仍然有提升空间。不过，重训练词向量是由风险的。</p>
+<p>比如有一个给单词做情感分析的小任务，在预训练的词向量中，这三个表示电视的单词都是在一起的：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/xwe0ziycheoqgmk32p1ceu60/image_1bpt4ncp3onos8h177l1l6edh09.png" alt="image_1bpt4ncp3onos8h177l1l6edh09.png-19.3kB"></p>
+<p>但由于情感分析语料中，训练集只含有TV和telly，导致re-training之后两者跑到别处去了：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7jq4ipnmfgs77opcggu1s2i8/image_1bpt4pp541bikit0rllqo119ag13.png" alt="image_1bpt4pp541bikit0rllqo119ag13.png-60.1kB"></p>
+<p>于是在测试集上导致television被误分类。</p>
+<p>这个例子说明，如果任务的语料非常小，则不必在任务语料上重新训练词向量，否则会导致词向量过拟合。</p>
+<h2 id="softmax与正则化"><a href="#softmax与正则化" class="headerlink" title="softmax与正则化"></a>softmax与正则化</h2><p>softmax分类函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/p60bz512q1xvywy4e8vdsct8/image_1bpt4vstbdfaj5c25t112dbvb30.png" alt="image_1bpt4vstbdfaj5c25t112dbvb30.png-9.1kB"></p>
+<p>计算方法分为两个步骤：取权值矩阵的某一行乘上输入向量，归一化得到概率。</p>
+<p>上面我们计算了词向量x属于类别j的概率。训练的时候，可以直接最小化正确类别的概率的负对数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/grxl59vmauqqhcidk8n89awh/image_1bpt53crf1dhu15sf1cg2u7s5a13t.png" alt="image_1bpt53crf1dhu15sf1cg2u7s5a13t.png-9.5kB"></p>
+<p>其实这个损失函数等效于交叉熵：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/3mbz3w79bsfi10qra9m6tcz2/image_1bpt8ao93ffp1n2b10djbvjc0p4a.png" alt="image_1bpt8ao93ffp1n2b10djbvjc0p4a.png-28.7kB"></p>
+<p>这是因为类别是one-hot向量。只有正确的分类y=1,其余y=0</p>
+<p>对N个数据点来讲有：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/65n4qjwt960ipakbt2ff2ec7/image_1bpt8edme8s21tvm7v61n8bivd4n.png" alt="image_1bpt8edme8s21tvm7v61n8bivd4n.png-12.6kB"></p>
+<p>这个公式有一点点不同，注意到其实这里的k(i)现在是个函数，返回每个x(i)所对应的正确的类。</p>
+<p>如果我们同时要训练模型中的权重参数(W)和词向量(x)， 需要训练多少个参数呢? 一个以d-维词向量为输入，输出一个其在C个类上的分布的简单的线性模型需要C·d个参数。如果我们训练时更新词库中每个单词的词向量，则需要更新|V|个词向量，而每一个都是d维。综合一下，我们知道，一个简单的线性分类模型需要更新C⋅d+∣V∣⋅d个参数。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/msy3vbvlddcrh3ypmpfiv75o/image_1bpt99b8j1s9e1fhb1emksr810438o.png" alt="image_1bpt99b8j1s9e1fhb1emksr810438o.png-42.9kB"></p>
+<p>对于一个简单的线性模型来说，这个参数量就显得非常大了，带来的问题是模型很容易在数据集上过拟合。为了缓解过拟合，我们需要引入一个正则项，用贝耶斯的角度来讲，这个正则项其实就是一个给模型的参数加上了一个先验分布，从而希望他们的值更接近0。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/srefkec65u8ingr09ynibwaa/image_1bpt95oqhqga14eu1h7tga57uo6b.png" alt="image_1bpt95oqhqga14eu1h7tga57uo6b.png-18.5kB"></p>
+<p>如果咱们找到合适的正则项权重λ，那最小化上面的损失函数得到的模型，不会出现某些权重特别大的情况，同时模型的泛化能力也很不错。</p>
+<h2 id="词窗分类"><a href="#词窗分类" class="headerlink" title="词窗分类"></a>词窗分类</h2><p><a href="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_2_Figure8.jpg?imageView/2/w/450/q/100![image_1bpt9bapt1ph1g0ki8014mnf7595.png-26kB][9]" target="_blank" rel="noopener">http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_2_Figure8.jpg?imageView/2/w/450/q/100![image_1bpt9bapt1ph1g0ki8014mnf7595.png-26kB][9]</a></p>
+<p>我们这里看到的是一个中心词，和长度为2的左右窗口内的词。这种上下文可以帮助我们分辨Paris是一个地点，还是一个人名 </p>
+<p><img src="http://static.zybuluo.com/yhsdba/e1gwia9laljmxg0rgoqq68v8/image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png" alt="image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png-7.1kB"></p>
+<p>我们前面提到的外部任务都是以单个单词为输入的。实际上，由于自然语言的特性，这种情况很少会出现。在自然语言中，有很多一词多义的情况，这时候我们一般会参考上下文来判断。所以在大多数的情况下，我们给模型输入的是一个词序列。这个词序列由一个中心词向量和它上下文的词向量组成。上下文中词的数量又叫词窗大小，任务不同这个参数的取值也不同。一般来讲，小窗口在句法上的精度较高，大窗口在语义上的表现较好。</p>
+<h2 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h2><p>我们继续使用softmax进行分类。只需要将之前的$x$换成$x_{window}$即可</p>
+<p><img src="http://static.zybuluo.com/yhsdba/c8zoc40vxms457ycfdzst6li/image_1bpt9mjrfu28v6k1f1f1m481d52av.png" alt="image_1bpt9mjrfu28v6k1f1f1m481d52av.png-10.7kB"></p>
+<p>那相应的，我们计算损失函数梯度的时候，得到的就是如下形式的向量了：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/144gger5c98e36pcn8ia9i8j/image_1bpt9mut31grhm86su9at10sebc.png" alt="image_1bpt9mut31grhm86su9at10sebc.png-10.5kB"></p>
+<p>对于较小的数据集，能勉强提供一个线性分类决策边界</p>
+<p><img src="http://static.zybuluo.com/yhsdba/4xux9u3pnm61tiidjbmayrz1/image_1bpt9p9vs8niosf1qoedel181gbp.png" alt="image_1bpt9p9vs8niosf1qoedel181gbp.png-159.5kB"></p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><p>神经网络可以提供非线性的决策边界：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ohj8qpx1z7mndo7jbt64phi6/image_1bpt9pvb7bro12s91fiq1krsggkc6.png" alt="image_1bpt9pvb7bro12s91fiq1krsggkc6.png-61kB"></p>
+<h1 id="神经网络-1"><a href="#神经网络-1" class="headerlink" title="神经网络"></a>神经网络</h1><p>之前已经写过几个神经网络的笔记，这里就简单写一写。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p><img src="http://static.zybuluo.com/yhsdba/b7itm0gafn1bb4owt6xqywec/image_1bpta8i3e1f6qikd1ika7hs17c0cj.png" alt="image_1bpta8i3e1f6qikd1ika7hs17c0cj.png-144.4kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/1j23u8l9s5jrcx40hl375vkd/image_1bpta8nrk11921i1konn13d31jthd0.png" alt="image_1bpta8nrk11921i1konn13d31jthd0.png-208.8kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/c1odz8i7ars1f8d8byx71svj/image_1bpta8sv312n61nqh11ri173b1otadd.png" alt="image_1bpta8sv312n61nqh11ri173b1otadd.png-88kB"></p>
+<p>我们把预测结果喂给下一级逻辑回归单元，由损失函数自动决定它们预测什么：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/gojyls8bkjdxypktedbuopdo/image_1bpta93v9aj81j1u25so7o1gr4dq.png" alt="image_1bpta93v9aj81j1u25so7o1gr4dq.png-131.6kB"></p>
+<p>多层网络：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/jvuoux4d09x332bpj79ermiq/image_1bptaa4ph754fq718j21qfh1nl7e7.png" alt="image_1bptaa4ph754fq718j21qfh1nl7e7.png-179.1kB"></p>
+<h2 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h2><p>我们以一个实际例子来观察前向和后向传播在nlp中的作用。</p>
+<p>一个命名识体识别的例子：</p>
+<p>“Museums in Paris are amazing”</p>
+<p>我们要来判断这里的中心词”Paris”是不是个命名实体。在这种情况下， 我们不止要知道这个词窗内哪些词向量出现过，可能也需要知道他们之间的相互作用。 比如说，可能只有在”Museums”出现在第1个位置，”in”出现在第二个位置的时候，Paris才是命名实体。如果你直接把词向量丢给Softmax函数， 这种非线性的决策是很难做到的。</p>
+<p>所以我们需要用1.2中讨论的方法对输入的变量进行非线性的处理加工(神经元产出非线性激励输出)，再把这些中间层的产物输入到Softmax函数中去。 这样我们可以用另一个矩阵<br>U∈$R^{m+1}$,与激励输出结果运算生成得分（当然，这里是未归一化的），从而进一步用于分类任务：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/5tte77pk0n1p41qtvfedsuuz/image_1bptb27ad1q1174b1j04400610f1.png" alt="image_1bptb27ad1q1174b1j04400610f1.png-430.2kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/p6o0ak00f3x92ly6c6r7hu36/image_1bptb1te62n9u1b1bf8ilv11vaek.png" alt="image_1bptb1te62n9u1b1bf8ilv11vaek.png-96.5kB"></p>
+<h2 id="最大化目标间隔函数"><a href="#最大化目标间隔函数" class="headerlink" title="最大化目标间隔函数"></a>最大化目标间隔函数</h2><p>跟大多数机器学习模型一样，神经网络也需要一个优化目标，一个用来衡量模型好坏的度量。优化算法在做的事情呢，通常说来就是找到一组权重，来最优化目标或者最小化误差。这里我们讨论一个比较流行的度量，叫做最大化间隔目标函数。直观的理解就是我们要保证被正确分类的样本分数要高于错误分类的样本得分。</p>
+<p>继续用之前的例子，如果我们把一个正确标记的词窗 “Museums in Paris are amazing”(这里Paris是命名实体)的得分记做$s$,而错误标记的词窗“Not all Museums in Paris”(这里Paris不是命名实体)的得分记作$s_c$ (c表示这个词窗”corrupt”了)</p>
+<p>于是，我们的目标函数就是要最大化$(s-s_c)$ 或者最小化 $(s_c-s)$。然而$当s&gt;s_c$时，这表明标记正确，我们可以跳过这个样不进行训练。我们只需要将$s_c-s&gt;0$的样本训练到差最小就可以了。所以目标函数改进为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/v24frsw8asn1g8269i4z115a/image_1bptbjcp9m241fn018nlvhmsjnfe.png" alt="image_1bptbjcp9m241fn018nlvhmsjnfe.png-6.1kB"></p>
+<p>但是这个优化函数还不稳妥，因为它缺乏一个用来保证安全划分的间隔。我们希望那些被正确标记的词窗得分不仅要比错误标记的词窗得分高，还希望至少高出一个取值为正的间隔Δ。通常将$\Delta$取1。因此，我们修改优化目标为 ︰ </p>
+<p><img src="http://static.zybuluo.com/yhsdba/16fx20l4cvn8ijhayy3mpht8/image_1bptbmnl21588ufsuq71ijv1njrg8.png" alt="image_1bptbmnl21588ufsuq71ijv1njrg8.png-6.8kB"></p>
+<p>这实际上是将函数间隔转换为几何间隔。可以参考SVM优化函数的几何意义。</p>
+<p>通常通过负采样算法得到负例。</p>
+<p>这个目标函数的好处是，随着训练的进行，可以忽略越来越多的实例，而只专注于那些难分类的实例。</p>
+<h2 id="反向传播训练"><a href="#反向传播训练" class="headerlink" title="反向传播训练"></a>反向传播训练</h2><p>通过反向传播来训练模型中的各个参数。方法就是梯度下降：</p>
+<p>$\theta^{(t+1)=\theta^{(t)}-\alpha\Delta_{\theta^{(t)}}J}$</p>
+<p>通过下面一个简单的网络我们自己推导一遍：</p>
+<p><img src="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_3_Lecture3_toy_nn.jpg?imageView/2/w/300/q/100" alt="此处输入图片的描述"></p>
+<p>假设目标函数$J=(1+s_c-s)$取正值，我们希望更新权重参数$W_{14}$我们注意到$W_{14}$只在计算$z_1^{2}$和$a_1^{2}$的时候出现。这一点对于理解反向传播很重要-参数的反向传播梯度只被那些在正向计算中用到过这个参数的值所影响。$a_1^2$在之后的正向计算中和$W_1^2$相乘进而参与到分类得分的计算中。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/o5iyt8zpzszjbl8f35urbj6q/cs224d_3_Lecture3_example.jpg" alt="cs224d_3_Lecture3_example.jpg-4.9kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/btzt5ltm46wszi7t8bdf2os6/%E5%9B%BE%E5%83%8F%201.jpg" alt="图像 1.jpg-9.4kB"> </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ww5x186ub03m3hs7xc1zovpe/%E5%9B%BE%E5%83%8F%202.jpg" alt="图像 2.jpg-143.1kB"></p>
+<p>这里所谓的反向传播误差$\delta_i^k$其实就是最终的目标函数对于第k层上第i个激励输出值$z_i^k$的导数</p>
+<p>如我们要更新$W_{14}$</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ps1e6qg9snj7f1p258akw95z/IMG_20170914_164959.jpg" alt="IMG_20170914_164959.jpg-1732.9kB"></p>
+<h3 id="偏移量的更新"><a href="#偏移量的更新" class="headerlink" title="偏移量的更新"></a>偏移量的更新</h3><p><img src="http://static.zybuluo.com/yhsdba/o4ec44mk07efi3i7d8sj8slp/IMG_20170914_165413.jpg" alt="IMG_20170914_165413.jpg-1763kB"></p>
+<h2 id="反向传播的向量化"><a href="#反向传播的向量化" class="headerlink" title="反向传播的向量化"></a>反向传播的向量化</h2><p><img src="http://static.zybuluo.com/yhsdba/mydxmhea2eg2ey33xvgz6gpl/image_1bpvs2069qd61nvi1ibqb07kmu9.png" alt="image_1bpvs2069qd61nvi1ibqb07kmu9.png-17.7kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/1buj0nrwo555s5j93g2cnwgn/image_1bpvs451p1u1rfrdkp01jt0l0c1r.png" alt="image_1bpvs451p1u1rfrdkp01jt0l0c1r.png-19.7kB"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/15/2017-9-15-Stanford cs224d 深度学习与nlp（三）词窗与神经网络/" data-id="cjpcnx2jx001ylsv6759as7qo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
     </div>
   </div>
 
@@ -138,7 +1523,23 @@
       <ul>
         
           <li>
-            <a href="/2018/12/05/hello-world/">Hello World</a>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
           </li>
         
       </ul>

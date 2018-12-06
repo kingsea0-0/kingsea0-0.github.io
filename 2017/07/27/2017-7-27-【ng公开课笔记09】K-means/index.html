@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>【ng公开课笔记09】聚类 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
+<meta name="keywords" content="聚类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记09】聚类">
+<meta property="og:url" content="https://kingsea0-0.github.io/2017/07/27/2017-7-27-【ng公开课笔记09】K-means/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/devmv809j8ljztup508gupjf/image_1bm1e8qk81l9ca011c8k16cp1jlm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nuz257lv4n7x1b6poyavfrni/image_1bm1ecgmcpp21oo41k5qcr1h3413.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/2zmip2hwr5j9pnczsfhrpcsu/image_1bm1f3pesle187u1e5s1keqg7b1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nhgy9szvwowwo5twvi6gw1ac/image_1bm1f9giqtsfr68mq1rca7ag2a.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ng公开课笔记09】聚类">
+<meta name="twitter:description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-7-27-【ng公开课笔记09】K-means" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/27/2017-7-27-【ng公开课笔记09】K-means/" class="article-date">
+  <time datetime="2017-07-27T06:47:00.000Z" itemprop="datePublished">2017-07-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【ng公开课笔记09】聚类
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-k-均值算法"><a href="#1-k-均值算法" class="headerlink" title="1.k-均值算法"></a>1.k-均值算法</h1><p>k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：</p>
+<ul>
+<li>选择k个随机的点，称为<strong>聚类中心</strong></li>
+<li>对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。</li>
+<li>计算每一个组的平均值，将该组所关联的中心点移到平均值的位置</li>
+<li>重复上述步骤直到中心点不再变化<br>示例：  </li>
+</ul>
+<p>开始随机选两个聚类中心  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png" alt="image_1bm1e6upq1hunbf919op1bqu10m99.png-113.4kB">    </p>
+<p>将数据与聚类中心关联起来，分成了两类</p>
+<p><img src="http://static.zybuluo.com/yhsdba/devmv809j8ljztup508gupjf/image_1bm1e8qk81l9ca011c8k16cp1jlm.png" alt="image_1bm1e8qk81l9ca011c8k16cp1jlm.png-83.6kB"> </p>
+<p>第一次迭代，移动聚类中心</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nuz257lv4n7x1b6poyavfrni/image_1bm1ecgmcpp21oo41k5qcr1h3413.png" alt="image_1bm1ecgmcpp21oo41k5qcr1h3413.png-76.8kB">  </p>
+<p>继续迭代，直到聚类中心不再变化</p>
+<p><img src="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png" alt="image_1bm1edeek8tq4486caks6e1g.png-80kB"></p>
+<p>用 $u^1,u^2,……,u^k$ 来表示聚类中心，用 $c^1,c^2,……,c^m$ 来储存与第i个实例数据最近的聚类中心的索引，算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Repeat &#123; </span><br><span class="line">for i = 1 to m </span><br><span class="line">c (i)  := index (form 1 to K) of cluster centroid closest to x (i)  //cluster assignment step</span><br><span class="line"> </span><br><span class="line">for k = 1 to K </span><br><span class="line">μ k  := average (mean) of points assigned to cluster k //move centroid</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-优化目标"><a href="#2-优化目标" class="headerlink" title="2.优化目标"></a>2.优化目标</h1><p>K-均值最小化问题，是要最小化所有的数据点与其所关联的聚类中心点之间的距离之和，<br>因此  K-均值的代价函数（又称畸变函数  Distortion function）为： $J(c^1,…,c^m,u_1,…,u_k)=1/m\Sigma_{i=1}^m|x^i-u_{c^i}|^2$</p>
+<p> 我们的的优化目标便是找出使得代价函数最小<br>的  c (1) ,c (2) ,…,c (m)和 μ 1 ,μ 2 ,…,μ k：</p>
+<p>上一节的算法，第一个循环是用于减小 c (i)引起的代价，<br>而第二个循环则是用于减小 μ i  引起的代价。  </p>
+<h1 id="3-随机初始化"><a href="#3-随机初始化" class="headerlink" title="3.随机初始化"></a>3.随机初始化</h1><p>在运行 K-均值算法的之前，我们首先要随机初始化所有的聚类中心点：</p>
+<ol>
+<li><p>我们应该选择 K&lt;m，即聚类中心点的个数要小于所有训练集实例的数量  </p>
+</li>
+<li><p>随机选择 K 个训练实例，然后令 K 个聚类中心分别与这 K 个训练实例相等<br>K-均值的一个问题在于，它有可能会停留在一个局部最小值处，而这取决于初始化的情<br>况。  </p>
+</li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/2zmip2hwr5j9pnczsfhrpcsu/image_1bm1f3pesle187u1e5s1keqg7b1t.png" alt="image_1bm1f3pesle187u1e5s1keqg7b1t.png-359.5kB"> </p>
+<p>为了解决这个问题，我们通常需要多次运行 K-均值算法，每一次都重新进行随机初始<br>化，最后再比较多次运行 K-均值的结果，选择代价函数最小的结果。这种方法在 K 较小的时候（2–10）还是可行的，但是如果K较大，这么做也可能不会有明显地改善。 </p>
+<h1 id="4-选择聚类数"><a href="#4-选择聚类数" class="headerlink" title="4.选择聚类数"></a>4.选择聚类数</h1><p>通常根据具体问题人工手动选择。</p>
+<p>肘部法则：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/nhgy9szvwowwo5twvi6gw1ac/image_1bm1f9giqtsfr68mq1rca7ag2a.png" alt="image_1bm1f9giqtsfr68mq1rca7ag2a.png-139.3kB"> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/07/27/2017-7-27-【ng公开课笔记09】K-means/" data-id="cjpcnx2ie000wlsv6d59x2mje" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/聚类/">聚类</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/27/2017-7-23-【ng公开课笔记10】降维/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【ng公开课笔记10】降维
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/24/2017-7-23-【ng公开课笔记08】SVM/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【ng公开课笔记08】SVM</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

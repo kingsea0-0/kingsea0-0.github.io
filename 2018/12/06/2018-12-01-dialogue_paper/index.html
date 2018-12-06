@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>2018年对话系统相关论文 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="语料库相关2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling这篇是2018EMNLP最佳论文之一。 这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。 特点：  数据内容是有关旅游业服务的，包含7个领域包括：医疗、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018年对话系统相关论文">
+<meta property="og:url" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="语料库相关2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling这篇是2018EMNLP最佳论文之一。 这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。 特点：  数据内容是有关旅游业服务的，包含7个领域包括：医疗、">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/assets/markdown-img-paste-20181202164123679.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/assets/markdown-img-paste-20181202164413498.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/assets/markdown-img-paste-20181202220328894.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/assets/markdown-img-paste-20181203085211172.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/assets/markdown-img-paste-20181203111914535.png">
+<meta property="og:updated_time" content="2018-12-03T10:36:41.092Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018年对话系统相关论文">
+<meta name="twitter:description" content="语料库相关2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling这篇是2018EMNLP最佳论文之一。 这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。 特点：  数据内容是有关旅游业服务的，包含7个领域包括：医疗、">
+<meta name="twitter:image" content="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/assets/markdown-img-paste-20181202164123679.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018-12-01-dialogue_paper" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/2018-12-01-dialogue_paper/" class="article-date">
+  <time datetime="2018-12-06T13:52:28.928Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/NLP/">NLP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2018年对话系统相关论文
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="语料库相关"><a href="#语料库相关" class="headerlink" title="语料库相关"></a>语料库相关</h1><h2 id="2018EMNLP：MultiWOZ-A-Large-Scale-Multi-Domain-Wizard-of-Oz-Dataset-for-Task-Oriented-Dialogue-Modelling"><a href="#2018EMNLP：MultiWOZ-A-Large-Scale-Multi-Domain-Wizard-of-Oz-Dataset-for-Task-Oriented-Dialogue-Modelling" class="headerlink" title="2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling"></a>2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling</h2><p>这篇是2018EMNLP最佳论文之一。</p>
+<p>这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。</p>
+<p>特点：</p>
+<ul>
+<li>数据内容是有关旅游业服务的，包含7个领域包括：医疗、警察、宾馆、餐厅、出租车、火车、吸引力等</li>
+<li>数据量大。共有10438个对话，70%的对话超过10轮。比目前的数据集大一个数量级。与现有数据集相比，句子的长度更长，回复更多样。</li>
+<li>3406个单一领域的对话，7032个涉及多领域的对话（2-5个领域）</li>
+<li>数据结构包括：目标、多个用户和系统的语句、信念状态、每轮带有slot的一系列对话</li>
+</ul>
+<p>用途：作为一种新的benchmark：</p>
+<ul>
+<li>dialogue state tracking</li>
+<li>dialogue management and response generation</li>
+<li>Natural Language Generation from a structured meaning representation</li>
+</ul>
+<h1 id="端到端的对话"><a href="#端到端的对话" class="headerlink" title="端到端的对话"></a>端到端的对话</h1><h2 id="2018EMNLP：Learning-End-to-End-Goal-Oriented-Dialog-with-Multiple-Answers"><a href="#2018EMNLP：Learning-End-to-End-Goal-Oriented-Dialog-with-Multiple-Answers" class="headerlink" title="2018EMNLP：Learning End-to-End Goal-Oriented Dialog with Multiple Answers"></a>2018EMNLP：Learning End-to-End Goal-Oriented Dialog with Multiple Answers</h2><h1 id="引入外部知识相关"><a href="#引入外部知识相关" class="headerlink" title="引入外部知识相关"></a>引入外部知识相关</h1><h2 id="2018-AAAI：Augmenting-End-to-End-Dialogue-Systems-with-Commonsense-Knowledge"><a href="#2018-AAAI：Augmenting-End-to-End-Dialogue-Systems-with-Commonsense-Knowledge" class="headerlink" title="2018 AAAI：Augmenting End-to-End Dialogue Systems with Commonsense Knowledge"></a>2018 AAAI：Augmenting End-to-End Dialogue Systems with Commonsense Knowledge</h2><p>这篇文章的观点是，由于外部知识数量巨大，所以更适合使用外部存储模块，而不是传统的在模型中通过参数进行编码。<br>它用来进行实验的问题限定在非任务导向领域，检索式方法的对话系统。</p>
+<h3 id="关于常识的检索："><a href="#关于常识的检索：" class="headerlink" title="关于常识的检索："></a>关于常识的检索：</h3><p>我们假设常识库是由一系列关于概念C的断言A构成。每一条断言$a\in A$ 可以表示为 $&lt;c_1,r,c_2&gt;,r \in R$表示c1和c2之间的关系。同时建立一个关于A的字典H。每一个概念c作为key，与c有关的a作为value。目的是可以检索到一条信息中涉及概念的全部常识。$A_x$为与c相关的全部断言的集合。</p>
+<p><img src="assets/markdown-img-paste-20181202164123679.png" alt=""></p>
+<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>将常识融入进对话模型的方法是用另一个额外的LSTM对论断a进行编码</p>
+<p><img src="assets/markdown-img-paste-20181202164413498.png" alt=""></p>
+<p>上半部分是常识论断的编码网络，下半部分是一个Dual-LSTM网络，用于回复的编码。原来a的形式是 $&lt;c_1,r,c_2&gt;$，由于c可能是一个多词组的概念，所以a就被转化为了token序列 $[c_{11},c_{12},c_{13},…,r,c_{21},c_{22},c_{23}…]$</p>
+<p>对于R我们将其加入词汇表V中，将r看待为一个常规的单词来编码。同时我们决定不把每一个c都作为编码单元，因为数量太多。使用LSTM将a编码为embedding层的表示 $\vec a$ 。这个方法对于自然表达中良好的结构化断言都适用。</p>
+<p>将断言a与回复y的匹配得分定义为：$m(a,y)=\vec a^TW_a\vec y$</p>
+<p>$W_a \in R^{D*D}$ 在训练中被学习。</p>
+<p>对于断言集$A_x$<br>$m(A_x,y)=max_{a\in A_x}m(a,y)$，大部分$A_x与y相关性不大，只考虑得分最高的m对应的a。将得分最高的m(A_x,y)融入Dual-LSTM编码器。$</p>
+<p>总的Tri-LSTM编码模型可以被定义为 $f(x,y)=\theta(\vec x^TW\vec y+m(A_x,y))$</p>
+<p>$这个式子表明了最终的回复y不仅与x有关，还与x相关的知识m(A_x,y)有关$</p>
+<h2 id="2018-ACL-Knowledge-Diffusion-for-Neural-Dialogue-Generation"><a href="#2018-ACL-Knowledge-Diffusion-for-Neural-Dialogue-Generation" class="headerlink" title="2018 ACL Knowledge Diffusion for Neural Dialogue Generation"></a>2018 ACL Knowledge Diffusion for Neural Dialogue Generation</h2><p>该论文提出了一种 neural knowl-edge diffusion (NKD)网络来将知识引入对话生成，不仅可以进行对输入的表述进行事实匹配，还能将事实进行扩展，融合到相似的实体中。</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>文中提到了知识库的应用之一是问答，常见的事实表示形式是一种三元关系（主题，关系，客体）。这在对话中同样重要，但是还不够，对话中常出现一种实体转移现象，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: Is there anything like the [Titanic]?</span><br><span class="line">B: I think the love story in ﬁlm [Waterloo Bridge] is beautiful, too.</span><br></pre></td></tr></table></figure></p>
+<p>涉及到的实体从《泰坦尼克号》扩展到了《魂断蓝桥》。NKD模型就可以表示这种实体的转移和扩展。</p>
+<h3 id="NKD模型"><a href="#NKD模型" class="headerlink" title="NKD模型"></a>NKD模型</h3><p><img src="assets/markdown-img-paste-20181202220328894.png" alt="NKD"></p>
+<p>输入：$X=(x_1,x_2,…,x_{NX})$</p>
+<p>输出: $Y=(y_1,y_2,…,y_{NY})$</p>
+<p>知识库K中的事实是以三元关系（主体、关系、客体）保存的。</p>
+<p>由上图可以看到，模型主要有以下几个部分组成：</p>
+<h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>将离散的tokens转化为向量表示。特别之处在于，为了捕捉不同方面的信息，利用两个独立的RNN产生两种隐状态序列：$H^C=(h_1^C,h_2^C,…,h_{NX}^C)和H^K=(h_1^K,…,h_{NX}^K)$。我们利用最终的隐状态，$h_{NX}^C$输入上下文RNN来追踪对话状态。另一个$h_{NX}^K$用于知识检索，并用来为输入表述中的知识实体和关系进行编码。</p>
+<h5 id="Knowledge-Retriever"><a href="#Knowledge-Retriever" class="headerlink" title="Knowledge Retriever"></a>Knowledge Retriever</h5><p>知识检索通过从知识库中提取一系列事实并明确它们的重要性，可以让以知识为基础的对话系统既具有收敛性，同时在思考能力上又具有扩展性。对于思考能力的扩展主要依靠：事实匹配和实体扩展，如下图：<br><img src="assets/markdown-img-paste-20181203085211172.png" alt=""></p>
+<ul>
+<li><strong>事实匹配</strong></li>
+</ul>
+<p>首先输入表述X和提取的隐状态$h_{NX}^K$，从知识库和历史对话中提取相关的事实。预先定义的事实数量的事实 $F={f_1,f_2,..f_{Nf}}$通过字符串匹配、实体连接、命名实体识别来获得。如上图所示，第一句话“Titanic”被认为是一个实体，所有相关的三元知识结构都被提取出来。接着通过entity embedding和relation embedding将实体和这些知识被转化为事实表示 $h_f={h_{f1},…,h_{fN_f}}$。事实和输入之间的关系系数$r^f$范围是[0,1],通过非线性函数或者子神经网络计算。比如可以用一个多层感知机MLP：</p>
+<p>$r_k^f=MLP([h_{NX}^K,h_{fk}])$</p>
+<p>对于多轮对话，之前表述中的实体也会被继承和保留，就像上图中的点连线所示。通过对$h_f$的加权平均，一系列事实总结为相关事实表示$C^f$</p>
+<p>  $C^f=\frac{\sum^{N_f}_{k=1}r_k^fh_{fk}}{\sum_{k=1}^{N_f}r_k^f}$</p>
+<ul>
+<li><strong>实体扩展</strong></li>
+</ul>
+<p>通过多层感知器计算知识库中实体(除了在前面出现的内容)与相关事实表示之间的相似性，得到相似系数re</p>
+<p>$r_k^e=MLP([h_{NX}^K,C^f,e_k])$</p>
+<p>$e_k$是entity embedding。选出top $N_e$个实体作为相似实体$E={e_1,e_2,…,e_{Ne}}$。相似实体的表示$C_s$定义为：</p>
+<p>  $C^s=\frac{\sum^{N_e}_{k=1}r_k^ee_k}{\sum_{k=1}^{N_e}r_k^e}$</p>
+<p>如上图，第一轮对话通过事实匹配得到最相关的事实是(Titanic,direct_by,JamesCameron)。当事实匹配完成，如果相关性很高，直觉上就不需要再进行实体扩展。而且进行实体扩展后发现相似度也不高。</p>
+<p>但在第二轮对话，没有对应输入的知识，但是之前继承过来的实体“Titanic”得分较高，我们就对”Titanic”进行实体扩展，得到相似的实体”Waterloo Bridge”和“Posedion”。同时可以看到这两个实体的相似度得分在第二轮比第一轮要高。说明比第一轮的对话更合适。</p>
+<h4 id="Context-RNN"><a href="#Context-RNN" class="headerlink" title="Context RNN"></a>Context RNN</h4><p>记录了话语（utterance）层面的对话状态。它包括utterance representation和knowledge representation.隐状态在这一层被更新为:</p>
+<p>$h_t^T=RNN(h_t^C,[c^f,C^s],h_{t-1}^T)$</p>
+<p>$h_t^T$被转移到解码器来引导回答生成</p>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="assets/markdown-img-paste-20181203111914535.png" alt=""></p>
+<p>主要介绍了Vanilla decoder和Probabilistic gated decoder</p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>作者爬取了百度知道和豆瓣电影的数据和讨论作为数据集。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2018/12/06/2018-12-01-dialogue_paper/" data-id="cjpcnx2jc001plsv656t2wdmg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/06/2018-11-28-dialogue_system_overview/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">对话系统综述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

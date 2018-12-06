@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Stanford CS224d 深度学习与自然语言处理笔记(一) word2vec | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言 一直对nlp比较感兴趣，最近开始学习Stanford大学cs224d课程，对深度学习在nlp上的应用进行一些了解。之后每节课上完都会根据课程内容和一些其他人的博客在博客理笔记。第一节课绪论的内容非常简单，就不写了。从第二节课word2vec开始写起。 计算机中如何表示一个词的意思 word vector是一种在计算机中表达word meaning的方式。在Webster词典中，关于meani">
+<meta name="keywords" content="word2vec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford CS224d 深度学习与自然语言处理笔记(一) word2vec">
+<meta property="og:url" content="https://kingsea0-0.github.io/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言 一直对nlp比较感兴趣，最近开始学习Stanford大学cs224d课程，对深度学习在nlp上的应用进行一些了解。之后每节课上完都会根据课程内容和一些其他人的博客在博客理笔记。第一节课绪论的内容非常简单，就不写了。从第二节课word2vec开始写起。 计算机中如何表示一个词的意思 word vector是一种在计算机中表达word meaning的方式。在Webster词典中，关于meani">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/9kj8idjutrvww8ab3kd7gbwx/image_1bombg7df1nk5n7s6c03kl28a9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/yys085tfywnrncfeq3ls5ap6/image_1bomerc3b1nbh10bv16rupu4m7vm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/tgv2t9vtmk135tf0bmcdebad/image_1bomerrtq15fme7p1ehv15pbc1513.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/968pmw305rj2by2hndmn2yff/image_1boml0ank1veb16318stf659t95r.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/81315otrozq35zxgvh0w9q17/image_1boml0lbo1d3jnlv8dn185j21g68.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/uz0bhcxuyz7c40s0o9l5faiq/image_1boml47i4183517va1nlb1of5cgm6l.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/47tgpb3x8rzyum6sjp4vlxrl/image_1boml9glatutjefafc186f1787f.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/dxfi9f00mc9lsmhzaaj1rdmi/image_1boml8d321dl62s510r6n7v1ktn72.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/rio0ylh4nv751knqssaqdpkp/image_1bomlatg418m6r0b16s2uslme7s.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/vsajjaxirwhmjihhqbt9bc05/image_1bomlucja1uanmuo1ir8dj2ogh89.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/7kh0mfxyrs2ujks72drurvk6/image_1bomm0cfot451k2p1v2bqfo1p3696.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/cg962k7xxxsop7fmz3rlbmc3/TIM%E5%9B%BE%E7%89%8720170829180518.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1yzn0bn6xnqt6rsz39b37hf3/TIM%E5%9B%BE%E7%89%8720170829180525.jpg">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/faq57yk87g0spqb2n6rtx4e1/image_1bon1ouk92fhm8l1u2uet4s6ba.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stanford CS224d 深度学习与自然语言处理笔记(一) word2vec">
+<meta name="twitter:description" content="前言 一直对nlp比较感兴趣，最近开始学习Stanford大学cs224d课程，对深度学习在nlp上的应用进行一些了解。之后每节课上完都会根据课程内容和一些其他人的博客在博客理笔记。第一节课绪论的内容非常简单，就不写了。从第二节课word2vec开始写起。 计算机中如何表示一个词的意思 word vector是一种在计算机中表达word meaning的方式。在Webster词典中，关于meani">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/9kj8idjutrvww8ab3kd7gbwx/image_1bombg7df1nk5n7s6c03kl28a9.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kingsea0-0.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/" class="article-date">
+  <time datetime="2017-08-29T08:00:00.000Z" itemprop="datePublished">2017-08-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nlp/">nlp</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Stanford CS224d 深度学习与自然语言处理笔记(一) word2vec
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p>一直对nlp比较感兴趣，最近开始学习Stanford大学cs224d课程，对深度学习在nlp上的应用进行一些了解。之后每节课上完都会根据课程内容和一些其他人的博客在博客理笔记。第一节课绪论的内容非常简单，就不写了。从第二节课word2vec开始写起。</p>
+<h1 id="计算机中如何表示一个词的意思"><a href="#计算机中如何表示一个词的意思" class="headerlink" title="计算机中如何表示一个词的意思"></a>计算机中如何表示一个词的意思</h1><hr>
+<p>word vector是一种在计算机中表达word meaning的方式。在Webster词典中，关于meaning有三种定义：</p>
+<ul>
+<li>the idea that is represented by a word, phrase, etc.</li>
+<li>the idea that a person wants to express by using words, signs, etc.</li>
+<li>the idea that is expressed in a word of writing, art, etc.</li>
+</ul>
+<p>计算语言学中常见的表示词义的方式是WordNet那样的词库。包含有上位词（is-a)关系和同义词集.比如NLTK中可以通过WordNet查询熊猫的hypernyms (is-a，上位词)，得到“食肉动物”“动物”之类的上位词。也可以查询“good”的同义词——“just品格好”“ripe熟了”。</p>
+<p>这种表示方式叫做<strong>discrete representation</strong></p>
+<h2 id="discrete-representation-amp-amp-one-hot-vector"><a href="#discrete-representation-amp-amp-one-hot-vector" class="headerlink" title="discrete representation &amp;&amp; one-hot vector"></a>discrete representation &amp;&amp; one-hot vector</h2><p>它有许多缺点：</p>
+<ul>
+<li>缺少新词</li>
+<li>主观化</li>
+<li>需要耗费大量人力去整理</li>
+<li><strong>无法准确计算词之间的相似度</strong></li>
+</ul>
+<p>传统的基于规则或基于统计的自然语义处理方法将单词看作一个原子符号：hotel, conference, walk。在向量空间的范畴里，这是一个1很多0的向量表示：[0,0,0,0,…,0,1,0,…,0,0,0]。<br>这种表示方法存在一个重要的问题就是“词汇鸿沟”现象：任意两个词之间都是孤立的。光从这两个向量中看不出两个词是否有关系。比如Dell notebook battery size和Dell laptop battery capacity。而one-hot向量是正交的，无法通过任何运算得到相似度。</p>
+<h2 id="Distributional-similarity-based-representations"><a href="#Distributional-similarity-based-representations" class="headerlink" title="Distributional similarity based representations"></a>Distributional similarity based representations</h2><p>现代nlp一个很成功的思想是：将单词放到上下文中去理解它的含义。</p>
+<blockquote>
+<p>You shall know a word by the company it keeps</p>
+</blockquote>
+<p><img src="http://static.zybuluo.com/yhsdba/9kj8idjutrvww8ab3kd7gbwx/image_1bombg7df1nk5n7s6c03kl28a9.png" alt="image_1bombg7df1nk5n7s6c03kl28a9.png-280.7kB"></p>
+<h3 id="通过向量表示词语含义"><a href="#通过向量表示词语含义" class="headerlink" title="通过向量表示词语含义"></a>通过向量表示词语含义</h3><p>通过调整一个单词及其上下文单词的向量，使得根据两个向量可以推测两个词语的相似度；或根据向量可以预测词语的上下文。这种手法也是递归的，根据向量来调整向量，与词典中意项的定义相似。</p>
+<p>另外，distributed representations与symbolic representations（localist representation、one-hot representation）相对；discrete representation则与后者及denotation的意思相似。切不可搞混distributed和discrete这两个单词。</p>
+<h2 id="学习神经网络word-embedding的基本思路"><a href="#学习神经网络word-embedding的基本思路" class="headerlink" title="学习神经网络word embedding的基本思路"></a>学习神经网络word embedding的基本思路</h2><p>定义一个预测某个单词上下文的模型：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/yys085tfywnrncfeq3ls5ap6/image_1bomerc3b1nbh10bv16rupu4m7vm.png" alt="image_1bomerc3b1nbh10bv16rupu4m7vm.png-4.5kB"></p>
+<p>损失函数定义如下：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/tgv2t9vtmk135tf0bmcdebad/image_1bomerrtq15fme7p1ehv15pbc1513.png" alt="image_1bomerrtq15fme7p1ehv15pbc1513.png-3.5kB"></p>
+<p>这里的$w_{-t}$表示$w_t$的上下文（负号通常表示除了某某之外），如果完美预测，损失函数为零。</p>
+<p>然后在一个大型语料库中的不同位置得到训练实例，调整词向量，最小化损失函数。</p>
+<h2 id="word2vec细节"><a href="#word2vec细节" class="headerlink" title="word2vec细节"></a>word2vec细节</h2><p>根据最大似然估计，目标函数定义为所有位置的预测结果的乘积：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/968pmw305rj2by2hndmn2yff/image_1boml0ank1veb16318stf659t95r.png" alt="image_1boml0ank1veb16318stf659t95r.png-110.1kB"></p>
+<p>取对数便于优化，加负号将最小化变为最大化（习惯而已）<br><img src="http://static.zybuluo.com/yhsdba/81315otrozq35zxgvh0w9q17/image_1boml0lbo1d3jnlv8dn185j21g68.png" alt="image_1boml0lbo1d3jnlv8dn185j21g68.png-161.4kB"></p>
+<p>预测到的某个上下文条件概率$p(w_{t+j}|wt)$可由softmax得到：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/uz0bhcxuyz7c40s0o9l5faiq/image_1boml47i4183517va1nlb1of5cgm6l.png" alt="image_1boml47i4183517va1nlb1of5cgm6l.png-297.6kB"></p>
+<p>o是输出的上下文词语中的确切某一个，c是中间的词语。u是对应的上下文词向量，v是词向量。</p>
+<p>注：关于softmax函数的原理</p>
+<p><img src="http://static.zybuluo.com/yhsdba/47tgpb3x8rzyum6sjp4vlxrl/image_1boml9glatutjefafc186f1787f.png" alt="image_1boml9glatutjefafc186f1787f.png-553kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/dxfi9f00mc9lsmhzaaj1rdmi/image_1boml8d321dl62s510r6n7v1ktn72.png" alt="image_1boml8d321dl62s510r6n7v1ktn72.png-125.7kB"></p>
+<p>指数函数可以把实数映射成正数，然后归一化得到概率。<br>softmax之所叫softmax，是因为指数函数会导致较大的数变得更大，小数变得微不足道；这种选择作用类似于max函数。</p>
+<h2 id="Skipgram（预测上下文）"><a href="#Skipgram（预测上下文）" class="headerlink" title="Skipgram（预测上下文）"></a>Skipgram（预测上下文）</h2><p><img src="http://static.zybuluo.com/yhsdba/rio0ylh4nv751knqssaqdpkp/image_1bomlatg418m6r0b16s2uslme7s.png" alt="image_1bomlatg418m6r0b16s2uslme7s.png-489.6kB"></p>
+<p>图中各种符号的含义：</p>
+<ul>
+<li>$w_t$:one-hot向量，对应含义的那一项为1，其他为0.</li>
+<li>W：词向量。这就是我们要求的部分（我们的目的不就是要用一个新的向量来表示一个词嘛，而且这个向量可以反映词与词之间的关系。而W这个矩阵每一个列向量就是一个词的表示。）</li>
+<li>$V_c$:$W*w_t$得到的中心词的词向量<br>最后用中心词词向量乘以W的转置得到对每个词语的“相似度”，对相似度取softmax得到概率，与答案对比计算损失。</li>
+</ul>
+<p>如果不是很明白，可以自己写一个句子带到上面试一试，这里就不具体说明了。</p>
+<p>上面手写图的抽象版：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/vsajjaxirwhmjihhqbt9bc05/image_1bomlucja1uanmuo1ir8dj2ogh89.png" alt="image_1bomlucja1uanmuo1ir8dj2ogh89.png-121kB"></p>
+<h1 id="训练模型：计算参数向量的梯度"><a href="#训练模型：计算参数向量的梯度" class="headerlink" title="训练模型：计算参数向量的梯度"></a>训练模型：计算参数向量的梯度</h1><hr>
+<p>把所有参数写进向量θθ，对d维的词向量和大小V的词表来讲，有：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7kh0mfxyrs2ujks72drurvk6/image_1bomm0cfot451k2p1v2bqfo1p3696.png" alt="image_1bomm0cfot451k2p1v2bqfo1p3696.png-35.5kB"></p>
+<p>这里上标2是因为上文和下文各有V个备胎</p>
+<p>然后用梯度下降法求得参数。</p>
+<p>自己手写了一下，懒得打了</p>
+<p><img src="http://static.zybuluo.com/yhsdba/cg962k7xxxsop7fmz3rlbmc3/TIM%E5%9B%BE%E7%89%8720170829180518.jpg" alt="TIM图片20170829180518.jpg-1501.6kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/1yzn0bn6xnqt6rsz39b37hf3/TIM%E5%9B%BE%E7%89%8720170829180525.jpg" alt="TIM图片20170829180525.jpg-1378.7kB"></p>
+<h1 id="连续词袋模型CBOM-这里视频中没有讲，根据一些材料和博客补充一下"><a href="#连续词袋模型CBOM-这里视频中没有讲，根据一些材料和博客补充一下" class="headerlink" title="连续词袋模型CBOM(这里视频中没有讲，根据一些材料和博客补充一下)"></a>连续词袋模型CBOM(这里视频中没有讲，根据一些材料和博客补充一下)</h1><ul>
+<li>对于m个词长度的输入上下文，我们产生它们的one-hot向量$（x^{(c−m)},⋯,x^{(c−1)},x^{(c+1)},⋯,x^{(c+m)}）$。</li>
+<li><p>我们得到上下文的嵌入词向量     $（v_{c−m+1}=Wx_(c−m+1),⋯,v_{c$+m}=Vx^{(c+m)}）$</p>
+</li>
+<li><p>将这些向量取平均$\hat{v}=(v_{c−m}+v_{c−m+1}+⋯+v_{c+m})/2m$</p>
+</li>
+<li>产生一个得分向量$z=U\hat{v}$</li>
+<li>将得分向量转换成概率分布形式y^=softmax(z)</li>
+<li>我们希望我们产生的概率分布,与真实概率分布$\hat{y}$相匹配。而y刚好也就是我们期望的真实词语的one-hot向量。</li>
+</ul>
+<p>步骤与skip-gram基本一致，不同的是代价函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/faq57yk87g0spqb2n6rtx4e1/image_1bon1ouk92fhm8l1u2uet4s6ba.png" alt="image_1bon1ouk92fhm8l1u2uet4s6ba.png-34.8kB"></p>
+<p>我们可以用随机梯度下降法去更新未知参数的梯度。</p>
+<p>参考：<a href="http://www.hankcs.com/nlp/word-vector-representations-word2vec.html" target="_blank" rel="noopener">http://www.hankcs.com/nlp/word-vector-representations-word2vec.html</a></p>
+<p><a href="http://blog.csdn.net/longxinchen_ml/article/details/51567960" target="_blank" rel="noopener">http://blog.csdn.net/longxinchen_ml/article/details/51567960</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kingsea0-0.github.io/2017/08/29/2017-8-29-Stanford cs224d 深度学习与nlp（一）word2vec/" data-id="cjpcnx2jt001ulsv6g58nln6l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/word2vec/">word2vec</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/31/2017-8-31-Stanford cs224d 深度学习与nlp（二）高级词向量/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Stanford cs224d 深度学习与nlp(二) 高级词向量
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/15/2017-8-25-SVD简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SVD简介</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nlp/">nlp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA/">PCA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PCA-LDA/">PCA LDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVD/">SVD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVM/">SVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb-数据库/">mongodb 数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/word2vec/">word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习-python/">机器学习 python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/概述/">概述</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫-pyhon-nlp/">爬虫 pyhon nlp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络/">神经网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/神经网络-word2vec/">神经网络 word2vec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性回归/">线性回归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/聚类/">聚类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调参方法/">调参方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/过拟合/">过拟合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/PCA/" style="font-size: 10px;">PCA</a> <a href="/tags/PCA-LDA/" style="font-size: 10px;">PCA LDA</a> <a href="/tags/SVD/" style="font-size: 10px;">SVD</a> <a href="/tags/SVM/" style="font-size: 10px;">SVM</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/mongodb-数据库/" style="font-size: 10px;">mongodb 数据库</a> <a href="/tags/word2vec/" style="font-size: 20px;">word2vec</a> <a href="/tags/数据预处理/" style="font-size: 10px;">数据预处理</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/机器学习-python/" style="font-size: 10px;">机器学习 python</a> <a href="/tags/概述/" style="font-size: 10px;">概述</a> <a href="/tags/爬虫-pyhon-nlp/" style="font-size: 10px;">爬虫 pyhon nlp</a> <a href="/tags/神经网络/" style="font-size: 10px;">神经网络</a> <a href="/tags/神经网络-word2vec/" style="font-size: 10px;">神经网络 word2vec</a> <a href="/tags/线性回归/" style="font-size: 10px;">线性回归</a> <a href="/tags/聚类/" style="font-size: 10px;">聚类</a> <a href="/tags/调参方法/" style="font-size: 10px;">调参方法</a> <a href="/tags/过拟合/" style="font-size: 10px;">过拟合</a> <a href="/tags/逻辑回归/" style="font-size: 10px;">逻辑回归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/06/2018-12-01-dialogue_paper/">2018年对话系统相关论文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-11-28-dialogue_system_overview/">对话系统综述</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2018-02-17-周志华《机器学习》笔记01 模型评估/">“周志华《机器学习》笔记01 模型评估”</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-8-25-PCA简介/">PCA简介</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/06/2017-6-3-python的多线程和多进程/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
