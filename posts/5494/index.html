@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="神经网络,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、非线性假设当特征数量太多时，如果再用多项式进行预测，项数会非常多($n^2/2$)所以普通的线性回归和逻辑回归将不能很好的解决这类复杂的问题，因此模拟人的大脑，构建了神经网络   二、模型表示神经元模型:      hθ(x)=g(θTx)=11+e−θTx，我们称这是一个以S型函数作为激励函数的人工神经元每个神经元都是一个学习模型，它采纳一些特征作为输入，并产生一个输出，θ在神经网络中也叫做">
+<meta name="keywords" content="神经网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记05】神经网络">
+<meta property="og:url" content="https://kingsea0-0.github.io/posts/5494/index.html">
+<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:description" content="一、非线性假设当特征数量太多时，如果再用多项式进行预测，项数会非常多($n^2/2$)所以普通的线性回归和逻辑回归将不能很好的解决这类复杂的问题，因此模拟人的大脑，构建了神经网络   二、模型表示神经元模型:      hθ(x)=g(θTx)=11+e−θTx，我们称这是一个以S型函数作为激励函数的人工神经元每个神经元都是一个学习模型，它采纳一些特征作为输入，并产生一个输出，θ在神经网络中也叫做">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-f5d71d77a4c34d4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/yo5jsdfa4rm9nx0fgsyu4j2x/image_1bh6jtd9t50b1mov1ra2108h18o19.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/v2f5hkj2urt2kpm0rse7eosa/image_1bh6kirs166n1cvt12saa9t1ko7m.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-88ac0f2a36ea6234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-57e1cf093c2858ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-dd89312e20fb18e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-057fbc656b1799a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-91b5c3c2f022aae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-844a59eea558cd17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-fd85bab91732fbfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-c24fa92373b3dd66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-632f4670ccd417dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-1e1f1ca312b18b0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2478435-cfdb2c8f0235ca2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/j6t01jtg13e9cysmu7lx8aj9/image_1bh6ufmnid8u1rg1o5sga13e213.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nnskhtgvtw2fay9j90oc8xje/image_1bh6unph8vrt44fmk5htk81v1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/syumrd3cndbp6ia1zi82qcuz/image_1bh6usvb2fhm116cbpjnjj5361t.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ng公开课笔记05】神经网络">
+<meta name="twitter:description" content="一、非线性假设当特征数量太多时，如果再用多项式进行预测，项数会非常多($n^2/2$)所以普通的线性回归和逻辑回归将不能很好的解决这类复杂的问题，因此模拟人的大脑，构建了神经网络   二、模型表示神经元模型:      hθ(x)=g(θTx)=11+e−θTx，我们称这是一个以S型函数作为激励函数的人工神经元每个神经元都是一个学习模型，它采纳一些特征作为输入，并产生一个输出，θ在神经网络中也叫做">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2478435-f5d71d77a4c34d4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingsea0-0.github.io/posts/5494/">
+
+
+
+
+
+  <title>【ng公开课笔记05】神经网络 | Kingsea's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kingsea's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">data garbage producer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/5494/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kingsea's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【ng公开课笔记05】神经网络</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T15:34:00+08:00">
+                2017-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、非线性假设"><a href="#一、非线性假设" class="headerlink" title="一、非线性假设"></a>一、非线性假设</h2><p>当特征数量太多时，如果再用多项式进行预测，项数会非常多($n^2/2$)<br>所以普通的线性回归和逻辑回归将不能很好的解决这类复杂的问题，因此模拟人的大脑，构建了神经网络  </p>
+<h2 id="二、模型表示"><a href="#二、模型表示" class="headerlink" title="二、模型表示"></a>二、模型表示</h2><p>神经元模型:  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-f5d71d77a4c34d4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="神经元模型">  </p>
+<p>hθ(x)=g(θTx)=11+e−θTx，我们称这是一个以S型函数作为激励函数的人工神经元<br>每个神经元都是一个学习模型，它采纳一些特征作为输入，并产生一个输出，θ在神经网络中也叫做权重   </p>
+<p>神经网络：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/yo5jsdfa4rm9nx0fgsyu4j2x/image_1bh6jtd9t50b1mov1ra2108h18o19.png" alt="image_1bh6jtd9t50b1mov1ra2108h18o19.png-100.5kB">  </p>
+<p>参数：</p>
+<blockquote>
+<p>$a_i^{(j)}$:第j层的第i个单元  </p>
+</blockquote>
+<blockquote>
+<p>$\theta^(j)$第j层映射到第j+1层时的权重矩阵  </p>
+</blockquote>
+<p>对于θ矩阵，行数=下一层的单元数，列数=上一行的单元数+1（bias unit）<br>如$\theta^1$的尺寸为3*4 </p>
+<p><strong>前向传播算法：</strong>  </p>
+<p>激活单元和输出单元的表达式  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/v2f5hkj2urt2kpm0rse7eosa/image_1bh6kirs166n1cvt12saa9t1ko7m.png" alt="image_1bh6kirs166n1cvt12saa9t1ko7m.png-25.7kB">  </p>
+<p>$\theta_{32}^{(1)}$即表示将第一层的第二个单元传导到下一层的第三个单元(即下标的前一个数是下一层的单元位置)。<br>如果用矩阵表示：<br>$$<br>X=\begin{bmatrix}<br>x_0\x_1\x_2\x_3<br>\end{bmatrix}<br>$$<br>$$<br>\theta=\begin{bmatrix}<br>\theta_{10}&amp;\cdots\\vdots&amp;\ddots\\cdots&amp;\cdots&amp;\theta_{33}<br>\end{bmatrix}<br>$$ </p>
+<p>$$a=\begin{bmatrix}<br>a_1\a_2\a_3<br>\end{bmatrix}$$</p>
+<p>我们可以得到$\theta*X=a$  </p>
+<p><strong>模型的向量化表示</strong>  </p>
+<p>令$z^{(2)}=\Theta^{(1)}x$,$h_\theta(x)=a^{(3)}=g(z^{(3)})$<br>这是针对一个训练实例进行的计算，如果对整个训练集进行计算，则需要将训练集特征矩阵进行转置，使同一个实例都在一列上。即：<br>$z^{(2)}=\Theta^{(1)}*X^T$<br>$a^{(2)}=g(z^{(2)})$<br>神经网络就像是logistic regression，只不过把输入向量[x1-x3]变成了中间层的单元。  </p>
+<h2 id="三、神经网络的优势"><a href="#三、神经网络的优势" class="headerlink" title="三、神经网络的优势"></a>三、神经网络的优势</h2><p>我们可以把$a_i$看作是更高级的特征值，他们是由x决定的，因为是梯度下降的，所以a是变化的，并且越来越厉害，这些更高级的特征值比仅仅将x进行幂运算效果要好，能更好的预测数据</p>
+<h2 id="四、对特征的直观理解"><a href="#四、对特征的直观理解" class="headerlink" title="四、对特征的直观理解"></a>四、对特征的直观理解</h2><p>1.and or not  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-88ac0f2a36ea6234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>2.xor:先将and和not进行组合<br>即(notx1)and(notx2)构成第二层，再进行一次or得到第三层  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-57e1cf093c2858ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>3.多类分类：<br>识别行人、汽车、卡车、摩托车  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-dd89312e20fb18e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="五、反向传播算法"><a href="#五、反向传播算法" class="headerlink" title="五、反向传播算法"></a>五、反向传播算法</h2><p>1.几个标记方法：   </p>
+<p>m组训练数据<br>$x^{(1)}, x^{(2)}……x^{(m)}$<br>神经网络总的层数L；<br>第l层的单元数$s_l$（不包括偏差单元）；<br>输出层的单元数K。<br>①对于两类分类问题<br>y=0或1，只有一个输出单元，hΘ(x)∈R，故$s_L$<br>=1,即K=1 .</p>
+<p>②对于多类分类问题<br>y是一个向量，y∈$R_K$，hΘ(x)∈$R_K$，SL=K(K&gt;=3)。    </p>
+<p>2.逻辑回归的代价函数  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-057fbc656b1799a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>3.神经网络的代价函数（多类分类问题）  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-91b5c3c2f022aae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>该式子的含义（个人现阶段理解），共有k个分类，所以对于每一行数据，h(x(i))是一个k维的向量（有个输出结果），Σk 即将每一个结果的代价求和，再将m行数据的代价求和，得出总的代价。正则化的式子：每一层有l个单元，对应每层的theta是一个S(l+1)*S(L)的矩阵  </p>
+<p>4.反向传播算法<br>先通过一个例子来看：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-844a59eea558cd17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>即前向传播是通过ai求得zi+1,反向传播是通过δi+1求得δi，系数都是Θij，其中j是前一层对应的单元，i是后一层对应的单元<br>代价函数：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-fd85bab91732fbfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png">  </p>
+<p>误差计算方法：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-c24fa92373b3dd66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-632f4670ccd417dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>而代价函数的偏导数为  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-1e1f1ca312b18b0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>算法：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-cfdb2c8f0235ca2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h2 id="六、梯度检验"><a href="#六、梯度检验" class="headerlink" title="六、梯度检验"></a>六、梯度检验</h2><p>当我们对一个复杂模型进行梯度下降算法的时候，可能存在一些不易察觉的错误，导致最终的结果可能不是最优解。<br>为了避免这样的问题，采用一种叫做梯度的数值检验方法。通过估计梯度值来检验我们计算的导数是否符合要求。   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/j6t01jtg13e9cysmu7lx8aj9/image_1bh6ufmnid8u1rg1o5sga13e213.png" alt="image_1bh6ufmnid8u1rg1o5sga13e213.png-23.9kB"><br>方法是在代价函数上沿着切线方向选择两个非常近的点然后计算两个点的平均值以估计梯度。即对某个特定的$\theta$，我们计算出$\theta-\epsilon$和$\theta+\epsilon$的代价值，然后求两个代价的平均，用以估计在θ出的代价值。<br>当θ是一个向量时，我们需要对偏导数进行检验    </p>
+<p><img src="http://static.zybuluo.com/yhsdba/nnskhtgvtw2fay9j90oc8xje/image_1bh6unph8vrt44fmk5htk81v1g.png" alt="image_1bh6unph8vrt44fmk5htk81v1g.png-8.6kB">  </p>
+<p>将计算出的偏导数存储在矩阵$D_{ij}^l$中。检验时将矩阵展开为向量，同时也将θ展开为向量，我们针对每一个θ都算一个近似的梯度值，将这些值存储在另一个矩阵中，并与D进行比较    </p>
+<p><img src="http://static.zybuluo.com/yhsdba/syumrd3cndbp6ia1zi82qcuz/image_1bh6usvb2fhm116cbpjnjj5361t.png" alt="image_1bh6usvb2fhm116cbpjnjj5361t.png-94.1kB">   </p>
+<h2 id="七、随机初始化"><a href="#七、随机初始化" class="headerlink" title="七、随机初始化"></a>七、随机初始化</h2><p>之前通常将参数初始化为0，但对于神经网络不可行，这会导致第二层所有的激活单元都为相同的值，同理，如果所有参数的值都相同，结果也是一样的。<br>所以参数的初值要随机产生。</p>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><p>使用神经网络的步骤：</p>
+<blockquote>
+<ul>
+<li>网络结构：决定层数和单元数  </li>
+</ul>
+</blockquote>
+<p> 第一层的单元数即训练集的特征数量  </p>
+<p> 最后一层的单元数是结果的种类数量  </p>
+<p> 如果隐藏层数大于1，确保每个隐藏层的单元个数相同  </p>
+<p> 真正需要决定的就是隐藏层的层数和每个中间层的单元数  </p>
+<blockquote>
+<ul>
+<li>训练神经网络：  </li>
+</ul>
+</blockquote>
+<p> 1.参数的随机初始化 </p>
+<p> 2.利用正向传播算法计算所有的$h_\theta(x)$ </p>
+<p> 3.编写计算代价函数J的代码  </p>
+<p> 4.利用反向传播方法计算所有的偏导数  </p>
+<p> 5.利用数值检验方法检验这些偏导数  </p>
+<p> 6.使用优化算法来最小化代价函数  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/47717/" rel="next" title="【ng公开课笔记04】正则化">
+                <i class="fa fa-chevron-left"></i> 【ng公开课笔记04】正则化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/12508/" rel="prev" title="【转】mongodb极简入门">
+                【转】mongodb极简入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">King sea</p>
+              <p class="site-description motion-element" itemprop="description">NLPER|Dialogue System</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、非线性假设"><span class="nav-number">1.</span> <span class="nav-text">一、非线性假设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、模型表示"><span class="nav-number">2.</span> <span class="nav-text">二、模型表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、神经网络的优势"><span class="nav-number">3.</span> <span class="nav-text">三、神经网络的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、对特征的直观理解"><span class="nav-number">4.</span> <span class="nav-text">四、对特征的直观理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、反向传播算法"><span class="nav-number">5.</span> <span class="nav-text">五、反向传播算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、梯度检验"><span class="nav-number">6.</span> <span class="nav-text">六、梯度检验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、随机初始化"><span class="nav-number">7.</span> <span class="nav-text">七、随机初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、总结"><span class="nav-number">8.</span> <span class="nav-text">八、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">King sea</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="终于放假了，也有时间写博客了。最近在看西瓜书，记一下自己的理解和笔记。比较基础的内容已经在Coursera的机器学习课程笔记中写过了，为了节约时间就不再赘述了，只记一些之前课程里没有深入到的概念。绪论就不写了，直接从第二章模型评估开始写吧。 2.1 经验误差与过拟合【错误率】：分类错误的样本数占样本总数的比例。【精度】：分类正确的样本数占样本总数的比例。即：精度=1-错误率。【训练误差】：学习器在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="“周志华《机器学习》笔记01 模型评估”">
+<meta property="og:url" content="https://kingsea0-0.github.io/posts/63576/index.html">
+<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:description" content="终于放假了，也有时间写博客了。最近在看西瓜书，记一下自己的理解和笔记。比较基础的内容已经在Coursera的机器学习课程笔记中写过了，为了节约时间就不再赘述了，只记一些之前课程里没有深入到的概念。绪论就不写了，直接从第二章模型评估开始写吧。 2.1 经验误差与过拟合【错误率】：分类错误的样本数占样本总数的比例。【精度】：分类正确的样本数占样本总数的比例。即：精度=1-错误率。【训练误差】：学习器在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nbzrviex931qun9pokpa784m/image_1c5vofr6v1jp61qu0ivb8em8mn9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/w1gxn0087i2xq1aqju5yjz8q/image_1c5vqsf2u3qen23ai9g7h5cm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/6q0kxf3qulg9i4pa9z33yo41/image_1c5vqv82j1tjppbij9p1o361as013.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/79ufkki6a2z2gdzlz3207kf5/image_1c6186m871dsv1n70189ib201buo9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/laonja3hhllik70teuqmsdsm/image_1c618ailo114qs4g1oirh0h8skm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/fbwwoek95eq5xbl1mwxndhlh/image_1c61bshb3a6a1plo1h5l12dc1b3j13.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/q3bq8azz9gto9m4u6jmbfb3q/image_1c61btkvk17g1o2k18v1bj51ejr1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/7yx26c4cnb5raf6wg1zk3yif/image_1c61c0mgoscovbn14j21l4vh853d.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/s8gylouanqkofvo7992ami5w/image_1c61c0tu31c1m12931bs31a3h1fa43q.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/n4cts0arig0fstx8teoelrjs/image_1c61c4shr1218t1re6f8nc168947.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ls8tewpy1h95y4gmn5w57idh/image_1c61di0ia1avoer89g0p2ne2464.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/cehtjru0x3nxl98upux8dcqq/image_1c61djujn1cf8coma35jf2jhp6h.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/2f9saplvzg4ey9rg6wmv15i3/image_1c61dk7cri23u2m14q31ef419n96u.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/tsjjwufmdtmi5ly4yl0v6mfc/image_1c61dl5dg1bgg128v1mt25u31h1m7b.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ii9kt9v3hrhzb8cocdnldkdz/image_1c61ebkagdgj177i1sa957pmr07o.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/jf7sywejbj4i5g0sjwe5bzvs/image_1c61elfu11uhc1mec18jq1bm48qp85.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1ycgj3bkfen0m80tcueefuvl/image_1c61f527k11l2aga1salgk41ros8i.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/8re9war8uwc34s5ftm0epmnw/image_1c6201vj3sphr1n1aaj14be1i79c.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/7kbrtw4oy5nu17fbzcy8wvhj/image_1c6204ojdrp81ps81io314ra12r69p.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/lmyzlgcfg0rs2ku8zm1wlzdr/image_1c61nebm91e57h2o184t123knq8v.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ewxcnrjioeg6adt2o0d4n5b1/image_1c6209hg41nuqcup8a2p501f6a6.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.060Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="“周志华《机器学习》笔记01 模型评估”">
+<meta name="twitter:description" content="终于放假了，也有时间写博客了。最近在看西瓜书，记一下自己的理解和笔记。比较基础的内容已经在Coursera的机器学习课程笔记中写过了，为了节约时间就不再赘述了，只记一些之前课程里没有深入到的概念。绪论就不写了，直接从第二章模型评估开始写吧。 2.1 经验误差与过拟合【错误率】：分类错误的样本数占样本总数的比例。【精度】：分类正确的样本数占样本总数的比例。即：精度=1-错误率。【训练误差】：学习器在">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/nbzrviex931qun9pokpa784m/image_1c5vofr6v1jp61qu0ivb8em8mn9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingsea0-0.github.io/posts/63576/">
+
+
+
+
+
+  <title>“周志华《机器学习》笔记01 模型评估” | Kingsea's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kingsea's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">data garbage producer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/63576/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kingsea's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">“周志华《机器学习》笔记01 模型评估”</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T21:52:28+08:00">
+                2018-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>终于放假了，也有时间写博客了。最近在看西瓜书，记一下自己的理解和笔记。比较基础的内容已经在Coursera的机器学习课程笔记中写过了，为了节约时间就不再赘述了，只记一些之前课程里没有深入到的概念。<br>绪论就不写了，直接从第二章模型评估开始写吧。</p>
+<h2 id="2-1-经验误差与过拟合"><a href="#2-1-经验误差与过拟合" class="headerlink" title="2.1 经验误差与过拟合"></a>2.1 经验误差与过拟合</h2><p>【错误率】：分类错误的样本数占样本总数的比例。<br>【精度】：分类正确的样本数占样本总数的比例。即：精度=1-错误率。<br>【训练误差】：学习器在训练集上的误差，也叫【经验误差】<br>【泛化误差】：学习器在新样本上的误差</p>
+<h2 id="2-2评估方法"><a href="#2-2评估方法" class="headerlink" title="2.2评估方法"></a>2.2评估方法</h2><p>需要一些评估方法的原因：泛化误差无法直接获得，训练误差过拟合不适合作为评估标准。</p>
+<p>方法：将数据集$D={(x_1,y_1),(x_2,y_2),…(x_m,y_m)}$分为训练集$S$和测试集$T$，用【测试误差】作为泛化误差的近似。</p>
+<p>几种划测试集的方法：</p>
+<h3 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h3><p>直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集S，另一个作为测试集T，即D=S∪T，S∩T=∅。<br>要求：</p>
+<ul>
+<li>集合互斥</li>
+<li>保持数据分布的一致性，即分层采样</li>
+<li>单次使用留出法得到的结果往往不稳定可靠，一般采用若干次随机划分，重复进行实验评估后取平均值作为留出法的评估结果。</li>
+</ul>
+<h3 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h3><p>先将数据集D分为k个大小相似的互斥子集，即$D=D_1∪D_2∪…∪D_k；D_i∩D_j=∅（i≠j），$。每个子集Di都尽可能保持数据分布的一致性，即每个子集仍然要进行分层采样。每次用k-1个子集作为训练集，余下的那个子集做测试集。这样可以获得k组“训练/测试集”，最终返回的是k个结果的均值。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nbzrviex931qun9pokpa784m/image_1c5vofr6v1jp61qu0ivb8em8mn9.png" alt="image_1c5vofr6v1jp61qu0ivb8em8mn9.png-18.4kB"></p>
+<p>D分为k份，即每一份既可以做训练集也可以做测试集。即可进行k次验证，最后结果取均值。因此又叫【k-折交叉验证法】。</p>
+<p>而真正应用时交叉验证法得到的结果是均值的均值，即p个“k个结果的均值”的均值，因此交叉验证法又可以叫做p次k折交叉验证。</p>
+<blockquote>
+<p>k最常取10</p>
+</blockquote>
+<p>优点：准确；缺点：开销大</p>
+<h3 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h3><p>对有m个样本的数据集D，按如下方式采样产生数据集D’：每次随机取一个样本拷贝进D’，取m次（有放回取m次）。</p>
+<p>按此方法，保证了D’和D的规模一致。但D’虽然也有m个样本，可其中中会出现重复的样本，而D中会存在D’采样没有采到的样本，这些样本就留作测试集。</p>
+<p>某样本在m次采样中均不会被采到的概率是：$(1-1/m)^m$，取极限可得</p>
+<p><img src="http://static.zybuluo.com/yhsdba/w1gxn0087i2xq1aqju5yjz8q/image_1c5vqsf2u3qen23ai9g7h5cm.png" alt="image_1c5vqsf2u3qen23ai9g7h5cm.png-12.6kB"></p>
+<p>由此可知，理论上有36.8%的样本没有出现在在D’之中。</p>
+<p>优点：训练集与数据集规模一致；数据集小、难以有效划分训练集和测试集时效果显著；能产生多个不同的训练集；</p>
+<p>缺点：改变了训练集的样本分布，引入估计偏差。</p>
+<h2 id="性能度量（难点）"><a href="#性能度量（难点）" class="headerlink" title="性能度量（难点）"></a>性能度量（难点）</h2><p><img src="http://static.zybuluo.com/yhsdba/6q0kxf3qulg9i4pa9z33yo41/image_1c5vqv82j1tjppbij9p1o361as013.png" alt="image_1c5vqv82j1tjppbij9p1o361as013.png-43.6kB"></p>
+<h3 id="回归任务——均方误差"><a href="#回归任务——均方误差" class="headerlink" title="回归任务——均方误差"></a>回归任务——均方误差</h3><p><img src="http://static.zybuluo.com/yhsdba/79ufkki6a2z2gdzlz3207kf5/image_1c6186m871dsv1n70189ib201buo9.png" alt="image_1c6186m871dsv1n70189ib201buo9.png-14.1kB"></p>
+<p>但对于数据分布Ɗ和概率密度p(·)，均方误差的计算公式如下：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/laonja3hhllik70teuqmsdsm/image_1c618ailo114qs4g1oirh0h8skm.png" alt="image_1c618ailo114qs4g1oirh0h8skm.png-16.5kB"></p>
+<p>式1可看作离散样本，式2可看作连续样本</p>
+<p>均方误差当然是越小越好</p>
+<h3 id="分类任务"><a href="#分类任务" class="headerlink" title="分类任务"></a>分类任务</h3><ol>
+<li>错误率与精度</li>
+</ol>
+<p>错误率与精度反应的是分类任务模型判断正确与否的能力。</p>
+<p> 错误率：<img src="http://static.zybuluo.com/yhsdba/fbwwoek95eq5xbl1mwxndhlh/image_1c61bshb3a6a1plo1h5l12dc1b3j13.png" alt="image_1c61bshb3a6a1plo1h5l12dc1b3j13.png-41.4kB"></p>
+<p> 精度：<img src="http://static.zybuluo.com/yhsdba/q3bq8azz9gto9m4u6jmbfb3q/image_1c61btkvk17g1o2k18v1bj51ejr1g.png" alt="image_1c61btkvk17g1o2k18v1bj51ejr1g.png-51.6kB"></p>
+<p> 对于一般的数据分布：<br> <img src="http://static.zybuluo.com/yhsdba/7yx26c4cnb5raf6wg1zk3yif/image_1c61c0mgoscovbn14j21l4vh853d.png" alt="image_1c61c0mgoscovbn14j21l4vh853d.png-55kB"></p>
+<p> <img src="http://static.zybuluo.com/yhsdba/s8gylouanqkofvo7992ami5w/image_1c61c0tu31c1m12931bs31a3h1fa43q.png" alt="image_1c61c0tu31c1m12931bs31a3h1fa43q.png-77.2kB"></p>
+<ol start="2">
+<li>查准率、查全率、F1</li>
+</ol>
+<p>如果想知道相关比例信息，如推荐的信息中有多少比例是用户真正感兴趣的，或者用户感兴趣的信息中有多少被检索了出来，则需要查准率(precision)与查全率(recall)来进行度量。</p>
+<p>在二分类问题中，可将样本分为四类：真正例（TP）、假正例（FP）、假反例（FN）、真反例（TN）。<br><img src="http://static.zybuluo.com/yhsdba/n4cts0arig0fstx8teoelrjs/image_1c61c4shr1218t1re6f8nc168947.png" alt="image_1c61c4shr1218t1re6f8nc168947.png-90.9kB"></p>
+<p>查准率即检测出的正例占所有正例的比例。即假正例是没有被预测出来的正例。<br>查准率是检测出的’真正正例’占所有’预测为正例’的样本的比例。</p>
+<p>当我们追求准确率时，即希望查准率高，当我们希望把所有正例都选择出来时，希望查全率高。</p>
+<p>一般来说，查准率高时，查全率偏低；查全率高时，查准率偏低。通常只在一些简单任务中，查准率和查全率都偏高。</p>
+<h4 id="P-R图：判断查准率和查全率的性能"><a href="#P-R图：判断查准率和查全率的性能" class="headerlink" title="P-R图：判断查准率和查全率的性能"></a>P-R图：判断查准率和查全率的性能</h4><p>P-R图，即以查全率做横轴，查准率做纵轴的平面示意图，通过P-R曲线，来综合判断模型的性能。</p>
+<p>同一个模型，在同一个正例判断标准下，得到的查准率和查全率只有一个，也就是说，在图中，只有一个点，而不是一条曲线。</p>
+<p>那么要得到一条曲线，就需要不同的正例判断标准</p>
+<p>具体的方式是，先对结果进行排序，前面的是最可能的，后面的是最不可能的正例样本。逐个把每一个样本加入正例，计算当前状况下的查准率和查全率</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ls8tewpy1h95y4gmn5w57idh/image_1c61di0ia1avoer89g0p2ne2464.png" alt="image_1c61di0ia1avoer89g0p2ne2464.png-199kB"></p>
+<p>当曲线没有交叉的时候：外侧曲线的学习器性能优于内侧；</p>
+<p>当曲线有交叉的时候：</p>
+<p>第一种方法是比较曲线下面积，但值不太容易估算；</p>
+<p>第二种方法是比较两条曲线的平衡点，平衡点是“查准率=查全率”时的取值，在图中表示为曲线和对角线的交点。平衡点在外侧的曲线的学习器性能优于内侧。</p>
+<p>第三种方法是F1度量和Fβ度量。F1是基于查准率与查全率的调和平均定义的，Fβ则是加权调和平均。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/cehtjru0x3nxl98upux8dcqq/image_1c61djujn1cf8coma35jf2jhp6h.png" alt="image_1c61djujn1cf8coma35jf2jhp6h.png-37.5kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/2f9saplvzg4ey9rg6wmv15i3/image_1c61dk7cri23u2m14q31ef419n96u.png" alt="image_1c61dk7cri23u2m14q31ef419n96u.png-41.1kB"></p>
+<p>但在不同的应用中，对查准率和查全率的重视程度不同，需要根据其重要性，进行加权处理，故而有了Fβ度量。β是查全率对查准率的相对重要性。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/tsjjwufmdtmi5ly4yl0v6mfc/image_1c61dl5dg1bgg128v1mt25u31h1m7b.png" alt="image_1c61dl5dg1bgg128v1mt25u31h1m7b.png-46kB"></p>
+<ol start="3">
+<li>ROC与AUC<br>通过设定不同的阈值划分正反例，如可能性为50%以上就认为是正例，或60%，70%….进而得到某个特定阈值下的真正例率和假正例率。</li>
+</ol>
+<p>ROC与PR图有相似之处，即都是将样本排序进行划分后计算，不同的是计算的度量值不同，同时PR是逐个划分，ROC是对阈值进行变化。</p>
+<p>真正例率（TPR）：所有正例中被预测出来的正例占得比例（等于查全率）</p>
+<p>假正例率（FPR）：没有被预测出的反例（即预测错误的正例）占全部反例的比例</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ii9kt9v3hrhzb8cocdnldkdz/image_1c61ebkagdgj177i1sa957pmr07o.png" alt="image_1c61ebkagdgj177i1sa957pmr07o.png-60.2kB"></p>
+<p><em>注意上图和之前那张图的横竖轴是相反的</em></p>
+<p><img src="http://static.zybuluo.com/yhsdba/jf7sywejbj4i5g0sjwe5bzvs/image_1c61elfu11uhc1mec18jq1bm48qp85.png" alt="roc曲线"></p>
+<p>理想模型是真正例率为100%，假正例率为0%的一点。随机猜测模型则是真正例率与假正例率持平的直线。</p>
+<p>两个学习器进行比较时，一个被另一个包住则后者性能好，如果发生了交叉，通常比较面积，即AUC</p>
+<p>$AUC=1/2*\Sigma_{i=1}^{m-1}(x_{i+1}-x_i)·(y_i+y_{i+1})$</p>
+<p>可以认为是将图b分解为好多个小矩形。计算矩形面积和。当$x_{i+1}=x_{i}$时AUC为0，当$x_{i+1}!=x_{i}$时，$y_i=y_{i+1}$，乘0.5还是$y_i$的值，即矩形的高。产生这种巧合的原因，是ROC的绘制过程决定的。</p>
+<p>有限个点的ROC绘制：<br>先将分类阈值设为最大，即把所有样例设为反例，此时真正例率和假正例率都为0(TP=0,FP=0)。在（0，0）处标一个点。然后分类阈值一次设为每个样例的预测值，即依次将每个样例划分为正例(这就与PR曲线类似了，只是横纵坐标不同)，设前一个点坐标为（x,y），若为真正例，对应标记点为$(x,y+1/m^+)$(TP上升，TPR上升，y增加，FP 不变,FPR不变，x不变)，若为反例则坐标为$(x+1/m^-,y)$。<br>所以ROC上坐标都是平行或者垂直的，故可以推出面积公式。</p>
+<p>AUC考虑的是样本预测的排序质量。给定$m^+$个正例和$m^-$个反例，$D^+$和$D^-$分别表示正、反例集合，则排序损失为</p>
+<p><img src="http://static.zybuluo.com/yhsdba/1ycgj3bkfen0m80tcueefuvl/image_1c61f527k11l2aga1salgk41ros8i.png" alt="image_1c61f527k11l2aga1salgk41ros8i.png-18.4kB"></p>
+<p>可理解为，若正例的预测值小雨反例，记一个罚分，若相等，记0.5分。</p>
+<p>$AUC=1-l_{rank}$</p>
+<ol start="4">
+<li>代价敏感错误率与代价曲线<br>非均等代价：通常不同的错误造成的严重后果不同，所以要给不同的代价一定权重</li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/8re9war8uwc34s5ftm0epmnw/image_1c6201vj3sphr1n1aaj14be1i79c.png" alt="image_1c6201vj3sphr1n1aaj14be1i79c.png-84.2kB"></p>
+<p>非均等代价的错误率：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/7kbrtw4oy5nu17fbzcy8wvhj/image_1c6204ojdrp81ps81io314ra12r69p.png" alt="image_1c6204ojdrp81ps81io314ra12r69p.png-49.7kB"></p>
+<p>在这样的非均等代价下，ROC曲线不能直接反映出学习器的期望总体代价，而“代价曲线”则可以达到目的。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/lmyzlgcfg0rs2ku8zm1wlzdr/image_1c61nebm91e57h2o184t123knq8v.png" alt="image_1c61nebm91e57h2o184t123knq8v.png-72.7kB"></p>
+<p>代价曲线的横轴是正例概率代价$P(+)cost$，纵轴是归一化代价 $cost_{norm}$ 。</p>
+<p><img src="http://static.zybuluo.com/yhsdba/ewxcnrjioeg6adt2o0d4n5b1/image_1c6209hg41nuqcup8a2p501f6a6.png" alt="image_1c6209hg41nuqcup8a2p501f6a6.png-61.2kB"></p>
+<p>p是样例为正例的概率；FNR是假反例率；FPR是假正例率。</p>
+<p>绘制方法：</p>
+<p>ROC曲线上取一个点(FPR,TPR)；</p>
+<p>取相应的(0,FPR)和(1,FNR)，连成线段；</p>
+<p>取遍ROC曲线上所有点并重复前步骤；</p>
+<p>所有线段的下界就是学习器期望总体代价。</p>
+<p>实际上就是通过将样例为正例的概率p设为0和1，来作出曲线的所有切线，最后连成曲线。</p>
+<h1 id="泛化误差分解"><a href="#泛化误差分解" class="headerlink" title="泛化误差分解"></a>泛化误差分解</h1><p>泛化误差=偏差+方差+噪声</p>
+<p>预测的期望（所有预测的均值）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/19788/" rel="next" title="PCA简介">
+                <i class="fa fa-chevron-left"></i> PCA简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/25337/" rel="prev" title="对话系统综述">
+                对话系统综述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">King sea</p>
+              <p class="site-description motion-element" itemprop="description">NLPER|Dialogue System</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-经验误差与过拟合"><span class="nav-number">1.</span> <span class="nav-text">2.1 经验误差与过拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2评估方法"><span class="nav-number">2.</span> <span class="nav-text">2.2评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#留出法"><span class="nav-number">2.1.</span> <span class="nav-text">留出法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉验证法"><span class="nav-number">2.2.</span> <span class="nav-text">交叉验证法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自助法"><span class="nav-number">2.3.</span> <span class="nav-text">自助法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能度量（难点）"><span class="nav-number">3.</span> <span class="nav-text">性能度量（难点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回归任务——均方误差"><span class="nav-number">3.1.</span> <span class="nav-text">回归任务——均方误差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类任务"><span class="nav-number">3.2.</span> <span class="nav-text">分类任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#P-R图：判断查准率和查全率的性能"><span class="nav-number">3.2.1.</span> <span class="nav-text">P-R图：判断查准率和查全率的性能</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#泛化误差分解"><span class="nav-number"></span> <span class="nav-text">泛化误差分解</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">King sea</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

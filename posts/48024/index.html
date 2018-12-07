@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="聚类,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
+<meta name="keywords" content="聚类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记09】聚类">
+<meta property="og:url" content="https://kingsea0-0.github.io/posts/48024/index.html">
+<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/devmv809j8ljztup508gupjf/image_1bm1e8qk81l9ca011c8k16cp1jlm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nuz257lv4n7x1b6poyavfrni/image_1bm1ecgmcpp21oo41k5qcr1h3413.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/2zmip2hwr5j9pnczsfhrpcsu/image_1bm1f3pesle187u1e5s1keqg7b1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/nhgy9szvwowwo5twvi6gw1ac/image_1bm1f9giqtsfr68mq1rca7ag2a.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.054Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ng公开课笔记09】聚类">
+<meta name="twitter:description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingsea0-0.github.io/posts/48024/">
+
+
+
+
+
+  <title>【ng公开课笔记09】聚类 | Kingsea's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kingsea's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">data garbage producer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/48024/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kingsea's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【ng公开课笔记09】聚类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T14:47:00+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-k-均值算法"><a href="#1-k-均值算法" class="headerlink" title="1.k-均值算法"></a>1.k-均值算法</h1><p>k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：</p>
+<ul>
+<li>选择k个随机的点，称为<strong>聚类中心</strong></li>
+<li>对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。</li>
+<li>计算每一个组的平均值，将该组所关联的中心点移到平均值的位置</li>
+<li>重复上述步骤直到中心点不再变化<br>示例：  </li>
+</ul>
+<p>开始随机选两个聚类中心  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/yyaet32rwd82c2hwabmmlypl/image_1bm1e6upq1hunbf919op1bqu10m99.png" alt="image_1bm1e6upq1hunbf919op1bqu10m99.png-113.4kB">    </p>
+<p>将数据与聚类中心关联起来，分成了两类</p>
+<p><img src="http://static.zybuluo.com/yhsdba/devmv809j8ljztup508gupjf/image_1bm1e8qk81l9ca011c8k16cp1jlm.png" alt="image_1bm1e8qk81l9ca011c8k16cp1jlm.png-83.6kB"> </p>
+<p>第一次迭代，移动聚类中心</p>
+<p><img src="http://static.zybuluo.com/yhsdba/nuz257lv4n7x1b6poyavfrni/image_1bm1ecgmcpp21oo41k5qcr1h3413.png" alt="image_1bm1ecgmcpp21oo41k5qcr1h3413.png-76.8kB">  </p>
+<p>继续迭代，直到聚类中心不再变化</p>
+<p><img src="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png" alt="image_1bm1edeek8tq4486caks6e1g.png-80kB"></p>
+<p>用 $u^1,u^2,……,u^k$ 来表示聚类中心，用 $c^1,c^2,……,c^m$ 来储存与第i个实例数据最近的聚类中心的索引，算法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Repeat &#123; </span><br><span class="line">for i = 1 to m </span><br><span class="line">c (i)  := index (form 1 to K) of cluster centroid closest to x (i)  //cluster assignment step</span><br><span class="line"> </span><br><span class="line">for k = 1 to K </span><br><span class="line">μ k  := average (mean) of points assigned to cluster k //move centroid</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-优化目标"><a href="#2-优化目标" class="headerlink" title="2.优化目标"></a>2.优化目标</h1><p>K-均值最小化问题，是要最小化所有的数据点与其所关联的聚类中心点之间的距离之和，<br>因此  K-均值的代价函数（又称畸变函数  Distortion function）为： $J(c^1,…,c^m,u_1,…,u_k)=1/m\Sigma_{i=1}^m|x^i-u_{c^i}|^2$</p>
+<p> 我们的的优化目标便是找出使得代价函数最小<br>的  c (1) ,c (2) ,…,c (m)和 μ 1 ,μ 2 ,…,μ k：</p>
+<p>上一节的算法，第一个循环是用于减小 c (i)引起的代价，<br>而第二个循环则是用于减小 μ i  引起的代价。  </p>
+<h1 id="3-随机初始化"><a href="#3-随机初始化" class="headerlink" title="3.随机初始化"></a>3.随机初始化</h1><p>在运行 K-均值算法的之前，我们首先要随机初始化所有的聚类中心点：</p>
+<ol>
+<li><p>我们应该选择 K&lt;m，即聚类中心点的个数要小于所有训练集实例的数量  </p>
+</li>
+<li><p>随机选择 K 个训练实例，然后令 K 个聚类中心分别与这 K 个训练实例相等<br>K-均值的一个问题在于，它有可能会停留在一个局部最小值处，而这取决于初始化的情<br>况。  </p>
+</li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/2zmip2hwr5j9pnczsfhrpcsu/image_1bm1f3pesle187u1e5s1keqg7b1t.png" alt="image_1bm1f3pesle187u1e5s1keqg7b1t.png-359.5kB"> </p>
+<p>为了解决这个问题，我们通常需要多次运行 K-均值算法，每一次都重新进行随机初始<br>化，最后再比较多次运行 K-均值的结果，选择代价函数最小的结果。这种方法在 K 较小的时候（2–10）还是可行的，但是如果K较大，这么做也可能不会有明显地改善。 </p>
+<h1 id="4-选择聚类数"><a href="#4-选择聚类数" class="headerlink" title="4.选择聚类数"></a>4.选择聚类数</h1><p>通常根据具体问题人工手动选择。</p>
+<p>肘部法则：  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/nhgy9szvwowwo5twvi6gw1ac/image_1bm1f9giqtsfr68mq1rca7ag2a.png" alt="image_1bm1f9giqtsfr68mq1rca7ag2a.png-139.3kB"> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/聚类/" rel="tag"># 聚类</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/9904/" rel="next" title="【ng公开课笔记08】SVM">
+                <i class="fa fa-chevron-left"></i> 【ng公开课笔记08】SVM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/43822/" rel="prev" title="【ng公开课笔记10】降维">
+                【ng公开课笔记10】降维 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">King sea</p>
+              <p class="site-description motion-element" itemprop="description">NLPER|Dialogue System</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-k-均值算法"><span class="nav-number">1.</span> <span class="nav-text">1.k-均值算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-优化目标"><span class="nav-number">2.</span> <span class="nav-text">2.优化目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-随机初始化"><span class="nav-number">3.</span> <span class="nav-text">3.随机初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-选择聚类数"><span class="nav-number">4.</span> <span class="nav-text">4.选择聚类数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">King sea</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

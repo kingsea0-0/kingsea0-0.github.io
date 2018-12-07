@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PCA LDA,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="LDALDA的全称是Linear Discriminant Analysis（线性判别分析），是一种supervised learning。LDA的原理是，将带标签的数据（点），通过投影的方法，投影到维度更低的空间中，使得投影后的点，会形成按类别区分，相同类别的点，将会在投影后的空间中更接近。要说明白LDA，首先得弄明白线性分类器(Linear Classifier)：因为LDA是一种线性分类器。">
+<meta name="keywords" content="PCA LDA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LDA简介">
+<meta property="og:url" content="https://kingsea0-0.github.io/posts/27541/index.html">
+<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:description" content="LDALDA的全称是Linear Discriminant Analysis（线性判别分析），是一种supervised learning。LDA的原理是，将带标签的数据（点），通过投影的方法，投影到维度更低的空间中，使得投影后的点，会形成按类别区分，相同类别的点，将会在投影后的空间中更接近。要说明白LDA，首先得弄明白线性分类器(Linear Classifier)：因为LDA是一种线性分类器。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/2xb0t13uos4ajiz0mji92u2c/image_1bmm1qol8t62138j1s28n1darh9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/8hykbc5fosz03o7mouw3376v/image_1bmm1snljalr125it1t1heghe8m.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/l9jt3fyh8axc05rgmfkzue2h/image_1bmm1v7clj34b09tn11r9o199i1j.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/o91frcuvci3q1yybw3th631d/image_1bmm1vuunkht1k31d7a1eim1hlo20.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/30qj4b9cfry4phgrw19efmkt/image_1bmm20a7j618lkv1e7m6vlukn2d.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/i93zr9tjm58znrkhhpq0ojkt/image_1bmm21d15d0c1ofslo7139dldk2q.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1lar6cb8x29mzwp6d5rkirc4/image_1bmm21pht1m7j1mb8n6daf61vir37.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/lh6waa2axf0xxq6qitn02wt9/image_1bmm2sifg106s1dogsm0hqagub3k.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/8al9xnvysnh6eg0v9kxau4so/image_1bmm2t0hb1f402duls016te146l41.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/844ujymlbw4kxbmmy39eenjs/image_1bmm2t9ubs3hj3n110huimvtm4e.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/29th473moxpndsvuaq2aiz92/image_1bmm2ukpr1b8d1vleu6df1718vt4r.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/g5w7ygqa4yx6k68krl49zcl1/image_1bmm34d9m14e712h9h71f651ups58.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/xyhmtkifwqcpxcninb4uu1rb/image_1bmm35ngg1ojf5ov19sug1vict5l.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/8ix3oqvt7cwcuhsaqm6m4336/image_1bmm8p66f1lvh1vtr11hg3nrdm57f.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ah7kqp49zxsgv5d9ln8sjdvr/image_1bmm60u3911kd135lnpno661kq572.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LDA简介">
+<meta name="twitter:description" content="LDALDA的全称是Linear Discriminant Analysis（线性判别分析），是一种supervised learning。LDA的原理是，将带标签的数据（点），通过投影的方法，投影到维度更低的空间中，使得投影后的点，会形成按类别区分，相同类别的点，将会在投影后的空间中更接近。要说明白LDA，首先得弄明白线性分类器(Linear Classifier)：因为LDA是一种线性分类器。">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/2xb0t13uos4ajiz0mji92u2c/image_1bmm1qol8t62138j1s28n1darh9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingsea0-0.github.io/posts/27541/">
+
+
+
+
+
+  <title>LDA简介 | Kingsea's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kingsea's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">data garbage producer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/27541/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kingsea's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LDA简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T15:00:00+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h1><p>LDA的全称是Linear Discriminant Analysis（线性判别分析），是一种supervised learning。LDA的原理是，将带标签的数据（点），通过投影的方法，投影到维度更低的空间中，使得投影后的点，会形成按类别区分，相同类别的点，将会在投影后的空间中更接近。要说明白LDA，首先得弄明白线性分类器(Linear Classifier)：因为LDA是一种线性分类器。对于K-分类的一个分类问题，会有K个线性函数：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/2xb0t13uos4ajiz0mji92u2c/image_1bmm1qol8t62138j1s28n1darh9.png" alt="image_1bmm1qol8t62138j1s28n1darh9.png-4kB"></p>
+<p>当满足条件：对于所有的j，都有Yk &gt; Yj,的时候，我们就说x属于类别k。对于每一个分类，都有一个公式去算一个分值，在所有的公式得到的分值中，找一个最大的，就是所属的分类了。</p>
+<p>上式实际上就是一种投影，是将一个高维的点投影到一条高维的直线上，LDA最求的目标是，给出一个标注了类别的数据集，投影到了一条直线之后，能够使得点尽量的按类别区分开，当k=2即二分类问题的时候，如下图所示：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8hykbc5fosz03o7mouw3376v/image_1bmm1snljalr125it1t1heghe8m.png" alt="image_1bmm1snljalr125it1t1heghe8m.png-10kB"><br>下面推到一下二分类LDA问题的公式：</p>
+<p>假设用来区分二分类的直线（投影函数)为：<br><img src="http://static.zybuluo.com/yhsdba/l9jt3fyh8axc05rgmfkzue2h/image_1bmm1v7clj34b09tn11r9o199i1j.png" alt="image_1bmm1v7clj34b09tn11r9o199i1j.png-1.9kB"></p>
+<p>LDA分类的一个目标是使得不同类别之间的距离越远越好，同一类别之中的距离越近越好（即需要找一个最佳的w的值），所以我们需要定义几个关键的值。</p>
+<p>类别i的原始中心点为：（Di表示属于类别i的点)</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/o91frcuvci3q1yybw3th631d/image_1bmm1vuunkht1k31d7a1eim1hlo20.png" alt="image_1bmm1vuunkht1k31d7a1eim1hlo20.png-3.5kB"></p>
+<p>类别i投影后的中心点为：</p>
+<p>  <img src="http://static.zybuluo.com/yhsdba/30qj4b9cfry4phgrw19efmkt/image_1bmm20a7j618lkv1e7m6vlukn2d.png" alt="image_1bmm20a7j618lkv1e7m6vlukn2d.png-3kB"></p>
+<p>衡量类别i投影后，类别点之间的分散程度（方差）为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/i93zr9tjm58znrkhhpq0ojkt/image_1bmm21d15d0c1ofslo7139dldk2q.png" alt="image_1bmm21d15d0c1ofslo7139dldk2q.png-5.4kB"></p>
+<p>最终我们可以得到一个下面的公式，表示LDA投影到w后的损失函数：</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/1lar6cb8x29mzwp6d5rkirc4/image_1bmm21pht1m7j1mb8n6daf61vir37.png" alt="image_1bmm21pht1m7j1mb8n6daf61vir37.png-6.4kB"></p>
+<p>  我们分类的目标是，使得类别内的点距离越近越好（集中），类别间的点越远越好。分母表示每一个类别内的方差之和，方差越大表示一个类别内的点越分散，分子为两个类别各自的中心点的距离的平方，我们最大化J(w)就可以求出最优的w了。想要求出最优的w，可以使用拉格朗日乘子法，但是现在我们得到的J(w)里面，w是不能被单独提出来的，我们就得想办法将w单独提出来。</p>
+<p>我们定义一个投影前的各类别分散程度的矩阵，矩阵的含义是，如果某一个分类的输入点集Di里面的点距离这个分类的中心店mi越近，则Si里面元素的值就越小，如果分类的点都紧紧地围绕着mi，则Si里面的元素值越更接近0.</p>
+<p><img src="http://static.zybuluo.com/yhsdba/lh6waa2axf0xxq6qitn02wt9/image_1bmm2sifg106s1dogsm0hqagub3k.png" alt="image_1bmm2sifg106s1dogsm0hqagub3k.png-6kB"></p>
+<p>Si称作散列矩阵(scatter matrix)</p>
+<p>同时定义$S_w=S_1+S_2$,Sw叫做within-class scatter matrix</p>
+<p>带入Si，将J(w)分母化为：（图片中应为si的平方）</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8al9xnvysnh6eg0v9kxau4so/image_1bmm2t0hb1f402duls016te146l41.png" alt="image_1bmm2t0hb1f402duls016te146l41.png-19.7kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/844ujymlbw4kxbmmy39eenjs/image_1bmm2t9ubs3hj3n110huimvtm4e.png" alt="image_1bmm2t9ubs3hj3n110huimvtm4e.png-8.5kB"></p>
+<p>同样的将J(w)分子化为：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/29th473moxpndsvuaq2aiz92/image_1bmm2ukpr1b8d1vleu6df1718vt4r.png" alt="image_1bmm2ukpr1b8d1vleu6df1718vt4r.png-10kB"></p>
+<p>$S_B$成为Between-class-scatter,是一个秩为1的矩阵</p>
+<p>这样损失函数可以化成下面的形式：</p>
+<p><img src="http://static.zybuluo.com/yhsdba/g5w7ygqa4yx6k68krl49zcl1/image_1bmm34d9m14e712h9h71f651ups58.png" alt="image_1bmm34d9m14e712h9h71f651ups58.png-5.6kB"></p>
+<p>然后就可以求导来求J(w)的最大值从而得到最佳的w。在我们求导之前，需要对分母进行归一化，因为不做归一的话，w扩大任何倍，都成立，我们就无法确定w。因此我们打算令$|w^TS_ww|=1$</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/xyhmtkifwqcpxcninb4uu1rb/image_1bmm35ngg1ojf5ov19sug1vict5l.png" alt="image_1bmm35ngg1ojf5ov19sug1vict5l.png-17.5kB">   </p>
+<p>其中用到了矩阵微积分，求导时可以简单的把$w^TS_ww$看作$S_ww^2$</p>
+<p>如果$S_w$可逆，两边同乘$S_w^{-1}$得到$S_w^{-1}S_Bw=\lambda w$</p>
+<p>w就是矩阵$S_w^{-1}S_B$的特征向量</p>
+<p>这个公式称为Fisher linear discrimination。</p>
+<p>将前面已知的$S_B$公式带入得到$S_w^{-1}S_Bw=S_w^{-1}(u_1-u_2)*\lambda_w=\lambda w$</p>
+<p>由于对w扩大缩小任何倍不影响结果，因此可以约去两边的未知常数$\lambda$和$\lambda_w$，得到</p>
+<p><img src="http://static.zybuluo.com/yhsdba/8ix3oqvt7cwcuhsaqm6m4336/image_1bmm8p66f1lvh1vtr11hg3nrdm57f.png" alt="image_1bmm8p66f1lvh1vtr11hg3nrdm57f.png-1.2kB"></p>
+<p>至此，我们只需要求出原始样本的均值和方差就可以求出最佳的方向w</p>
+<p> 对于N(N&gt;2)分类的问题，结论：</p>
+<p> <img src="http://static.zybuluo.com/yhsdba/ah7kqp49zxsgv5d9ln8sjdvr/image_1bmm60u3911kd135lnpno661kq572.png" alt="image_1bmm60u3911kd135lnpno661kq572.png-13.9kB"></p>
+<p> 参考：<br> <a href="http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html" target="_blank" rel="noopener">http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html</a></p>
+<p> <a href="http://blog.csdn.net/ffeng271/article/details/7353834" target="_blank" rel="noopener">http://blog.csdn.net/ffeng271/article/details/7353834</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PCA-LDA/" rel="tag"># PCA LDA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/43822/" rel="next" title="【ng公开课笔记10】降维">
+                <i class="fa fa-chevron-left"></i> 【ng公开课笔记10】降维
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/25854/" rel="prev" title="Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络">
+                Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">King sea</p>
+              <p class="site-description motion-element" itemprop="description">NLPER|Dialogue System</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LDA"><span class="nav-number">1.</span> <span class="nav-text">LDA</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">King sea</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

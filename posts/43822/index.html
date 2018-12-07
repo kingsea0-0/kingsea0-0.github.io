@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据预处理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.数据压缩如果几个特征高度相关，我们可以用1个特征进行表示，这就是降维降维可以对数据进行压缩，节约存储空间，并提高训练速度   2.数据可视化可以通过降维将数据进行可视化 3.主成成分分析（Principal Component Analysis Problem Formulation）PCA是最常见的降维算法  在 PCA 中，我们要做的是找到一个方向向量（Vector direction），">
+<meta name="keywords" content="数据预处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记10】降维">
+<meta property="og:url" content="https://kingsea0-0.github.io/posts/43822/index.html">
+<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:description" content="1.数据压缩如果几个特征高度相关，我们可以用1个特征进行表示，这就是降维降维可以对数据进行压缩，节约存储空间，并提高训练速度   2.数据可视化可以通过降维将数据进行可视化 3.主成成分分析（Principal Component Analysis Problem Formulation）PCA是最常见的降维算法  在 PCA 中，我们要做的是找到一个方向向量（Vector direction），">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/wpb5p3vt4trxuslkx0mtaxl2/image_1bm1mijn4u4r13a3r3617lh1cuv9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/ejil7svkrni5q9k5iksgy74i/image_1bm1mjnd217arfn13bd14qv1eh7m.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/p23zvkxnb0tvwu9n9n8qjhvc/image_1bm1mssmel4j15nme7ot0o10fs13.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/1woezzphbenpprs7we5ynkj1/image_1bm1pg9bsauo1s5n1iousb1fss1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/55771649x4vlct14uegj7cz1/image_1bm1utk3db2hk251bi41ldqa2b1t.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.053Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ng公开课笔记10】降维">
+<meta name="twitter:description" content="1.数据压缩如果几个特征高度相关，我们可以用1个特征进行表示，这就是降维降维可以对数据进行压缩，节约存储空间，并提高训练速度   2.数据可视化可以通过降维将数据进行可视化 3.主成成分分析（Principal Component Analysis Problem Formulation）PCA是最常见的降维算法  在 PCA 中，我们要做的是找到一个方向向量（Vector direction），">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/wpb5p3vt4trxuslkx0mtaxl2/image_1bm1mijn4u4r13a3r3617lh1cuv9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingsea0-0.github.io/posts/43822/">
+
+
+
+
+
+  <title>【ng公开课笔记10】降维 | Kingsea's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kingsea's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">data garbage producer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/43822/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kingsea's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【ng公开课笔记10】降维</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T17:00:00+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-数据压缩"><a href="#1-数据压缩" class="headerlink" title="1.数据压缩"></a>1.数据压缩</h1><p>如果几个特征高度相关，我们可以用1个特征进行表示，这就是降维<br>降维可以对数据进行压缩，节约存储空间，并提高训练速度</p>
+<p><img src="http://static.zybuluo.com/yhsdba/wpb5p3vt4trxuslkx0mtaxl2/image_1bm1mijn4u4r13a3r3617lh1cuv9.png" alt="image_1bm1mijn4u4r13a3r3617lh1cuv9.png-102.1kB"></p>
+<p><img src="http://static.zybuluo.com/yhsdba/ejil7svkrni5q9k5iksgy74i/image_1bm1mjnd217arfn13bd14qv1eh7m.png" alt="image_1bm1mjnd217arfn13bd14qv1eh7m.png-549.9kB"></p>
+<h1 id="2-数据可视化"><a href="#2-数据可视化" class="headerlink" title="2.数据可视化"></a>2.数据可视化</h1><p>可以通过降维将数据进行可视化</p>
+<h1 id="3-主成成分分析（Principal-Component-Analysis-Problem-Formulation）"><a href="#3-主成成分分析（Principal-Component-Analysis-Problem-Formulation）" class="headerlink" title="3.主成成分分析（Principal Component Analysis Problem Formulation）"></a>3.主成成分分析（Principal Component Analysis Problem Formulation）</h1><p>PCA是最常见的降维算法 </p>
+<p>在 PCA 中，我们要做的是找到一个方向向量（Vector direction），当我们把所有的数据<br>都  投射到该向量上时，我们希望投射平均均方误差能尽可能地小。方向向量是一个经过原<br>点的向量，而投射误差是从特征向量向该方向向量作垂线的长度。 </p>
+<p><img src="http://static.zybuluo.com/yhsdba/p23zvkxnb0tvwu9n9n8qjhvc/image_1bm1mssmel4j15nme7ot0o10fs13.png" alt="image_1bm1mssmel4j15nme7ot0o10fs13.png-94.9kB">  </p>
+<p>下面给出主成分分析问题的描述：<br>问题是要将 n 维数据降至 k 维，目标是找到向量 u (1) ,u (2) ,…,u (k)使得总的投射误差最小。<br>主成分分析与线性回顾的比较：<br>主成分分析与线性回归是两种不同的算法。主成分分析最小化的是投射误差（Projected<br>Error），而线性回归尝试的是最小化预测误差。线性回归的目的是预测结果，而主成分分析<br>不作任何预测。  </p>
+<p><img src="http://static.zybuluo.com/yhsdba/1woezzphbenpprs7we5ynkj1/image_1bm1pg9bsauo1s5n1iousb1fss1g.png" alt="image_1bm1pg9bsauo1s5n1iousb1fss1g.png-51.9kB"></p>
+<p>上图中，左边的是线性回归的误差（垂直于横轴投影），右边则是主要成分分析的误差（垂直于红线投影）</p>
+<h1 id="4-主成分分析算法"><a href="#4-主成分分析算法" class="headerlink" title="4.主成分分析算法"></a>4.主成分分析算法</h1><p>PCA减少n维到k维：<br>第一步是均值归一化。我们需要计算出所有特征的均值，然后令$x_j=x_j-u_j$。如果特征是在不同的数量级上，我们还需要将其除以标准差$\sigma^2$。<br>第二步是计算协方差矩阵（covariance matrix）Σ：<br>$$\Sigma=1/m(x^i)(x^i)^T$$</p>
+<p>第三步是计算协方差矩阵 Σ 的特征向量（eigenvectors）:<br>利用Ocatave里的奇异值分解来求解。[U,S,V]=svd(sigma)。</p>
+<pre><code>$$U=\begin{bmatrix}
+{\vdots}&amp;{\vdots}&amp;{\cdots}&amp;{\vdots}\\
+u^1&amp;u^2&amp;{\cdots}&amp;u^n\\
+{\vdots}&amp;{\vdots}&amp;{\cdots}&amp;{\vdots}\\
+\end{bmatrix}$$
+</code></pre><p>对于一个  n×n  维度的矩阵，上式中的U是一个具有与数据之间最小投射误差的方向向量构成的矩阵。如果我们希望将数据从 n 维降至 k 维，我们只需要从 U 中选取前 K 个向量，获得一个 n×k 维度的矩阵，我们用$U_reduce$ 表示，然后通过如下计算获得要求的新特征向量z (i)： </p>
+<p>$$z^i=U_{reduce}^Tx^i$$</p>
+<p>其中 x 是 n×1 维的，因此结果为 k×1 维度。注，我们不对方差特征进行处理。</p>
+<h1 id="5-选择主成分的数量"><a href="#5-选择主成分的数量" class="headerlink" title="5.选择主成分的数量"></a>5.选择主成分的数量</h1><p>主要成分分析是减少投射的平均均方误差：$1/m\Sigma_{i=1}^m\mid x^i-x_{approx}^i\mid^2$</p>
+<p>训练集的方差为：$1/m\Sigma_{i=1}^m\mid x^i\mid^2$</p>
+<p>我们希望在平均均方误差与训练集方差的比例尽可能小的情况下选择尽可能小的 K 值。 </p>
+<p>我们可以先令 K=1，然后进行主要成分分析，获得 U reduce 和 z，然后计算比例是否小于 1%。如果不是的话再令K=2，如此类推，直到找到可以使得比例小于 1%的最小 K 值（原因是各个特征之间通常情况存在某种相关性）。  </p>
+<p>还有一些更好的方式来选择 K，当我们在Octave中调用“svd”函数的时候，我们获得三个参数：[U, S, V] = svd(sigma)。 </p>
+<p>其中的 S 是一个 n×n 的矩阵，只有对角线上有值，而其它单元都是 0，我们可以使用这<br>个矩阵来计算平均均方误差与训练集方差的比例： </p>
+<p><img src="http://static.zybuluo.com/yhsdba/55771649x4vlct14uegj7cz1/image_1bm1utk3db2hk251bi41ldqa2b1t.png" alt="image_1bm1utk3db2hk251bi41ldqa2b1t.png-76.3kB"></p>
+<h1 id="6-压缩重建"><a href="#6-压缩重建" class="headerlink" title="6.压缩重建"></a>6.压缩重建</h1><p>$z=U_{reduce}^Tx$<br>$x_{appox}=U_{reduce}z$</p>
+<h1 id="7-应用建议："><a href="#7-应用建议：" class="headerlink" title="7.应用建议："></a>7.应用建议：</h1><p>只在训练集使用主成分析<br>最好不要用作避免过拟合的手段</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据预处理/" rel="tag"># 数据预处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/48024/" rel="next" title="【ng公开课笔记09】聚类">
+                <i class="fa fa-chevron-left"></i> 【ng公开课笔记09】聚类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/27541/" rel="prev" title="LDA简介">
+                LDA简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">King sea</p>
+              <p class="site-description motion-element" itemprop="description">NLPER|Dialogue System</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-数据压缩"><span class="nav-number">1.</span> <span class="nav-text">1.数据压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-数据可视化"><span class="nav-number">2.</span> <span class="nav-text">2.数据可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-主成成分分析（Principal-Component-Analysis-Problem-Formulation）"><span class="nav-number">3.</span> <span class="nav-text">3.主成成分分析（Principal Component Analysis Problem Formulation）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-主成分分析算法"><span class="nav-number">4.</span> <span class="nav-text">4.主成分分析算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-选择主成分的数量"><span class="nav-number">5.</span> <span class="nav-text">5.选择主成分的数量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-压缩重建"><span class="nav-number">6.</span> <span class="nav-text">6.压缩重建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-应用建议："><span class="nav-number">7.</span> <span class="nav-text">7.应用建议：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">King sea</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

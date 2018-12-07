@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等) 高偏差   减小归一化程度$\lambda$ 高偏差   增加归一化程度$\lambda$ 高方差    评估一个假设前面我们确定假设函数时所用的方法是不断优化假设函数">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ng公开课笔记06】算法应用建议">
+<meta property="og:url" content="https://kingsea0-0.github.io/posts/20548/index.html">
+<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等) 高偏差   减小归一化程度$\lambda$ 高偏差   增加归一化程度$\lambda$ 高方差    评估一个假设前面我们确定假设函数时所用的方法是不断优化假设函数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/fkpmj31forfx0bujg3fvggaj/image_1bi0qv10k170d1qd287nemn6rk9.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/fei86o7a4ypkczc0536kh24y/image_1bi0r5a13shb3i11an6aed7sm.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/juuvgz155l5wya8vpdburnf1/image_1bi168gcb455ru51q9pcdamd413.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/083lvwrlimahkod3z5ijm7pz/image_1bi172kt1pb4fh41rea1g2ik561g.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/c5u57yciclhsnq4rihy4orvd/image_1bi175tts14unv6418qi1ese1niv2a.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/t3g7ix850dy4t8bl0h5s6tnx/image_1bi176m171t1l1mji14kp3un1g5m2n.png">
+<meta property="og:image" content="http://static.zybuluo.com/yhsdba/6snengrbjx4vhoxgnyp86vij/image_1bi17897n15c9g1d2jp1rgj1hro34.png">
+<meta property="og:updated_time" content="2018-11-28T08:16:31.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ng公开课笔记06】算法应用建议">
+<meta name="twitter:description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等) 高偏差   减小归一化程度$\lambda$ 高偏差   增加归一化程度$\lambda$ 高方差    评估一个假设前面我们确定假设函数时所用的方法是不断优化假设函数">
+<meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/fkpmj31forfx0bujg3fvggaj/image_1bi0qv10k170d1qd287nemn6rk9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://kingsea0-0.github.io/posts/20548/">
+
+
+
+
+
+  <title>【ng公开课笔记06】算法应用建议 | Kingsea's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kingsea's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">data garbage producer</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/20548/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King sea">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kingsea's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【ng公开课笔记06】算法应用建议</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T16:00:00+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="性能改进方法"><a href="#性能改进方法" class="headerlink" title="性能改进方法"></a>性能改进方法</h1><p>先放结论，后面再详细写一下原因  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">适用范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">获得更多的训练实例</td>
+<td style="text-align:center">高方差</td>
+</tr>
+<tr>
+<td style="text-align:center">减小特征数量</td>
+<td style="text-align:center">高方差</td>
+</tr>
+<tr>
+<td style="text-align:center">获得更多特征</td>
+<td style="text-align:center">高偏差</td>
+</tr>
+<tr>
+<td style="text-align:center">增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等)</td>
+<td style="text-align:center">高偏差</td>
+</tr>
+<tr>
+<td style="text-align:center">减小归一化程度$\lambda$</td>
+<td style="text-align:center">高偏差</td>
+</tr>
+<tr>
+<td style="text-align:center">增加归一化程度$\lambda$</td>
+<td style="text-align:center">高方差</td>
+</tr>
+</tbody>
+</table>
+<h1 id="评估一个假设"><a href="#评估一个假设" class="headerlink" title="评估一个假设"></a>评估一个假设</h1><p>前面我们确定假设函数时所用的方法是不断优化假设函数的参数使其误差最小。但这并不意味着我们求得了一个好的假设函数，因为有可能出现过拟合问题。最简单的确定过拟合的方法就是画图，但当特征数量较多时，画图就比较困难了，所以需要采取别的方法来评判一个假设函数的好坏。   </p>
+<p>为了检验算法是否过拟合，我们将数据分为训练集和测试集，比例约为7:3。注意数据要随机分配。通过训练集计算出参数后，对测试集运用该模型计算代价函数J。  </p>
+<p>对于逻辑回归（分类问题），除了采用代价函数计算误差外，还可以用误分类率(misclassfication error)计算。</p>
+<p>$$<br>err(h_\theta(x),y)={^{1\ \ \ ifh(x)&gt;0.5\ and \ y=0,or\ if \ h(x)&lt;0.5\ and\ y=1}_{0  \ \ \ ohterwise}<br>$$    </p>
+<p>最后对计算结果求平均  </p>
+<h1 id="模型选择和交叉验证"><a href="#模型选择和交叉验证" class="headerlink" title="模型选择和交叉验证"></a>模型选择和交叉验证</h1><p>前面提到了，当多项式的次数越高时越能适应训练集，但不一定能代表普遍情况（即不能很好的预测）。所以我们通过交叉验证来帮助选择模型。    </p>
+<blockquote>
+<p>交叉验证：使用60%的数据用作训练集，20%的数据作为交叉验证集，20%的数据作为测试集  </p>
+</blockquote>
+<p>模型选择方法：</p>
+<ul>
+<li>使用训练集训练出10个模型</li>
+<li>用10个模型分别对交叉验证集计算得出交叉验证误差（代价函数的值）</li>
+<li>选取代价函数值最小的模型</li>
+<li>用步骤3选出的模型对测试机计算得出推广误差   </li>
+</ul>
+<p><img src="http://static.zybuluo.com/yhsdba/fkpmj31forfx0bujg3fvggaj/image_1bi0qv10k170d1qd287nemn6rk9.png" alt="image_1bi0qv10k170d1qd287nemn6rk9.png-60kB"></p>
+<h1 id="诊断偏差和方差"><a href="#诊断偏差和方差" class="headerlink" title="诊断偏差和方差"></a>诊断偏差和方差</h1><p><strong>这节讨论的是误差与多项式次数的关系</strong></p>
+<p>模型效果不理想一般分为两种情况：  </p>
+<ul>
+<li>偏差较大：表现为欠拟合</li>
+<li>方差较大：表现为过拟合  </li>
+</ul>
+<p><img src="http://static.zybuluo.com/yhsdba/fei86o7a4ypkczc0536kh24y/image_1bi0r5a13shb3i11an6aed7sm.png" alt="image_1bi0r5a13shb3i11an6aed7sm.png-34.3kB">  </p>
+<p>对于训练集，d较小时，拟合程度低，误差大，随着d增大拟合度变好，误差减小  </p>
+<p>对于交叉验证集，d较小时欠拟合，误差较大，d较大时过拟合，误差也较大，所以呈现出先减小后增大的趋势  </p>
+<p>所以当训练集误差和交叉验证集误差近似时：偏差/欠拟合  </p>
+<p>交叉验证误差远大于训练集误差时：方差/过拟合  </p>
+<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p><strong>这里讨论的是误差与$\lambda$的关系</strong></p>
+<p>前面提到我们通过归一化的方式来防止过拟合，但是$\lambda$的值过高会导致欠拟合，过小依然过拟合。   </p>
+<p>所以我们需要测试一系列$\lambda$的值，通常是0-10之间的呈现2倍关系的值(0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10)。同样把数据分为训练集交叉验证集和测试集  </p>
+<p>选择$\lambda$的方法：</p>
+<ol>
+<li>使用训练集训练出12个不同程度的归一化模型</li>
+<li>分别用每个模型对交叉验证集计算交叉验证误差</li>
+<li>选择交叉验证误差最小的模型</li>
+<li>对选出的模型通过测试集得出误差的推广，也可以同时将训练集和交叉验证集的代价函数误差与$\lambda$的值会在一张图表上：   </li>
+</ol>
+<p><img src="http://static.zybuluo.com/yhsdba/juuvgz155l5wya8vpdburnf1/image_1bi168gcb455ru51q9pcdamd413.png" alt="image_1bi168gcb455ru51q9pcdamd413.png-140.2kB">   </p>
+<ul>
+<li>$\lambda$较小时，训练误差较小而交叉验证误差较大(过拟合)</li>
+<li>$\lambda$增加，训练集误差不断增加(欠拟合),而交叉验证集误差先减小后增大</li>
+</ul>
+<h1 id="学习曲线"><a href="#学习曲线" class="headerlink" title="学习曲线"></a>学习曲线</h1><p>学习曲线是对算法的一个合理检验，表示了<strong>训练集实例数量与误差的关系</strong>  </p>
+<p>当实例很少的时候，模型可以完美拟合训练数据，但训练出的模型不能很好的适应交叉训练集。当训练数据增多，训练集的误差会有所增大，但交叉验证集的误差却减小了。   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/083lvwrlimahkod3z5ijm7pz/image_1bi172kt1pb4fh41rea1g2ik561g.png" alt="image_1bi172kt1pb4fh41rea1g2ik561g.png-33.9kB">    </p>
+<p>对于高偏差、欠拟合的模型，增加数据量几乎没有效果：<br><img src="http://static.zybuluo.com/yhsdba/c5u57yciclhsnq4rihy4orvd/image_1bi175tts14unv6418qi1ese1niv2a.png" alt="image_1bi175tts14unv6418qi1ese1niv2a.png-20.8kB"><br><img src="http://static.zybuluo.com/yhsdba/t3g7ix850dy4t8bl0h5s6tnx/image_1bi176m171t1l1mji14kp3un1g5m2n.png" alt="image_1bi176m171t1l1mji14kp3un1g5m2n.png-21.1kB">   </p>
+<p>而对于高方差/过拟合的情况，增加训练集数据可以提高准确度：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/6snengrbjx4vhoxgnyp86vij/image_1bi17897n15c9g1d2jp1rgj1hro34.png" alt="image_1bi17897n15c9g1d2jp1rgj1hro34.png-103.1kB">     </p>
+<h1 id="神经网络和偏差与方差"><a href="#神经网络和偏差与方差" class="headerlink" title="神经网络和偏差与方差"></a>神经网络和偏差与方差</h1><ul>
+<li>使用较小的神经网络，类似于参数较少的情况，容易造成高偏差和欠拟合。</li>
+<li>当计算大家较小时使用较大的神经网络类似高方差和过拟合，可以通过归一化来调整   </li>
+<li>所以一般选择较大神经网络并归一化比采用较小的神经网络效果要好  </li>
+<li>对于隐藏层数的选择，通常从一层开始逐渐增加并进行交叉检验。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/31975/" rel="next" title="kNN算法的python实现">
+                <i class="fa fa-chevron-left"></i> kNN算法的python实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/50172/" rel="prev" title="【ng公开课笔记07】系统构建的几个问题">
+                【ng公开课笔记07】系统构建的几个问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">King sea</p>
+              <p class="site-description motion-element" itemprop="description">NLPER|Dialogue System</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#性能改进方法"><span class="nav-number">1.</span> <span class="nav-text">性能改进方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#评估一个假设"><span class="nav-number">2.</span> <span class="nav-text">评估一个假设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型选择和交叉验证"><span class="nav-number">3.</span> <span class="nav-text">模型选择和交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#诊断偏差和方差"><span class="nav-number">4.</span> <span class="nav-text">诊断偏差和方差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#归一化"><span class="nav-number">5.</span> <span class="nav-text">归一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习曲线"><span class="nav-number">6.</span> <span class="nav-text">学习曲线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络和偏差与方差"><span class="nav-number">7.</span> <span class="nav-text">神经网络和偏差与方差</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">King sea</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
