@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/2zmip2hwr5j9pnczsfhrpcsu/image_1bm1f3pesle187u1e5s1keqg7b1t.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/nhgy9szvwowwo5twvi6gw1ac/image_1bm1f9giqtsfr68mq1rca7ag2a.png">
-<meta property="og:updated_time" content="2018-11-28T08:16:31.054Z">
+<meta property="og:updated_time" content="2018-12-07T09:42:48.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【ng公开课笔记09】聚类">
 <meta name="twitter:description" content="1.k-均值算法k-均值是一个迭代算法，假设我们想将数据聚类为n组，方法为：  选择k个随机的点，称为聚类中心 对于数据集中的每一个数据，按照距离k个中心点的距离，将其与距离最近的中心点关联起来，与同一个中心点关联的所有点聚成一类。 计算每一个组的平均值，将该组所关联的中心点移到平均值的位置 重复上述步骤直到中心点不再变化示例：    开始随机选两个聚类中心        将数据与聚类中心关联起来">
@@ -345,7 +345,7 @@
 <p>继续迭代，直到聚类中心不再变化</p>
 <p><img src="http://static.zybuluo.com/yhsdba/o3f2ghpdi7z303nggwvi3qad/image_1bm1edeek8tq4486caks6e1g.png" alt="image_1bm1edeek8tq4486caks6e1g.png-80kB"></p>
 <p>用 $u^1,u^2,……,u^k$ 来表示聚类中心，用 $c^1,c^2,……,c^m$ 来储存与第i个实例数据最近的聚类中心的索引，算法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Repeat &#123; </span><br><span class="line">for i = 1 to m </span><br><span class="line">c (i)  := index (form 1 to K) of cluster centroid closest to x (i)  //cluster assignment step</span><br><span class="line"> </span><br><span class="line">for k = 1 to K </span><br><span class="line">μ k  := average (mean) of points assigned to cluster k //move centroid</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Repeat &#123; </span><br><span class="line"><span class="keyword">for</span> i = <span class="number">1</span> <span class="keyword">to</span> m </span><br><span class="line">c (i)  := index (form <span class="number">1</span> <span class="keyword">to</span> K) <span class="keyword">of</span> cluster centroid closest <span class="keyword">to</span> x (i)  <span class="comment">//cluster assignment step</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> k = <span class="number">1</span> <span class="keyword">to</span> K </span><br><span class="line">μ k  := average (mean) <span class="keyword">of</span> points assigned <span class="keyword">to</span> cluster k <span class="comment">//move centroid</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="2-优化目标"><a href="#2-优化目标" class="headerlink" title="2.优化目标"></a>2.优化目标</h1><p>K-均值最小化问题，是要最小化所有的数据点与其所关联的聚类中心点之间的距离之和，<br>因此  K-均值的代价函数（又称畸变函数  Distortion function）为： $J(c^1,…,c^m,u_1,…,u_k)=1/m\Sigma_{i=1}^m|x^i-u_{c^i}|^2$</p>
 <p> 我们的的优化目标便是找出使得代价函数最小<br>的  c (1) ,c (2) ,…,c (m)和 μ 1 ,μ 2 ,…,μ k：</p>
 <p>上一节的算法，第一个循环是用于减小 c (i)引起的代价，<br>而第二个循环则是用于减小 μ i  引起的代价。  </p>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Kingsea&#39;s Blog">
 <meta property="og:description" content="组成：字符+操作符   常用操作符：      操作符 说明 实例     . 表示任何单个字符    [] 字符集，对单个字符给出取值范围 [abc]表示a或b或c，[a-z]表示a到z任意单个字符   [^] 非字符，给出排除范围 [^abc]表示非a或b或c的单个字符   * 前一个字符0次或无限次扩展 abc*表示ab,abc,abcc等   + 前一个字符1次或无限次扩展 abc+表示a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-28T08:16:31.048Z">
+<meta property="og:updated_time" content="2018-12-07T09:42:48.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
 <meta name="twitter:description" content="组成：字符+操作符   常用操作符：      操作符 说明 实例     . 表示任何单个字符    [] 字符集，对单个字符给出取值范围 [abc]表示a或b或c，[a-z]表示a到z任意单个字符   [^] 非字符，给出排除范围 [^abc]表示非a或b或c的单个字符   * 前一个字符0次或无限次扩展 abc*表示ab,abc,abcc等   + 前一个字符1次或无限次扩展 abc+表示a">
@@ -504,11 +504,11 @@
 <ul>
 <li>maxsplit:最大分割数，剩余部分作为最后一个元素输出</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;re.split(r&apos;[1-9]\d&#123;5&#125;&apos;,&apos;BIT100081 TSU100084&apos;)</span><br><span class="line">[&apos;BIT&apos;,&apos;TSU&apos;,&apos;&apos;]</span><br><span class="line">&gt;&gt;&gt;re.split(r&apos;[1-9]\d&#123;5&#125;&apos;,&apos;BIT100081 TSU100084&apos;,maxsplit=1)</span><br><span class="line">[&apos;BIT&apos;,&apos;TSU10084&apos;]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">re.sub(pattern,repl,string,count=0,flags=0)</span><br><span class="line">在一个字符串中替换所有匹配正则表达式的字串，返回替换后的字符串</span><br><span class="line">* repl:替换匹配到字符串的字符串</span><br><span class="line">* count:最大替换次数</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;re.split(<span class="string">r'[1-9]\d&#123;5&#125;'</span>,<span class="string">'BIT100081 TSU100084'</span>)</span><br><span class="line">[<span class="string">'BIT'</span>,<span class="string">'TSU'</span>,<span class="string">''</span>]</span><br><span class="line">&gt;&gt;&gt;re.split(<span class="string">r'[1-9]\d&#123;5&#125;'</span>,<span class="string">'BIT100081 TSU100084'</span>,maxsplit=<span class="number">1</span>)</span><br><span class="line">[<span class="string">'BIT'</span>,<span class="string">'TSU10084'</span>]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">re.sub(pattern,repl,string,count=<span class="number">0</span>,flags=<span class="number">0</span>)</span><br><span class="line">在一个字符串中替换所有匹配正则表达式的字串，返回替换后的字符串</span><br><span class="line">* repl:替换匹配到字符串的字符串</span><br><span class="line">* count:最大替换次数</span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
 <blockquote>
-<p>re.sub(r’[1-9]\d{5}’,’:zipcode’,’BIT100081 TSU100084’)<br>‘BIT:zipcode TSU:zipcode’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">等价用法:</span><br></pre></td></tr></table></figure></p>
+<p>re.sub(r’[1-9]\d{5}’,’:zipcode’,’BIT100081 TSU100084’)<br>‘BIT:zipcode TSU:zipcode’<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">等价用法:</span></span><br></pre></td></tr></table></figure></p>
 </blockquote>
 </blockquote>
 </blockquote>

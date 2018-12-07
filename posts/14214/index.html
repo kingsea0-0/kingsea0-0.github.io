@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="blog,机器学习,nlp,dialogue system,machine learning">
 
 
 
@@ -86,16 +86,16 @@
 <meta property="og:site_name" content="Kingsea&#39;s Blog">
 <meta property="og:description" content="语料库相关2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling这篇是2018EMNLP最佳论文之一。 这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。 特点：  数据内容是有关旅游业服务的，包含7个领域包括：医疗、">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181202164123679.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181202164413498.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181202220328894.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202164123679.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202164413498.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202220328894.png">
 <meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181203085211172.png">
 <meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181203111914535.png">
-<meta property="og:updated_time" content="2018-12-03T10:36:41.092Z">
+<meta property="og:updated_time" content="2018-12-07T11:35:38.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018年对话系统相关论文">
 <meta name="twitter:description" content="语料库相关2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling这篇是2018EMNLP最佳论文之一。 这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。 特点：  数据内容是有关旅游业服务的，包含7个领域包括：医疗、">
-<meta name="twitter:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181202164123679.png">
+<meta name="twitter:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202164123679.png">
 
 
 
@@ -344,9 +344,9 @@
 </ul>
 <h1 id="端到端的对话"><a href="#端到端的对话" class="headerlink" title="端到端的对话"></a>端到端的对话</h1><h2 id="2018EMNLP：Learning-End-to-End-Goal-Oriented-Dialog-with-Multiple-Answers"><a href="#2018EMNLP：Learning-End-to-End-Goal-Oriented-Dialog-with-Multiple-Answers" class="headerlink" title="2018EMNLP：Learning End-to-End Goal-Oriented Dialog with Multiple Answers"></a>2018EMNLP：Learning End-to-End Goal-Oriented Dialog with Multiple Answers</h2><h1 id="引入外部知识相关"><a href="#引入外部知识相关" class="headerlink" title="引入外部知识相关"></a>引入外部知识相关</h1><h2 id="2018-AAAI：Augmenting-End-to-End-Dialogue-Systems-with-Commonsense-Knowledge"><a href="#2018-AAAI：Augmenting-End-to-End-Dialogue-Systems-with-Commonsense-Knowledge" class="headerlink" title="2018 AAAI：Augmenting End-to-End Dialogue Systems with Commonsense Knowledge"></a>2018 AAAI：Augmenting End-to-End Dialogue Systems with Commonsense Knowledge</h2><p>这篇文章的观点是，由于外部知识数量巨大，所以更适合使用外部存储模块，而不是传统的在模型中通过参数进行编码。<br>它用来进行实验的问题限定在非任务导向领域，检索式方法的对话系统。</p>
 <h3 id="关于常识的检索："><a href="#关于常识的检索：" class="headerlink" title="关于常识的检索："></a>关于常识的检索：</h3><p>我们假设常识库是由一系列关于概念C的断言A构成。每一条断言$a\in A$ 可以表示为 $&lt;c_1,r,c_2&gt;,r \in R$表示c1和c2之间的关系。同时建立一个关于A的字典H。每一个概念c作为key，与c有关的a作为value。目的是可以检索到一条信息中涉及概念的全部常识。$A_x$为与c相关的全部断言的集合。</p>
-<p><img src="assets/markdown-img-paste-20181202164123679.png" alt=""></p>
+<p><img src="../img/assets/markdown-img-paste-20181202164123679.png" alt=""></p>
 <h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><p>将常识融入进对话模型的方法是用另一个额外的LSTM对论断a进行编码</p>
-<p><img src="assets/markdown-img-paste-20181202164413498.png" alt=""></p>
+<p><img src="../img/assets/markdown-img-paste-20181202164413498.png" alt=""></p>
 <p>上半部分是常识论断的编码网络，下半部分是一个Dual-LSTM网络，用于回复的编码。原来a的形式是 $&lt;c_1,r,c_2&gt;$，由于c可能是一个多词组的概念，所以a就被转化为了token序列 $[c_{11},c_{12},c_{13},…,r,c_{21},c_{22},c_{23}…]$</p>
 <p>对于R我们将其加入词汇表V中，将r看待为一个常规的单词来编码。同时我们决定不把每一个c都作为编码单元，因为数量太多。使用LSTM将a编码为embedding层的表示 $\vec a$ 。这个方法对于自然表达中良好的结构化断言都适用。</p>
 <p>将断言a与回复y的匹配得分定义为：$m(a,y)=\vec a^TW_a\vec y$</p>
@@ -355,9 +355,9 @@
 <p>总的Tri-LSTM编码模型可以被定义为 $f(x,y)=\theta(\vec x^TW\vec y+m(A_x,y))$</p>
 <p>$这个式子表明了最终的回复y不仅与x有关，还与x相关的知识m(A_x,y)有关$</p>
 <h2 id="2018-ACL-Knowledge-Diffusion-for-Neural-Dialogue-Generation"><a href="#2018-ACL-Knowledge-Diffusion-for-Neural-Dialogue-Generation" class="headerlink" title="2018 ACL Knowledge Diffusion for Neural Dialogue Generation"></a>2018 ACL Knowledge Diffusion for Neural Dialogue Generation</h2><p>该论文提出了一种 neural knowl-edge diffusion (NKD)网络来将知识引入对话生成，不仅可以进行对输入的表述进行事实匹配，还能将事实进行扩展，融合到相似的实体中。</p>
-<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>文中提到了知识库的应用之一是问答，常见的事实表示形式是一种三元关系（主题，关系，客体）。这在对话中同样重要，但是还不够，对话中常出现一种实体转移现象，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: Is there anything like the [Titanic]?</span><br><span class="line">B: I think the love story in ﬁlm [Waterloo Bridge] is beautiful, too.</span><br></pre></td></tr></table></figure></p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>文中提到了知识库的应用之一是问答，常见的事实表示形式是一种三元关系（主题，关系，客体）。这在对话中同样重要，但是还不够，对话中常出现一种实体转移现象，如：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: <span class="keyword">Is</span> there anything like the <span class="comment">[Titanic]</span>?</span><br><span class="line">B: I think the love story in ﬁlm <span class="comment">[Waterloo Bridge]</span> <span class="keyword">is</span> beautiful, too.</span><br></pre></td></tr></table></figure></p>
 <p>涉及到的实体从《泰坦尼克号》扩展到了《魂断蓝桥》。NKD模型就可以表示这种实体的转移和扩展。</p>
-<h3 id="NKD模型"><a href="#NKD模型" class="headerlink" title="NKD模型"></a>NKD模型</h3><p><img src="assets/markdown-img-paste-20181202220328894.png" alt="NKD"></p>
+<h3 id="NKD模型"><a href="#NKD模型" class="headerlink" title="NKD模型"></a>NKD模型</h3><p><img src="../img/assets/markdown-img-paste-20181202220328894.png" alt="NKD"></p>
 <p>输入：$X=(x_1,x_2,…,x_{NX})$</p>
 <p>输出: $Y=(y_1,y_2,…,y_{NY})$</p>
 <p>知识库K中的事实是以三元关系（主体、关系、客体）保存的。</p>
