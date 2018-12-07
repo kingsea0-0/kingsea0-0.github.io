@@ -89,9 +89,9 @@
 <meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202164123679.png">
 <meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202164413498.png">
 <meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181202220328894.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181203085211172.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/14214/assets/markdown-img-paste-20181203111914535.png">
-<meta property="og:updated_time" content="2018-12-07T11:35:38.570Z">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181203085211172.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181203111914535.png">
+<meta property="og:updated_time" content="2018-12-07T11:42:09.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018年对话系统相关论文">
 <meta name="twitter:description" content="语料库相关2018EMNLP：MultiWOZ - A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling这篇是2018EMNLP最佳论文之一。 这篇文章构建了一个Multi-Domain Wizard-of-Oz数据集。 特点：  数据内容是有关旅游业服务的，包含7个领域包括：医疗、">
@@ -363,7 +363,7 @@
 <p>知识库K中的事实是以三元关系（主体、关系、客体）保存的。</p>
 <p>由上图可以看到，模型主要有以下几个部分组成：</p>
 <h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p>将离散的tokens转化为向量表示。特别之处在于，为了捕捉不同方面的信息，利用两个独立的RNN产生两种隐状态序列：$H^C=(h_1^C,h_2^C,…,h_{NX}^C)和H^K=(h_1^K,…,h_{NX}^K)$。我们利用最终的隐状态，$h_{NX}^C$输入上下文RNN来追踪对话状态。另一个$h_{NX}^K$用于知识检索，并用来为输入表述中的知识实体和关系进行编码。</p>
-<h5 id="Knowledge-Retriever"><a href="#Knowledge-Retriever" class="headerlink" title="Knowledge Retriever"></a>Knowledge Retriever</h5><p>知识检索通过从知识库中提取一系列事实并明确它们的重要性，可以让以知识为基础的对话系统既具有收敛性，同时在思考能力上又具有扩展性。对于思考能力的扩展主要依靠：事实匹配和实体扩展，如下图：<br><img src="assets/markdown-img-paste-20181203085211172.png" alt=""></p>
+<h5 id="Knowledge-Retriever"><a href="#Knowledge-Retriever" class="headerlink" title="Knowledge Retriever"></a>Knowledge Retriever</h5><p>知识检索通过从知识库中提取一系列事实并明确它们的重要性，可以让以知识为基础的对话系统既具有收敛性，同时在思考能力上又具有扩展性。对于思考能力的扩展主要依靠：事实匹配和实体扩展，如下图：<br><img src="../img/assets/markdown-img-paste-20181203085211172.png" alt=""></p>
 <ul>
 <li><strong>事实匹配</strong></li>
 </ul>
@@ -383,7 +383,7 @@
 <h4 id="Context-RNN"><a href="#Context-RNN" class="headerlink" title="Context RNN"></a>Context RNN</h4><p>记录了话语（utterance）层面的对话状态。它包括utterance representation和knowledge representation.隐状态在这一层被更新为:</p>
 <p>$h_t^T=RNN(h_t^C,[c^f,C^s],h_{t-1}^T)$</p>
 <p>$h_t^T$被转移到解码器来引导回答生成</p>
-<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="assets/markdown-img-paste-20181203111914535.png" alt=""></p>
+<h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="../img/assets/markdown-img-paste-20181203111914535.png" alt=""></p>
 <p>主要介绍了Vanilla decoder和Probabilistic gated decoder</p>
 <h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>作者爬取了百度知道和豆瓣电影的数据和讨论作为数据集。</p>
 

@@ -86,17 +86,17 @@
 <meta property="og:site_name" content="Kingsea&#39;s Blog">
 <meta property="og:description" content="1. 概要本文是阅读京东数据团队的论文《A Survey on Dialogue Systems:Recent Advances and New Frontiers》以及微软亚洲研究院周明院长的演讲《自然语言对话引擎》的一些摘要。希望通过该论文首先对dialogue system的常用方法有一个了解。 对话系统大致分为两类： （1）任务导向型（task-oriented)：完成特定工作（如找商品、">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181128195917650.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181128212329795.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181129174110923.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181129204537238.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181129204556654.png">
-<meta property="og:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181129214952750.png">
-<meta property="og:updated_time" content="2018-12-07T11:35:39.375Z">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181128195917650.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181128212329795.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181129174110923.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181129204537238.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181129204556654.png">
+<meta property="og:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181129214952750.png">
+<meta property="og:updated_time" content="2018-12-07T11:41:45.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对话系统综述">
 <meta name="twitter:description" content="1. 概要本文是阅读京东数据团队的论文《A Survey on Dialogue Systems:Recent Advances and New Frontiers》以及微软亚洲研究院周明院长的演讲《自然语言对话引擎》的一些摘要。希望通过该论文首先对dialogue system的常用方法有一个了解。 对话系统大致分为两类： （1）任务导向型（task-oriented)：完成特定工作（如找商品、">
-<meta name="twitter:image" content="https://kingsea0-0.github.io/posts/25337/assets/markdown-img-paste-20181128195917650.png">
+<meta name="twitter:image" content="https://kingsea0-0.github.io/posts/img/assets/markdown-img-paste-20181128195917650.png">
 
 
 
@@ -332,7 +332,7 @@
 <p>对话系统大致分为两类：</p>
 <p><strong>（1）任务导向型（task-oriented)：完成特定工作（如找商品、订酒店等）</strong></p>
 <p>通常将dialogue response视为pipeline。</p>
-<p><img src="assets/markdown-img-paste-20181128195917650.png" alt="pipeline"></p>
+<p><img src="../img/assets/markdown-img-paste-20181128195917650.png" alt="pipeline"></p>
 <p><strong>（2）非任务导向型（non-task-oriented）</strong><br>主要有两种方法：</p>
 <ul>
 <li>生成式方法：如seq2seq</li>
@@ -341,7 +341,7 @@
 <h2 id="2-Task-oriented-System"><a href="#2-Task-oriented-System" class="headerlink" title="2. Task-oriented System"></a>2. Task-oriented System</h2><h3 id="2-1-Pipeline-method"><a href="#2-1-Pipeline-method" class="headerlink" title="2.1 Pipeline method"></a>2.1 Pipeline method</h3><p>如图示，pipeline由四部分构成</p>
 <p>具体解析四个部分：</p>
 <h4 id="NLU"><a href="#NLU" class="headerlink" title="NLU"></a>NLU</h4><p>功能：将用户的表达解析为预定义的语义槽（semantic slots）</p>
-<p>举例：<br><img src="assets/markdown-img-paste-20181128212329795.png" alt=""></p>
+<p>举例：<br><img src="../img/assets/markdown-img-paste-20181128212329795.png" alt=""></p>
 <p>如上表就是一个语义槽，New York是槽值，槽中还确定了领域（domain）和意图（intent）。</p>
 <p>表示方法分为两种：</p>
 <ul>
@@ -395,7 +395,7 @@
 <p>一个包含T’个词的目标序列（回复）$Y=(y_1,y_2,…y_T’)$</p>
 <p>模型需要最大化条件概率：$P(y_1,…,y_T’|x_1…x_T)$</p>
 <p>特别地，seq2seq模型是一种encoder-decoder结构。如下图</p>
-<p><img src="assets/markdown-img-paste-20181129174110923.png" alt="figure2"></p>
+<p><img src="../img/assets/markdown-img-paste-20181129174110923.png" alt="figure2"></p>
 <p>编码器依次读入X个词，利用RNN将其表示为一个上下文向量c,解码器利用c作为输入估计生成Y的概率。RNN编码器计算上下文c可以写作：$h_t=f(x_t,h_{t-1})$。</p>
 <p>其中$h_t$是t时刻的隐藏状态，f是一个非线性方程，如LSTM或GRU。c就是最后一个词的隐藏状态$h_T$。解码器是一个标准的RNN语言模型，加上额外的条件上下文向量c，t时刻候选词的概率分布$P_t$可计算为：</p>
 <p>$s_t=f(y_{t-1},s_{t-1},c)$</p>
@@ -406,10 +406,10 @@
 <h4 id="3-1-2-对话上下文-Dialogue-Context"><a href="#3-1-2-对话上下文-Dialogue-Context" class="headerlink" title="3.1.2 对话上下文(Dialogue Context)"></a>3.1.2 对话上下文(Dialogue Context)</h4><p>考虑对话的上下文信息的是构建对话系统的关键所在，它可以使对话保持连贯和增进用户体验。使用层次化的RNN模型，捕捉个体语句的意义，然后将其整合为完整的对话。同时，分别用字级别和句子级别的注意力方法扩展层次化的结构。试验证明：(1)层次化 RNNs的表现通常优于非层次化的RNNs；(2)在考虑上下文相关的信息后，神经网络趋向于产生更长的、更有意义和多样性的回复。</p>
 <p>在下图中，作者通过代表整个对话历史(包括当前的信息)，用连续的表示或嵌入单词和短语来解决上下文敏感回复生成的这一难题。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A neural<span class="built_in"> network </span>approach <span class="keyword">to</span> context-sensitive generation of conversational responses. <span class="keyword">In</span> Proceedings of the 2015 Conference of the North American Chapter of the Association <span class="keyword">for</span> Computational Linguistics:Human Language Technologies, pages 196–205, Denver, Colorado,May–June 2015. Association <span class="keyword">for</span> Computational Linguistics.</span><br></pre></td></tr></table></figure>
-<p><img src="assets/markdown-img-paste-20181129204537238.png" alt="Context1"></p>
+<p><img src="../img/assets/markdown-img-paste-20181129204537238.png" alt="Context1"></p>
 <p>在下图的结构中作者引入两个层次的Attention机制，让模型能够自动的学到词语与句子级别的重要度信息，从而更好的生成新一轮的对话。作者在句子级别的信息中，是反向学习的，即认为下一句的信息中更能够包含上一句的信息，所以从总体上来看，其对于对话的学习是逆向使用每一轮对话的内容的。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C. Xing, W. Wu, Y. Wu, M. Zhou, Y. Huang,<span class="keyword">and</span> W. Y. Ma. Hierarchical recurrent attention<span class="built_in"> network </span><span class="keyword">for</span> response generation. arXiv preprint arXiv:1701.07149, 2017.</span><br></pre></td></tr></table></figure>
-<p><img src="assets/markdown-img-paste-20181129204556654.png" alt="context2"></p>
+<p><img src="../img/assets/markdown-img-paste-20181129204556654.png" alt="context2"></p>
 <h4 id="3-1-3-回复多样性"><a href="#3-1-3-回复多样性" class="headerlink" title="3.1.3 回复多样性"></a>3.1.3 回复多样性</h4><p>在当前的序列对话系统中，一个具有挑战性的问题是，它们倾向于产生意义不大的普通或不重要的、普适的回答，而这些回答往往涉及到“我不知道”或者“我很好”这样的高频率短语。这种行为可以归因于泛型回答往往有相对较高的频率，例如会话数据集中“我不知道”，而相反，有更多信息的回答相对稀疏。</p>
 <p>目前提出的解决此类问题的办法：</p>
 <ul>
@@ -434,7 +434,7 @@
 <li>进行图灵测试，用 retrieval 的 discriminator 来评价回复生成。</li>
 </ul>
 <h3 id="3-2-检索模型"><a href="#3-2-检索模型" class="headerlink" title="3.2 检索模型"></a>3.2 检索模型</h3><h4 id="3-2-1-单轮回复匹配"><a href="#3-2-1-单轮回复匹配" class="headerlink" title="3.2.1 单轮回复匹配"></a>3.2.1 单轮回复匹配</h4><p>目前比较新的方法如下图，利用深度卷积神经网络体系结构改进模型，学习消息和响应的表示，或直接学习两个句子的相互作用表示，然后用多层感知器来计算匹配的分数。</p>
-<p><img src="assets/markdown-img-paste-20181129214952750.png" alt="单论匹配"></p>
+<p><img src="../img/assets/markdown-img-paste-20181129214952750.png" alt="单论匹配"></p>
 <h4 id="3-2-2-多轮回复匹配"><a href="#3-2-2-多轮回复匹配" class="headerlink" title="3.2.2 多轮回复匹配"></a>3.2.2 多轮回复匹配</h4><p>在多轮回复的选择中，当前消息和之前的对话将被作为输入。模型会选择与整个文本最相关且自然的回复。这样，在之前的对话里识别重要信息、对对话的关系建立合适模型来保证对话一致性就变得十分重要。</p>
 <p>多轮对话的难点在于不仅要考虑当前的问题，也要考虑前几轮的对话情景。多轮对话的难点主要有两点：1.如何明确上下文的关键信息（关键词，关键短语或关键句）；2.在上下文中如何模拟多轮对话间的关系。</p>
 <p>目前提出的方法有：</p>

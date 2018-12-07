@@ -379,7 +379,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/64719/">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/38742/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
@@ -398,7 +398,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/64719/" itemprop="url">【ng公开课笔记02】线性回归</a></h1>
+                <a class="post-title-link" href="/posts/38742/" itemprop="url">【ng公开课笔记03+代码】逻辑回归</a></h1>
         
 
         <div class="post-meta">
@@ -472,70 +472,47 @@
       
         
           
-            <h2 id="一、主要步骤-各算法通用"><a href="#一、主要步骤-各算法通用" class="headerlink" title="一、主要步骤(各算法通用)"></a><strong>一、主要步骤(各算法通用)</strong></h2><ul>
-<li>构建模型</li>
-<li>构建代价函数</li>
-<li>参数优化</li>
-</ul>
-<p>监督学习的工作方式：                            </p>
-<p><img src="http://static.zybuluo.com/yhsdba/8vvje0ah0sbyea5xi9bs00fc/image_1bh51fai51gi31us419km90j9jd13.png" alt="image_1bh51fai51gi31us419km90j9jd13.png-28.8kB"></p>
-<h2 id="二、单变量线性回归"><a href="#二、单变量线性回归" class="headerlink" title="二、单变量线性回归"></a><strong>二、单变量线性回归</strong></h2><h3 id="eg：房价估计"><a href="#eg：房价估计" class="headerlink" title="eg：房价估计"></a>eg：房价估计</h3><p>1.构建模型<br><img src="http://static.zybuluo.com/yhsdba/9ajfijc732r92o1na8zi0fk7/image_1bh50ubm31vefda2d1g16q6c6tm.png" alt="house_price"></p>
-<p><strong>假设函数: $ h_\theta(x)=\theta_0+\theta_1x $</strong></p>
-<p>2.<strong>代价函数</strong><br>$ J(\theta_0,\theta_1)=1/2m*\sum^n_1(h_\theta(x^i-y^i))^2 $<br>对代价函数的直观理解：<br><img src="http://static.zybuluo.com/yhsdba/meohz27xm3i8i748vzuavkdt/image_1bh52dkl91r4ku7t1chp14hl10ee9.png" alt="image_1bh52dkl91r4ku7t1chp14hl10ee9.png-293kB">                       </p>
-<p><img src="http://static.zybuluo.com/yhsdba/6xhfv374dzobu0u5x5k2264r/image_1bh52euue1b1d1dch80q68v154lm.png" alt="image_1bh52euue1b1d1dch80q68v154lm.png-75.3kB"></p>
-<p>3.<strong>梯度下降</strong></p>
-<p>直观理解：从高点逐步到达局部最小值（选择的初始参数组合不同，可能最后的结果也不同）<br><img src="http://static.zybuluo.com/yhsdba/7m2uokpdtvooxhjkc88ofqzv/image_1bh52helr1us51q841gqofvb1rln13.png" alt="image_1bh52helr1us51q841gqofvb1rln13.png-84.2kB"></p>
-<p>算法：<br>repeat:<br>    $\theta_j=\theta_j-\alpha\partial/\partial\theta_jJ(\theta_0,\theta_1)\  \ \  (for\ j=0\ and\ j=1)$  </p>
-<p>$\alpha$:学习率<br><strong>注意</strong>梯度下降时，要同时更新$\theta_0$和$\theta_1$，即：   </p>
-<p><img src="http://static.zybuluo.com/yhsdba/xkuyeai4fn8sh42oa83bcf3y/image_1bh53avt6194ghvblhv18q9doo2a.png" alt="image_1bh53avt6194ghvblhv18q9doo2a.png-36.1kB"></p>
-<p>将代价函数带入上式求导   </p>
-<p><img src="http://static.zybuluo.com/yhsdba/ec2c0pup5uu5mqmq5gunxnno/image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png" alt="image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png-15.7kB"></p>
-<h2 id="三、多变量线性回归"><a href="#三、多变量线性回归" class="headerlink" title="三、多变量线性回归"></a><strong>三、多变量线性回归</strong></h2><p>步骤与上述类似，只是需要将X和Y向量化<br>即代价函数变为：<br>$J(\theta_0\theta_1…\theta_n)=1/2m\sum_1^n(h_\theta(x^i)-y^i)^2$<br>梯度下降算法变为(求导带入后)：<br>Repeat{<br>$\theta_j=\theta_j-\alpha/m\sum^m_1(h_\theta(x^i)-y^i)x^i_j$<br>}</p>
-<h2 id="四、一些数据处理方法"><a href="#四、一些数据处理方法" class="headerlink" title="四、一些数据处理方法"></a><strong>四、一些数据处理方法</strong></h2><p>1.特征缩放：面对多特征问题时，要保证这些特征都具有相近的尺度，这样可以使收敛速度加快。最简单的是将所有特征取值范围都缩放到[-1,1]</p>
-<p>即$x_n=(x_n-u_n)/s_n$</p>
-<p>其中$u_n$是平均值$s_n$是标准差</p>
-<p>收敛速度对比：<br><img src="http://static.zybuluo.com/yhsdba/c76vk48ijzkdymesx5d2xdve/image_1bh53tnepat82p93d11p1v15pv2n.png" alt="image_1bh53tnepat82p93d11p1v15pv2n.png-51.1kB"></p>
-<p>2.常用学习率：0.01,0.03,0.1,0.3,1,3,10.（过高可能越过最值，过低迭代次数过高）</p>
-<p>3.非线性多项式：有时需要用曲线来适应数据，如<br>$h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x^2+\theta_3x^3$<br>通常需要先观察数据再决定尝试怎样的模型<br>还可以令：$x_2=x_2^2$     $x_3=x_3^3$将模型转换为线性回归</p>
-<h2 id="五、正规方程"><a href="#五、正规方程" class="headerlink" title="五、正规方程"></a><strong>五、正规方程</strong></h2><h3 id="另一种参数优化方法"><a href="#另一种参数优化方法" class="headerlink" title="另一种参数优化方法"></a>另一种参数优化方法</h3><p>如$J(\theta)=a\theta^2+b\theta+c$<br>X为训练集特征矩阵，y为结果向量<br>正规方程解$\theta=(X^TX)^{-1}X^Ty$</p>
-<ul>
-<li>对上述式子的理解：  </li>
-</ul>
-<p>设误差为$\Sigma_{i=1}^m(y_i-x_i^Tw)^2$     </p>
-<p>还可以用矩阵写为$(y-x_i^T\theta)^T(y-x_i^T\theta)$，对$w$求导，得到$X^T(Y-X\theta)$，令其等于0，得到  </p>
-<blockquote>
-<p>$\theta=(X^TX)^{-1}X^Ty$  </p>
-</blockquote>
-<p>即得到了使误差函数最小的参数</p>
-<h3 id="梯度下降和正规方程的比较："><a href="#梯度下降和正规方程的比较：" class="headerlink" title="梯度下降和正规方程的比较："></a>梯度下降和正规方程的比较：</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">梯度下降</th>
-<th style="text-align:center">正规方程</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">需要选择学习率</td>
-<td style="text-align:center">不需要</td>
-</tr>
-<tr>
-<td style="text-align:center">需要多次迭代</td>
-<td style="text-align:center">一次运算得出</td>
-</tr>
-<tr>
-<td style="text-align:center">当特征数量n大时也能较好适用</td>
-<td style="text-align:center">特征数量n较大则运算代价大</td>
-</tr>
-<tr>
-<td style="text-align:center">适用于各种类型的模型</td>
-<td style="text-align:center">只适用于线性模型，不适合逻辑回归等其他模型</td>
-</tr>
-</tbody>
-</table>
-<p>当特征变量数量小于一万，通常使用标准方程法</p>
-<p><strong>正规方程是不可逆时可删除几个特征</strong></p>
-<h2 id="六、python实现"><a href="#六、python实现" class="headerlink" title="六、python实现"></a><strong>六、python实现</strong></h2><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def standRegress(xArr,yArr):</span><br><span class="line">    xMat=<span class="built_in">np</span>.mat(xArr);yMat=<span class="built_in">np</span>.mat(yArr).T</span><br><span class="line">    xTx=xMat.T*xMat</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">np</span>.linalg.det(xTx)==<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span> 'the <span class="built_in">matrix</span> <span class="built_in">is</span> singular,can <span class="keyword">not</span> <span class="built_in">reverse</span>'</span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    ws=xTx.I*(xMat.T*yMat)</span><br><span class="line">    <span class="built_in">return</span> ws</span><br><span class="line"></span><br><span class="line">def lwlr(testPoint,xArr,yArr,k=<span class="number">1.0</span>):</span><br><span class="line">    xMat=<span class="built_in">np</span>.mat(xArr);yMat=<span class="built_in">np</span>.mat(yArr).T</span><br><span class="line">    m=<span class="built_in">np</span>.shape(xMat)[<span class="number">0</span>]</span><br><span class="line">    weights=<span class="built_in">np</span>.mat(<span class="built_in">np</span>.eye(m))</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        diffMat=testPoint-xMat[j,:]</span><br><span class="line">        weights[j,j]=<span class="built_in">np</span>.<span class="built_in">exp</span>(diffMat*diffMat.T/(-<span class="number">2.0</span>*k**<span class="number">2</span>))</span><br><span class="line">    xTx=xMat.T*(weights*xMat)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">np</span>.linalg.det(xTx)==<span class="number">0.0</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">"This matrix is singular,cannot do inverse"</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    ws=xTx.I*(xMat.T*(weights*yMat))</span><br><span class="line">    <span class="built_in">return</span> testPoint*ws</span><br><span class="line"></span><br><span class="line">def lwlrTest(testArr,xArr,yArr,k=<span class="number">1.0</span>):</span><br><span class="line">    m=<span class="built_in">np</span>.shape(testArr)[<span class="number">0</span>]</span><br><span class="line">    yHat=<span class="built_in">np</span>.zeros(m)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        yHat[i]=lwlr(testArr[i],xArr,yArr,k)</span><br><span class="line">    <span class="built_in">return</span> yHat</span><br></pre></td></tr></table></figure>
+            <p><strong>用途</strong>：分类问题  </p>
+<p><strong>假设函数</strong>：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-6f55c7156571e94a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-5188ba4a1f7bb5cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>我们就是要通过训练样本来确定theta的取值<br>z=Theta^t*x在样本的图像上即是分类的分界曲线,即求得theta就可以判断实验样本的分类  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-a3147b90d90d5550.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-3f45b9ddaad7bf28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>theta^*x表示边界图像  </p>
+<p><strong>代价函数</strong>：<br>一般来说代价函数为误差的平方和<br>但对于h(x)误差的平方和为非凸函数所以  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-685622df8ca1d825.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>将其写成一个式子：  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-c44d7c9d29e747d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>通过梯度下降算法求theta:  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2478435-dda134e7ec44a81f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>代码：  </p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">from numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot as plt</span><br><span class="line">def loadDataSet():</span><br><span class="line">    dataMat=[];labelMat=[]</span><br><span class="line">    with <span class="built_in">open</span>(<span class="string">'testSet.txt'</span>) as f:</span><br><span class="line">        lineArr=f.readlines()</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">line</span> in lineArr:</span><br><span class="line">            <span class="built_in">line</span>=<span class="built_in">line</span>.strip().<span class="built_in">split</span>()</span><br><span class="line">            dataMat.<span class="built_in">append</span>([<span class="number">1.0</span>,<span class="built_in">float</span>(<span class="built_in">line</span>[<span class="number">0</span>]),<span class="built_in">float</span>(<span class="built_in">line</span>[<span class="number">1</span>])])</span><br><span class="line">            labelMat.<span class="built_in">append</span>(<span class="built_in">int</span>(<span class="built_in">line</span>[<span class="number">2</span>]))</span><br><span class="line">        <span class="keyword">return</span> dataMat,labelMat</span><br><span class="line"></span><br><span class="line">def sigmoid(inX):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1.0</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-inX))</span><br><span class="line"></span><br><span class="line">def gradAscent(dataMatin,classMatin):</span><br><span class="line">    dataMatrix=mat(dataMatin)</span><br><span class="line">    labelMatrix=mat(classMatin).transpose()</span><br><span class="line">    <span class="built_in">alpha</span>=<span class="number">0.01</span></span><br><span class="line">    Maxcycletime=<span class="number">500</span></span><br><span class="line">    m,n=<span class="built_in">shape</span>(dataMatrix)</span><br><span class="line">    weight=ones((n,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> k in range(Maxcycletime):</span><br><span class="line">        h=sigmoid(dataMatrix*weight)</span><br><span class="line">        cost=(labelMatrix-h)</span><br><span class="line">        weight=weight+<span class="built_in">alpha</span>*dataMatrix.transpose()*cost</span><br><span class="line">    <span class="keyword">return</span> weight</span><br><span class="line"></span><br><span class="line">def plotBestFit(wei):</span><br><span class="line">    weight=wei.getA()#将矩阵转化为数组</span><br><span class="line">    dataMat,labelMat=loadDataSet()</span><br><span class="line">    dataArr=array(dataMat)</span><br><span class="line">    n=<span class="built_in">shape</span>(dataArr)[<span class="number">0</span>]</span><br><span class="line">    xcord1=[];ycord1=[];</span><br><span class="line">    xcord2=[];ycord2=[];</span><br><span class="line">    <span class="keyword">for</span> i in range(n):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(labelMat[i])==<span class="number">1</span>:</span><br><span class="line">            xcord1.<span class="built_in">append</span>(dataArr[i,<span class="number">1</span>]);ycord1.<span class="built_in">append</span>(dataArr[i,<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            xcord2.<span class="built_in">append</span>(dataArr[i,<span class="number">1</span>]);ycord2.<span class="built_in">append</span>(dataArr[i,<span class="number">2</span>])</span><br><span class="line">    fig=plt.figure()</span><br><span class="line">    ax=fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">    ax.scatter(xcord1,ycord1,s=<span class="number">30</span>,c=<span class="string">'red'</span>,marker=<span class="string">'s'</span>)</span><br><span class="line">    ax.scatter(xcord2,ycord2,s=<span class="number">30</span>,c=<span class="string">'green'</span>)</span><br><span class="line">    x=arange(<span class="number">-3.0</span>,<span class="number">3.0</span>,<span class="number">0.1</span>)</span><br><span class="line">    y=(-weight[<span class="number">0</span>]-weight[<span class="number">1</span>]*x)/weight[<span class="number">2</span>]</span><br><span class="line">    ax.plot(x,y)</span><br><span class="line">    plt.xlabel(<span class="string">'X1'</span>);plt.ylabel(<span class="string">'X2'</span>);</span><br><span class="line">    plt.show()</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">运行结果</span><br><span class="line"></span><br><span class="line">![<span class="built_in">image</span>.png](http:<span class="comment">//upload-images.jianshu.io/upload_images/2478435-d4dfe63d9d7887b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">因为上述算法需要迭代<span class="number">500</span>次，不适合大量数据的计算</span><br><span class="line">所以改进 采用随机梯度上升</span><br><span class="line">即每次只用一组数据进行一次theta的更新，而不是每次都用所有的theta</span><br><span class="line">改进的随机梯度上升算法</span><br></pre></td></tr></table></figure>
+<p>def stocGradAscent0(dataMatrix,classLabels):</p>
+<p>#注意这里的dataMatrix是array数组不是矩阵<br>    m,n=shape(dataMatrix)<br>    alpha=0.01<br>    weight=ones(n)<br>    for i in range(m):<br>        error=classLabels[i]-sigmoid(sum(weight<em>dataMatrix[i]))<br>        weight=weight+error</em>alpha*dataMatrix[i]<br>    return weight</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">由于这里受限于数据量的大小，对theta更新次数较少，所以不是很精确</span><br><span class="line">因此人为增加更新次数，同时动态更新<span class="built_in">alpha</span>的值</span><br></pre></td></tr></table></figure>
+<p>def stocGradAscent1(dataMatrix,classLabels,numIter=150):<br>    m,n=shape(dataMatrix)<br>    weight=ones(n)<br>    for i in range(numIter):<br>        dataIndex=range(m)<br>        for j in range(m):<br>            alpha=4.0/(1.0+i+j)<br>            randIndex=int(random.uniform(0,len(dataIndex)))<br>            error=classLabels[randIndex]-sigmoid(sum(weight<em>dataMatrix[randIndex]))<br>            weight=weight+alpha</em>error*dataMatrix[randIndex]<br>    return weight</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">随机梯度下降算法的运行结果（结果反而比第一个好）  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![<span class="string">image.png</span>](<span class="link">http://upload-images.jianshu.io/upload_images/2478435-7b0a18e796379454.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)</span><br><span class="line"></span><br><span class="line">实战：预测马的死亡率</span><br><span class="line">一、数据预处理</span><br><span class="line">常用的数据预处理方法：  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![<span class="string">image.png</span>](<span class="link">http://upload-images.jianshu.io/upload_images/2478435-bd501491dcc3f78d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由于系数的计算公式：  </span><br><span class="line"></span><br><span class="line">![<span class="string">image.png</span>](<span class="link">http://upload-images.jianshu.io/upload_images/2478435-28b8df0a63f44ac7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)  </span><br><span class="line"></span><br><span class="line">当特征值缺失时  weight=weight 所以不会造成影响，所以置缺失的特征值为0</span><br><span class="line"></span><br><span class="line">而缺失的标签值直接丢弃</span><br><span class="line"></span><br><span class="line">二、进行分类</span><br><span class="line">方法：将特征向量乘以训练好的系数求和，带入sigmoid函数，大于0.5则为正样本，否则为负样本</span><br></pre></td></tr></table></figure>
+<p>from logRegres import *</p>
+<p>def classifyVector(inX,weight):<br>    prob=sigmoid(sum(inX*weight))<br>    if prob&gt;0.5:return 1.0<br>    else: return 0.0</p>
+<p>def colicTest():<br>    trainLabels =[]<br>    trainSet=[]<br>    with open(‘horseColicTraining.txt’) as frTrian:<br>        for line in frTrian.readlines():<br>            currLine=line.strip().split(‘\t’)<br>            n=int(len(currLine))-1<br>            Arr=[float(i) for i in currLine[0:n]]<br>            trainSet.append(Arr)<br>            trainLabels.append(float(currLine[-1]))<br>    trianWeights=stocGradAscent1(array(trainSet),trainLabels,1000)</p>
+<pre><code>with open(&apos;horseColicTest.txt&apos;) as frTest:
+    lineArr=[]
+    errorCount=0.0
+    numTestVect = 0.0
+    for line in frTest.readlines():
+        numTestVect+=1
+        currline=line.strip().split(&apos;\t&apos;)
+        Arr=[float(i) for i in currline[0:len(currline)-1]]
+        lineArr.append(Arr)
+        if int(classifyVector(array(lineArr),trianWeights))!=int(currline[-1]):
+            errorCount+=1
+errorRate=float(errorCount)/float(numTestVect)
+print(&quot;the error rate of this test is:%f&quot;%errorRate)
+return errorRate
+</code></pre><p>def multiTest():<br>    numTests = 10; errorSum=0.0<br>    for k in range(numTests):<br>        errorSum += colicTest()<br>    print(“after %d iterations the average error rate is: %f” % (numTests, errorSum/float(numTests)))</p>
+<p>multiTest()<br><code>`</code>  </p>
+<p>注：1.书上读取文件时写的代码比较繁琐，自己简化了一下。<br><em>注在用切片时想进行类型转换</em>：<code>Arr=[float(i) for i in currline[0:len(currline)-1]]</code><br>2.在随机梯度增加时 有一句<code>del(dataIndex[randIndex])</code>在python3中出错，应该将<code>dataIndex=rand(m)</code>改为<code>dataIndex=list(rand(m))</code>，这样更改之后错误率明显上升，个人理解这个语句的作用应该是删除已经被删选过的数据，避免重复选择一些数据进行学习，但是为什么效果更差了很奇怪，待解决</p>
 
           
         
@@ -751,7 +728,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/38742/">
+    <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/64719/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
@@ -770,7 +747,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/38742/" itemprop="url">【ng公开课笔记03+代码】逻辑回归</a></h1>
+                <a class="post-title-link" href="/posts/64719/" itemprop="url">【ng公开课笔记02】线性回归</a></h1>
         
 
         <div class="post-meta">
@@ -844,47 +821,70 @@
       
         
           
-            <p><strong>用途</strong>：分类问题  </p>
-<p><strong>假设函数</strong>：  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-6f55c7156571e94a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-5188ba4a1f7bb5cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>我们就是要通过训练样本来确定theta的取值<br>z=Theta^t*x在样本的图像上即是分类的分界曲线,即求得theta就可以判断实验样本的分类  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-a3147b90d90d5550.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-3f45b9ddaad7bf28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>theta^*x表示边界图像  </p>
-<p><strong>代价函数</strong>：<br>一般来说代价函数为误差的平方和<br>但对于h(x)误差的平方和为非凸函数所以  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-685622df8ca1d825.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>将其写成一个式子：  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-c44d7c9d29e747d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>通过梯度下降算法求theta:  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2478435-dda134e7ec44a81f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>代码：  </p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">from numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot as plt</span><br><span class="line">def loadDataSet():</span><br><span class="line">    dataMat=[];labelMat=[]</span><br><span class="line">    with <span class="built_in">open</span>(<span class="string">'testSet.txt'</span>) as f:</span><br><span class="line">        lineArr=f.readlines()</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">line</span> in lineArr:</span><br><span class="line">            <span class="built_in">line</span>=<span class="built_in">line</span>.strip().<span class="built_in">split</span>()</span><br><span class="line">            dataMat.<span class="built_in">append</span>([<span class="number">1.0</span>,<span class="built_in">float</span>(<span class="built_in">line</span>[<span class="number">0</span>]),<span class="built_in">float</span>(<span class="built_in">line</span>[<span class="number">1</span>])])</span><br><span class="line">            labelMat.<span class="built_in">append</span>(<span class="built_in">int</span>(<span class="built_in">line</span>[<span class="number">2</span>]))</span><br><span class="line">        <span class="keyword">return</span> dataMat,labelMat</span><br><span class="line"></span><br><span class="line">def sigmoid(inX):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1.0</span>/(<span class="number">1</span>+<span class="built_in">exp</span>(-inX))</span><br><span class="line"></span><br><span class="line">def gradAscent(dataMatin,classMatin):</span><br><span class="line">    dataMatrix=mat(dataMatin)</span><br><span class="line">    labelMatrix=mat(classMatin).transpose()</span><br><span class="line">    <span class="built_in">alpha</span>=<span class="number">0.01</span></span><br><span class="line">    Maxcycletime=<span class="number">500</span></span><br><span class="line">    m,n=<span class="built_in">shape</span>(dataMatrix)</span><br><span class="line">    weight=ones((n,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">for</span> k in range(Maxcycletime):</span><br><span class="line">        h=sigmoid(dataMatrix*weight)</span><br><span class="line">        cost=(labelMatrix-h)</span><br><span class="line">        weight=weight+<span class="built_in">alpha</span>*dataMatrix.transpose()*cost</span><br><span class="line">    <span class="keyword">return</span> weight</span><br><span class="line"></span><br><span class="line">def plotBestFit(wei):</span><br><span class="line">    weight=wei.getA()#将矩阵转化为数组</span><br><span class="line">    dataMat,labelMat=loadDataSet()</span><br><span class="line">    dataArr=array(dataMat)</span><br><span class="line">    n=<span class="built_in">shape</span>(dataArr)[<span class="number">0</span>]</span><br><span class="line">    xcord1=[];ycord1=[];</span><br><span class="line">    xcord2=[];ycord2=[];</span><br><span class="line">    <span class="keyword">for</span> i in range(n):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(labelMat[i])==<span class="number">1</span>:</span><br><span class="line">            xcord1.<span class="built_in">append</span>(dataArr[i,<span class="number">1</span>]);ycord1.<span class="built_in">append</span>(dataArr[i,<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            xcord2.<span class="built_in">append</span>(dataArr[i,<span class="number">1</span>]);ycord2.<span class="built_in">append</span>(dataArr[i,<span class="number">2</span>])</span><br><span class="line">    fig=plt.figure()</span><br><span class="line">    ax=fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">    ax.scatter(xcord1,ycord1,s=<span class="number">30</span>,c=<span class="string">'red'</span>,marker=<span class="string">'s'</span>)</span><br><span class="line">    ax.scatter(xcord2,ycord2,s=<span class="number">30</span>,c=<span class="string">'green'</span>)</span><br><span class="line">    x=arange(<span class="number">-3.0</span>,<span class="number">3.0</span>,<span class="number">0.1</span>)</span><br><span class="line">    y=(-weight[<span class="number">0</span>]-weight[<span class="number">1</span>]*x)/weight[<span class="number">2</span>]</span><br><span class="line">    ax.plot(x,y)</span><br><span class="line">    plt.xlabel(<span class="string">'X1'</span>);plt.ylabel(<span class="string">'X2'</span>);</span><br><span class="line">    plt.show()</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">运行结果</span><br><span class="line"></span><br><span class="line">![<span class="built_in">image</span>.png](http:<span class="comment">//upload-images.jianshu.io/upload_images/2478435-d4dfe63d9d7887b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">因为上述算法需要迭代<span class="number">500</span>次，不适合大量数据的计算</span><br><span class="line">所以改进 采用随机梯度上升</span><br><span class="line">即每次只用一组数据进行一次theta的更新，而不是每次都用所有的theta</span><br><span class="line">改进的随机梯度上升算法</span><br></pre></td></tr></table></figure>
-<p>def stocGradAscent0(dataMatrix,classLabels):</p>
-<p>#注意这里的dataMatrix是array数组不是矩阵<br>    m,n=shape(dataMatrix)<br>    alpha=0.01<br>    weight=ones(n)<br>    for i in range(m):<br>        error=classLabels[i]-sigmoid(sum(weight<em>dataMatrix[i]))<br>        weight=weight+error</em>alpha*dataMatrix[i]<br>    return weight</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">由于这里受限于数据量的大小，对theta更新次数较少，所以不是很精确</span><br><span class="line">因此人为增加更新次数，同时动态更新<span class="built_in">alpha</span>的值</span><br></pre></td></tr></table></figure>
-<p>def stocGradAscent1(dataMatrix,classLabels,numIter=150):<br>    m,n=shape(dataMatrix)<br>    weight=ones(n)<br>    for i in range(numIter):<br>        dataIndex=range(m)<br>        for j in range(m):<br>            alpha=4.0/(1.0+i+j)<br>            randIndex=int(random.uniform(0,len(dataIndex)))<br>            error=classLabels[randIndex]-sigmoid(sum(weight<em>dataMatrix[randIndex]))<br>            weight=weight+alpha</em>error*dataMatrix[randIndex]<br>    return weight</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">随机梯度下降算法的运行结果（结果反而比第一个好）  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![<span class="string">image.png</span>](<span class="link">http://upload-images.jianshu.io/upload_images/2478435-7b0a18e796379454.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)</span><br><span class="line"></span><br><span class="line">实战：预测马的死亡率</span><br><span class="line">一、数据预处理</span><br><span class="line">常用的数据预处理方法：  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">![<span class="string">image.png</span>](<span class="link">http://upload-images.jianshu.io/upload_images/2478435-bd501491dcc3f78d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由于系数的计算公式：  </span><br><span class="line"></span><br><span class="line">![<span class="string">image.png</span>](<span class="link">http://upload-images.jianshu.io/upload_images/2478435-28b8df0a63f44ac7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240</span>)  </span><br><span class="line"></span><br><span class="line">当特征值缺失时  weight=weight 所以不会造成影响，所以置缺失的特征值为0</span><br><span class="line"></span><br><span class="line">而缺失的标签值直接丢弃</span><br><span class="line"></span><br><span class="line">二、进行分类</span><br><span class="line">方法：将特征向量乘以训练好的系数求和，带入sigmoid函数，大于0.5则为正样本，否则为负样本</span><br></pre></td></tr></table></figure>
-<p>from logRegres import *</p>
-<p>def classifyVector(inX,weight):<br>    prob=sigmoid(sum(inX*weight))<br>    if prob&gt;0.5:return 1.0<br>    else: return 0.0</p>
-<p>def colicTest():<br>    trainLabels =[]<br>    trainSet=[]<br>    with open(‘horseColicTraining.txt’) as frTrian:<br>        for line in frTrian.readlines():<br>            currLine=line.strip().split(‘\t’)<br>            n=int(len(currLine))-1<br>            Arr=[float(i) for i in currLine[0:n]]<br>            trainSet.append(Arr)<br>            trainLabels.append(float(currLine[-1]))<br>    trianWeights=stocGradAscent1(array(trainSet),trainLabels,1000)</p>
-<pre><code>with open(&apos;horseColicTest.txt&apos;) as frTest:
-    lineArr=[]
-    errorCount=0.0
-    numTestVect = 0.0
-    for line in frTest.readlines():
-        numTestVect+=1
-        currline=line.strip().split(&apos;\t&apos;)
-        Arr=[float(i) for i in currline[0:len(currline)-1]]
-        lineArr.append(Arr)
-        if int(classifyVector(array(lineArr),trianWeights))!=int(currline[-1]):
-            errorCount+=1
-errorRate=float(errorCount)/float(numTestVect)
-print(&quot;the error rate of this test is:%f&quot;%errorRate)
-return errorRate
-</code></pre><p>def multiTest():<br>    numTests = 10; errorSum=0.0<br>    for k in range(numTests):<br>        errorSum += colicTest()<br>    print(“after %d iterations the average error rate is: %f” % (numTests, errorSum/float(numTests)))</p>
-<p>multiTest()<br><code>`</code>  </p>
-<p>注：1.书上读取文件时写的代码比较繁琐，自己简化了一下。<br><em>注在用切片时想进行类型转换</em>：<code>Arr=[float(i) for i in currline[0:len(currline)-1]]</code><br>2.在随机梯度增加时 有一句<code>del(dataIndex[randIndex])</code>在python3中出错，应该将<code>dataIndex=rand(m)</code>改为<code>dataIndex=list(rand(m))</code>，这样更改之后错误率明显上升，个人理解这个语句的作用应该是删除已经被删选过的数据，避免重复选择一些数据进行学习，但是为什么效果更差了很奇怪，待解决</p>
+            <h2 id="一、主要步骤-各算法通用"><a href="#一、主要步骤-各算法通用" class="headerlink" title="一、主要步骤(各算法通用)"></a><strong>一、主要步骤(各算法通用)</strong></h2><ul>
+<li>构建模型</li>
+<li>构建代价函数</li>
+<li>参数优化</li>
+</ul>
+<p>监督学习的工作方式：                            </p>
+<p><img src="http://static.zybuluo.com/yhsdba/8vvje0ah0sbyea5xi9bs00fc/image_1bh51fai51gi31us419km90j9jd13.png" alt="image_1bh51fai51gi31us419km90j9jd13.png-28.8kB"></p>
+<h2 id="二、单变量线性回归"><a href="#二、单变量线性回归" class="headerlink" title="二、单变量线性回归"></a><strong>二、单变量线性回归</strong></h2><h3 id="eg：房价估计"><a href="#eg：房价估计" class="headerlink" title="eg：房价估计"></a>eg：房价估计</h3><p>1.构建模型<br><img src="http://static.zybuluo.com/yhsdba/9ajfijc732r92o1na8zi0fk7/image_1bh50ubm31vefda2d1g16q6c6tm.png" alt="house_price"></p>
+<p><strong>假设函数: $ h_\theta(x)=\theta_0+\theta_1x $</strong></p>
+<p>2.<strong>代价函数</strong><br>$ J(\theta_0,\theta_1)=1/2m*\sum^n_1(h_\theta(x^i-y^i))^2 $<br>对代价函数的直观理解：<br><img src="http://static.zybuluo.com/yhsdba/meohz27xm3i8i748vzuavkdt/image_1bh52dkl91r4ku7t1chp14hl10ee9.png" alt="image_1bh52dkl91r4ku7t1chp14hl10ee9.png-293kB">                       </p>
+<p><img src="http://static.zybuluo.com/yhsdba/6xhfv374dzobu0u5x5k2264r/image_1bh52euue1b1d1dch80q68v154lm.png" alt="image_1bh52euue1b1d1dch80q68v154lm.png-75.3kB"></p>
+<p>3.<strong>梯度下降</strong></p>
+<p>直观理解：从高点逐步到达局部最小值（选择的初始参数组合不同，可能最后的结果也不同）<br><img src="http://static.zybuluo.com/yhsdba/7m2uokpdtvooxhjkc88ofqzv/image_1bh52helr1us51q841gqofvb1rln13.png" alt="image_1bh52helr1us51q841gqofvb1rln13.png-84.2kB"></p>
+<p>算法：<br>repeat:<br>    $\theta_j=\theta_j-\alpha\partial/\partial\theta_jJ(\theta_0,\theta_1)\  \ \  (for\ j=0\ and\ j=1)$  </p>
+<p>$\alpha$:学习率<br><strong>注意</strong>梯度下降时，要同时更新$\theta_0$和$\theta_1$，即：   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/xkuyeai4fn8sh42oa83bcf3y/image_1bh53avt6194ghvblhv18q9doo2a.png" alt="image_1bh53avt6194ghvblhv18q9doo2a.png-36.1kB"></p>
+<p>将代价函数带入上式求导   </p>
+<p><img src="http://static.zybuluo.com/yhsdba/ec2c0pup5uu5mqmq5gunxnno/image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png" alt="image_1bh539j6p1j1aomn1g7q1a8b1meg1t.png-15.7kB"></p>
+<h2 id="三、多变量线性回归"><a href="#三、多变量线性回归" class="headerlink" title="三、多变量线性回归"></a><strong>三、多变量线性回归</strong></h2><p>步骤与上述类似，只是需要将X和Y向量化<br>即代价函数变为：<br>$J(\theta_0\theta_1…\theta_n)=1/2m\sum_1^n(h_\theta(x^i)-y^i)^2$<br>梯度下降算法变为(求导带入后)：<br>Repeat{<br>$\theta_j=\theta_j-\alpha/m\sum^m_1(h_\theta(x^i)-y^i)x^i_j$<br>}</p>
+<h2 id="四、一些数据处理方法"><a href="#四、一些数据处理方法" class="headerlink" title="四、一些数据处理方法"></a><strong>四、一些数据处理方法</strong></h2><p>1.特征缩放：面对多特征问题时，要保证这些特征都具有相近的尺度，这样可以使收敛速度加快。最简单的是将所有特征取值范围都缩放到[-1,1]</p>
+<p>即$x_n=(x_n-u_n)/s_n$</p>
+<p>其中$u_n$是平均值$s_n$是标准差</p>
+<p>收敛速度对比：<br><img src="http://static.zybuluo.com/yhsdba/c76vk48ijzkdymesx5d2xdve/image_1bh53tnepat82p93d11p1v15pv2n.png" alt="image_1bh53tnepat82p93d11p1v15pv2n.png-51.1kB"></p>
+<p>2.常用学习率：0.01,0.03,0.1,0.3,1,3,10.（过高可能越过最值，过低迭代次数过高）</p>
+<p>3.非线性多项式：有时需要用曲线来适应数据，如<br>$h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x^2+\theta_3x^3$<br>通常需要先观察数据再决定尝试怎样的模型<br>还可以令：$x_2=x_2^2$     $x_3=x_3^3$将模型转换为线性回归</p>
+<h2 id="五、正规方程"><a href="#五、正规方程" class="headerlink" title="五、正规方程"></a><strong>五、正规方程</strong></h2><h3 id="另一种参数优化方法"><a href="#另一种参数优化方法" class="headerlink" title="另一种参数优化方法"></a>另一种参数优化方法</h3><p>如$J(\theta)=a\theta^2+b\theta+c$<br>X为训练集特征矩阵，y为结果向量<br>正规方程解$\theta=(X^TX)^{-1}X^Ty$</p>
+<ul>
+<li>对上述式子的理解：  </li>
+</ul>
+<p>设误差为$\Sigma_{i=1}^m(y_i-x_i^Tw)^2$     </p>
+<p>还可以用矩阵写为$(y-x_i^T\theta)^T(y-x_i^T\theta)$，对$w$求导，得到$X^T(Y-X\theta)$，令其等于0，得到  </p>
+<blockquote>
+<p>$\theta=(X^TX)^{-1}X^Ty$  </p>
+</blockquote>
+<p>即得到了使误差函数最小的参数</p>
+<h3 id="梯度下降和正规方程的比较："><a href="#梯度下降和正规方程的比较：" class="headerlink" title="梯度下降和正规方程的比较："></a>梯度下降和正规方程的比较：</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">梯度下降</th>
+<th style="text-align:center">正规方程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">需要选择学习率</td>
+<td style="text-align:center">不需要</td>
+</tr>
+<tr>
+<td style="text-align:center">需要多次迭代</td>
+<td style="text-align:center">一次运算得出</td>
+</tr>
+<tr>
+<td style="text-align:center">当特征数量n大时也能较好适用</td>
+<td style="text-align:center">特征数量n较大则运算代价大</td>
+</tr>
+<tr>
+<td style="text-align:center">适用于各种类型的模型</td>
+<td style="text-align:center">只适用于线性模型，不适合逻辑回归等其他模型</td>
+</tr>
+</tbody>
+</table>
+<p>当特征变量数量小于一万，通常使用标准方程法</p>
+<p><strong>正规方程是不可逆时可删除几个特征</strong></p>
+<h2 id="六、python实现"><a href="#六、python实现" class="headerlink" title="六、python实现"></a><strong>六、python实现</strong></h2><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def standRegress(xArr,yArr):</span><br><span class="line">    xMat=<span class="built_in">np</span>.mat(xArr);yMat=<span class="built_in">np</span>.mat(yArr).T</span><br><span class="line">    xTx=xMat.T*xMat</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">np</span>.linalg.det(xTx)==<span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span> 'the <span class="built_in">matrix</span> <span class="built_in">is</span> singular,can <span class="keyword">not</span> <span class="built_in">reverse</span>'</span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    ws=xTx.I*(xMat.T*yMat)</span><br><span class="line">    <span class="built_in">return</span> ws</span><br><span class="line"></span><br><span class="line">def lwlr(testPoint,xArr,yArr,k=<span class="number">1.0</span>):</span><br><span class="line">    xMat=<span class="built_in">np</span>.mat(xArr);yMat=<span class="built_in">np</span>.mat(yArr).T</span><br><span class="line">    m=<span class="built_in">np</span>.shape(xMat)[<span class="number">0</span>]</span><br><span class="line">    weights=<span class="built_in">np</span>.mat(<span class="built_in">np</span>.eye(m))</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        diffMat=testPoint-xMat[j,:]</span><br><span class="line">        weights[j,j]=<span class="built_in">np</span>.<span class="built_in">exp</span>(diffMat*diffMat.T/(-<span class="number">2.0</span>*k**<span class="number">2</span>))</span><br><span class="line">    xTx=xMat.T*(weights*xMat)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">np</span>.linalg.det(xTx)==<span class="number">0.0</span>:</span><br><span class="line">        <span class="built_in">print</span> <span class="string">"This matrix is singular,cannot do inverse"</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    ws=xTx.I*(xMat.T*(weights*yMat))</span><br><span class="line">    <span class="built_in">return</span> testPoint*ws</span><br><span class="line"></span><br><span class="line">def lwlrTest(testArr,xArr,yArr,k=<span class="number">1.0</span>):</span><br><span class="line">    m=<span class="built_in">np</span>.shape(testArr)[<span class="number">0</span>]</span><br><span class="line">    yHat=<span class="built_in">np</span>.zeros(m)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">        yHat[i]=lwlr(testArr[i],xArr,yArr,k)</span><br><span class="line">    <span class="built_in">return</span> yHat</span><br></pre></td></tr></table></figure>
 
           
         
