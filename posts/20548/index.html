@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<!DOCTYPE html><html class="theme-next muse use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,13 +71,13 @@
 
 
 
-<meta name="description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等) 高偏差   减小归一化程度$\lambda$ 高偏差   增加归一化程度$\lambda$ 高方差    评估一个假设前面我们确定假设函数时所用的方法是不断优化假设函数">
+<meta name="description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征(              ,             ,                  等) 高偏差   减小归一化程度         高偏差   增加归一化程度         高方差    评估一个假设前面我们">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【ng公开课笔记06】算法应用建议">
 <meta property="og:url" content="https://kingsea0-0.github.io/posts/20548/index.html">
-<meta property="og:site_name" content="Kingsea&#39;s Blog">
-<meta property="og:description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等) 高偏差   减小归一化程度$\lambda$ 高偏差   增加归一化程度$\lambda$ 高方差    评估一个假设前面我们确定假设函数时所用的方法是不断优化假设函数">
+<meta property="og:site_name" content="Kingsea's Blog">
+<meta property="og:description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征(              ,             ,                  等) 高偏差   减小归一化程度         高偏差   增加归一化程度         高方差    评估一个假设前面我们">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/fkpmj31forfx0bujg3fvggaj/image_1bi0qv10k170d1qd287nemn6rk9.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/fei86o7a4ypkczc0536kh24y/image_1bi0r5a13shb3i11an6aed7sm.png">
@@ -97,7 +89,7 @@
 <meta property="og:updated_time" content="2018-12-07T09:42:48.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【ng公开课笔记06】算法应用建议">
-<meta name="twitter:description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等) 高偏差   减小归一化程度$\lambda$ 高偏差   增加归一化程度$\lambda$ 高方差    评估一个假设前面我们确定假设函数时所用的方法是不断优化假设函数">
+<meta name="twitter:description" content="性能改进方法先放结论，后面再详细写一下原因      方法 适用范围     获得更多的训练实例 高方差   减小特征数量 高方差   获得更多特征 高偏差   增加多项式特征(              ,             ,                  等) 高偏差   减小归一化程度         高偏差   增加归一化程度         高方差    评估一个假设前面我们">
 <meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/fkpmj31forfx0bujg3fvggaj/image_1bi0qv10k170d1qd287nemn6rk9.png">
 
 
@@ -243,13 +235,13 @@
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/20548/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kingsea's Blog">
     </span>
 
@@ -330,7 +322,7 @@
       
 
       
-        <h1 id="性能改进方法"><a href="#性能改进方法" class="headerlink" title="性能改进方法"></a>性能改进方法</h1><p>先放结论，后面再详细写一下原因  </p>
+        <meta name="generator" content="Hexo 3.8.0"><h1 id="性能改进方法"><a href="#性能改进方法" class="headerlink" title="性能改进方法"></a>性能改进方法</h1><p>先放结论，后面再详细写一下原因  </p>
 <table>
 <thead>
 <tr>
@@ -352,15 +344,64 @@
 <td style="text-align:center">高偏差</td>
 </tr>
 <tr>
-<td style="text-align:center">增加多项式特征($x_1^2$,$x_2^2$,$x_1x_2$等)</td>
+<td style="text-align:center">增加多项式特征(<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.384ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 1026.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E1-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E1-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-32" x="809" y="488"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-31" x="809" y="-435"></use>
+</g>
+</svg></span>,<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.384ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 1026.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E2-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E2-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E2-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E2-MJMAIN-32" x="809" y="488"></use>
+ <use transform="scale(0.707)" xlink:href="#E2-MJMAIN-32" x="809" y="-435"></use>
+</g>
+</svg></span>,<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.768ex" height="2.009ex" style="vertical-align: -0.671ex;" viewBox="0 -576.1 2052.8 865.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E3-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E3-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E3-MJMAIN-31" x="809" y="-213"></use>
+<g transform="translate(1026,0)">
+ <use xlink:href="#E3-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E3-MJMAIN-32" x="809" y="-213"></use>
+</g>
+</g>
+</svg></span>等)</td>
 <td style="text-align:center">高偏差</td>
 </tr>
 <tr>
-<td style="text-align:center">减小归一化程度$\lambda$</td>
+<td style="text-align:center">减小归一化程度<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E4-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E4-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span></td>
 <td style="text-align:center">高偏差</td>
 </tr>
 <tr>
-<td style="text-align:center">增加归一化程度$\lambda$</td>
+<td style="text-align:center">增加归一化程度<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E5-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E5-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span></td>
 <td style="text-align:center">高方差</td>
 </tr>
 </tbody>
@@ -368,7 +409,7 @@
 <h1 id="评估一个假设"><a href="#评估一个假设" class="headerlink" title="评估一个假设"></a>评估一个假设</h1><p>前面我们确定假设函数时所用的方法是不断优化假设函数的参数使其误差最小。但这并不意味着我们求得了一个好的假设函数，因为有可能出现过拟合问题。最简单的确定过拟合的方法就是画图，但当特征数量较多时，画图就比较困难了，所以需要采取别的方法来评判一个假设函数的好坏。   </p>
 <p>为了检验算法是否过拟合，我们将数据分为训练集和测试集，比例约为7:3。注意数据要随机分配。通过训练集计算出参数后，对测试集运用该模型计算代价函数J。  </p>
 <p>对于逻辑回归（分类问题），除了采用代价函数计算误差外，还可以用误分类率(misclassfication error)计算。</p>
-<p>$$<br>err(h_\theta(x),y)={^{1\ \ \ ifh(x)&gt;0.5\ and \ y=0,or\ if \ h(x)&lt;0.5\ and\ y=1}_{0  \ \ \ ohterwise}<br>$$    </p>
+<p><span class="mjpage mjpage__block"></span>    </p>
 <p>最后对计算结果求平均  </p>
 <h1 id="模型选择和交叉验证"><a href="#模型选择和交叉验证" class="headerlink" title="模型选择和交叉验证"></a>模型选择和交叉验证</h1><p>前面提到了，当多项式的次数越高时越能适应训练集，但不一定能代表普遍情况（即不能很好的预测）。所以我们通过交叉验证来帮助选择模型。    </p>
 <blockquote>
@@ -393,20 +434,69 @@
 <p>对于交叉验证集，d较小时欠拟合，误差较大，d较大时过拟合，误差也较大，所以呈现出先减小后增大的趋势  </p>
 <p>所以当训练集误差和交叉验证集误差近似时：偏差/欠拟合  </p>
 <p>交叉验证误差远大于训练集误差时：方差/过拟合  </p>
-<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p><strong>这里讨论的是误差与$\lambda$的关系</strong></p>
-<p>前面提到我们通过归一化的方式来防止过拟合，但是$\lambda$的值过高会导致欠拟合，过小依然过拟合。   </p>
-<p>所以我们需要测试一系列$\lambda$的值，通常是0-10之间的呈现2倍关系的值(0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10)。同样把数据分为训练集交叉验证集和测试集  </p>
-<p>选择$\lambda$的方法：</p>
+<h1 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h1><p><strong>这里讨论的是误差与<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E7-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E7-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>的关系</strong></p>
+<p>前面提到我们通过归一化的方式来防止过拟合，但是<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E8-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E8-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>的值过高会导致欠拟合，过小依然过拟合。   </p>
+<p>所以我们需要测试一系列<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E9-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E9-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>的值，通常是0-10之间的呈现2倍关系的值(0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10)。同样把数据分为训练集交叉验证集和测试集  </p>
+<p>选择<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E10-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E10-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>的方法：</p>
 <ol>
 <li>使用训练集训练出12个不同程度的归一化模型</li>
 <li>分别用每个模型对交叉验证集计算交叉验证误差</li>
 <li>选择交叉验证误差最小的模型</li>
-<li>对选出的模型通过测试集得出误差的推广，也可以同时将训练集和交叉验证集的代价函数误差与$\lambda$的值会在一张图表上：   </li>
+<li>对选出的模型通过测试集得出误差的推广，也可以同时将训练集和交叉验证集的代价函数误差与<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E11-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E11-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>的值会在一张图表上：   </li>
 </ol>
 <p><img src="http://static.zybuluo.com/yhsdba/juuvgz155l5wya8vpdburnf1/image_1bi168gcb455ru51q9pcdamd413.png" alt="image_1bi168gcb455ru51q9pcdamd413.png-140.2kB">   </p>
 <ul>
-<li>$\lambda$较小时，训练误差较小而交叉验证误差较大(过拟合)</li>
-<li>$\lambda$增加，训练集误差不断增加(欠拟合),而交叉验证集误差先减小后增大</li>
+<li><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E12-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E12-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>较小时，训练误差较小而交叉验证误差较大(过拟合)</li>
+<li><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.355ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 583.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E13-MJMATHI-3BB" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E13-MJMATHI-3BB" x="0" y="0"></use>
+</g>
+</svg></span>增加，训练集误差不断增加(欠拟合),而交叉验证集误差先减小后增大</li>
 </ul>
 <h1 id="学习曲线"><a href="#学习曲线" class="headerlink" title="学习曲线"></a>学习曲线</h1><p>学习曲线是对算法的一个合理检验，表示了<strong>训练集实例数量与误差的关系</strong>  </p>
 <p>当实例很少的时候，模型可以完美拟合训练数据，但训练出的模型不能很好的适应交叉训练集。当训练数据增多，训练集的误差会有所增大，但交叉验证集的误差却减小了。   </p>
@@ -614,7 +704,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">© <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -632,7 +722,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 — <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -799,5 +889,6 @@
 
   
 
-</body>
-</html>
+
+
+</body></html>

@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<!DOCTYPE html><html class="theme-next muse use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,13 +71,13 @@
 
 
 
-<meta name="description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^">
+<meta name="description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集">
 <meta name="keywords" content="神经网络 word2vec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络">
 <meta property="og:url" content="https://kingsea0-0.github.io/posts/25854/index.html">
-<meta property="og:site_name" content="Kingsea&#39;s Blog">
-<meta property="og:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^">
+<meta property="og:site_name" content="Kingsea's Blog">
+<meta property="og:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/xwe0ziycheoqgmk32p1ceu60/image_1bpt4ncp3onos8h177l1l6edh09.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/7jq4ipnmfgs77opcggu1s2i8/image_1bpt4pp541bikit0rllqo119ag13.png">
@@ -120,7 +112,7 @@
 <meta property="og:updated_time" content="2018-12-07T09:42:48.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络">
-<meta name="twitter:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^">
+<meta name="twitter:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集">
 <meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/xwe0ziycheoqgmk32p1ceu60/image_1bpt4ncp3onos8h177l1l6edh09.png">
 
 
@@ -266,13 +258,13 @@
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/25854/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kingsea's Blog">
     </span>
 
@@ -353,9 +345,55 @@
       
 
       
-        <h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。</p>
+        <meta name="generator" content="Hexo 3.8.0"><h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。</p>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。</p>
-<p>我们给定一个训练集${x^{(i)},y^{(i)}}^N$，$x^i$是一个d维向量，$y^i$是一个C维one-hot向量（常用来作为预测结果的标签），N是总数。在一般的机器学习任务中，我们通常固定输入数据和目标标签，通过优化（SGD等）训练权重。在自然语言处理中，我们引入了重训练的思想，针对具体任务时，我们重新训练输入的词向量。下面讨论何时需要进行这样的操作以及原因。</p>
+<p>我们给定一个训练集<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="9.374ex" height="3.509ex" style="vertical-align: -0.671ex;" viewBox="0 -1221.9 4035.9 1510.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E1-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E1-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path>
+<path stroke-width="1" id="E1-MJMATHI-79" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E1-MJMATHI-4E" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E1-MJMATHI-78" x="0" y="0"></use>
+<g transform="translate(572,362)">
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-28" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-69" x="389" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-29" x="734" y="0"></use>
+</g>
+ <use xlink:href="#E1-MJMAIN-2C" x="1467" y="0"></use>
+<g transform="translate(1912,0)">
+ <use xlink:href="#E1-MJMATHI-79" x="0" y="0"></use>
+<g transform="translate(499,362)">
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-28" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-69" x="389" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-29" x="734" y="0"></use>
+</g>
+</g>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-4E" x="4677" y="878"></use>
+</g>
+</svg></span>，<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.129ex" height="2.509ex" style="vertical-align: -0.338ex;" viewBox="0 -934.9 916.8 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E2-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E2-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E2-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E2-MJMATHI-69" x="809" y="513"></use>
+</g>
+</svg></span>是一个d维向量，<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.96ex" height="2.843ex" style="vertical-align: -0.671ex;" viewBox="0 -934.9 844 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E3-MJMATHI-79" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E3-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E3-MJMATHI-79" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E3-MJMATHI-69" x="706" y="513"></use>
+</g>
+</svg></span>是一个C维one-hot向量（常用来作为预测结果的标签），N是总数。在一般的机器学习任务中，我们通常固定输入数据和目标标签，通过优化（SGD等）训练权重。在自然语言处理中，我们引入了重训练的思想，针对具体任务时，我们重新训练输入的词向量。下面讨论何时需要进行这样的操作以及原因。</p>
 <h2 id="重训练词向量"><a href="#重训练词向量" class="headerlink" title="重训练词向量"></a>重训练词向量</h2><p>注：只有在训练集比较大时，才需要进行词向量重训练，否则适得其反</p>
 <p>我们一般先用一个简单的内部任务评价来初始化用于外部任务评价的词向量。在很多情况下，这些预训练的词向量的在外部任务中的表现已经非常好了。 然而，一些情况下，这些词向量在外部任务中的表现仍然有提升空间。不过，重训练词向量是由风险的。</p>
 <p>比如有一个给单词做情感分析的小任务，在预训练的词向量中，这三个表示电视的单词都是在一起的：</p>
@@ -384,7 +422,34 @@
 <p>我们这里看到的是一个中心词，和长度为2的左右窗口内的词。这种上下文可以帮助我们分辨Paris是一个地点，还是一个人名 </p>
 <p><img src="http://static.zybuluo.com/yhsdba/e1gwia9laljmxg0rgoqq68v8/image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png" alt="image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png-7.1kB"></p>
 <p>我们前面提到的外部任务都是以单个单词为输入的。实际上，由于自然语言的特性，这种情况很少会出现。在自然语言中，有很多一词多义的情况，这时候我们一般会参考上下文来判断。所以在大多数的情况下，我们给模型输入的是一个词序列。这个词序列由一个中心词向量和它上下文的词向量组成。上下文中词的数量又叫词窗大小，任务不同这个参数的取值也不同。一般来讲，小窗口在句法上的精度较高，大窗口在语义上的表现较好。</p>
-<h2 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h2><p>我们继续使用softmax进行分类。只需要将之前的$x$换成$x_{window}$即可</p>
+<h2 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h2><p>我们继续使用softmax进行分类。只需要将之前的<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 572.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E4-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E4-MJMATHI-78" x="0" y="0"></use>
+</g>
+</svg></span>换成<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.126ex" height="2.009ex" style="vertical-align: -0.671ex;" viewBox="0 -576.1 3068.2 865.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E5-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-77" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-64" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-6F" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E5-MJMATHI-78" x="0" y="0"></use>
+<g transform="translate(572,-150)">
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-77" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-69" x="716" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-6E" x="1062" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-64" x="1662" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-6F" x="2186" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-77" x="2671" y="0"></use>
+</g>
+</g>
+</svg></span>即可</p>
 <p><img src="http://static.zybuluo.com/yhsdba/c8zoc40vxms457ycfdzst6li/image_1bpt9mjrfu28v6k1f1f1m481d52av.png" alt="image_1bpt9mjrfu28v6k1f1f1m481d52av.png-10.7kB"></p>
 <p>那相应的，我们计算损失函数梯度的时候，得到的就是如下形式的向量了：</p>
 <p><img src="http://static.zybuluo.com/yhsdba/144gger5c98e36pcn8ia9i8j/image_1bpt9mut31grhm86su9at10sebc.png" alt="image_1bpt9mut31grhm86su9at10sebc.png-10.5kB"></p>
@@ -404,28 +469,311 @@
 <p>一个命名识体识别的例子：</p>
 <p>“Museums in Paris are amazing”</p>
 <p>我们要来判断这里的中心词”Paris”是不是个命名实体。在这种情况下， 我们不止要知道这个词窗内哪些词向量出现过，可能也需要知道他们之间的相互作用。 比如说，可能只有在”Museums”出现在第1个位置，”in”出现在第二个位置的时候，Paris才是命名实体。如果你直接把词向量丢给Softmax函数， 这种非线性的决策是很难做到的。</p>
-<p>所以我们需要用1.2中讨论的方法对输入的变量进行非线性的处理加工(神经元产出非线性激励输出)，再把这些中间层的产物输入到Softmax函数中去。 这样我们可以用另一个矩阵<br>U∈$R^{m+1}$,与激励输出结果运算生成得分（当然，这里是未归一化的），从而进一步用于分类任务：</p>
+<p>所以我们需要用1.2中讨论的方法对输入的变量进行非线性的处理加工(神经元产出非线性激励输出)，再把这些中间层的产物输入到Softmax函数中去。 这样我们可以用另一个矩阵<br>U∈<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.54ex" height="2.509ex" style="vertical-align: -0.338ex;" viewBox="0 -934.9 2385.1 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E6-MJMATHI-52" d="M230 637Q203 637 198 638T193 649Q193 676 204 682Q206 683 378 683Q550 682 564 680Q620 672 658 652T712 606T733 563T739 529Q739 484 710 445T643 385T576 351T538 338L545 333Q612 295 612 223Q612 212 607 162T602 80V71Q602 53 603 43T614 25T640 16Q668 16 686 38T712 85Q717 99 720 102T735 105Q755 105 755 93Q755 75 731 36Q693 -21 641 -21H632Q571 -21 531 4T487 82Q487 109 502 166T517 239Q517 290 474 313Q459 320 449 321T378 323H309L277 193Q244 61 244 59Q244 55 245 54T252 50T269 48T302 46H333Q339 38 339 37T336 19Q332 6 326 0H311Q275 2 180 2Q146 2 117 2T71 2T50 1Q33 1 33 10Q33 12 36 24Q41 43 46 45Q50 46 61 46H67Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628Q287 635 230 637ZM630 554Q630 586 609 608T523 636Q521 636 500 636T462 637H440Q393 637 386 627Q385 624 352 494T319 361Q319 360 388 360Q466 361 492 367Q556 377 592 426Q608 449 619 486T630 554Z"></path>
+<path stroke-width="1" id="E6-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E6-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path>
+<path stroke-width="1" id="E6-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E6-MJMATHI-52" x="0" y="0"></use>
+<g transform="translate(759,362)">
+ <use transform="scale(0.707)" xlink:href="#E6-MJMATHI-6D" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMAIN-2B" x="878" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMAIN-31" x="1657" y="0"></use>
+</g>
+</g>
+</svg></span>,与激励输出结果运算生成得分（当然，这里是未归一化的），从而进一步用于分类任务：</p>
 <p><img src="http://static.zybuluo.com/yhsdba/5tte77pk0n1p41qtvfedsuuz/image_1bptb27ad1q1174b1j04400610f1.png" alt="image_1bptb27ad1q1174b1j04400610f1.png-430.2kB"></p>
 <p><img src="http://static.zybuluo.com/yhsdba/p6o0ak00f3x92ly6c6r7hu36/image_1bptb1te62n9u1b1bf8ilv11vaek.png" alt="image_1bptb1te62n9u1b1bf8ilv11vaek.png-96.5kB"></p>
 <h2 id="最大化目标间隔函数"><a href="#最大化目标间隔函数" class="headerlink" title="最大化目标间隔函数"></a>最大化目标间隔函数</h2><p>跟大多数机器学习模型一样，神经网络也需要一个优化目标，一个用来衡量模型好坏的度量。优化算法在做的事情呢，通常说来就是找到一组权重，来最优化目标或者最小化误差。这里我们讨论一个比较流行的度量，叫做最大化间隔目标函数。直观的理解就是我们要保证被正确分类的样本分数要高于错误分类的样本得分。</p>
-<p>继续用之前的例子，如果我们把一个正确标记的词窗 “Museums in Paris are amazing”(这里Paris是命名实体)的得分记做$s$,而错误标记的词窗“Not all Museums in Paris”(这里Paris不是命名实体)的得分记作$s_c$ (c表示这个词窗”corrupt”了)</p>
-<p>于是，我们的目标函数就是要最大化$(s-s_c)$ 或者最小化 $(s_c-s)$。然而$当s&gt;s_c$时，这表明标记正确，我们可以跳过这个样不进行训练。我们只需要将$s_c-s&gt;0$的样本训练到差最小就可以了。所以目标函数改进为：</p>
+<p>继续用之前的例子，如果我们把一个正确标记的词窗 “Museums in Paris are amazing”(这里Paris是命名实体)的得分记做<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.09ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 469.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E7-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E7-MJMATHI-73" x="0" y="0"></use>
+</g>
+</svg></span>,而错误标记的词窗“Not all Museums in Paris”(这里Paris不是命名实体)的得分记作<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.035ex" height="2.009ex" style="vertical-align: -0.671ex;" viewBox="0 -576.1 876 865.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E8-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+<path stroke-width="1" id="E8-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E8-MJMATHI-73" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMATHI-63" x="663" y="-213"></use>
+</g>
+</svg></span> (c表示这个词窗”corrupt”了)</p>
+<p>于是，我们的目标函数就是要最大化<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.775ex" height="2.843ex" style="vertical-align: -0.838ex;" viewBox="0 -863.1 3347.5 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E9-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E9-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+<path stroke-width="1" id="E9-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E9-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+<path stroke-width="1" id="E9-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E9-MJMAIN-28" x="0" y="0"></use>
+ <use xlink:href="#E9-MJMATHI-73" x="389" y="0"></use>
+ <use xlink:href="#E9-MJMAIN-2212" x="1081" y="0"></use>
+<g transform="translate(2081,0)">
+ <use xlink:href="#E9-MJMATHI-73" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E9-MJMATHI-63" x="663" y="-213"></use>
+</g>
+ <use xlink:href="#E9-MJMAIN-29" x="2957" y="0"></use>
+</g>
+</svg></span> 或者最小化 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.775ex" height="2.843ex" style="vertical-align: -0.838ex;" viewBox="0 -863.1 3347.5 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E10-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E10-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+<path stroke-width="1" id="E10-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+<path stroke-width="1" id="E10-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E10-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E10-MJMAIN-28" x="0" y="0"></use>
+<g transform="translate(389,0)">
+ <use xlink:href="#E10-MJMATHI-73" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E10-MJMATHI-63" x="663" y="-213"></use>
+</g>
+ <use xlink:href="#E10-MJMAIN-2212" x="1487" y="0"></use>
+ <use xlink:href="#E10-MJMATHI-73" x="2488" y="0"></use>
+ <use xlink:href="#E10-MJMAIN-29" x="2957" y="0"></use>
+</g>
+</svg></span>。然而<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="8.39ex" height="3.343ex" style="vertical-align: -1.171ex;" viewBox="0 -934.9 3612.5 1439.2" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E11-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+<path stroke-width="1" id="E11-MJMAIN-3E" d="M84 520Q84 528 88 533T96 539L99 540Q106 540 253 471T544 334L687 265Q694 260 694 250T687 235Q685 233 395 96L107 -40H101Q83 -38 83 -20Q83 -19 83 -17Q82 -10 98 -1Q117 9 248 71Q326 108 378 132L626 250L378 368Q90 504 86 509Q84 513 84 520Z"></path>
+<path stroke-width="1" id="E11-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+<text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">当</text>
+ <use xlink:href="#E11-MJMATHI-73" x="932" y="0"></use>
+ <use xlink:href="#E11-MJMAIN-3E" x="1680" y="0"></use>
+<g transform="translate(2736,0)">
+ <use xlink:href="#E11-MJMATHI-73" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E11-MJMATHI-63" x="663" y="-213"></use>
+</g>
+</g>
+</svg></span>时，这表明标记正确，我们可以跳过这个样不进行训练。我们只需要将<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="10.226ex" height="2.509ex" style="vertical-align: -0.671ex;" viewBox="0 -791.3 4403 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E12-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+<path stroke-width="1" id="E12-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+<path stroke-width="1" id="E12-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E12-MJMAIN-3E" d="M84 520Q84 528 88 533T96 539L99 540Q106 540 253 471T544 334L687 265Q694 260 694 250T687 235Q685 233 395 96L107 -40H101Q83 -38 83 -20Q83 -19 83 -17Q82 -10 98 -1Q117 9 248 71Q326 108 378 132L626 250L378 368Q90 504 86 509Q84 513 84 520Z"></path>
+<path stroke-width="1" id="E12-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E12-MJMATHI-73" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMATHI-63" x="663" y="-213"></use>
+ <use xlink:href="#E12-MJMAIN-2212" x="1098" y="0"></use>
+ <use xlink:href="#E12-MJMATHI-73" x="2098" y="0"></use>
+ <use xlink:href="#E12-MJMAIN-3E" x="2846" y="0"></use>
+ <use xlink:href="#E12-MJMAIN-30" x="3902" y="0"></use>
+</g>
+</svg></span>的样本训练到差最小就可以了。所以目标函数改进为：</p>
 <p><img src="http://static.zybuluo.com/yhsdba/v24frsw8asn1g8269i4z115a/image_1bptbjcp9m241fn018nlvhmsjnfe.png" alt="image_1bptbjcp9m241fn018nlvhmsjnfe.png-6.1kB"></p>
-<p>但是这个优化函数还不稳妥，因为它缺乏一个用来保证安全划分的间隔。我们希望那些被正确标记的词窗得分不仅要比错误标记的词窗得分高，还希望至少高出一个取值为正的间隔Δ。通常将$\Delta$取1。因此，我们修改优化目标为 ︰ </p>
+<p>但是这个优化函数还不稳妥，因为它缺乏一个用来保证安全划分的间隔。我们希望那些被正确标记的词窗得分不仅要比错误标记的词窗得分高，还希望至少高出一个取值为正的间隔Δ。通常将<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.936ex" height="2.176ex" style="vertical-align: -0.338ex;" viewBox="0 -791.3 833.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E13-MJMAIN-394" d="M51 0Q46 4 46 7Q46 9 215 357T388 709Q391 716 416 716Q439 716 444 709Q447 705 616 357T786 7Q786 4 781 0H51ZM507 344L384 596L137 92L383 91H630Q630 93 507 344Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E13-MJMAIN-394" x="0" y="0"></use>
+</g>
+</svg></span>取1。因此，我们修改优化目标为 ︰ </p>
 <p><img src="http://static.zybuluo.com/yhsdba/16fx20l4cvn8ijhayy3mpht8/image_1bptbmnl21588ufsuq71ijv1njrg8.png" alt="image_1bptbmnl21588ufsuq71ijv1njrg8.png-6.8kB"></p>
 <p>这实际上是将函数间隔转换为几何间隔。可以参考SVM优化函数的几何意义。</p>
 <p>通常通过负采样算法得到负例。</p>
 <p>这个目标函数的好处是，随着训练的进行，可以忽略越来越多的实例，而只专注于那些难分类的实例。</p>
 <h2 id="反向传播训练"><a href="#反向传播训练" class="headerlink" title="反向传播训练"></a>反向传播训练</h2><p>通过反向传播来训练模型中的各个参数。方法就是梯度下降：</p>
-<p>$\theta^{(t+1)=\theta^{(t)}-\alpha\Delta_{\theta^{(t)}}J}$</p>
+<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="16.215ex" height="3.343ex" style="vertical-align: -0.338ex;" viewBox="0 -1293.7 6981.3 1439.2" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E14-MJMATHI-3B8" d="M35 200Q35 302 74 415T180 610T319 704Q320 704 327 704T339 705Q393 701 423 656Q462 596 462 495Q462 380 417 261T302 66T168 -10H161Q125 -10 99 10T60 63T41 130T35 200ZM383 566Q383 668 330 668Q294 668 260 623T204 521T170 421T157 371Q206 370 254 370L351 371Q352 372 359 404T375 484T383 566ZM113 132Q113 26 166 26Q181 26 198 36T239 74T287 161T335 307L340 324H145Q145 321 136 286T120 208T113 132Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E14-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E14-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"></path>
+<path stroke-width="1" id="E14-MJMAIN-394" d="M51 0Q46 4 46 7Q46 9 215 357T388 709Q391 716 416 716Q439 716 444 709Q447 705 616 357T786 7Q786 4 781 0H51ZM507 344L384 596L137 92L383 91H630Q630 93 507 344Z"></path>
+<path stroke-width="1" id="E14-MJMATHI-4A" d="M447 625Q447 637 354 637H329Q323 642 323 645T325 664Q329 677 335 683H352Q393 681 498 681Q541 681 568 681T605 682T619 682Q633 682 633 672Q633 670 630 658Q626 642 623 640T604 637Q552 637 545 623Q541 610 483 376Q420 128 419 127Q397 64 333 21T195 -22Q137 -22 97 8T57 88Q57 130 80 152T132 174Q177 174 182 130Q182 98 164 80T123 56Q115 54 115 53T122 44Q148 15 197 15Q235 15 271 47T324 130Q328 142 387 380T447 625Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E14-MJMATHI-3B8" x="0" y="0"></use>
+<g transform="translate(469,507)">
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-28" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMATHI-74" x="389" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-2B" x="751" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-31" x="1529" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-29" x="2030" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-3D" x="2419" y="0"></use>
+<g transform="translate(2261,0)">
+ <use transform="scale(0.707)" xlink:href="#E14-MJMATHI-3B8" x="0" y="0"></use>
+<g transform="translate(331,277)">
+ <use transform="scale(0.574)" xlink:href="#E14-MJMAIN-28" x="0" y="0"></use>
+ <use transform="scale(0.574)" xlink:href="#E14-MJMATHI-74" x="389" y="0"></use>
+ <use transform="scale(0.574)" xlink:href="#E14-MJMAIN-29" x="751" y="0"></use>
+</g>
+</g>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-2212" x="4693" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMATHI-3B1" x="5471" y="0"></use>
+<g transform="translate(4322,0)">
+ <use transform="scale(0.707)" xlink:href="#E14-MJMAIN-394" x="0" y="0"></use>
+<g transform="translate(589,-394)">
+ <use transform="scale(0.574)" xlink:href="#E14-MJMATHI-3B8" x="0" y="0"></use>
+<g transform="translate(269,205)">
+ <use transform="scale(0.574)" xlink:href="#E14-MJMAIN-28" x="0" y="0"></use>
+ <use transform="scale(0.574)" xlink:href="#E14-MJMATHI-74" x="389" y="0"></use>
+ <use transform="scale(0.574)" xlink:href="#E14-MJMAIN-29" x="751" y="0"></use>
+</g>
+</g>
+</g>
+ <use transform="scale(0.707)" xlink:href="#E14-MJMATHI-4A" x="8434" y="0"></use>
+</g>
+</g>
+</svg></span></p>
 <p>通过下面一个简单的网络我们自己推导一遍：</p>
 <p><img src="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_3_Lecture3_toy_nn.jpg?imageView/2/w/300/q/100" alt="此处输入图片的描述"></p>
-<p>假设目标函数$J=(1+s_c-s)$取正值，我们希望更新权重参数$W_{14}$我们注意到$W_{14}$只在计算$z_1^{2}$和$a_1^{2}$的时候出现。这一点对于理解反向传播很重要-参数的反向传播梯度只被那些在正向计算中用到过这个参数的值所影响。$a_1^2$在之后的正向计算中和$W_1^2$相乘进而参与到分类得分的计算中。</p>
+<p>假设目标函数<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="16.347ex" height="2.843ex" style="vertical-align: -0.838ex;" viewBox="0 -863.1 7038.5 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E15-MJMATHI-4A" d="M447 625Q447 637 354 637H329Q323 642 323 645T325 664Q329 677 335 683H352Q393 681 498 681Q541 681 568 681T605 682T619 682Q633 682 633 672Q633 670 630 658Q626 642 623 640T604 637Q552 637 545 623Q541 610 483 376Q420 128 419 127Q397 64 333 21T195 -22Q137 -22 97 8T57 88Q57 130 80 152T132 174Q177 174 182 130Q182 98 164 80T123 56Q115 54 115 53T122 44Q148 15 197 15Q235 15 271 47T324 130Q328 142 387 380T447 625Z"></path>
+<path stroke-width="1" id="E15-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path>
+<path stroke-width="1" id="E15-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E15-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E15-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path>
+<path stroke-width="1" id="E15-MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path>
+<path stroke-width="1" id="E15-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+<path stroke-width="1" id="E15-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E15-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E15-MJMATHI-4A" x="0" y="0"></use>
+ <use xlink:href="#E15-MJMAIN-3D" x="911" y="0"></use>
+ <use xlink:href="#E15-MJMAIN-28" x="1967" y="0"></use>
+ <use xlink:href="#E15-MJMAIN-31" x="2357" y="0"></use>
+ <use xlink:href="#E15-MJMAIN-2B" x="3079" y="0"></use>
+<g transform="translate(4080,0)">
+ <use xlink:href="#E15-MJMATHI-73" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-63" x="663" y="-213"></use>
+</g>
+ <use xlink:href="#E15-MJMAIN-2212" x="5178" y="0"></use>
+ <use xlink:href="#E15-MJMATHI-73" x="6179" y="0"></use>
+ <use xlink:href="#E15-MJMAIN-29" x="6648" y="0"></use>
+</g>
+</svg></span>取正值，我们希望更新权重参数<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.07ex" height="2.509ex" style="vertical-align: -0.671ex;" viewBox="0 -791.3 1752.3 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E16-MJMATHI-57" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path>
+<path stroke-width="1" id="E16-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E16-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E16-MJMATHI-57" x="0" y="0"></use>
+<g transform="translate(944,-150)">
+ <use transform="scale(0.707)" xlink:href="#E16-MJMAIN-31"></use>
+ <use transform="scale(0.707)" xlink:href="#E16-MJMAIN-34" x="500" y="0"></use>
+</g>
+</g>
+</svg></span>我们注意到<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.07ex" height="2.509ex" style="vertical-align: -0.671ex;" viewBox="0 -791.3 1752.3 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E17-MJMATHI-57" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path>
+<path stroke-width="1" id="E17-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E17-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E17-MJMATHI-57" x="0" y="0"></use>
+<g transform="translate(944,-150)">
+ <use transform="scale(0.707)" xlink:href="#E17-MJMAIN-31"></use>
+ <use transform="scale(0.707)" xlink:href="#E17-MJMAIN-34" x="500" y="0"></use>
+</g>
+</g>
+</svg></span>只在计算<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.145ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 923.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E18-MJMATHI-7A" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path>
+<path stroke-width="1" id="E18-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+<path stroke-width="1" id="E18-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E18-MJMATHI-7A" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMAIN-32" x="663" y="488"></use>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMAIN-31" x="658" y="-435"></use>
+</g>
+</svg></span>和<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.284ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 983.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E19-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path>
+<path stroke-width="1" id="E19-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+<path stroke-width="1" id="E19-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E19-MJMATHI-61" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E19-MJMAIN-32" x="748" y="488"></use>
+ <use transform="scale(0.707)" xlink:href="#E19-MJMAIN-31" x="748" y="-435"></use>
+</g>
+</svg></span>的时候出现。这一点对于理解反向传播很重要-参数的反向传播梯度只被那些在正向计算中用到过这个参数的值所影响。<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.284ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 983.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E20-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path>
+<path stroke-width="1" id="E20-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+<path stroke-width="1" id="E20-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E20-MJMATHI-61" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E20-MJMAIN-32" x="748" y="488"></use>
+ <use transform="scale(0.707)" xlink:href="#E20-MJMAIN-31" x="748" y="-435"></use>
+</g>
+</svg></span>在之后的正向计算中和<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.562ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 1533.7 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E21-MJMATHI-57" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path>
+<path stroke-width="1" id="E21-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+<path stroke-width="1" id="E21-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E21-MJMATHI-57" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMAIN-32" x="1526" y="488"></use>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMAIN-31" x="1335" y="-435"></use>
+</g>
+</svg></span>相乘进而参与到分类得分的计算中。</p>
 <p><img src="http://static.zybuluo.com/yhsdba/o5iyt8zpzszjbl8f35urbj6q/cs224d_3_Lecture3_example.jpg" alt="cs224d_3_Lecture3_example.jpg-4.9kB"></p>
 <p><img src="http://static.zybuluo.com/yhsdba/btzt5ltm46wszi7t8bdf2os6/%E5%9B%BE%E5%83%8F%201.jpg" alt="图像 1.jpg-9.4kB"> </p>
 <p><img src="http://static.zybuluo.com/yhsdba/ww5x186ub03m3hs7xc1zovpe/%E5%9B%BE%E5%83%8F%202.jpg" alt="图像 2.jpg-143.1kB"></p>
-<p>这里所谓的反向传播误差$\delta_i^k$其实就是最终的目标函数对于第k层上第i个激励输出值$z_i^k$的导数</p>
-<p>如我们要更新$W_{14}$</p>
+<p>这里所谓的反向传播误差<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.142ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 922.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E22-MJMATHI-3B4" d="M195 609Q195 656 227 686T302 717Q319 716 351 709T407 697T433 690Q451 682 451 662Q451 644 438 628T403 612Q382 612 348 641T288 671T249 657T235 628Q235 584 334 463Q401 379 401 292Q401 169 340 80T205 -10H198Q127 -10 83 36T36 153Q36 286 151 382Q191 413 252 434Q252 435 245 449T230 481T214 521T201 566T195 609ZM112 130Q112 83 136 55T204 27Q233 27 256 51T291 111T309 178T316 232Q316 267 309 298T295 344T269 400L259 396Q215 381 183 342T137 256T118 179T112 130Z"></path>
+<path stroke-width="1" id="E22-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path>
+<path stroke-width="1" id="E22-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E22-MJMATHI-3B4" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E22-MJMATHI-6B" x="641" y="499"></use>
+ <use transform="scale(0.707)" xlink:href="#E22-MJMATHI-69" x="628" y="-430"></use>
+</g>
+</svg></span>其实就是最终的目标函数对于第k层上第i个激励输出值<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.179ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 938.2 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E23-MJMATHI-7A" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path>
+<path stroke-width="1" id="E23-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path>
+<path stroke-width="1" id="E23-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E23-MJMATHI-7A" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E23-MJMATHI-6B" x="663" y="499"></use>
+ <use transform="scale(0.707)" xlink:href="#E23-MJMATHI-69" x="658" y="-430"></use>
+</g>
+</svg></span>的导数</p>
+<p>如我们要更新<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.07ex" height="2.509ex" style="vertical-align: -0.671ex;" viewBox="0 -791.3 1752.3 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E24-MJMATHI-57" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path>
+<path stroke-width="1" id="E24-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E24-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E24-MJMATHI-57" x="0" y="0"></use>
+<g transform="translate(944,-150)">
+ <use transform="scale(0.707)" xlink:href="#E24-MJMAIN-31"></use>
+ <use transform="scale(0.707)" xlink:href="#E24-MJMAIN-34" x="500" y="0"></use>
+</g>
+</g>
+</svg></span></p>
 <p><img src="http://static.zybuluo.com/yhsdba/ps1e6qg9snj7f1p258akw95z/IMG_20170914_164959.jpg" alt="IMG_20170914_164959.jpg-1732.9kB"></p>
 <h3 id="偏移量的更新"><a href="#偏移量的更新" class="headerlink" title="偏移量的更新"></a>偏移量的更新</h3><p><img src="http://static.zybuluo.com/yhsdba/o4ec44mk07efi3i7d8sj8slp/IMG_20170914_165413.jpg" alt="IMG_20170914_165413.jpg-1763kB"></p>
 <h2 id="反向传播的向量化"><a href="#反向传播的向量化" class="headerlink" title="反向传播的向量化"></a>反向传播的向量化</h2><p><img src="http://static.zybuluo.com/yhsdba/mydxmhea2eg2ey33xvgz6gpl/image_1bpvs2069qd61nvi1ibqb07kmu9.png" alt="image_1bpvs2069qd61nvi1ibqb07kmu9.png-17.7kB"></p>
@@ -624,7 +972,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">© <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -642,7 +990,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 — <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -809,5 +1157,6 @@
 
   
 
-</body>
-</html>
+
+
+</body></html>

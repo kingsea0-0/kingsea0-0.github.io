@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<!DOCTYPE html><html class="theme-next muse use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,13 +71,13 @@
 
 
 
-<meta name="description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以$\nabla_\theta J_t(\theta)$会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
+<meta name="description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以                           会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
 <meta name="keywords" content="word2vec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stanford cs224d 深度学习与nlp(二) 高级词向量">
 <meta property="og:url" content="https://kingsea0-0.github.io/posts/64655/index.html">
-<meta property="og:site_name" content="Kingsea&#39;s Blog">
-<meta property="og:description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以$\nabla_\theta J_t(\theta)$会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
+<meta property="og:site_name" content="Kingsea's Blog">
+<meta property="og:description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以                           会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/yik2jtywz7gzp28sbv8bj8nr/image_1bor07qr3okhi7u1r21193g128u9.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/nqd3max13sdlweblzx40do9b/image_1bor0amj4h5f13sa1gkvgee5jtm.png">
@@ -113,7 +105,7 @@
 <meta property="og:updated_time" content="2018-12-07T09:42:48.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stanford cs224d 深度学习与nlp(二) 高级词向量">
-<meta name="twitter:description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以$\nabla_\theta J_t(\theta)$会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
+<meta name="twitter:description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以                           会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
 <meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/yik2jtywz7gzp28sbv8bj8nr/image_1bor07qr3okhi7u1r21193g128u9.png">
 
 
@@ -259,13 +251,13 @@
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/64655/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kingsea's Blog">
     </span>
 
@@ -346,7 +338,27 @@
       
 
       
-        <h1 id="SGD与词向量"><a href="#SGD与词向量" class="headerlink" title="SGD与词向量"></a>SGD与词向量</h1><p>在每一个窗口中，我们最多只有2m+1个单词，所以$\nabla_\theta J_t(\theta)$会非常稀疏</p>
+        <meta name="generator" content="Hexo 3.8.0"><h1 id="SGD与词向量"><a href="#SGD与词向量" class="headerlink" title="SGD与词向量"></a>SGD与词向量</h1><p>在每一个窗口中，我们最多只有2m+1个单词，所以<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.955ex" height="2.843ex" style="vertical-align: -0.838ex;" viewBox="0 -863.1 3425.1 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E1-MJMAIN-2207" d="M46 676Q46 679 51 683H781Q786 679 786 676Q786 674 617 326T444 -26Q439 -33 416 -33T388 -26Q385 -22 216 326T46 676ZM697 596Q697 597 445 597T193 596Q195 591 319 336T445 80L697 596Z"></path>
+<path stroke-width="1" id="E1-MJMATHI-3B8" d="M35 200Q35 302 74 415T180 610T319 704Q320 704 327 704T339 705Q393 701 423 656Q462 596 462 495Q462 380 417 261T302 66T168 -10H161Q125 -10 99 10T60 63T41 130T35 200ZM383 566Q383 668 330 668Q294 668 260 623T204 521T170 421T157 371Q206 370 254 370L351 371Q352 372 359 404T375 484T383 566ZM113 132Q113 26 166 26Q181 26 198 36T239 74T287 161T335 307L340 324H145Q145 321 136 286T120 208T113 132Z"></path>
+<path stroke-width="1" id="E1-MJMATHI-4A" d="M447 625Q447 637 354 637H329Q323 642 323 645T325 664Q329 677 335 683H352Q393 681 498 681Q541 681 568 681T605 682T619 682Q633 682 633 672Q633 670 630 658Q626 642 623 640T604 637Q552 637 545 623Q541 610 483 376Q420 128 419 127Q397 64 333 21T195 -22Q137 -22 97 8T57 88Q57 130 80 152T132 174Q177 174 182 130Q182 98 164 80T123 56Q115 54 115 53T122 44Q148 15 197 15Q235 15 271 47T324 130Q328 142 387 380T447 625Z"></path>
+<path stroke-width="1" id="E1-MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E1-MJMAIN-2207" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-3B8" x="1178" y="-219"></use>
+<g transform="translate(1265,0)">
+ <use xlink:href="#E1-MJMATHI-4A" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMATHI-74" x="785" y="-213"></use>
+</g>
+ <use xlink:href="#E1-MJMAIN-28" x="2176" y="0"></use>
+ <use xlink:href="#E1-MJMATHI-3B8" x="2566" y="0"></use>
+ <use xlink:href="#E1-MJMAIN-29" x="3035" y="0"></use>
+</g>
+</svg></span>会非常稀疏</p>
 <p><img src="http://static.zybuluo.com/yhsdba/yik2jtywz7gzp28sbv8bj8nr/image_1bor07qr3okhi7u1r21193g128u9.png" alt="image_1bor07qr3okhi7u1r21193g128u9.png-31.3kB"></p>
 <p>我们实际上只更新了出现在窗口中的那些词的列</p>
 <p>所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射</p>
@@ -366,14 +378,55 @@
 <ul>
 <li><p>这里t是某个窗口，k是采样个数</p>
 </li>
-<li><p>$\sigma$是sigmoid函数</p>
+<li><p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 572.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E2-MJMATHI-3C3" d="M184 -11Q116 -11 74 34T31 147Q31 247 104 333T274 430Q275 431 414 431H552Q553 430 555 429T559 427T562 425T565 422T567 420T569 416T570 412T571 407T572 401Q572 357 507 357Q500 357 490 357T476 358H416L421 348Q439 310 439 263Q439 153 359 71T184 -11ZM361 278Q361 358 276 358Q152 358 115 184Q114 180 114 178Q106 141 106 117Q106 67 131 47T188 26Q242 26 287 73Q316 103 334 153T356 233T361 278Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E2-MJMATHI-3C3" x="0" y="0"></use>
+</g>
+</svg></span>是sigmoid函数</p>
 </li>
 </ul>
 <p>所以上式可以化为：</p>
 <p><img src="http://static.zybuluo.com/yhsdba/99gd9k5b810oa8bi1zjtv9av/image_1bor1hmr11jme11kuh681ab61pe2a.png" alt="image_1bor1hmr11jme11kuh681ab61pe2a.png-22.4kB"></p>
 <ul>
 <li>需要做的是最大化第一项（真实出现在中心词上下文的词），最小化第二项（随机选取的词）</li>
-<li>P(w)是一个unigram分布 $P(W)=U(w)^{3/4}/Z$</li>
+<li>P(w)是一个unigram分布 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="19.885ex" height="3.176ex" style="vertical-align: -0.838ex;" viewBox="0 -1006.6 8561.8 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E3-MJMATHI-50" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E3-MJMATHI-57" d="M436 683Q450 683 486 682T553 680Q604 680 638 681T677 682Q695 682 695 674Q695 670 692 659Q687 641 683 639T661 637Q636 636 621 632T600 624T597 615Q597 603 613 377T629 138L631 141Q633 144 637 151T649 170T666 200T690 241T720 295T759 362Q863 546 877 572T892 604Q892 619 873 628T831 637Q817 637 817 647Q817 650 819 660Q823 676 825 679T839 682Q842 682 856 682T895 682T949 681Q1015 681 1034 683Q1048 683 1048 672Q1048 666 1045 655T1038 640T1028 637Q1006 637 988 631T958 617T939 600T927 584L923 578L754 282Q586 -14 585 -15Q579 -22 561 -22Q546 -22 542 -17Q539 -14 523 229T506 480L494 462Q472 425 366 239Q222 -13 220 -15T215 -19Q210 -22 197 -22Q178 -22 176 -15Q176 -12 154 304T131 622Q129 631 121 633T82 637H58Q51 644 51 648Q52 671 64 683H76Q118 680 176 680Q301 680 313 683H323Q329 677 329 674T327 656Q322 641 318 637H297Q236 634 232 620Q262 160 266 136L501 550L499 587Q496 629 489 632Q483 636 447 637Q428 637 422 639T416 648Q416 650 418 660Q419 664 420 669T421 676T424 680T428 682T436 683Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path>
+<path stroke-width="1" id="E3-MJMATHI-55" d="M107 637Q73 637 71 641Q70 643 70 649Q70 673 81 682Q83 683 98 683Q139 681 234 681Q268 681 297 681T342 682T362 682Q378 682 378 672Q378 670 376 658Q371 641 366 638H364Q362 638 359 638T352 638T343 637T334 637Q295 636 284 634T266 623Q265 621 238 518T184 302T154 169Q152 155 152 140Q152 86 183 55T269 24Q336 24 403 69T501 205L552 406Q599 598 599 606Q599 633 535 637Q511 637 511 648Q511 650 513 660Q517 676 519 679T529 683Q532 683 561 682T645 680Q696 680 723 681T752 682Q767 682 767 672Q767 650 759 642Q756 637 737 637Q666 633 648 597Q646 592 598 404Q557 235 548 205Q515 105 433 42T263 -22Q171 -22 116 34T60 167V183Q60 201 115 421Q164 622 164 628Q164 635 107 637Z"></path>
+<path stroke-width="1" id="E3-MJMATHI-77" d="M580 385Q580 406 599 424T641 443Q659 443 674 425T690 368Q690 339 671 253Q656 197 644 161T609 80T554 12T482 -11Q438 -11 404 5T355 48Q354 47 352 44Q311 -11 252 -11Q226 -11 202 -5T155 14T118 53T104 116Q104 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Q21 293 29 315T52 366T96 418T161 441Q204 441 227 416T250 358Q250 340 217 250T184 111Q184 65 205 46T258 26Q301 26 334 87L339 96V119Q339 122 339 128T340 136T341 143T342 152T345 165T348 182T354 206T362 238T373 281Q402 395 406 404Q419 431 449 431Q468 431 475 421T483 402Q483 389 454 274T422 142Q420 131 420 107V100Q420 85 423 71T442 42T487 26Q558 26 600 148Q609 171 620 213T632 273Q632 306 619 325T593 357T580 385Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-2F" d="M423 750Q432 750 438 744T444 730Q444 725 271 248T92 -240Q85 -250 75 -250Q68 -250 62 -245T56 -231Q56 -221 230 257T407 740Q411 750 423 750Z"></path>
+<path stroke-width="1" id="E3-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path>
+<path stroke-width="1" id="E3-MJMATHI-5A" d="M58 8Q58 23 64 35Q64 36 329 334T596 635L586 637Q575 637 512 637H500H476Q442 637 420 635T365 624T311 598T266 548T228 469Q227 466 226 463T224 458T223 453T222 450L221 448Q218 443 202 443Q185 443 182 453L214 561Q228 606 241 651Q249 679 253 681Q256 683 487 683H718Q723 678 723 675Q723 673 717 649Q189 54 188 52L185 49H274Q369 50 377 51Q452 60 500 100T579 247Q587 272 590 277T603 282H607Q628 282 628 271Q547 5 541 2Q538 0 300 0H124Q58 0 58 8Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E3-MJMATHI-50" x="0" y="0"></use>
+ <use xlink:href="#E3-MJMAIN-28" x="751" y="0"></use>
+ <use xlink:href="#E3-MJMATHI-57" x="1141" y="0"></use>
+ <use xlink:href="#E3-MJMAIN-29" x="2189" y="0"></use>
+ <use xlink:href="#E3-MJMAIN-3D" x="2856" y="0"></use>
+ <use xlink:href="#E3-MJMATHI-55" x="3913" y="0"></use>
+ <use xlink:href="#E3-MJMAIN-28" x="4680" y="0"></use>
+ <use xlink:href="#E3-MJMATHI-77" x="5070" y="0"></use>
+<g transform="translate(5786,0)">
+ <use xlink:href="#E3-MJMAIN-29" x="0" y="0"></use>
+<g transform="translate(389,362)">
+ <use transform="scale(0.707)" xlink:href="#E3-MJMAIN-33" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E3-MJMAIN-2F" x="500" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E3-MJMAIN-34" x="1001" y="0"></use>
+</g>
+</g>
+ <use xlink:href="#E3-MJMAIN-2F" x="7337" y="0"></use>
+ <use xlink:href="#E3-MJMATHI-5A" x="7838" y="0"></use>
+</g>
+</svg></span></li>
 </ul>
 <p>word2vec通过把相似词语放到同一个地方来增大目标函数(内积大嘛)</p>
 <p><img src="http://static.zybuluo.com/yhsdba/9348jo8hlb1abrtyeqkmvgt5/image_1bor21b984en1f0v16l815vgmgq2n.png" alt="image_1bor21b984en1f0v16l815vgmgq2n.png-1025.2kB"></p>
@@ -413,7 +466,20 @@
 <p><img src="http://static.zybuluo.com/yhsdba/fi5tt7sucb7xkecp6vl84utd/image_1bor65ntk1hlk1l6tfvrr51oi91g.png" alt="image_1bor65ntk1hlk1l6tfvrr51oi91g.png-251.4kB"></p>
 <p><img src="http://static.zybuluo.com/yhsdba/eupr0e4kmpcof6ftsxrhcq8j/image_1bor66viu1qq3112h11vk13ddkts1t.png" alt="image_1bor66viu1qq3112h11vk13ddkts1t.png-42.6kB"></p>
 <h2 id="SVD的问题"><a href="#SVD的问题" class="headerlink" title="SVD的问题"></a>SVD的问题</h2><ul>
-<li>计算复杂度高，对m*n的矩阵 O($mn^2$)</li>
+<li>计算复杂度高，对m*n的矩阵 O(<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.489ex" height="2.509ex" style="vertical-align: -0.338ex;" viewBox="0 -934.9 1932.9 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E4-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E4-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path>
+<path stroke-width="1" id="E4-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E4-MJMATHI-6D" x="0" y="0"></use>
+<g transform="translate(878,0)">
+ <use xlink:href="#E4-MJMATHI-6E" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-32" x="849" y="513"></use>
+</g>
+</g>
+</svg></span>)</li>
 <li>不方便处理新词和新文档</li>
 <li>与其他DL模型训练套路不同</li>
 </ul>
@@ -444,7 +510,36 @@
 <li>通常比较耗时</li>
 <li>比Intrinsic评估更具有参考意义</li>
 </ul>
-<h3 id="Intrinsic评估"><a href="#Intrinsic评估" class="headerlink" title="Intrinsic评估"></a>Intrinsic评估</h3><p>对于词向量模型，一个常用的Intrinsic评估是向量类比（word vector analogies）。它评估了一组词向量在语义和句法上表现出来的线性关系。具体来说，给定一组词(a, b, c, d)，我们要验证的是<img src="http://static.zybuluo.com/yhsdba/e7rbnp9xfz5qktdgqbqf955q/image_1bor7rega5c4sd31cj21luc1u984b.png" alt="image_1bor7rega5c4sd31cj21luc1u984b.png-5.7kB">，即d是与向量$(x_b-x_a+x_c)$的cosine距离最近的词。</p>
+<h3 id="Intrinsic评估"><a href="#Intrinsic评估" class="headerlink" title="Intrinsic评估"></a>Intrinsic评估</h3><p>对于词向量模型，一个常用的Intrinsic评估是向量类比（word vector analogies）。它评估了一组词向量在语义和句法上表现出来的线性关系。具体来说，给定一组词(a, b, c, d)，我们要验证的是<img src="http://static.zybuluo.com/yhsdba/e7rbnp9xfz5qktdgqbqf955q/image_1bor7rega5c4sd31cj21luc1u984b.png" alt="image_1bor7rega5c4sd31cj21luc1u984b.png-5.7kB">，即d是与向量<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="14.463ex" height="2.843ex" style="vertical-align: -0.838ex;" viewBox="0 -863.1 6227 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="1" id="E5-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-62" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path>
+<path stroke-width="1" id="E5-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path>
+<path stroke-width="1" id="E5-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path>
+<path stroke-width="1" id="E5-MJMATHI-63" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path>
+<path stroke-width="1" id="E5-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E5-MJMAIN-28" x="0" y="0"></use>
+<g transform="translate(389,0)">
+ <use xlink:href="#E5-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-62" x="809" y="-213"></use>
+</g>
+ <use xlink:href="#E5-MJMAIN-2212" x="1587" y="0"></use>
+<g transform="translate(2588,0)">
+ <use xlink:href="#E5-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-61" x="809" y="-213"></use>
+</g>
+ <use xlink:href="#E5-MJMAIN-2B" x="3857" y="0"></use>
+<g transform="translate(4858,0)">
+ <use xlink:href="#E5-MJMATHI-78" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-63" x="809" y="-213"></use>
+</g>
+ <use xlink:href="#E5-MJMAIN-29" x="5837" y="0"></use>
+</g>
+</svg></span>的cosine距离最近的词。</p>
 <p><img src="http://static.zybuluo.com/yhsdba/z9tjej1lqs771ep2x2t78sld/image_1bor849oc7fc14of168ql0eokh4o.png" alt="image_1bor849oc7fc14of168ql0eokh4o.png-98.2kB"></p>
 <p>Mikolov在他的word2vec开源工具包里也提供了用于word<br>analogy评估的数据集。例如国家与首都的类比数据，时态或是比较级的类比数据。</p>
 <p>借助于Intrinsic评估，我们也可以方便快捷地对模型的超参数（Hyperparameters）进行选择。例如向量的维度，context window的大小，甚至是模型的选择。</p>
@@ -661,7 +756,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">© <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -679,7 +774,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 — <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -846,5 +941,6 @@
 
   
 
-</body>
-</html>
+
+
+</body></html>

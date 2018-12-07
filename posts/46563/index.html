@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<!DOCTYPE html><html class="theme-next muse use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -84,7 +76,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式">
 <meta property="og:url" content="https://kingsea0-0.github.io/posts/46563/index.html">
-<meta property="og:site_name" content="Kingsea&#39;s Blog">
+<meta property="og:site_name" content="Kingsea's Blog">
 <meta property="og:description" content="组成：字符+操作符   常用操作符：      操作符 说明 实例     . 表示任何单个字符    [] 字符集，对单个字符给出取值范围 [abc]表示a或b或c，[a-z]表示a到z任意单个字符   [^] 非字符，给出排除范围 [^abc]表示非a或b或c的单个字符   * 前一个字符0次或无限次扩展 abc*表示ab,abc,abcc等   + 前一个字符1次或无限次扩展 abc+表示a">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-07T09:42:48.855Z">
@@ -235,13 +227,13 @@
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://kingsea0-0.github.io/posts/46563/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kingsea's Blog">
     </span>
 
@@ -322,7 +314,7 @@
       
 
       
-        <p><strong>组成：字符+操作符</strong>  </p>
+        <meta name="generator" content="Hexo 3.8.0"><p><strong>组成：字符+操作符</strong>  </p>
 <p>常用操作符：  </p>
 <table>
 <thead>
@@ -386,7 +378,7 @@
 <td style="text-align:center">^abc表示abc且在一个字符的开头</td>
 </tr>
 <tr>
-<td style="text-align:center">\$</td>
+<td style="text-align:center"><span>$</span></td>
 <td style="text-align:center">匹配字符串的结尾</td>
 <td style="text-align:center">abc$表示abc且在一个字符串的结尾</td>
 </tr>
@@ -418,11 +410,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">^[A-Za-z]+\$</td>
+<td style="text-align:center">^[A-Za-z]+<span>$</span></td>
 <td style="text-align:center">由26个字母组成的字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">^[A-Za-z0-9]+\$</td>
+<td style="text-align:center">^[A-Za-z0-9]+<span>$</span></td>
 <td style="text-align:center">由字母或数字组成的字符串</td>
 </tr>
 <tr>
@@ -430,7 +422,7 @@
 <td style="text-align:center">整数形式字符串</td>
 </tr>
 <tr>
-<td style="text-align:center">^[0-9]*[1-9][0-9]*\$</td>
+<td style="text-align:center">^[0-9]*[1-9][0-9]*<span>$</span></td>
 <td style="text-align:center">正整数形式的字符串</td>
 </tr>
 <tr>
@@ -504,11 +496,11 @@
 <ul>
 <li>maxsplit:最大分割数，剩余部分作为最后一个元素输出</li>
 </ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;re.split(<span class="string">r'[1-9]\d&#123;5&#125;'</span>,<span class="string">'BIT100081 TSU100084'</span>)</span><br><span class="line">[<span class="string">'BIT'</span>,<span class="string">'TSU'</span>,<span class="string">''</span>]</span><br><span class="line">&gt;&gt;&gt;re.split(<span class="string">r'[1-9]\d&#123;5&#125;'</span>,<span class="string">'BIT100081 TSU100084'</span>,maxsplit=<span class="number">1</span>)</span><br><span class="line">[<span class="string">'BIT'</span>,<span class="string">'TSU10084'</span>]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">re.sub(pattern,repl,string,count=<span class="number">0</span>,flags=<span class="number">0</span>)</span><br><span class="line">在一个字符串中替换所有匹配正则表达式的字串，返回替换后的字符串</span><br><span class="line">* repl:替换匹配到字符串的字符串</span><br><span class="line">* count:最大替换次数</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;re.split(<span class="string">r'[1-9]\d{5}'</span>,<span class="string">'BIT100081 TSU100084'</span>)</span><br><span class="line">[<span class="string">'BIT'</span>,<span class="string">'TSU'</span>,<span class="string">''</span>]</span><br><span class="line">&gt;&gt;&gt;re.split(<span class="string">r'[1-9]\d{5}'</span>,<span class="string">'BIT100081 TSU100084'</span>,maxsplit=<span class="number">1</span>)</span><br><span class="line">[<span class="string">'BIT'</span>,<span class="string">'TSU10084'</span>]</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">re.sub(pattern,repl,string,count=<span class="number">0</span>,flags=<span class="number">0</span>)</span><br><span class="line">在一个字符串中替换所有匹配正则表达式的字串，返回替换后的字符串</span><br><span class="line">* repl:替换匹配到字符串的字符串</span><br><span class="line">* count:最大替换次数</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <blockquote>
 <blockquote>
-<p>re.sub(r’[1-9]\d{5}’,’:zipcode’,’BIT100081 TSU100084’)<br>‘BIT:zipcode TSU:zipcode’<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">等价用法:</span></span><br></pre></td></tr></table></figure></p>
+<p>re.sub(r’[1-9]\d{5}’,’:zipcode’,’BIT100081 TSU100084’)<br>‘BIT:zipcode TSU:zipcode’<br></p><figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">等价用法:</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
 </blockquote>
 </blockquote>
@@ -726,7 +718,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">© <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -744,7 +736,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 — <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -911,5 +903,6 @@
 
   
 
-</body>
-</html>
+
+
+</body></html>

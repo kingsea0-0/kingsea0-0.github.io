@@ -1,3 +1,10 @@
+.mjpage__block {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  overflow-x: auto;
+  vertical-align: bottom;
+}
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif; /* 1 */
@@ -1822,7 +1829,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8140ff;
+  background: #8e7d12;
 }
 .links-of-blogroll {
   font-size: 13px;
