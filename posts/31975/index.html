@@ -60,7 +60,7 @@
 
 
 
-  <meta name="keywords" content="机器学习 python,">
+  <meta name="keywords" content="knn,">
 
 
 
@@ -71,19 +71,19 @@
 
 
 
-<meta name="description" content="一、概述简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。工作原理如下：首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。   通常k&amp;lt;=20     如我们要下图绿色图形的分类如果k=3 则被分类为三角形   如果k=5 则被分">
-<meta name="keywords" content="机器学习 python">
+<meta name="description" content="一、概述简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。工作原理如下：首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。 通常k&amp;lt;=20 如我们要下图绿色图形的分类如果k=3 则被分类为三角形 如果k=5 则被分类为正方形 所以">
+<meta name="keywords" content="knn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kNN算法的python实现">
 <meta property="og:url" content="https://kingsea0-0.github.io/posts/31975/index.html">
 <meta property="og:site_name" content="Kingsea's Blog">
-<meta property="og:description" content="一、概述简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。工作原理如下：首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。   通常k&amp;lt;=20     如我们要下图绿色图形的分类如果k=3 则被分类为三角形   如果k=5 则被分">
+<meta property="og:description" content="一、概述简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。工作原理如下：首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。 通常k&amp;lt;=20 如我们要下图绿色图形的分类如果k=3 则被分类为三角形 如果k=5 则被分类为正方形 所以">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/4m9o83v8nbcgopx653aywd67/image_1bhu8q6441tqi7lg14taffa1cq9.png">
-<meta property="og:updated_time" content="2018-12-07T09:42:48.860Z">
+<meta property="og:updated_time" content="2018-12-07T12:24:51.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kNN算法的python实现">
-<meta name="twitter:description" content="一、概述简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。工作原理如下：首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。   通常k&amp;lt;=20     如我们要下图绿色图形的分类如果k=3 则被分类为三角形   如果k=5 则被分">
+<meta name="twitter:description" content="一、概述简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。工作原理如下：首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。 通常k&amp;lt;=20 如我们要下图绿色图形的分类如果k=3 则被分类为三角形 如果k=5 则被分类为正方形 所以">
 <meta name="twitter:image" content="http://static.zybuluo.com/yhsdba/4m9o83v8nbcgopx653aywd67/image_1bhu8q6441tqi7lg14taffa1cq9.png">
 
 
@@ -316,20 +316,20 @@
       
 
       
-        <meta name="generator" content="Hexo 3.8.0"><h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。<br>工作原理如下：<br>首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。  </p>
-<p><em>通常k&lt;=20</em>    </p>
-<p>如我们要下图绿色图形的分类<br><img src="http://static.zybuluo.com/yhsdba/4m9o83v8nbcgopx653aywd67/image_1bhu8q6441tqi7lg14taffa1cq9.png" alt="image_1bhu8q6441tqi7lg14taffa1cq9.png-70.6kB"><br>如果k=3 则被分类为三角形  </p>
-<p>如果k=5 则被分类为正方形  </p>
-<p>所以knn算法的结果很大程度上取决于k的选择  </p>
+        <meta name="generator" content="Hexo 3.8.0"><h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>简单的说KNN是通过测量某样本与已知样本的距离来进行分类的。<br>工作原理如下：<br>首先我们有一个带标注的训练样本集。当我们输入一个新的样本，将新样本的每个特征与训练样本集中数据的对应特征进行比较。选择k个在坐标系中与新样本最接近的数据，这些数据中出现次数最多的分类即可看作新数据的分类。</p>
+<p><em>通常k&lt;=20</em></p>
+<p>如我们要下图绿色图形的分类<br><img src="http://static.zybuluo.com/yhsdba/4m9o83v8nbcgopx653aywd67/image_1bhu8q6441tqi7lg14taffa1cq9.png" alt="image_1bhu8q6441tqi7lg14taffa1cq9.png-70.6kB"><br>如果k=3 则被分类为三角形</p>
+<p>如果k=5 则被分类为正方形</p>
+<p>所以knn算法的结果很大程度上取决于k的选择</p>
 <h3 id="knn算法的描述："><a href="#knn算法的描述：" class="headerlink" title="knn算法的描述："></a>knn算法的描述：</h3><ul>
 <li>列表项</li>
 <li>计算测试数据与各个训练集之间的距离</li>
 <li>按照距离的递增关系进行排序</li>
 <li>选取距离最小的k个点</li>
 <li>确定前k个点所在类别的频率</li>
-<li>返回前k个点出现频率最高的类别作为测试数据的分类  </li>
+<li>返回前k个点出现频率最高的类别作为测试数据的分类</li>
 </ul>
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><p>优点：精度高、对异常值不敏感、无数据输入假定<br>缺点：计算复杂度高、空间复杂度高<br>适用范围：数值型和标称型  </p>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><p>优点：精度高、对异常值不敏感、无数据输入假定<br>缺点：计算复杂度高、空间复杂度高<br>适用范围：数值型和标称型</p>
 <h2 id="二、python实现"><a href="#二、python实现" class="headerlink" title="二、python实现"></a>二、python实现</h2><figure class="highlight cs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> numpy import *</span><br><span class="line">import <span class="keyword">operator</span></span><br><span class="line"></span><br><span class="line"><span class="function">def <span class="title">creatDataset</span>(<span class="params"></span>):</span></span><br><span class="line"><span class="function">    <span class="keyword">group</span></span>=array([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</span><br><span class="line">    labels=[<span class="string">'A'</span>,<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'B'</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">group</span>,labels</span><br><span class="line"></span><br><span class="line"><span class="meta">#inX:分类向量</span></span><br><span class="line"><span class="meta">#dataSet:测试数据集</span></span><br><span class="line"></span><br><span class="line"><span class="function">def <span class="title">classify0</span>(<span class="params">inX,dataSet,labels,k</span>):</span></span><br><span class="line"><span class="function">    dataSetSize</span>=dataSet.shape[<span class="number">0</span>]<span class="meta">#shape返回行列数,shape[0]返回行数</span></span><br><span class="line">    diffmat=tile(inX,(dataSetSize,<span class="number">1</span>))-dataSet</span><br><span class="line">    seqdiffmat=diffmat**<span class="number">2</span></span><br><span class="line">    seqdistance=sum(seqdiffmat,axis=<span class="number">1</span>)<span class="meta">##axis=1按行相加 anxis=0按列相加</span></span><br><span class="line">    distances=seqdistance**<span class="number">0.5</span></span><br><span class="line">    sortedDistindex=argsort(distances)<span class="meta">#从大到小排序，返回下标</span></span><br><span class="line"></span><br><span class="line">    classCount={}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="title">range</span>(<span class="params">k</span>):</span></span><br><span class="line"><span class="function">        votelabel</span>=labels[sortedDistindex[i]]</span><br><span class="line">        classCount[votelabel]=classCount.<span class="keyword">get</span>(votelabel,<span class="number">0</span>)+<span class="number">1</span><span class="meta">##相当于classcount+=1 但该没有数据时用get可返回0</span></span><br><span class="line">    maxCount=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> key,<span class="keyword">value</span> <span class="keyword">in</span> classCount.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">value</span>&gt;maxCount:</span><br><span class="line">            maxCount=<span class="keyword">value</span></span><br><span class="line">            classes=key</span><br><span class="line">        <span class="keyword">return</span> classes</span><br><span class="line"></span><br><span class="line">dataSet,labels=creatDataset()</span><br><span class="line">inX=array([<span class="number">1.1</span>,<span class="number">0.3</span>])</span><br><span class="line">K=<span class="number">3</span></span><br><span class="line">output=classify0(inX,dataSet,labels,K)</span><br><span class="line">print(<span class="string">'测试数据为：'</span>,inX,<span class="string">'分类结果为：'</span>,output)</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>这是《机器学习实战》书中的第一个算法，实现起来比较简单。书中有几个实战的内容就不详细写了，代码都已放在github上。<br>这个算法中用到了Numpy和Matplotlib库，对这些库的使用还需要继续学习（会新开一篇写一下常用的用法）</p>
 
@@ -349,7 +349,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习-python/" rel="tag"># 机器学习 python</a>
+            <a href="/tags/knn/" rel="tag"># knn</a>
           
         </div>
       
@@ -362,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/12508/" rel="next" title="【转】mongodb极简入门">
-                <i class="fa fa-chevron-left"></i> 【转】mongodb极简入门
+              <a href="/posts/61797/" rel="next" title="python中多进程和多线程的使用">
+                <i class="fa fa-chevron-left"></i> python中多进程和多线程的使用
               </a>
             
           </div>
@@ -451,7 +451,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -462,7 +462,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -473,7 +473,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
