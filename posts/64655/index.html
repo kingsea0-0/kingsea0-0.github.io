@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/ypg3y2b1kx14svi4g5ieip2e/image_1bor8jgcgorq9r36f817461r5j6c.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/o7c88cxdf1cecbpwjy3zsf29/image_1bor8l7a31lr912le1b3kfjd1k276p.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/8omul7jo5o3ol4daf4zk200k/image_1bor8t9lle4u18vf85jb042ln76.png">
-<meta property="og:updated_time" content="2018-12-07T12:08:09.630Z">
+<meta property="og:updated_time" content="2018-12-08T08:10:24.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stanford cs224d 深度学习与nlp(二) 高级词向量">
 <meta name="twitter:description" content="SGD与词向量在每一个窗口中，我们最多只有2m+1个单词，所以                           会非常稀疏  我们实际上只更新了出现在窗口中的那些词的列 所以我们只需要更新词向量矩阵U和V中的少数列，或者为每个词和词向量建立一个hash映射  负采样词向量矩阵的量级很大，所以下面式子的分母很难计算  之前我们提到word2vec有两种高效的训练方法：  Hierarchical">
@@ -207,6 +207,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -217,22 +227,22 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
-            
-            分类
           </a>
         </li>
       
@@ -274,7 +284,7 @@
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/img/avatar.jpg">
     </span>
 
     <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -440,11 +450,11 @@
 <p><img src="http://static.zybuluo.com/yhsdba/9348jo8hlb1abrtyeqkmvgt5/image_1bor21b984en1f0v16l815vgmgq2n.png" alt="image_1bor21b984en1f0v16l815vgmgq2n.png-1025.2kB"></p>
 <h1 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h1><p>word2vec将窗口视作训练单位，每个窗口或者几个窗口都要进行一次参数更新。要知道，很多词串出现的频次是很高的。能不能遍历一遍语料，迅速得到结果呢？</p>
 <p>早在word2vec之前，就已经出现了很多得到词向量的方法，这些方法是基于统计共现矩阵的方法。如果在窗口级别上统计词性和语义共现，可以得到相似的词。如果在文档级别上统计，则会得到相似的文档（潜在语义分析LSA）。</p>
-<h2 id="基于窗口的共现矩阵X"><a href="#基于窗口的共现矩阵X" class="headerlink" title="基于窗口的共现矩阵X"></a>基于窗口的共现矩阵X</h2><p>我们先规定一个固定大小的窗口，然后统计每个词出现在窗口中次数，这个计数是针对整个语料集做的。可能说得有点含糊，咱们一起来看个例子，假定我们有如下的3个句子，同时我们的窗口大小设定为1（把原始的句子分拆成一个一个的词）： </p>
+<h2 id="基于窗口的共现矩阵X"><a href="#基于窗口的共现矩阵X" class="headerlink" title="基于窗口的共现矩阵X"></a>基于窗口的共现矩阵X</h2><p>我们先规定一个固定大小的窗口，然后统计每个词出现在窗口中次数，这个计数是针对整个语料集做的。可能说得有点含糊，咱们一起来看个例子，假定我们有如下的3个句子，同时我们的窗口大小设定为1（把原始的句子分拆成一个一个的词）：</p>
 <ol>
-<li>I enjoy flying. </li>
-<li>I like NLP. </li>
-<li>I like deep learning.<br>由此产生的计数矩阵如下： </li>
+<li>I enjoy flying.</li>
+<li>I like NLP.</li>
+<li>I like deep learning.<br>由此产生的计数矩阵如下：</li>
 </ol>
 <p><img src="http://static.zybuluo.com/yhsdba/q1zg40048encmhvue8no4ni4/image_1bor5s4em1di9168utrnjtgvju9.png" alt="image_1bor5s4em1di9168utrnjtgvju9.png-326.3kB"></p>
 <p>根据这个矩阵，的确可以得到简单的共现向量。但是它存在非常多的局限性：</p>
@@ -681,6 +691,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/img/avatar.jpg" alt="King sea">
+            
               <p class="site-author-name" itemprop="name">King sea</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -703,7 +715,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -733,6 +745,12 @@
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
                 
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yhsdba" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
             </div>
           
 
@@ -740,6 +758,20 @@
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reset0.github.io/" title="mxc" target="_blank">mxc</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           

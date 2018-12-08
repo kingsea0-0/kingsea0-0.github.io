@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/o4ec44mk07efi3i7d8sj8slp/IMG_20170914_165413.jpg">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/mydxmhea2eg2ey33xvgz6gpl/image_1bpvs2069qd61nvi1ibqb07kmu9.png">
 <meta property="og:image" content="http://static.zybuluo.com/yhsdba/1buj0nrwo555s5j93g2cnwgn/image_1bpvs451p1u1rfrdkp01jt0l0c1r.png">
-<meta property="og:updated_time" content="2018-12-07T09:42:48.927Z">
+<meta property="og:updated_time" content="2018-12-08T08:10:27.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stanford cs224d 深度学习与nlp(三)词窗分类与神经网络">
 <meta name="twitter:description" content="分类问题前面我们讨论了如何构建、训练、评估一个词向量，这些都属于内部性任务。我们构建一个好的词向量的目的还是为了解决实际问题（也叫做外部任务）。下面我们讨论一下处理外部任务的一般方法。 问题描述大部分nlp的任务都可以看作分类问题，如情感分析，就是判断指代的情况是褒义、贬义还是中性。命名实体识别，就是找出上下文中的中心词的类别。 我们给定一个训练集">
@@ -214,6 +214,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -224,22 +234,22 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
-            
-            分类
           </a>
         </li>
       
@@ -281,7 +291,7 @@
     <span hidden="" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="King sea">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/img/avatar.jpg">
     </span>
 
     <span hidden="" itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -427,7 +437,7 @@
 <p><img src="http://static.zybuluo.com/yhsdba/srefkec65u8ingr09ynibwaa/image_1bpt95oqhqga14eu1h7tga57uo6b.png" alt="image_1bpt95oqhqga14eu1h7tga57uo6b.png-18.5kB"></p>
 <p>如果咱们找到合适的正则项权重λ，那最小化上面的损失函数得到的模型，不会出现某些权重特别大的情况，同时模型的泛化能力也很不错。</p>
 <h2 id="词窗分类"><a href="#词窗分类" class="headerlink" title="词窗分类"></a>词窗分类</h2><p><a href="http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_2_Figure8.jpg?imageView/2/w/450/q/100![image_1bpt9bapt1ph1g0ki8014mnf7595.png-26kB][9]" target="_blank" rel="noopener">http://7xo0y8.com1.z0.glb.clouddn.com/cs224d_2_Figure8.jpg?imageView/2/w/450/q/100![image_1bpt9bapt1ph1g0ki8014mnf7595.png-26kB][9]</a></p>
-<p>我们这里看到的是一个中心词，和长度为2的左右窗口内的词。这种上下文可以帮助我们分辨Paris是一个地点，还是一个人名 </p>
+<p>我们这里看到的是一个中心词，和长度为2的左右窗口内的词。这种上下文可以帮助我们分辨Paris是一个地点，还是一个人名</p>
 <p><img src="http://static.zybuluo.com/yhsdba/e1gwia9laljmxg0rgoqq68v8/image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png" alt="image_1bpt9dp8v1tml1ieb1gcf1gr310ho9i.png-7.1kB"></p>
 <p>我们前面提到的外部任务都是以单个单词为输入的。实际上，由于自然语言的特性，这种情况很少会出现。在自然语言中，有很多一词多义的情况，这时候我们一般会参考上下文来判断。所以在大多数的情况下，我们给模型输入的是一个词序列。这个词序列由一个中心词向量和它上下文的词向量组成。上下文中词的数量又叫词窗大小，任务不同这个参数的取值也不同。一般来讲，小窗口在句法上的精度较高，大窗口在语义上的表现较好。</p>
 <h2 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h2><p>我们继续使用softmax进行分类。只需要将之前的<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.33ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 572.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
@@ -589,7 +599,7 @@
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
  <use xlink:href="#E13-MJMAIN-394" x="0" y="0"></use>
 </g>
-</svg></span>取1。因此，我们修改优化目标为 ︰ </p>
+</svg></span>取1。因此，我们修改优化目标为 ︰</p>
 <p><img src="http://static.zybuluo.com/yhsdba/16fx20l4cvn8ijhayy3mpht8/image_1bptbmnl21588ufsuq71ijv1njrg8.png" alt="image_1bptbmnl21588ufsuq71ijv1njrg8.png-6.8kB"></p>
 <p>这实际上是将函数间隔转换为几何间隔。可以参考SVM优化函数的几何意义。</p>
 <p>通常通过负采样算法得到负例。</p>
@@ -743,7 +753,7 @@
 </g>
 </svg></span>相乘进而参与到分类得分的计算中。</p>
 <p><img src="http://static.zybuluo.com/yhsdba/o5iyt8zpzszjbl8f35urbj6q/cs224d_3_Lecture3_example.jpg" alt="cs224d_3_Lecture3_example.jpg-4.9kB"></p>
-<p><img src="http://static.zybuluo.com/yhsdba/btzt5ltm46wszi7t8bdf2os6/%E5%9B%BE%E5%83%8F%201.jpg" alt="图像 1.jpg-9.4kB"> </p>
+<p><img src="http://static.zybuluo.com/yhsdba/btzt5ltm46wszi7t8bdf2os6/%E5%9B%BE%E5%83%8F%201.jpg" alt="图像 1.jpg-9.4kB"></p>
 <p><img src="http://static.zybuluo.com/yhsdba/ww5x186ub03m3hs7xc1zovpe/%E5%9B%BE%E5%83%8F%202.jpg" alt="图像 2.jpg-143.1kB"></p>
 <p>这里所谓的反向传播误差<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.142ex" height="3.176ex" style="vertical-align: -1.005ex;" viewBox="0 -934.9 922.4 1367.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -897,6 +907,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/img/avatar.jpg" alt="King sea">
+            
               <p class="site-author-name" itemprop="name">King sea</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -919,7 +931,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -949,6 +961,12 @@
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
                 
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yhsdba" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
             </div>
           
 
@@ -956,6 +974,20 @@
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reset0.github.io/" title="mxc" target="_blank">mxc</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           
